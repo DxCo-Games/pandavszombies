@@ -2,6 +2,7 @@
 
 #include "SpriteUtil.h"
 #include <map>
+#include "MathUtil.h"
 
 namespace dxco {
 
@@ -86,6 +87,12 @@ float Item::getHeight() {
 
 float Item::getWidth() {
 	return SpriteUtil::getWidth(this->sprite);
+}
+
+void Item::goTo(cocos2d::CCPoint point, float distance) {
+	float angle = MathUtil::angle(point, this->getLocation());
+
+	this->move(cos(angle) * distance, sin(angle) * distance);
 }
 
 } /* namespace dxco */

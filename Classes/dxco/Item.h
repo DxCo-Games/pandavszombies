@@ -31,6 +31,8 @@ public:
 	virtual void moveTo(float x, float y);
 	virtual void restartPosition();
 	virtual cocos2d::CCSprite* getSprite();
+
+	virtual void goTo(cocos2d::CCPoint point, float distance);
 protected:
 	cocos2d::CCSprite* sprite;
 	cocos2d::CCTexture2D* defaultTexture;
