@@ -4,8 +4,6 @@
 #include "Joystick.h"
 #include <vector>
 
-#define PI 3.14159265359
-
 namespace dxco {
 
 class JoystickController {

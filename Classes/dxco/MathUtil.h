@@ -1,6 +1,10 @@
 #ifndef MATHUTIL_H_
 #define MATHUTIL_H_
 
+#define PI 3.14159265359
+
+#include "cocos2d.h"
+
 namespace dxco {
 
 class MathUtil {
