@@ -18,8 +18,6 @@ public:
 private:
 	std::vector<Joystick*> joysticks;
 	std::map<int, cocos2d::CCPoint> beginLocations;
-	float distance(cocos2d::CCPoint a, cocos2d::CCPoint b);
-	float angle(cocos2d::CCPoint center, cocos2d::CCPoint pointA);
 	Joystick* getRelatedJoystick(cocos2d::CCPoint location);
 	float angulo;
 };

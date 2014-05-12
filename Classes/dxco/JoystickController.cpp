@@ -1,5 +1,8 @@
 #include "JoystickController.h"
 #include <math.h>
+
+#include "MathUtil.h"
+
 namespace dxco {
 
 void JoystickController::addJoystick(Joystick* joystick) {
@@ -24,7 +27,7 @@ void JoystickController::ccTouchesBegan(cocos2d::CCSet *pTouches,
 
 		if (joystick) {
 			cocos2d::CCPoint center = joystick->getCenter();
-			float intensity = this->distance(location, joystick->getCenter());
+			float intensity = MathUtil::distance(location, joystick->getCenter());
 
 			joystick->onTouchedBegan(location, 0, intensity);
 		}
@@ -32,15 +35,6 @@ void JoystickController::ccTouchesBegan(cocos2d::CCSet *pTouches,
 		it++;
 	}
 
-}
-
-float JoystickController::distance(cocos2d::CCPoint a, cocos2d::CCPoint b) {
-	float x = a.x - b.x;
-	float y = a.y - b.y;
-	x = x * x;
-	y = y * y;
-
-	return sqrt(x + y);
 }
 
 void JoystickController::ccTouchesEnded(cocos2d::CCSet *pTouches,
@@ -60,7 +54,7 @@ void JoystickController::ccTouchesEnded(cocos2d::CCSet *pTouches,
 		Joystick* joystick = getRelatedJoystick(location);
 		if (joystick) {
 			cocos2d::CCPoint center = joystick->getCenter();
-			float intensity = this->distance(location, joystick->getCenter());
+			float intensity = MathUtil::distance(location, joystick->getCenter());
 
 			joystick->onTouchedEnded(location, 0, intensity);
 		}
@@ -69,41 +63,6 @@ void JoystickController::ccTouchesEnded(cocos2d::CCSet *pTouches,
 	}
 }
 
-float JoystickController::angle(cocos2d::CCPoint center,
-		cocos2d::CCPoint pointA) {
-
-	float result = 0;
-
-	if (pointA.y > center.y) {
-		// cuadrante 1
-		if (pointA.x > center.x) {
-			double adyacente = pointA.x - center.x;
-			double hipotenusa = distance(pointA, center);
-
-			result = acos(adyacente / hipotenusa);
-		} else { // cuadrante 2
-			double adyacente = pointA.y - center.y;
-			double hipotenusa = distance(pointA, center);
-
-			result = acos(adyacente / hipotenusa) + (PI * 0.5);
-		}
-	} else {
-		// cuadrante 3
-		if (pointA.x < center.x) {
-			double adyacente = center.x - pointA.x;
-			double hipotenusa = distance(pointA, center);
-
-			result = acos(adyacente / hipotenusa) + PI;
-		} else { // cuadrante 4
-			double adyacente = center.y - pointA.y;
-			double hipotenusa = distance(pointA, center);
-
-			result = acos(adyacente / hipotenusa) + (PI * 1.5);
-		}
-	}
-
-	return result;
-}
 
 void JoystickController::ccTouchesMoved(cocos2d::CCSet *pTouches,
 		cocos2d::CCEvent *pEvent) {
@@ -124,9 +83,9 @@ void JoystickController::ccTouchesMoved(cocos2d::CCSet *pTouches,
 
 		if (joystick) {
 			cocos2d::CCPoint center = joystick->getCenter();
-			float intensity = this->distance(location, joystick->getCenter());
+			float intensity = MathUtil::distance(location, joystick->getCenter());
 
-			joystick->onMoved(location, angle(joystick->getCenter(), location),
+			joystick->onMoved(location, MathUtil::angle(joystick->getCenter(), location),
 					intensity);
 		}
 
@@ -139,11 +98,11 @@ Joystick* JoystickController::getRelatedJoystick(cocos2d::CCPoint location) {
 
 	if (joysticks.size()) {
 		result = joysticks[0];
-		float minDistance = distance(location, result->getCenter());
+		float minDistance = MathUtil::distance(location, result->getCenter());
 
 		for (int i = 1; i < this->joysticks.size(); i++) {
 			Joystick* joystick = this->joysticks[i];
-			float currDistance = distance(location, joystick->getCenter());
+			float currDistance = MathUtil::distance(location, joystick->getCenter());
 
 			if (currDistance < minDistance) {
 				result = joystick;
