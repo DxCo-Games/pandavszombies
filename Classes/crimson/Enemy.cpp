@@ -7,6 +7,8 @@ Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animatio
 	this->model = model;
 }
 
-void Enemy::update(float dt);
+void Enemy::update(float dt) {
+
+}
 
 } /* namespace dxco */

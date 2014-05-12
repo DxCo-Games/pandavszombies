@@ -49,7 +49,4 @@ float MathUtil::angle(cocos2d::CCPoint center,
 }
 
 
-float MathUtil::angle(cocos2d::CCPoint center, cocos2d::CCPoint pointA) {
-
-}
 } /* namespace dxco */
