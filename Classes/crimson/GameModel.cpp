@@ -10,6 +10,7 @@ GameModel::GameModel(HelloWorld* vista, Player* player) {
 	this->player = player;
 	player->model = this;
 	this->vista = vista;
+	this->items.push_back(player);
 }
 
 void GameModel::addBullet(Bullet* bullet) {
