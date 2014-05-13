@@ -33,6 +33,10 @@ public:
 	virtual cocos2d::CCSprite* getSprite();
 
 	virtual void goTo(cocos2d::CCPoint point, float distance);
+
+	virtual bool collides(Item* item);
+	virtual bool isOutOfScreen();
+
 protected:
 	cocos2d::CCSprite* sprite;
 	cocos2d::CCTexture2D* defaultTexture;
