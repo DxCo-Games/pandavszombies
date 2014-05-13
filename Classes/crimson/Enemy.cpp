@@ -20,7 +20,7 @@ void Enemy::update(float dt) {
 	if (!this->muerto) {
 		float distance = MathUtil::distance(this->getLocation(), this->model->player->getLocation());
 
-		if (distance < this->getWidth() / 2) {
+		if (distance < this->getWidth() + this->model->player->getWidth() / 4) {
 			this->beat(this->model->player);
 		} else if (this->canAdvance(this->model->player->getLocation(), ENEMY_SPEED * dt, this->model->getItems())) {
 			this->state = ENEMY_WALKING;
@@ -67,7 +67,9 @@ bool Enemy::shoot(Bullet* bullet) {
 	return result;
 }
 
-
+float Enemy::getWidth() {
+	return Item::getWidth() / 2;
+}
 bool Enemy::isActive() {
 	return !this->muerto;
 }

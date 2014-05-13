@@ -28,6 +28,8 @@ public:
 
 	void beat(Player* player);
 	virtual bool isActive();
+
+	virtual float getWidth();
 };
 
 } /* namespace dxco */
