@@ -67,11 +67,6 @@ void GameModel::update(float dt) {
 				bool shooted = enemy->shoot(bullet);
 
 				if (shooted) {
-					cocos2d::CCPoint position = enemy->getLocation();
-					enemy->getSprite()->setVisible(false);
-
-					cocos2d::CCSprite* tombSprite = dxco::SpriteUtil::create("tomb.png", position.x - 17, position.y - 17, 35, 35);
-					this->vista->addChild(tombSprite);
 					continue;
 				}
 			}
@@ -80,10 +75,7 @@ void GameModel::update(float dt) {
 
 	for (int i = 0; i < this->enemies.size(); i++) {
 		Enemy* enemy = this->enemies[i];
-
-		if (!enemy->muerto) {
-			enemy->update(dt);
-		}
+		enemy->update(dt);
 	}
 }
 
