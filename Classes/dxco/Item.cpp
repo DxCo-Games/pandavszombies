@@ -126,10 +126,10 @@ bool Item::canAdvance(cocos2d::CCPoint target, float distance, std::vector<Item*
 	for (int i = 0; i < items.size(); i++) {
 		Item* item = items[i];
 
-		if (item->isVisible()) {
+		if (item->isActive()) {
 			float itemDistance = MathUtil::distance(position, item->getLocation());
 
-			if (itemDistance < MathUtil::max(width, item->getWidth()) / 2) {
+			if (itemDistance < (width / 2 + item->getWidth() / 2)) {
 				float newDistance = MathUtil::distance(finalPosition, item->getLocation());
 
 				/** me fijo si me estoy acercando o alejando, en el caso de estar alejandome dejo que se mueva*/
@@ -141,8 +141,11 @@ bool Item::canAdvance(cocos2d::CCPoint target, float distance, std::vector<Item*
 		}
 	}
 
-
 	return result;
+}
+
+bool Item::isActive() {
+	return this->isVisible();
 }
 
 

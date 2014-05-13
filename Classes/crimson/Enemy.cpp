@@ -57,4 +57,9 @@ bool Enemy::shoot(Bullet* bullet) {
 	return result;
 }
 
+
+bool Enemy::isActive() {
+	return !this->muerto;
+}
+
 } /* namespace dxco */

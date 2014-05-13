@@ -23,6 +23,8 @@ public:
 	bool muerto;
 	float life;
 	float deadTime;
+
+	virtual bool isActive();
 };
 
 } /* namespace dxco */
