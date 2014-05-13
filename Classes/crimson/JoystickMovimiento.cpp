@@ -9,7 +9,7 @@ JoystickMovimiento::JoystickMovimiento(GameModel* game, cocos2d::CCSprite* sprit
 
 void JoystickMovimiento::onMoved(cocos2d::CCPoint location, float angle, float intensity) {
 	Joystick::onMoved(location, angle, intensity);
-	this->game->player->move(cos(angle) * intensity / 10, sin(angle) * intensity / 10);
+	this->game->player->move(cos(angle) * intensity / 15, sin(angle) * intensity / 15);
 }
 
 } /* namespace dxco */
