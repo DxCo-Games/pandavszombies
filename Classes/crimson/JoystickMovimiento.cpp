@@ -10,7 +10,16 @@ JoystickMovimiento::JoystickMovimiento(GameModel* game, cocos2d::CCSprite* sprit
 
 void JoystickMovimiento::onMoved(cocos2d::CCPoint location, float angle, float intensity) {
 	Joystick::onMoved(location, angle, intensity);
-	this->game->player->move(cos(angle) * PLAYER_SPEED, sin(angle) * PLAYER_SPEED);
+
+	float x = this->game->player->getLocation().x;
+	float y = this->game->player->getLocation().y;
+	float deltaX = cos(angle) * PLAYER_SPEED;
+	float deltaY = sin(angle) * PLAYER_SPEED;
+	cocos2d::CCSize size = cocos2d::CCDirector::sharedDirector()->getVisibleSize();
+
+	if (x + deltaX > 0 && x + deltaX < size.width && y + deltaY > 0 && y + deltaY < size.height){
+		this->game->player->move(deltaX, deltaY);
+	}
 }
 
 } /* namespace dxco */
