@@ -3,7 +3,6 @@
 
 #include "../dxco/Item.h"
 
-
 namespace dxco {
 
 class GameModel;

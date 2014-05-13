@@ -2,10 +2,12 @@
 #define ENEMY_H_
 
 #define ENEMY_SPEED 30
+#define ENEMY_DEAD_TIME 1
 
 #include "cocos2d.h"
 #include "../dxco/Item.h"
 #include "Bullet.h"
+
 
 namespace dxco {
 
@@ -19,6 +21,10 @@ public:
 	bool shoot(Bullet* bullet);
 	GameModel* model;
 	bool muerto;
+	float life;
+	float deadTime;
+
+	virtual bool isActive();
 };
 
 } /* namespace dxco */

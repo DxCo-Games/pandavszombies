@@ -106,6 +106,53 @@ bool Item::collides(Item* item) {
 	return result;
 }
 
+
+bool Item::canAdvance(cocos2d::CCPoint target, float distance, std::vector<Item*> &items) {
+
+	bool result = true;
+
+	cocos2d::CCPoint position = this->getLocation();
+	float angle = MathUtil::angle(target, position);
+
+	float newX = position.x - cos(angle) * distance;
+	float newY = position.y - sin(angle) * distance;
+
+	cocos2d::CCPoint finalPosition = ccp(newX, newY);
+
+	float distanceTarget = MathUtil::distance(position, target);
+
+	float width = this->getWidth();
+
+	for (int i = 0; i < items.size(); i++) {
+		Item* item = items[i];
+
+		if (item->isActive()) {
+			float itemDistance = MathUtil::distance(position, item->getLocation());
+
+			if (itemDistance < (width / 2 + item->getWidth() / 2)) {
+				float newDistance = MathUtil::distance(finalPosition, item->getLocation());
+
+				/** me fijo si me estoy acercando o alejando, en el caso de estar alejandome dejo que se mueva*/
+				if (newDistance < itemDistance) {
+					result = false;
+					break;
+				}
+			}
+		}
+	}
+
+	return result;
+}
+
+bool Item::isActive() {
+	return this->isVisible();
+}
+
+
+bool Item::isVisible() {
+	return this->sprite->isVisible();
+}
+
 bool Item::isOutOfScreen() {
 
 	if (this->getRightPosition() < 0) {
