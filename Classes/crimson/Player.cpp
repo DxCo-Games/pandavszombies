@@ -13,13 +13,17 @@ Player::Player(cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations)
 
 void Player::disparar() {
 	cocos2d::CCPoint location = this->getLocation();
-	cocos2d::CCSprite* spriteBullet = SpriteUtil::create("bullet.jpg", location.x - 5 -15, location.y - 1.5 - 15, 10, 3);
 
-	/** transformo el angulo a radianes */
+	cocos2d::CCSprite* spriteBullet = SpriteUtil::create("bullet.jpg", location.x, location.y, 5, 5);
+	/** degrees to radians */
 	float rotation = this->getSprite()->getRotation();
 	float angle = -rotation / 57.2957795;
 
 	spriteBullet->setRotation(rotation);
+
+	//fix position of the bullet to actually come out the weapon. the last number fixes sprites nonesense
+	float R = 18;
+	SpriteUtil::moveTo(spriteBullet, location.x + R * cos(angle), location.y + R * sin(angle) - 16);
 
 	std::map<int, Animation*> animations;
 	Bullet* bullet = new Bullet(spriteBullet, angle, animations);
