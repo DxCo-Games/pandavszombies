@@ -15,6 +15,7 @@ public:
 	 * goes from the origin to the pointA. */
 	static float angle(cocos2d::CCPoint center, cocos2d::CCPoint pointA);
 
+	static float max(float value1, float value2);
 };
 
 } /* namespace dxco */

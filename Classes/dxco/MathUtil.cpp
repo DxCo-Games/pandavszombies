@@ -49,4 +49,8 @@ float MathUtil::angle(cocos2d::CCPoint center,
 }
 
 
+float MathUtil::max(float value1, float value2) {
+	return (value1 > value2) ? value1 : value2;
+}
+
 } /* namespace dxco */

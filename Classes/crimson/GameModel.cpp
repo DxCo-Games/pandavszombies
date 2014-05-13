@@ -17,6 +17,11 @@ void GameModel::addBullet(Bullet* bullet) {
 	this->vista->addChild(bullet->getSprite(), 2);
 }
 
+
+std::vector<Item*>& GameModel::getItems() {
+	return items;
+}
+
 void GameModel::addEnemy() {
 	//make random point
 	cocos2d::CCSize visibleSize = cocos2d::CCDirector::sharedDirector()->getVisibleSize();
@@ -52,6 +57,7 @@ void GameModel::addEnemy() {
 	Enemy* enemy = new Enemy(this, enemySprite, animations);
 
 	this->enemies.push_back(enemy);
+	this->items.push_back(enemy);
 	this->vista->addChild(enemy->getSprite());
 }
 

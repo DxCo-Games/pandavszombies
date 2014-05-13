@@ -16,11 +16,14 @@ Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animatio
 void Enemy::update(float dt) {
 
 	if (!this->muerto) {
-		//look at player
-		float angle = MathUtil::angle(this->getLocation(), this->model->player->getLocation()) * - 57.2957795;
-		SpriteUtil::setAngle(this->sprite, angle);
-		//walk to player
-		this->goTo(this->model->player->getLocation(), ENEMY_SPEED * dt);
+
+		if (this->canAdvance(this->model->player->getLocation(), ENEMY_SPEED * dt, this->model->getItems())) {
+			//look at player
+			float angle = MathUtil::angle(this->getLocation(), this->model->player->getLocation()) * - 57.2957795;
+			SpriteUtil::setAngle(this->sprite, angle);
+			//walk to player
+			this->goTo(this->model->player->getLocation(), ENEMY_SPEED * dt);
+		}
 	} else {
 		this->deadTime += dt;
 

@@ -23,6 +23,8 @@ public:
 	std::vector<Bullet*> bullets;
 
 	void addEnemy();
+	std::vector<Item*>& getItems();
+	std::vector<Item*> items;
 	std::vector<Enemy*> enemies;
 
 	void update(float dt);

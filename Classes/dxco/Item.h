@@ -37,6 +37,10 @@ public:
 	virtual bool collides(Item* item);
 	virtual bool isOutOfScreen();
 
+	virtual bool canAdvance(cocos2d::CCPoint target, float distance, std::vector<Item*> &items);
+
+	virtual bool isVisible();
+
 protected:
 	cocos2d::CCSprite* sprite;
 	cocos2d::CCTexture2D* defaultTexture;
