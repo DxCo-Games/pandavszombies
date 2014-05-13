@@ -15,8 +15,9 @@ public:
 	void ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
 private:
 	std::vector<Joystick*> joysticks;
-	std::map<int, cocos2d::CCPoint> beginLocations;
-	Joystick* getRelatedJoystick(cocos2d::CCPoint location);
+	std::map<int, Joystick*> relatedJoysticks;
+	void setRelatedJoystick(int id, cocos2d::CCPoint location);
+	Joystick* getRelatedJoystick(int id);
 	float angulo;
 };
 

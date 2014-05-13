@@ -21,9 +21,8 @@ void JoystickController::ccTouchesBegan(cocos2d::CCSet *pTouches,
 		location = touch->getLocationInView();
 		location = cocos2d::CCDirector::sharedDirector()->convertToGL(location);
 
-		this->beginLocations[touch->getID()] = location;
-
-		Joystick* joystick = getRelatedJoystick(location);
+		this->setRelatedJoystick(touch->getID(), location);
+		Joystick* joystick = this->getRelatedJoystick(touch->getID());
 
 		if (joystick) {
 			cocos2d::CCPoint center = joystick->getCenter();
@@ -49,9 +48,8 @@ void JoystickController::ccTouchesEnded(cocos2d::CCSet *pTouches,
 		location = touch->getLocationInView();
 		location = cocos2d::CCDirector::sharedDirector()->convertToGL(location);
 
-		this->beginLocations[touch->getID()] = location;
+		Joystick* joystick = getRelatedJoystick(touch->getID());
 
-		Joystick* joystick = getRelatedJoystick(location);
 		if (joystick) {
 			cocos2d::CCPoint center = joystick->getCenter();
 			float intensity = MathUtil::distance(location, joystick->getCenter());
@@ -77,9 +75,7 @@ void JoystickController::ccTouchesMoved(cocos2d::CCSet *pTouches,
 		location = touch->getLocationInView();
 		location = cocos2d::CCDirector::sharedDirector()->convertToGL(location);
 
-		this->beginLocations[touch->getID()] = location;
-
-		Joystick* joystick = getRelatedJoystick(location);
+		Joystick* joystick = getRelatedJoystick(touch->getID());
 
 		if (joystick) {
 			cocos2d::CCPoint center = joystick->getCenter();
@@ -93,25 +89,22 @@ void JoystickController::ccTouchesMoved(cocos2d::CCSet *pTouches,
 	}
 }
 
-Joystick* JoystickController::getRelatedJoystick(cocos2d::CCPoint location) {
-	Joystick* result = NULL;
 
-	if (joysticks.size()) {
-		result = joysticks[0];
-		float minDistance = MathUtil::distance(location, result->getCenter());
+void JoystickController::setRelatedJoystick(int id, cocos2d::CCPoint location) {
+	Joystick* joystick = NULL;
 
-		for (int i = 1; i < this->joysticks.size(); i++) {
-			Joystick* joystick = this->joysticks[i];
-			float currDistance = MathUtil::distance(location, joystick->getCenter());
+	for (int i = 0; i < this->joysticks.size(); i++) {
+		float distance = MathUtil::distance(this->joysticks[i]->getCenter(), location);
 
-			if (currDistance < minDistance) {
-				result = joystick;
-			}
+		if (distance <= this->joysticks[i]->getRadio()) {
+			joystick = this->joysticks[i];
 		}
-
 	}
 
-	return result;
+	this->relatedJoysticks[id] = joystick;
 }
 
+Joystick* JoystickController::getRelatedJoystick(int id) {
+	return this->relatedJoysticks[id];
+}
 } /* namespace dxco */
