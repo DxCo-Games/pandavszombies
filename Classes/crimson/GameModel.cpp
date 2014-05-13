@@ -14,7 +14,7 @@ GameModel::GameModel(HelloWorld* vista, Player* player) {
 
 void GameModel::addBullet(Bullet* bullet) {
 	this->bullets.push_back(bullet);
-	this->vista->addChild(bullet->getSprite());
+	this->vista->addChild(bullet->getSprite(), 2);
 }
 
 void GameModel::addEnemy() {
@@ -57,12 +57,34 @@ void GameModel::addEnemy() {
 
 void GameModel::update(float dt) {
 	for (int i = 0; i < this->bullets.size(); i++) {
-		this->bullets[i]->update(dt);
+		Bullet* bullet = this->bullets[i];
+		bullet->update(dt);
+
+		for (int j = 0; j < this->enemies.size(); j++) {
+			Enemy* enemy = this->enemies[j];
+
+			if (!enemy->muerto) {
+				bool shooted = enemy->shoot(bullet);
+
+				if (shooted) {
+					cocos2d::CCPoint position = enemy->getLocation();
+					enemy->getSprite()->setVisible(false);
+
+					cocos2d::CCSprite* tombSprite = dxco::SpriteUtil::create("tomb.png", position.x - 17, position.y - 17, 35, 35);
+					this->vista->addChild(tombSprite);
+					continue;
+				}
+			}
+		}
 	}
 
 	for (int i = 0; i < this->enemies.size(); i++) {
-			this->enemies[i]->update(dt);
+		Enemy* enemy = this->enemies[i];
+
+		if (!enemy->muerto) {
+			enemy->update(dt);
 		}
+	}
 }
 
 } /* namespace dxco */
