@@ -95,4 +95,38 @@ void Item::goTo(cocos2d::CCPoint point, float distance) {
 	this->move(cos(angle) * distance, sin(angle) * distance);
 }
 
+bool Item::collides(Item* item) {
+
+	bool result = false;
+
+	if (item && item->getSprite()) {
+		item->getSprite()->getTextureRect().intersectsRect(this->getSprite()->getTextureRect());
+	}
+
+	return result;
+}
+
+bool Item::isOutOfScreen() {
+
+	if (this->getRightPosition() < 0) {
+		return true;
+	}
+
+	if (this->getTopPosition() < 0) {
+		return true;
+	}
+
+	cocos2d::CCSize visibleSize = cocos2d::CCDirector::sharedDirector()->getVisibleSize();
+
+	if (this->getLeftPosition() > visibleSize.width) {
+		return true;
+	}
+
+	if (this->getBottomPosition() > visibleSize.height) {
+		return true;
+	}
+
+	return false;
+}
+
 } /* namespace dxco */

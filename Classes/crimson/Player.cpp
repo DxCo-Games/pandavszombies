@@ -6,7 +6,7 @@
 namespace dxco {
 
 Player::Player(cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations) : Item(sprite, animations) {
-
+	this->state = QUIETO;
 }
 
 void Player::disparar() {
@@ -22,6 +22,10 @@ void Player::disparar() {
 	std::map<int, Animation*> animations;
 	Bullet* bullet = new Bullet(spriteBullet, angle, animations);
 	this->model->addBullet(bullet);
+}
+
+int Player::getState() {
+	return this->state;
 }
 
 } /* namespace dxco */
