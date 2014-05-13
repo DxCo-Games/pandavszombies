@@ -3,10 +3,12 @@
 
 #include "cocos2d.h"
 #include "Player.h"
+#include "Enemy.h"
 #include "Bullet.h"
 #include <vector>
 
 #define BULLET_DT 0.15
+#define ENEMY_DT 2.0
 
 class HelloWorld;
 
@@ -19,6 +21,9 @@ public:
 
 	void addBullet(Bullet* bullet);
 	std::vector<Bullet*> bullets;
+
+	void addEnemy();
+	std::vector<Enemy*> enemies;
 
 	void update(float dt);
 	HelloWorld* vista;

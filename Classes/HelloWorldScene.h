@@ -28,6 +28,7 @@ private:
     dxco::GameModel* model;
     dxco::JoystickController joystickController;
     float bulletDt;
+    float enemyDt;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

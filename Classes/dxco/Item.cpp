@@ -92,7 +92,7 @@ float Item::getWidth() {
 void Item::goTo(cocos2d::CCPoint point, float distance) {
 	float angle = MathUtil::angle(point, this->getLocation());
 
-	this->move(cos(angle) * distance, sin(angle) * distance);
+	this->move(-cos(angle) * distance, -sin(angle) * distance);
 }
 
 bool Item::collides(Item* item) {

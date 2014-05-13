@@ -40,7 +40,7 @@ bool HelloWorld::init()
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
     CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
     
-    CCSprite* pSprite = dxco::SpriteUtil::create("grass.jpg", 0, 0, visibleSize.width, visibleSize.height);
+    CCSprite* pSprite = dxco::SpriteUtil::create("grass-texture-2.jpg", 0, 0, visibleSize.width, visibleSize.height);
     this->addChild(pSprite, 0);
 
     this->scheduleUpdate();
@@ -60,7 +60,7 @@ bool HelloWorld::init()
     CCSprite* joystickBotonMovimiento = dxco::SpriteUtil::create("boton.png", visibleSize.width * 0.15 + 20,  40, 40, 40);
     this->addChild(joystickBotonMovimiento);
 
-    CCSprite* spriteGuy = dxco::SpriteUtil::create("guy.jpg", visibleSize.width / 2,  visibleSize.height / 2, 30, 30);
+    CCSprite* spriteGuy = dxco::SpriteUtil::create("citizenplayershotgun.png", visibleSize.width / 2,  visibleSize.height / 2, 35, 35);
     this->addChild(spriteGuy);
     
     std::map<int, dxco::Animation*> animations;
@@ -97,6 +97,12 @@ void HelloWorld::update(float dt) {
 	if (this->bulletDt > BULLET_DT) {
 		this->model->player->disparar();
 		this->bulletDt = 0;
+	}
+
+	this->enemyDt += dt;
+	if (this->enemyDt > ENEMY_DT){
+		this->model->addEnemy();
+		this->enemyDt = 0;
 	}
 
 	this->model->update(dt);

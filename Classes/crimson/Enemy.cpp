@@ -8,7 +8,7 @@ Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animatio
 }
 
 void Enemy::update(float dt) {
-
+	this->goTo(this->model->player->getLocation(), ENEMY_SPEED * dt);
 }
 
 } /* namespace dxco */

@@ -1,6 +1,8 @@
 #ifndef ENEMY_H_
 #define ENEMY_H_
 
+#define ENEMY_SPEED 100
+
 #include "cocos2d.h"
 #include "../dxco/Item.h"
 
