@@ -61,7 +61,7 @@ bool HelloWorld::init()
     this->addChild(joystickBotonMovimiento);
 
     CCSprite* spriteGuy = dxco::SpriteUtil::create("citizenplayershotgun.png", visibleSize.width / 2,  visibleSize.height / 2, 40, 40);
-    this->addChild(spriteGuy);
+    this->addChild(spriteGuy, 2);
     
     std::map<int, dxco::Animation*> animations;
 

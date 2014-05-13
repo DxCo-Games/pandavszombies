@@ -5,6 +5,7 @@
 
 #include "cocos2d.h"
 #include "../dxco/Item.h"
+#include "Bullet.h"
 
 namespace dxco {
 
@@ -15,7 +16,9 @@ public:
 	Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations);
 	void update(float dt);
 
+	bool shoot(Bullet* bullet);
 	GameModel* model;
+	bool muerto;
 };
 
 } /* namespace dxco */

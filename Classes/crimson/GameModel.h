@@ -8,7 +8,7 @@
 #include <vector>
 
 #define BULLET_DT 0.15
-#define ENEMY_DT 2.0
+#define ENEMY_DT 0.75
 
 class HelloWorld;
 
