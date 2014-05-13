@@ -3,6 +3,7 @@
 #include "../dxco/SpriteUtil.h"
 #include "../dxco/MathUtil.h"
 #include "cocos2d.h"
+#include "Player.h"
 
 namespace dxco {
 
@@ -15,9 +16,14 @@ Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animatio
 
 void Enemy::update(float dt) {
 
+	Item::update(dt);
 	if (!this->muerto) {
+		float distance = MathUtil::distance(this->getLocation(), this->model->player->getLocation());
 
-		if (this->canAdvance(this->model->player->getLocation(), ENEMY_SPEED * dt, this->model->getItems())) {
+		if (distance < this->getWidth() / 2) {
+			this->beat(this->model->player);
+		} else if (this->canAdvance(this->model->player->getLocation(), ENEMY_SPEED * dt, this->model->getItems())) {
+			this->state = ENEMY_WALKING;
 			//look at player
 			float angle = MathUtil::angle(this->getLocation(), this->model->player->getLocation()) * - 57.2957795;
 			SpriteUtil::setAngle(this->sprite, angle);
@@ -31,6 +37,10 @@ void Enemy::update(float dt) {
 			this->getSprite()->setVisible(false);
 		}
 	}
+}
+
+void Enemy::beat(Player* player) {
+	this->state = ENEMY_BEATING;
 }
 
 bool Enemy::shoot(Bullet* bullet) {

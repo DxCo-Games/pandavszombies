@@ -8,10 +8,10 @@
 #include "../dxco/Item.h"
 #include "Bullet.h"
 
-
 namespace dxco {
 
 class GameModel;
+class Player;
 
 class Enemy : public Item {
 public:
@@ -24,6 +24,9 @@ public:
 	float life;
 	float deadTime;
 
+	enum estados { ENEMY_WALKING, ENEMY_BEATING };
+
+	void beat(Player* player);
 	virtual bool isActive();
 };
 

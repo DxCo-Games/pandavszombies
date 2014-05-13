@@ -44,7 +44,8 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/crimson/GameModel.cpp \
                    ../../Classes/crimson/Player.cpp \
                    ../../Classes/crimson/Bullet.cpp \
-                   ../../Classes/crimson/Enemy.cpp
+                   ../../Classes/crimson/Enemy.cpp \
+                   ../../Classes/crimson/GameFactory.cpp
                    
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
