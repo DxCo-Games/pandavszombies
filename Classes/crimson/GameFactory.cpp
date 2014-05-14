@@ -40,6 +40,7 @@ Enemy* GameFactory::createEnemy(GameModel* model) {
 	//new enemy
 	std::map<int, dxco::Animation*> animations;
 	std::vector<cocos2d::CCTexture2D*> textures;
+	std::vector<cocos2d::CCTexture2D*> texturesMuerto;
 	float frameTime = 0.18;
 
 
@@ -50,6 +51,10 @@ Enemy* GameFactory::createEnemy(GameModel* model) {
 
 	animations[Enemy::ENEMY_BEATING] = animation;
 
+	texturesMuerto.push_back(dxco::SpriteUtil::createTexture("tomb.png"));
+	animation = new Animation(texturesMuerto, 1);
+
+	animations[Enemy::ENEMY_DEAD] = animation;
 	return new Enemy(model, enemySprite, animations);
 }
 

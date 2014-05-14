@@ -31,6 +31,7 @@ void Enemy::update(float dt) {
 			this->goTo(this->model->player->getLocation(), ENEMY_SPEED * dt);
 		}
 	} else {
+		this->state = ENEMY_DEAD;
 		this->deadTime += dt;
 
 		if (this->deadTime > ENEMY_DEAD_TIME) {
@@ -58,8 +59,6 @@ bool Enemy::shoot(Bullet* bullet) {
 
 			if (this->life < 0) {
 				this->muerto = true;
-				cocos2d::CCPoint position = this->getLocation();
-				SpriteUtil::setTexture(this->sprite, "tomb.png");
 			}
 		}
 	}

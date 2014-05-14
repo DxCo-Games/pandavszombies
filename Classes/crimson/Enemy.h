@@ -24,7 +24,7 @@ public:
 	float life;
 	float deadTime;
 
-	enum estados { ENEMY_WALKING, ENEMY_BEATING };
+	enum estados { ENEMY_WALKING, ENEMY_BEATING, ENEMY_DEAD };
 
 	void beat(Player* player);
 	virtual bool isActive();
