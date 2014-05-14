@@ -27,6 +27,7 @@ public:
 	enum estados { ENEMY_WALKING, ENEMY_BEATING, ENEMY_DEAD };
 
 	void beat(Player* player);
+	void hurt(float value);
 	virtual bool isActive();
 
 	virtual float getWidth();

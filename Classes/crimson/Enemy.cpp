@@ -7,7 +7,9 @@
 
 namespace dxco {
 
-Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations) : Item(sprite, animations) {
+Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite,
+		std::map<int, Animation*>& animations) :
+		Item(sprite, animations) {
 	this->model = model;
 	this->muerto = false;
 	this->life = 20;
@@ -18,14 +20,17 @@ void Enemy::update(float dt) {
 
 	Item::update(dt);
 	if (!this->muerto) {
-		float distance = MathUtil::distance(this->getLocation(), this->model->player->getLocation());
+		float distance = MathUtil::distance(this->getLocation(),
+				this->model->player->getLocation());
 
 		if (distance < this->getWidth() + this->model->player->getWidth() / 4) {
 			this->beat(this->model->player);
-		} else if (this->canAdvance(this->model->player->getLocation(), ENEMY_SPEED * dt, this->model->getItems())) {
+		} else if (this->canAdvance(this->model->player->getLocation(),
+				ENEMY_SPEED * dt, this->model->getItems())) {
 			this->state = ENEMY_WALKING;
 			//look at player
-			float angle = MathUtil::angle(this->getLocation(), this->model->player->getLocation()) * - 57.2957795;
+			float angle = MathUtil::angle(this->getLocation(),
+					this->model->player->getLocation()) * -57.2957795;
 			SpriteUtil::setAngle(this->sprite, angle);
 			//walk to player
 			this->goTo(this->model->player->getLocation(), ENEMY_SPEED * dt);
@@ -49,7 +54,8 @@ bool Enemy::shoot(Bullet* bullet) {
 
 	if (bullet && !bullet->used) {
 
-		float distance = MathUtil::distance(this->getLocation(), bullet->getLocation());
+		float distance = MathUtil::distance(this->getLocation(),
+				bullet->getLocation());
 
 		if (distance < this->getWidth() / 2) {
 			bullet->use();
@@ -64,6 +70,14 @@ bool Enemy::shoot(Bullet* bullet) {
 	}
 
 	return result;
+}
+
+void Enemy::hurt(float value) {
+	this->life -= value;
+
+	if (this->life < 0) {
+		this->muerto = true;
+	}
 }
 
 float Enemy::getWidth() {

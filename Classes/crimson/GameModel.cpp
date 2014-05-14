@@ -3,13 +3,14 @@
 #include "dxco/SpriteUtil.h"
 #include <cstdlib>
 #include "GameFactory.h"
-
+#include "Bomba.h"
 namespace dxco {
 
 GameModel::GameModel(HelloWorld* vista, Player* player) {
 	this->player = player;
 	player->model = this;
 	this->vista = vista;
+	this->bombaTime = 0;
 }
 
 void GameModel::addBullet(Bullet* bullet) {
@@ -32,6 +33,16 @@ void GameModel::addEnemy() {
 }
 
 void GameModel::update(float dt) {
+
+	this->bombaTime+= dt;
+
+	if (this->bombaTime > BOMBA_TIME) {
+		Bomba* bomba = new Bomba(this);
+
+		bomba->explode(10 + (rand() % 5));
+		this->bombaTime = 0;
+	}
+
 	for (int i = 0; i < this->bullets.size(); i++) {
 		Bullet* bullet = this->bullets[i];
 		bullet->update(dt);

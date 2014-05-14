@@ -68,12 +68,13 @@ bool HelloWorld::init()
     dxco::Player* player = new dxco::Player(spriteGuy, animations);
 
     model = new dxco::GameModel(this, player);
-    dxco::Joystick* joystick = new dxco::JoystickMira(model, joystickBoton, 50);
+    dxco::Joystick* joystick = new dxco::JoystickMira(model, joystickBoton, 65);
     this->joystickController.addJoystick(joystick);
 
-    joystick = new dxco::JoystickMovimiento(model, joystickBotonMovimiento, 50);
+    joystick = new dxco::JoystickMovimiento(model, joystickBotonMovimiento, 65);
     this->joystickController.addJoystick(joystick);
     this->bulletDt = 0;
+
     return true;
 }
 

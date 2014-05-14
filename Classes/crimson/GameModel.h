@@ -9,6 +9,7 @@
 
 #define BULLET_DT 0.15
 #define ENEMY_DT 0.75
+#define BOMBA_TIME 4
 
 class HelloWorld;
 
@@ -29,6 +30,7 @@ public:
 
 	void update(float dt);
 	HelloWorld* vista;
+	float bombaTime;
 };
 
 } /* namespace dxco */
