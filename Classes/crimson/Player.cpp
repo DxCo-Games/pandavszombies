@@ -14,7 +14,7 @@ Player::Player(cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations)
 void Player::disparar() {
 	cocos2d::CCPoint location = this->getLocation();
 
-	cocos2d::CCSprite* spriteBullet = SpriteUtil::create("bullet.jpg", location.x, location.y, 5, 5);
+	cocos2d::CCSprite* spriteBullet = SpriteUtil::create("bullet.png", location.x, location.y, 5, 5);
 	/** degrees to radians */
 	float rotation = this->getSprite()->getRotation();
 	float angle = -rotation / 57.2957795;

@@ -1,7 +1,7 @@
 #ifndef ENEMY_H_
 #define ENEMY_H_
 
-#define ENEMY_SPEED 30
+#define ENEMY_SPEED 15
 #define ENEMY_DEAD_TIME 180
 
 #include "cocos2d.h"

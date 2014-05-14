@@ -7,9 +7,9 @@
 #include "Bullet.h"
 #include <vector>
 
-#define BULLET_DT 0.15
+#define BULLET_DT 0.25
 #define ENEMY_DT 0.75
-#define BOMBA_TIME 4
+#define BOMBA_TIME 5
 
 class HelloWorld;
 

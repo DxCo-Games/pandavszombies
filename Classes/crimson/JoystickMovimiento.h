@@ -1,7 +1,7 @@
 #ifndef JOYSTICKMOVIMIENTO_H_
 #define JOYSTICKMOVIMIENTO_H_
 
-#define PLAYER_SPEED 2
+#define PLAYER_SPEED 1.5
 
 #include "../dxco/Joystick.h"
 #include "GameModel.h"
