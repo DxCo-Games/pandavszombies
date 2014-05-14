@@ -37,6 +37,7 @@ void Enemy::update(float dt) {
 		}
 	} else {
 		this->state = ENEMY_DEAD;
+		this->sprite->setZOrder(-1);
 		this->deadTime += dt;
 
 		if (this->deadTime > ENEMY_DEAD_TIME) {

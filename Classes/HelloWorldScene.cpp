@@ -41,24 +41,24 @@ bool HelloWorld::init()
     CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
     
     CCSprite* pSprite = dxco::SpriteUtil::create("grass-texture-2.jpg", 0, 0, visibleSize.width, visibleSize.height);
-    this->addChild(pSprite, 0);
+    this->addChild(pSprite, -10);
 
     this->scheduleUpdate();
     this->setTouchEnabled(true);
 
     CCSprite* joystickFondo = dxco::SpriteUtil::create("circulo.png", visibleSize.width *  0.85 - 80, 20, 80, 80);
-    this->addChild(joystickFondo);
+    this->addChild(joystickFondo, 10);
     joystickFondo->setOpacity(128);
 
     CCSprite* joystickBoton = dxco::SpriteUtil::create("boton.png", visibleSize.width * 0.85 - 60,  40, 40, 40);
-    this->addChild(joystickBoton);
+    this->addChild(joystickBoton, 10);
 
     joystickFondo = dxco::SpriteUtil::create("circulo.png", visibleSize.width *  0.15, 20, 80, 80);
-    this->addChild(joystickFondo);
+    this->addChild(joystickFondo, 10);
     joystickFondo->setOpacity(128);
 
     CCSprite* joystickBotonMovimiento = dxco::SpriteUtil::create("boton.png", visibleSize.width * 0.15 + 20,  40, 40, 40);
-    this->addChild(joystickBotonMovimiento);
+    this->addChild(joystickBotonMovimiento, 10);
 
     CCSprite* spriteGuy = dxco::SpriteUtil::create("citizenplayershotgun.png", visibleSize.width / 2,  visibleSize.height / 2, 40, 40);
     this->addChild(spriteGuy, 2);

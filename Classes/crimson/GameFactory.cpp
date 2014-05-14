@@ -51,7 +51,7 @@ Enemy* GameFactory::createEnemy(GameModel* model) {
 
 	animations[Enemy::ENEMY_BEATING] = animation;
 
-	texturesMuerto.push_back(dxco::SpriteUtil::createTexture("tomb.png"));
+	texturesMuerto.push_back(dxco::SpriteUtil::createTexture("BloodSplat1.png"));
 	animation = new Animation(texturesMuerto, 1);
 
 	animations[Enemy::ENEMY_DEAD] = animation;
