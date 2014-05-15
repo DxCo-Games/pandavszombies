@@ -24,7 +24,7 @@ void EnemyFactory::update(GameModel* model, float dt) {
 	this->bossDt += dt;
 	if (this->bossDt > BOSS_DT){
 		this->createBoss(model);
-		this->enemyDt = 0;
+		this->bossDt = 0;
 	}
 }
 
