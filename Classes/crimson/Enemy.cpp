@@ -81,8 +81,8 @@ void Enemy::hurt(float value) {
 	}
 }
 
-float Enemy::getWidth() {
-	return Item::getWidth() / 2;
+float Enemy::getColitionRatio() {
+	return this->getWidth() / 4;
 }
 bool Enemy::isActive() {
 	return !this->muerto;

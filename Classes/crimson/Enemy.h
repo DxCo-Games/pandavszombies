@@ -30,7 +30,7 @@ public:
 	void hurt(float value);
 	virtual bool isActive();
 
-	virtual float getWidth();
+	virtual float getColitionRatio();
 };
 
 } /* namespace dxco */

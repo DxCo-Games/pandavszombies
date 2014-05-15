@@ -42,6 +42,8 @@ public:
 	virtual bool isVisible();
 	virtual bool isActive();
 
+	virtual float getColitionRatio();
+
 protected:
 	cocos2d::CCSprite* sprite;
 	cocos2d::CCTexture2D* defaultTexture;

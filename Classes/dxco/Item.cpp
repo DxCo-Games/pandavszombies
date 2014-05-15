@@ -121,7 +121,7 @@ bool Item::canAdvance(cocos2d::CCPoint target, float distance, std::vector<Item*
 
 	float distanceTarget = MathUtil::distance(position, target);
 
-	float width = this->getWidth();
+	float ratio = this->getColitionRatio();
 
 	for (int i = 0; i < items.size(); i++) {
 		Item* item = items[i];
@@ -129,7 +129,7 @@ bool Item::canAdvance(cocos2d::CCPoint target, float distance, std::vector<Item*
 		if (item->isActive()) {
 			float itemDistance = MathUtil::distance(position, item->getLocation());
 
-			if (itemDistance < (width / 2 + item->getWidth() / 2)) {
+			if (itemDistance < (ratio  + item->getColitionRatio())) {
 				float newDistance = MathUtil::distance(finalPosition, item->getLocation());
 
 				/** me fijo si me estoy acercando o alejando, en el caso de estar alejandome dejo que se mueva*/
@@ -151,6 +151,11 @@ bool Item::isActive() {
 
 bool Item::isVisible() {
 	return this->sprite->isVisible();
+}
+
+
+float Item::getColitionRatio() {
+	return this->getWidth() / 2;
 }
 
 bool Item::isOutOfScreen() {
