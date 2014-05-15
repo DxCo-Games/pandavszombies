@@ -11,7 +11,6 @@ Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite,
 		std::map<int, Animation*>& animations) :
 		Item(sprite, animations) {
 	this->model = model;
-	this->muerto = false;
 	this->life = 20;
 	this->deadTime = 0;
 }
@@ -19,7 +18,7 @@ Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite,
 void Enemy::update(float dt) {
 
 	Item::update(dt);
-	if (!this->muerto) {
+	if (this->isActive()) {
 		float distance = MathUtil::distance(this->getLocation(),
 				this->model->player->getLocation());
 
@@ -63,10 +62,6 @@ bool Enemy::shoot(Bullet* bullet) {
 			result = true;
 
 			this->life -= bullet->getDamage();
-
-			if (this->life < 0) {
-				this->muerto = true;
-			}
 		}
 	}
 
@@ -75,17 +70,13 @@ bool Enemy::shoot(Bullet* bullet) {
 
 void Enemy::hurt(float value) {
 	this->life -= value;
-
-	if (this->life < 0) {
-		this->muerto = true;
-	}
 }
 
 float Enemy::getWidth() {
 	return Item::getWidth() / 2;
 }
 bool Enemy::isActive() {
-	return !this->muerto;
+	return this->life > 0;
 }
 
 } /* namespace dxco */

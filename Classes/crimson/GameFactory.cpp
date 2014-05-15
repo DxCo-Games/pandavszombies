@@ -1,5 +1,6 @@
 #include "GameFactory.h"
 #include "../dxco/SpriteUtil.h"
+#include "../dxco/StringUtil.h"
 #include "../dxco/Animation.h"
 #include "Enemy.h"
 
@@ -33,9 +34,11 @@ Enemy* GameFactory::createEnemy(GameModel* model) {
 	}
 	}
 
+	std::string snumber = StringUtil::toString(rand() % 8 + 1);
+
 	//create sprite
 	cocos2d::CCSprite* enemySprite = dxco::SpriteUtil::create(
-			"citizenzombie1.png", x, y, 35, 35);
+			"citizenzombie" + snumber + ".png", x, y, 35, 35);
 
 	//new enemy
 	std::map<int, dxco::Animation*> animations;
@@ -43,9 +46,14 @@ Enemy* GameFactory::createEnemy(GameModel* model) {
 	std::vector<cocos2d::CCTexture2D*> texturesMuerto;
 	float frameTime = 0.18;
 
-
-	textures.push_back(dxco::SpriteUtil::createTexture("citizenzombie1.png"));
-	textures.push_back(dxco::SpriteUtil::createTexture("citizenzombie1-pega.png"));
+	//FIXME animate the rest of the zombies
+	if (snumber == "1") {
+		textures.push_back(dxco::SpriteUtil::createTexture("citizenzombie1.png"));
+		textures.push_back(dxco::SpriteUtil::createTexture("citizenzombie1-pega.png"));
+	} else {
+		textures.push_back(dxco::SpriteUtil::createTexture("citizenzombie" + snumber + ".png"));
+		textures.push_back(dxco::SpriteUtil::createTexture("citizenzombie" + snumber + ".png"));
+	}
 
 	dxco::Animation* animation = new Animation(textures, frameTime);
 

@@ -50,7 +50,7 @@ void GameModel::update(float dt) {
 		for (int j = 0; j < this->enemies.size(); j++) {
 			Enemy* enemy = this->enemies[j];
 
-			if (!enemy->muerto) {
+			if (enemy->isActive()) {
 				bool shooted = enemy->shoot(bullet);
 
 				if (shooted) {

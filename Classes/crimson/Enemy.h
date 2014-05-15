@@ -20,7 +20,6 @@ public:
 
 	bool shoot(Bullet* bullet);
 	GameModel* model;
-	bool muerto;
 	float life;
 	float deadTime;
 
