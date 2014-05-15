@@ -2,7 +2,7 @@
 #include "../HelloWorldScene.h"
 #include "dxco/SpriteUtil.h"
 #include <cstdlib>
-#include "GameFactory.h"
+#include "EnemyFactory.h"
 #include "Bomba.h"
 namespace dxco {
 
@@ -11,6 +11,7 @@ GameModel::GameModel(HelloWorld* vista, Player* player) {
 	player->model = this;
 	this->vista = vista;
 	this->bombaTime = 0;
+	this->factory = new EnemyFactory();
 }
 
 void GameModel::addBullet(Bullet* bullet) {
@@ -23,18 +24,10 @@ std::vector<Item*>& GameModel::getItems() {
 	return items;
 }
 
-void GameModel::addEnemy() {
-
-	Enemy* enemy = GameFactory::createEnemy(this);
-
-	this->enemies.push_back(enemy);
-	this->items.push_back(enemy);
-	this->vista->addChild(enemy->getSprite());
-}
-
 void GameModel::update(float dt) {
 
 	this->bombaTime+= dt;
+
 
 	if (this->bombaTime > BOMBA_TIME) {
 		Bomba* bomba = new Bomba(this);

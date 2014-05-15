@@ -1,12 +1,33 @@
-#include "GameFactory.h"
+#include "EnemyFactory.h"
 #include "../dxco/SpriteUtil.h"
 #include "../dxco/StringUtil.h"
 #include "../dxco/Animation.h"
 #include "Enemy.h"
+#include "GameModel.h"
+#include "HelloWorldScene.h"
 
 namespace dxco {
 
-Enemy* GameFactory::createEnemy(GameModel* model) {
+EnemyFactory::EnemyFactory(){
+	this->enemyDt = 0;
+	this->bossDt = 0;
+}
+
+void EnemyFactory::update(GameModel* model, float dt) {
+	this->enemyDt += dt;
+	if (this->enemyDt > ENEMY_DT){
+		this->createEnemy(model);
+		this->enemyDt = 0;
+	}
+
+	this->bossDt += dt;
+	if (this->bossDt > BOSS_DT){
+		this->createBoss(model);
+		this->enemyDt = 0;
+	}
+}
+
+void EnemyFactory::createEnemy(GameModel* model) {
 	//make random point
 	cocos2d::CCSize visibleSize =
 			cocos2d::CCDirector::sharedDirector()->getVisibleSize();
@@ -63,7 +84,15 @@ Enemy* GameFactory::createEnemy(GameModel* model) {
 	animation = new Animation(texturesMuerto, 1);
 
 	animations[Enemy::ENEMY_DEAD] = animation;
-	return new Enemy(model, enemySprite, animations);
+	Enemy* enemy = new Enemy(model, enemySprite, animations);
+
+	model->enemies.push_back(enemy);
+	model->items.push_back(enemy);
+	model->vista->addChild(enemy->getSprite());
+}
+
+void EnemyFactory::createBoss(GameModel* model) {
+
 }
 
 } /* namespace dxco */

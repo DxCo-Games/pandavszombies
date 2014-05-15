@@ -100,12 +100,6 @@ void HelloWorld::update(float dt) {
 		this->bulletDt = 0;
 	}
 
-	this->enemyDt += dt;
-	if (this->enemyDt > ENEMY_DT){
-		this->model->addEnemy();
-		this->enemyDt = 0;
-	}
-
 	this->model->update(dt);
 }
 
