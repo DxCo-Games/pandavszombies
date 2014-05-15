@@ -4,6 +4,8 @@
 #define ENEMY_DT 0.75
 #define BOSS_DT 30
 
+#include "cocos2d.h"
+
 namespace dxco {
 
 class GameModel;
@@ -15,6 +17,8 @@ public:
 
 	void createEnemy(GameModel* model);
 	void createBoss(GameModel* model);
+
+	cocos2d::CCSprite* getRandomSprite(std::string texture, int width, int height);
 
 	float enemyDt;
 	float bossDt;

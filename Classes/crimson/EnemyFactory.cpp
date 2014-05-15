@@ -3,6 +3,7 @@
 #include "../dxco/StringUtil.h"
 #include "../dxco/Animation.h"
 #include "Enemy.h"
+#include "Boss.h"
 #include "GameModel.h"
 #include "HelloWorldScene.h"
 
@@ -28,38 +29,10 @@ void EnemyFactory::update(GameModel* model, float dt) {
 }
 
 void EnemyFactory::createEnemy(GameModel* model) {
-	//make random point
-	cocos2d::CCSize visibleSize =
-			cocos2d::CCDirector::sharedDirector()->getVisibleSize();
-	float x, y;
-	switch (rand() % 4) {
-	case 0: { //top
-		x = rand() % int(visibleSize.width);
-		y = visibleSize.height + 30;
-		break;
-	}
-	case 1: { //bottom
-		x = rand() % int(visibleSize.width);
-		y = -30;
-		break;
-	}
-	case 2: { //left
-		x = -30;
-		y = rand() % int(visibleSize.height);
-		break;
-	}
-	case 3: { //right
-		x = visibleSize.width + 30;
-		y = rand() % int(visibleSize.height);
-		break;
-	}
-	}
-
 	std::string snumber = StringUtil::toString(rand() % 8 + 1);
 
 	//create sprite
-	cocos2d::CCSprite* enemySprite = dxco::SpriteUtil::create(
-			"citizenzombie" + snumber + ".png", x, y, 35, 35);
+	cocos2d::CCSprite* enemySprite = getRandomSprite("citizenzombie" + snumber + ".png", 35, 35);
 
 	//new enemy
 	std::map<int, dxco::Animation*> animations;
@@ -91,8 +64,62 @@ void EnemyFactory::createEnemy(GameModel* model) {
 	model->vista->addChild(enemy->getSprite());
 }
 
-void EnemyFactory::createBoss(GameModel* model) {
+/* create a sprite in a random position outside the map */
+cocos2d::CCSprite* EnemyFactory::getRandomSprite(std::string texture, int width, int height) {
+	//make random point
+	cocos2d::CCSize visibleSize =
+			cocos2d::CCDirector::sharedDirector()->getVisibleSize();
+	float x, y;
+	switch (rand() % 4) {
+	case 0: { //top
+		x = rand() % int(visibleSize.width);
+		y = visibleSize.height + 30;
+		break;
+	}
+	case 1: { //bottom
+		x = rand() % int(visibleSize.width);
+		y = -30;
+		break;
+	}
+	case 2: { //left
+		x = -30;
+		y = rand() % int(visibleSize.height);
+		break;
+	}
+	case 3: { //right
+		x = visibleSize.width + 30;
+		y = rand() % int(visibleSize.height);
+		break;
+	}
+	}
 
+	//create sprite
+	return dxco::SpriteUtil::create(texture, x, y, width, height);
+}
+
+void EnemyFactory::createBoss(GameModel* model) {
+	std::string snumber = StringUtil::toString(rand() % 8 + 1);
+
+	//create sprite
+	cocos2d::CCSprite* enemySprite = getRandomSprite("citizenzombieboss.png", 120, 120);
+
+	//new enemy
+	std::map<int, dxco::Animation*> animations;
+	std::vector<cocos2d::CCTexture2D*> textures;
+	std::vector<cocos2d::CCTexture2D*> texturesMuerto;
+	float frameTime = 0.18;
+
+	dxco::Animation* animation = new Animation(textures, frameTime);
+
+	texturesMuerto.push_back(dxco::SpriteUtil::createTexture("BloodSplat1.png"));
+	animation = new Animation(texturesMuerto, 1);
+	animations[Enemy::ENEMY_DEAD] = animation;
+
+	Boss* enemy = new Boss(model, enemySprite, animations);
+
+	model->enemies.push_back(enemy);
+	model->items.push_back(enemy);
+	model->vista->addChild(enemy->getSprite());
 }
 
 } /* namespace dxco */

@@ -27,7 +27,7 @@ std::vector<Item*>& GameModel::getItems() {
 void GameModel::update(float dt) {
 
 	this->bombaTime+= dt;
-
+	this->factory->update(this, dt);
 
 	if (this->bombaTime > BOMBA_TIME) {
 		Bomba* bomba = new Bomba(this);
