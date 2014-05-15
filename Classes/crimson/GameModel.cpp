@@ -57,6 +57,29 @@ void GameModel::update(float dt) {
 		Enemy* enemy = this->enemies[i];
 		enemy->update(dt);
 	}
+
+	if (!this->player->isActive()){
+		this->restartGame();
+	}
+}
+
+void GameModel::restartGame() {
+	this->player->restartPosition();
+	this->player->life = 100;
+
+	for (int i = 0; i < this->items.size(); i++) {
+		this->items[i]->getSprite()->setVisible(false);
+	}
+	this->items.clear();
+	this->enemies.clear();
+
+	for (int i = 0; i < this->bullets.size(); i++) {
+		this->bullets[i]->getSprite()->setVisible(false);
+	}
+	this->bullets.clear();
+
+	this->factory->bossDt = 0;
+	this->factory->enemyDt = 0;
 }
 
 } /* namespace dxco */

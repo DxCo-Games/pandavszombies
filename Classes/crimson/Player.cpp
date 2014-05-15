@@ -9,6 +9,7 @@ namespace dxco {
 
 Player::Player(cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations) : Item(sprite, animations) {
 	this->state = QUIETO;
+	this->life = 100;
 }
 
 void Player::disparar() {
@@ -32,6 +33,14 @@ void Player::disparar() {
 
 int Player::getState() {
 	return this->state;
+}
+
+void Player::hurt(float damage) {
+	this->life -= damage;
+}
+
+bool Player::isActive() {
+	return this->life > 0;
 }
 
 } /* namespace dxco */

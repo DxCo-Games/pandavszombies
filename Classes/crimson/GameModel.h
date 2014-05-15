@@ -31,6 +31,8 @@ public:
 	void update(float dt);
 	HelloWorld* vista;
 	float bombaTime;
+
+	void restartGame();
 };
 
 } /* namespace dxco */
