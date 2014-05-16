@@ -2,6 +2,8 @@
 #include "Bullet.h"
 #include "GameModel.h"
 #include "Weapon.h"
+#include "Shotgun.h"
+#include "SMG.h"
 #include "../dxco/SpriteUtil.h"
 
 namespace dxco {
@@ -28,9 +30,14 @@ bool Player::isActive() {
 }
 
 void Player::setWeapon(weapons type) {
+	//TODO change sprites
 	switch(type) {
-	case SHOTGUN:;
-	case SMG:;
+	case SHOTGUN:
+		this->weapon = new Shotgun(this->model);
+		break;
+	case SMG_:
+		this->weapon = new SMG(this->model);
+		break;
 	default:
 		this->weapon = new Weapon(this->model);
 	}
