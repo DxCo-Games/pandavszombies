@@ -13,6 +13,8 @@ public:
 
 	virtual void shoot();
 
+	void createBullet(float rotation);
+
 	GameModel* model;
 	float bulletDt;
 	float bulletFrequency;

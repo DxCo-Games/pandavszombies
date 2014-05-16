@@ -20,14 +20,19 @@ void Weapon::update(float dt) {
 }
 
 void Weapon::shoot() {
+	float rotation = this->model->player->getSprite()->getRotation();
+	this->createBullet(rotation);
+}
+
+void Weapon::createBullet(float rotation) {
 	cocos2d::CCPoint location = this->model->player->getLocation();
 
 	cocos2d::CCSprite* spriteBullet = SpriteUtil::create("bullet.png", location.x, location.y, 5, 5);
-	/** degrees to radians */
-	float rotation = this->model->player->getSprite()->getRotation();
-	float angle = -rotation / 57.2957795;
 
 	spriteBullet->setRotation(rotation);
+
+	/** degrees to radians */
+	float angle = -rotation / 57.2957795;
 
 	//fix position of the bullet to actually come out the weapon. the last number fixes sprites nonesense
 	float R = 18;
