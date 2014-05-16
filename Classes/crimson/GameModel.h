@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "Bonus.h"
 #include "EnemyFactory.h"
 #include "BonusFactory.h"
 #include "Bullet.h"
@@ -29,6 +30,7 @@ public:
 	std::vector<Item*>& getItems();
 	std::vector<Item*> items;
 	std::vector<Enemy*> enemies;
+	std::vector<Bonus*> bonuses;
 
 	void update(float dt);
 	HelloWorld* vista;

@@ -1,6 +1,8 @@
 #ifndef PLAYER_H_
 #define PLAYER_H_
 
+#define PLAYER_LIFE 100
+
 #include "../dxco/Item.h"
 
 namespace dxco {
@@ -16,7 +18,7 @@ public:
 	enum estados { CAMINANDO, QUIETO };
 
 	int getState();
-	void hurt(float damage);
+	void hurt(float damage); //works with negative too
 	bool isActive();
 
 	int state;

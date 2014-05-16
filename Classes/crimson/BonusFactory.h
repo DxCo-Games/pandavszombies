@@ -1,14 +1,9 @@
-/*
- * BonusFactory.h
- *
- *  Created on: May 16, 2014
- *      Author: facundo
- */
-
 #ifndef BONUSFACTORY_H_
 #define BONUSFACTORY_H_
 
-#define BONUS_PROBABILITY 20
+#include "cocos2d.h"
+
+#define BONUS_PROBABILITY 25
 
 namespace dxco {
 
@@ -18,7 +13,7 @@ class BonusFactory {
 public:
 	BonusFactory();
 
-	void createBonus(GameModel* model);
+	void createBonus(GameModel* model, cocos2d::CCPoint);
 };
 
 } /* namespace dxco */

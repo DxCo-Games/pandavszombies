@@ -59,6 +59,10 @@ void GameModel::update(float dt) {
 		enemy->update(dt);
 	}
 
+	for (int i = 0; i < this->bonuses.size(); i++) {
+		this->bonuses[i]->update(dt);
+	}
+
 	if (!this->player->isActive()){
 		this->restartGame();
 	}
@@ -66,7 +70,7 @@ void GameModel::update(float dt) {
 
 void GameModel::restartGame() {
 	this->player->restartPosition();
-	this->player->life = 100;
+	this->player->life = PLAYER_LIFE;
 
 	for (int i = 0; i < this->items.size(); i++) {
 		this->items[i]->getSprite()->setVisible(false);
@@ -78,6 +82,11 @@ void GameModel::restartGame() {
 		this->bullets[i]->getSprite()->setVisible(false);
 	}
 	this->bullets.clear();
+
+	for (int i = 0; i < this->bonuses.size(); i++) {
+		this->bonuses[i]->getSprite()->setVisible(false);
+	}
+	this->bonuses.clear();
 
 	this->enemyFactory->bossDt = 0;
 	this->enemyFactory->enemyDt = 0;

@@ -9,7 +9,7 @@ namespace dxco {
 
 Player::Player(cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations) : Item(sprite, animations) {
 	this->state = QUIETO;
-	this->life = 100;
+	this->life = PLAYER_LIFE;
 }
 
 void Player::disparar() {
@@ -37,6 +37,10 @@ int Player::getState() {
 
 void Player::hurt(float damage) {
 	this->life -= damage;
+
+	if (this->life > PLAYER_LIFE) {
+		this->life = PLAYER_LIFE;
+	}
 }
 
 bool Player::isActive() {

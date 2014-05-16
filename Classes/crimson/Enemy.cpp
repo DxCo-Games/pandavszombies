@@ -40,7 +40,7 @@ void Enemy::update(float dt) {
 		}
 	} else {
 		if (this->state != ENEMY_DEAD) {
-			this->model->bonusFactory->createBonus(this->model);
+			this->model->bonusFactory->createBonus(this->model, this->getLocation());
 			this->state = ENEMY_DEAD;
 			this->sprite->setZOrder(-1);
 		}
