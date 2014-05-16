@@ -78,6 +78,7 @@ void GameModel::update(float dt) {
 void GameModel::restartGame() {
 	this->player->restartPosition();
 	this->player->life = PLAYER_LIFE;
+	this->player->setWeapon(Player::PISTOL);
 
 	for (int i = 0; i < this->items.size(); i++) {
 		this->items[i]->getSprite()->setVisible(false);
