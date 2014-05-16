@@ -11,7 +11,8 @@ GameModel::GameModel(HelloWorld* vista, Player* player) {
 	player->model = this;
 	this->vista = vista;
 	this->bombaTime = 0;
-	this->factory = new EnemyFactory();
+	this->enemyFactory = new EnemyFactory();
+	this->bonusFactory = new BonusFactory();
 }
 
 void GameModel::addBullet(Bullet* bullet) {
@@ -27,7 +28,7 @@ std::vector<Item*>& GameModel::getItems() {
 void GameModel::update(float dt) {
 
 	this->bombaTime+= dt;
-	this->factory->update(this, dt);
+	this->enemyFactory->update(this, dt);
 
 	if (this->bombaTime > BOMBA_TIME) {
 		Bomba* bomba = new Bomba(this);
@@ -78,8 +79,8 @@ void GameModel::restartGame() {
 	}
 	this->bullets.clear();
 
-	this->factory->bossDt = 0;
-	this->factory->enemyDt = 0;
+	this->enemyFactory->bossDt = 0;
+	this->enemyFactory->enemyDt = 0;
 }
 
 } /* namespace dxco */
