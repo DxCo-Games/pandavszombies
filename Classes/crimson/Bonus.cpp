@@ -7,6 +7,7 @@
 
 #include "Bonus.h"
 #include "GameModel.h"
+#include <algorithm>
 
 namespace dxco {
 
@@ -20,7 +21,10 @@ void Bonus::update(float dt) {
 	if (this->collides(this->model->player)) {
 		this->applyBonus();
 		this->sprite->setVisible(false);
-		//TODO remove from bonuses list
+
+		//this removes the bonus. cpp, don't ask.
+		this->model->bonuses.erase(std::remove(this->model->bonuses.begin(), this->model->bonuses.end(), this),
+				this->model->bonuses.end());
 	}
 }
 
