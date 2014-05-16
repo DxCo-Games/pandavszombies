@@ -1,10 +1,3 @@
-/*
- * HealthBonus.cpp
- *
- *  Created on: May 16, 2014
- *      Author: facundo
- */
-
 #include "HealthBonus.h"
 #include "GameModel.h"
 
