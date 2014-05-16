@@ -73,8 +73,6 @@ bool HelloWorld::init()
 
     joystick = new dxco::JoystickMovimiento(model, joystickBotonMovimiento, 65);
     this->joystickController.addJoystick(joystick);
-    this->bulletDt = 0;
-
     return true;
 }
 
@@ -93,13 +91,6 @@ void HelloWorld::ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEve
 }
 
 void HelloWorld::update(float dt) {
-	this->bulletDt += dt;
-
-	if (this->bulletDt > BULLET_DT) {
-		this->model->player->disparar();
-		this->bulletDt = 0;
-	}
-
 	this->model->update(dt);
 }
 

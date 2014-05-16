@@ -4,11 +4,18 @@
 #include <cstdlib>
 #include "EnemyFactory.h"
 #include "Bomba.h"
+#include "Weapon.h"
+#include "Player.h"
+
 namespace dxco {
 
 GameModel::GameModel(HelloWorld* vista, Player* player) {
+
+	//not very nice
 	this->player = player;
 	player->model = this;
+	this->player->setWeapon(Player::PISTOL);
+
 	this->vista = vista;
 	this->bombaTime = 0;
 	this->enemyFactory = new EnemyFactory();
@@ -26,7 +33,7 @@ std::vector<Item*>& GameModel::getItems() {
 }
 
 void GameModel::update(float dt) {
-
+	this->player->weapon->update(dt);
 	this->bombaTime+= dt;
 	this->enemyFactory->update(this, dt);
 

@@ -48,6 +48,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/crimson/Boss.cpp \
                    ../../Classes/crimson/BonusFactory.cpp \
                    ../../Classes/crimson/Bonus.cpp \
+                   ../../Classes/crimson/Weapon.cpp \
                    ../../Classes/crimson/HealthBonus.cpp \
                    ../../Classes/crimson/EnemyFactory.cpp \
                    ../../Classes/crimson/Bomba.cpp

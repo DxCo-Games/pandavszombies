@@ -10,7 +10,6 @@
 #include "Bullet.h"
 #include <vector>
 
-#define BULLET_DT 0.25
 #define BOMBA_TIME 5
 
 class HelloWorld;

@@ -27,7 +27,6 @@ public:
 private:
     dxco::GameModel* model;
     dxco::JoystickController joystickController;
-    float bulletDt;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

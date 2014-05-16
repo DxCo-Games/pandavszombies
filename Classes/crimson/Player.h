@@ -8,6 +8,7 @@
 namespace dxco {
 
 class GameModel;
+class Weapon;
 
 class Player : public Item {
 public:
@@ -15,7 +16,11 @@ public:
 	void disparar();
 
 	GameModel* model;
+	Weapon* weapon;
 	enum estados { CAMINANDO, QUIETO };
+	enum weapons { PISTOL, SHOTGUN, SMG, MACHINE_GUN};
+
+	void setWeapon(weapons type);
 
 	int getState();
 	void hurt(float damage); //works with negative too
