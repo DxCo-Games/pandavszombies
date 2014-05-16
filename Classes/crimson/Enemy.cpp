@@ -11,29 +11,32 @@ Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite,
 		std::map<int, Animation*>& animations) :
 		Item(sprite, animations) {
 	this->model = model;
-	this->muerto = false;
 	this->life = 20;
 	this->deadTime = 0;
+	this->strength = 10;
 }
 
 void Enemy::update(float dt) {
 
 	Item::update(dt);
-	if (!this->muerto) {
+	if (this->isActive()) {
 		float distance = MathUtil::distance(this->getLocation(),
 				this->model->player->getLocation());
 
 		if (distance < this->getWidth() + this->model->player->getWidth() / 4) {
-			this->beat(this->model->player);
-		} else if (this->canAdvance(this->model->player->getLocation(),
-				ENEMY_SPEED * dt, this->model->getItems())) {
+			this->beat(this->model->player, dt);
+		} else {
 			this->state = ENEMY_WALKING;
 			//look at player
 			float angle = MathUtil::angle(this->getLocation(),
 					this->model->player->getLocation()) * -57.2957795;
 			SpriteUtil::setAngle(this->sprite, angle);
-			//walk to player
-			this->goTo(this->model->player->getLocation(), ENEMY_SPEED * dt);
+
+			if (this->canAdvance(this->model->player->getLocation(),
+							ENEMY_SPEED * dt, this->model->getItems())) {
+				//walk to player
+				this->goTo(this->model->player->getLocation(), ENEMY_SPEED * dt);
+			}
 		}
 	} else {
 		this->state = ENEMY_DEAD;
@@ -46,8 +49,14 @@ void Enemy::update(float dt) {
 	}
 }
 
-void Enemy::beat(Player* player) {
-	this->state = ENEMY_BEATING;
+void Enemy::beat(Player* player, float dt) {
+	if (this->state != ENEMY_BEATING) {
+		//start to attack
+		this->state = ENEMY_BEATING;
+	} else {
+		//already atacking -> make damage
+		player->hurt(this->strength * dt);
+	}
 }
 
 bool Enemy::shoot(Bullet* bullet) {
@@ -63,10 +72,6 @@ bool Enemy::shoot(Bullet* bullet) {
 			result = true;
 
 			this->life -= bullet->getDamage();
-
-			if (this->life < 0) {
-				this->muerto = true;
-			}
 		}
 	}
 
@@ -75,17 +80,13 @@ bool Enemy::shoot(Bullet* bullet) {
 
 void Enemy::hurt(float value) {
 	this->life -= value;
-
-	if (this->life < 0) {
-		this->muerto = true;
-	}
 }
 
 float Enemy::getColitionRatio() {
 	return this->getWidth() / 4;
 }
 bool Enemy::isActive() {
-	return !this->muerto;
+	return this->life > 0;
 }
 
 } /* namespace dxco */

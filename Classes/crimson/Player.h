@@ -16,8 +16,11 @@ public:
 	enum estados { CAMINANDO, QUIETO };
 
 	int getState();
+	void hurt(float damage);
+	bool isActive();
 
 	int state;
+	float life;
 };
 
 } /* namespace dxco */

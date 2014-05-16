@@ -20,13 +20,13 @@ public:
 
 	bool shoot(Bullet* bullet);
 	GameModel* model;
-	bool muerto;
 	float life;
 	float deadTime;
+	float strength;
 
 	enum estados { ENEMY_WALKING, ENEMY_BEATING, ENEMY_DEAD };
 
-	void beat(Player* player);
+	void beat(Player* player, float dt);
 	void hurt(float value);
 	virtual bool isActive();
 
