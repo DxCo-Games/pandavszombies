@@ -97,13 +97,12 @@ void Item::goTo(cocos2d::CCPoint point, float distance) {
 
 bool Item::collides(Item* item) {
 
-	bool result = false;
+	cocos2d::CCRect thisRect = cocos2d::CCRect(this->getBottomPosition(), this->getLeftPosition(),
+			this->getHeight(), this->getWidth());
+	cocos2d::CCRect itemRect = cocos2d::CCRect(item->getBottomPosition(), item->getLeftPosition(),
+			item->getHeight(), item->getWidth());
 
-	if (item && item->getSprite()) {
-		item->getSprite()->getTextureRect().intersectsRect(this->getSprite()->getTextureRect());
-	}
-
-	return result;
+	return thisRect.intersectsRect(itemRect);
 }
 
 
@@ -153,11 +152,15 @@ bool Item::isVisible() {
 	return this->sprite->isVisible();
 }
 
+<<<<<<< HEAD
 
 float Item::getColitionRatio() {
 	return this->getWidth() / 2;
 }
 
+=======
+//FIXME doesnt' work
+>>>>>>> 2bcb0898cdf2584ad7ac266e362e6811cb6e6343
 bool Item::isOutOfScreen() {
 
 	if (this->getRightPosition() < 0) {

@@ -73,21 +73,21 @@ cocos2d::CCSprite* EnemyFactory::getRandomSprite(std::string texture, int width,
 	switch (rand() % 4) {
 	case 0: { //top
 		x = rand() % int(visibleSize.width);
-		y = visibleSize.height + 30;
+		y = visibleSize.height + height / 2;
 		break;
 	}
 	case 1: { //bottom
 		x = rand() % int(visibleSize.width);
-		y = -30;
+		y = - height / 2;
 		break;
 	}
 	case 2: { //left
-		x = -30;
+		x = - width / 2;
 		y = rand() % int(visibleSize.height);
 		break;
 	}
 	case 3: { //right
-		x = visibleSize.width + 30;
+		x = visibleSize.width + width / 2;
 		y = rand() % int(visibleSize.height);
 		break;
 	}

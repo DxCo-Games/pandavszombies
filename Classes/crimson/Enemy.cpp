@@ -4,6 +4,7 @@
 #include "../dxco/MathUtil.h"
 #include "cocos2d.h"
 #include "Player.h"
+#include <algorithm>
 
 namespace dxco {
 
@@ -39,12 +40,21 @@ void Enemy::update(float dt) {
 			}
 		}
 	} else {
-		this->state = ENEMY_DEAD;
-		this->sprite->setZOrder(-1);
-		this->deadTime += dt;
+		if (this->state != ENEMY_DEAD) {
+			this->model->bonusFactory->createBonus(this->model, this->getLocation());
+			this->state = ENEMY_DEAD;
+			this->sprite->setZOrder(-1);
+		}
 
+		this->deadTime += dt;
 		if (this->deadTime > ENEMY_DEAD_TIME) {
 			this->getSprite()->setVisible(false);
+
+			//this removes the enemies. cpp, don't ask.
+			this->model->enemies.erase(std::remove(this->model->enemies.begin(), this->model->enemies.end(), this),
+					this->model->enemies.end());
+			this->model->items.erase(std::remove(this->model->items.begin(), this->model->items.end(), this),
+								this->model->items.end());
 		}
 	}
 }

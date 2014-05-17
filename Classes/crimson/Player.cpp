@@ -1,34 +1,16 @@
 #include "Player.h"
 #include "Bullet.h"
 #include "GameModel.h"
+#include "Weapon.h"
+#include "Shotgun.h"
+#include "SMG.h"
 #include "../dxco/SpriteUtil.h"
-
-
 
 namespace dxco {
 
 Player::Player(cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations) : Item(sprite, animations) {
 	this->state = QUIETO;
-	this->life = 100;
-}
-
-void Player::disparar() {
-	cocos2d::CCPoint location = this->getLocation();
-
-	cocos2d::CCSprite* spriteBullet = SpriteUtil::create("bullet.png", location.x, location.y, 5, 5);
-	/** degrees to radians */
-	float rotation = this->getSprite()->getRotation();
-	float angle = -rotation / 57.2957795;
-
-	spriteBullet->setRotation(rotation);
-
-	//fix position of the bullet to actually come out the weapon. the last number fixes sprites nonesense
-	float R = 18;
-	SpriteUtil::moveTo(spriteBullet, location.x + R * cos(angle), location.y + R * sin(angle) - 16);
-
-	std::map<int, Animation*> animations;
-	Bullet* bullet = new Bullet(spriteBullet, angle, animations);
-	this->model->addBullet(bullet);
+	this->life = PLAYER_LIFE;
 }
 
 int Player::getState() {
@@ -37,10 +19,37 @@ int Player::getState() {
 
 void Player::hurt(float damage) {
 	this->life -= damage;
+
+	if (this->life > PLAYER_LIFE) {
+		this->life = PLAYER_LIFE;
+	}
 }
 
 bool Player::isActive() {
 	return this->life > 0;
+}
+
+void Player::setWeapon(weapons type) {
+	//TODO change sprites
+	switch(type) {
+	case SHOTGUN: {
+		this->weapon = new Shotgun(this->model);
+		cocos2d::CCTexture2D* texture = SpriteUtil::createTexture("citizenplayershotgun.png");
+		SpriteUtil::setTexture(this->sprite, texture);
+		break;
+	}
+	case SMG_: {
+		this->weapon = new SMG(this->model);
+		cocos2d::CCTexture2D* texture = SpriteUtil::createTexture("citizenplayer_uzi.png");
+		SpriteUtil::setTexture(this->sprite, texture);
+		break;
+	}
+	default:{
+		this->weapon = new Weapon(this->model);
+		cocos2d::CCTexture2D* texture = SpriteUtil::createTexture("citizenplayer_handgun.png");
+		SpriteUtil::setTexture(this->sprite, texture);
+	}
+	}
 }
 
 } /* namespace dxco */

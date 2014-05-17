@@ -4,11 +4,12 @@
 #include "cocos2d.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "Bonus.h"
 #include "EnemyFactory.h"
+#include "BonusFactory.h"
 #include "Bullet.h"
 #include <vector>
 
-#define BULLET_DT 0.25
 #define BOMBA_TIME 5
 
 class HelloWorld;
@@ -19,7 +20,8 @@ class GameModel {
 public:
 	GameModel(HelloWorld* vista, Player* player);
 	Player* player;
-	EnemyFactory* factory;
+	EnemyFactory* enemyFactory;
+	BonusFactory* bonusFactory;
 
 	void addBullet(Bullet* bullet);
 	std::vector<Bullet*> bullets;
@@ -27,6 +29,7 @@ public:
 	std::vector<Item*>& getItems();
 	std::vector<Item*> items;
 	std::vector<Enemy*> enemies;
+	std::vector<Bonus*> bonuses;
 
 	void update(float dt);
 	HelloWorld* vista;
