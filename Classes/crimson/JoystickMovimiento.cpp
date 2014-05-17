@@ -17,9 +17,9 @@ void JoystickMovimiento::onMoved(cocos2d::CCPoint location, float angle, float i
 	float deltaY = sin(angle) * PLAYER_SPEED;
 	cocos2d::CCSize size = cocos2d::CCDirector::sharedDirector()->getVisibleSize();
 
-	if (x + deltaX > 0 && x + deltaX < size.width && y + deltaY > 0 && y + deltaY < size.height){
-		this->game->player->move(deltaX, deltaY);
-	}
+	//if (x + deltaX > 0 && x + deltaX < size.width && y + deltaY > 0 && y + deltaY < size.height){
+	this->game->mapa->move(-deltaX, -deltaY);
+	//}
 }
 
 } /* namespace dxco */

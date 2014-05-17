@@ -24,14 +24,14 @@ void Enemy::update(float dt) {
 		float distance = MathUtil::distance(this->getLocation(),
 				this->model->player->getLocation());
 
+		//look at player
+		float angle = MathUtil::angle(this->getLocation(),
+				this->model->player->getLocation()) * -57.2957795;
+		SpriteUtil::setAngle(this->sprite, angle);
 		if (distance < this->getWidth() + this->model->player->getWidth() / 4) {
 			this->beat(this->model->player, dt);
 		} else {
 			this->state = ENEMY_WALKING;
-			//look at player
-			float angle = MathUtil::angle(this->getLocation(),
-					this->model->player->getLocation()) * -57.2957795;
-			SpriteUtil::setAngle(this->sprite, angle);
 
 			if (this->canAdvance(this->model->player->getLocation(),
 							ENEMY_SPEED * dt, this->model->getItems())) {

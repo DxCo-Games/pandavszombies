@@ -61,7 +61,7 @@ void EnemyFactory::createEnemy(GameModel* model) {
 
 	model->enemies.push_back(enemy);
 	model->items.push_back(enemy);
-	model->vista->addChild(enemy->getSprite());
+	model->mapa->addChild(enemy->getSprite());
 }
 
 /* create a sprite in a random position outside the map */
@@ -119,7 +119,7 @@ void EnemyFactory::createBoss(GameModel* model) {
 
 	model->enemies.push_back(enemy);
 	model->items.push_back(enemy);
-	model->vista->addChild(enemy->getSprite());
+	model->vista->mapa->addChild(enemy->getSprite());
 }
 
 } /* namespace dxco */

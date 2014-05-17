@@ -4,6 +4,7 @@
 #include "Weapon.h"
 #include "Shotgun.h"
 #include "SMG.h"
+#include "../HelloWorldScene.h"
 #include "../dxco/SpriteUtil.h"
 
 namespace dxco {
@@ -50,6 +51,15 @@ void Player::setWeapon(weapons type) {
 		SpriteUtil::setTexture(this->sprite, texture);
 	}
 	}
+}
+
+
+cocos2d::CCPoint Player::getLocation() {
+	cocos2d::CCPoint location = Item::getLocation();
+	location.setPoint(location.x - this->model->vista->mapa->getPositionX(),
+			location.y - this->model->vista->mapa->getPositionY());
+
+	return location;
 }
 
 } /* namespace dxco */

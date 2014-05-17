@@ -54,7 +54,8 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/crimson/SMG.cpp \
                    ../../Classes/crimson/Shotgun.cpp \
                    ../../Classes/crimson/EnemyFactory.cpp \
-                   ../../Classes/crimson/Bomba.cpp
+                   ../../Classes/crimson/Bomba.cpp \
+                   ../../Classes/crimson/Mapa.cpp
                    
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes

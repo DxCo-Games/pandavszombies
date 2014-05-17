@@ -26,7 +26,7 @@ void Bomba::explode(float radio) {
 	firework->setEndSize(radio);
 	firework->setLife(0.5);
 
-	this->model->vista->addChild(firework);
+	this->model->mapa->addChild(firework);
 
 	for (int i = 0; i < this->model->enemies.size(); i++) {
 		Enemy* enemy = this->model->enemies[i];

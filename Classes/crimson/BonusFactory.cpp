@@ -33,7 +33,7 @@ void BonusFactory::createBonus(GameModel* model, cocos2d::CCPoint location) {
 			}
 		}
 		model->bonuses.push_back(bonus);
-		model->vista->addChild(bonus->getSprite());
+		model->mapa->addChild(bonus->getSprite());
 	}
 }
 

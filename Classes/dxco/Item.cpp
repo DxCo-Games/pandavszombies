@@ -152,15 +152,11 @@ bool Item::isVisible() {
 	return this->sprite->isVisible();
 }
 
-<<<<<<< HEAD
-
 float Item::getColitionRatio() {
 	return this->getWidth() / 2;
 }
 
-=======
 //FIXME doesnt' work
->>>>>>> 2bcb0898cdf2584ad7ac266e362e6811cb6e6343
 bool Item::isOutOfScreen() {
 
 	if (this->getRightPosition() < 0) {

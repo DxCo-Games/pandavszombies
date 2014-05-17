@@ -28,6 +28,8 @@ public:
 
 	int state;
 	float life;
+
+	cocos2d::CCPoint getLocation();
 };
 
 } /* namespace dxco */

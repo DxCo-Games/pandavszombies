@@ -8,6 +8,7 @@
 #include "EnemyFactory.h"
 #include "BonusFactory.h"
 #include "Bullet.h"
+#include "Mapa.h"
 #include <vector>
 
 #define BOMBA_TIME 5
@@ -34,7 +35,7 @@ public:
 	void update(float dt);
 	HelloWorld* vista;
 	float bombaTime;
-
+	Mapa* mapa;
 	void restartGame();
 };
 

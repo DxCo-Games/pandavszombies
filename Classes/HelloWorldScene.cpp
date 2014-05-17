@@ -40,8 +40,18 @@ bool HelloWorld::init()
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
     CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
     
-    CCSprite* pSprite = dxco::SpriteUtil::create("grass-texture-2.jpg", 0, 0, visibleSize.width, visibleSize.height);
-    this->addChild(pSprite, -10);
+    this->mapa = new dxco::Mapa(0, 0, visibleSize.width * 4, visibleSize.height * 4);
+    CCSprite* pSprite = dxco::SpriteUtil::create("grass.jpg", 0, 0, visibleSize.width, visibleSize.height);
+    this->mapa->addChild(pSprite, -10);
+
+    pSprite = dxco::SpriteUtil::create("grass.jpg", 0, visibleSize.height, visibleSize.width, visibleSize.height);
+    this->mapa->addChild(pSprite, -10);
+
+    pSprite = dxco::SpriteUtil::create("grass.jpg", visibleSize.width, 0, visibleSize.width, visibleSize.height);
+    this->mapa->addChild(pSprite, -10);
+
+    pSprite = dxco::SpriteUtil::create("grass.jpg", visibleSize.width, visibleSize.height, visibleSize.width, visibleSize.height);
+    this->mapa->addChild(pSprite, -10);
 
     this->scheduleUpdate();
     this->setTouchEnabled(true);
@@ -51,15 +61,16 @@ bool HelloWorld::init()
     joystickFondo->setOpacity(128);
 
     CCSprite* joystickBoton = dxco::SpriteUtil::create("boton.png", visibleSize.width * 0.85 - 60,  40, 40, 40);
-    this->addChild(joystickBoton, 10);
+    this->addChild(joystickBoton, 12);
 
     joystickFondo = dxco::SpriteUtil::create("circulo.png", visibleSize.width *  0.15, 20, 80, 80);
-    this->addChild(joystickFondo, 10);
+    this->addChild(joystickFondo, 12);
     joystickFondo->setOpacity(128);
 
     CCSprite* joystickBotonMovimiento = dxco::SpriteUtil::create("boton.png", visibleSize.width * 0.15 + 20,  40, 40, 40);
     this->addChild(joystickBotonMovimiento, 10);
 
+    this->addChild(mapa);
     CCSprite* spriteGuy = dxco::SpriteUtil::create("citizenplayer_handgun.png", visibleSize.width / 2,  visibleSize.height / 2, 40, 40);
     this->addChild(spriteGuy, 2);
     

@@ -17,6 +17,7 @@ GameModel::GameModel(HelloWorld* vista, Player* player) {
 	this->player->setWeapon(Player::PISTOL);
 
 	this->vista = vista;
+	this->mapa = vista->mapa;
 	this->bombaTime = 0;
 	this->enemyFactory = new EnemyFactory();
 	this->bonusFactory = new BonusFactory();
@@ -24,7 +25,7 @@ GameModel::GameModel(HelloWorld* vista, Player* player) {
 
 void GameModel::addBullet(Bullet* bullet) {
 	this->bullets.push_back(bullet);
-	this->vista->addChild(bullet->getSprite(), 2);
+	this->mapa->addChild(bullet->getSprite(), 2);
 }
 
 
