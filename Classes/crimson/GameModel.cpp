@@ -15,17 +15,29 @@ class ShouldDeleteBullet
 {
     GameModel* model;
 public:
-    ShouldDeleteBullet( GameModel* model ) : model( model ) {}
+    ShouldDeleteBullet( GameModel* model ) : model( model ) {
+    	cocos2d::CCPoint origin = cocos2d::CCDirector::sharedDirector()->getVisibleOrigin();
+    	maxX = this->model->mapa->getWidth() + origin.x;
+    	maxY = this->model->mapa->getHeight() + origin.y;
+    	minX = origin.x;
+    	minY = origin.y;
+    }
+
+    float maxX;
+    float maxY;
+    float minX;
+    float minY;
+
     bool operator()( Bullet* bullet )
     {
     	if (bullet->used) {
 			return true;
 		}
 
-		if(bullet->getLeftPosition() < 0 ||
-		   bullet->getRightPosition() > this->model->mapa->getWidth() ||
-		   bullet->getBottomPosition() < 0 ||
-		   bullet->getTopPosition() > this->model->mapa->getHeight()) {
+		if(bullet->getLeftPosition() < minX ||
+		   bullet->getRightPosition() > maxX ||
+		   bullet->getBottomPosition() < minY ||
+		   bullet->getTopPosition() > maxY) {
 			//also making it invisible
 			bullet->getSprite()->setVisible(false);
 			return true;
