@@ -22,10 +22,10 @@ public:
 			return true;
 		}
 
-		if(bullet->getLeftPosition() < this->model->mapa->getPositionX() ||
-		   bullet->getRightPosition() > this->model->mapa->getPositionX() + this->model->mapa->getWidth() ||
-		   bullet->getBottomPosition() < this->model->mapa->getPositionY() ||
-		   bullet->getTopPosition() > this->model->mapa->getPositionY() + this->model->mapa->getHeight()) {
+		if(bullet->getLeftPosition() < 0 ||
+		   bullet->getRightPosition() > this->model->mapa->getWidth() ||
+		   bullet->getBottomPosition() < 0 ||
+		   bullet->getTopPosition() > this->model->mapa->getHeight()) {
 			//also making it invisible
 			bullet->getSprite()->setVisible(false);
 			return true;
