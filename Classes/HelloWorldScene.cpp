@@ -68,7 +68,7 @@ bool HelloWorld::init()
     joystickFondo->setOpacity(128);
 
     CCSprite* joystickBotonMovimiento = dxco::SpriteUtil::create("boton.png", visibleSize.width * 0.15 + 20,  40, 40, 40);
-    this->addChild(joystickBotonMovimiento, 10);
+    this->addChild(joystickBotonMovimiento, 12);
 
     this->addChild(mapa);
     CCSprite* spriteGuy = dxco::SpriteUtil::create("citizenplayer_handgun.png", visibleSize.width / 2,  visibleSize.height / 2, 40, 40);
@@ -84,6 +84,9 @@ bool HelloWorld::init()
 
     joystick = new dxco::JoystickMovimiento(model, joystickBotonMovimiento, 65);
     this->joystickController.addJoystick(joystick);
+
+    this->initFire();
+    this->showFire();
     return true;
 }
 
@@ -103,6 +106,22 @@ void HelloWorld::ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEve
 
 void HelloWorld::update(float dt) {
 	this->model->update(dt);
+}
+
+void HelloWorld::initFire() {
+	cocos2d::CCSize visibleSize =
+				cocos2d::CCDirector::sharedDirector()->getVisibleSize();
+	fire = new dxco::FireWeapon(this->model, visibleSize.width / 2, visibleSize.height / 2);
+
+	//this->addChild(fire);
+}
+
+void HelloWorld::showFire() {
+	fire->setVisible(true);
+}
+
+void HelloWorld::hideFire() {
+	fire->setVisible(false);
 }
 
 void HelloWorld::menuCloseCallback(CCObject* pSender)

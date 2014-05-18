@@ -5,6 +5,7 @@
 #include "dxco/JoystickController.h"
 #include "crimson/GameModel.h"
 #include "crimson/Mapa.h"
+#include "crimson/FireWeapon.h"
 
 class HelloWorld : public cocos2d::CCLayer
 {
@@ -26,6 +27,11 @@ public:
     void ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
     virtual void update(float dt);
     dxco::Mapa* mapa;
+
+    virtual void initFire();
+    virtual void showFire();
+    virtual void hideFire();
+    dxco::FireWeapon* fire;
 private:
     dxco::GameModel* model;
     dxco::JoystickController joystickController;
