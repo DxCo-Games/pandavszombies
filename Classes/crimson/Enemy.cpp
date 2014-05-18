@@ -72,7 +72,7 @@ void Enemy::beat(Player* player, float dt) {
 bool Enemy::shoot(Bullet* bullet) {
 	bool result = false;
 
-	if (bullet && !bullet->used) {
+	if (bullet && !bullet->used && this->state != ENEMY_DEAD) {
 
 		float distance = MathUtil::distance(this->getLocation(),
 				bullet->getLocation());

@@ -37,6 +37,7 @@ public:
 	float bombaTime;
 	Mapa* mapa;
 	void restartGame();
+	bool shouldDeleteBullet(Bullet* bullet);
 };
 
 } /* namespace dxco */

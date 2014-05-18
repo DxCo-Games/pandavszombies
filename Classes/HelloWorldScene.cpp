@@ -40,7 +40,7 @@ bool HelloWorld::init()
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
     CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
     
-    this->mapa = new dxco::Mapa(0, 0, visibleSize.width * 4, visibleSize.height * 4);
+    this->mapa = new dxco::Mapa(0, 0, visibleSize.width * 2, visibleSize.height * 2);
     CCSprite* pSprite = dxco::SpriteUtil::create("grass.jpg", 0, 0, visibleSize.width, visibleSize.height);
     this->mapa->addChild(pSprite, -10);
 

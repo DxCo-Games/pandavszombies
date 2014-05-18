@@ -6,8 +6,34 @@
 #include "Bomba.h"
 #include "Weapon.h"
 #include "Player.h"
+#include <algorithm>
 
 namespace dxco {
+
+//Used to remove old bullets to avoid ralentization
+class ShouldDeleteBullet
+{
+    GameModel* model;
+public:
+    ShouldDeleteBullet( GameModel* model ) : model( model ) {}
+    bool operator()( Bullet* bullet )
+    {
+    	if (bullet->used) {
+			return true;
+		}
+
+		if(bullet->getLeftPosition() < this->model->mapa->getPositionX() ||
+		   bullet->getRightPosition() > this->model->mapa->getPositionX() + this->model->mapa->getWidth() ||
+		   bullet->getBottomPosition() < this->model->mapa->getPositionY() ||
+		   bullet->getTopPosition() > this->model->mapa->getPositionY() + this->model->mapa->getHeight()) {
+			//also making it invisible
+			bullet->getSprite()->setVisible(false);
+			return true;
+		}
+
+		return false;
+    }
+};
 
 GameModel::GameModel(HelloWorld* vista, Player* player) {
 
@@ -74,6 +100,14 @@ void GameModel::update(float dt) {
 	if (!this->player->isActive()){
 		this->restartGame();
 	}
+
+	//Bullet cleanup
+	this->bullets.erase(
+	    std::remove_if(this->bullets.begin(), this->bullets.end(), ShouldDeleteBullet(this)),
+	    				this->bullets.end());
+
+	//if used, remove
+	//if out of screen, remove
 }
 
 void GameModel::restartGame() {
@@ -100,5 +134,6 @@ void GameModel::restartGame() {
 	this->enemyFactory->bossDt = 0;
 	this->enemyFactory->enemyDt = 0;
 }
+
 
 } /* namespace dxco */
