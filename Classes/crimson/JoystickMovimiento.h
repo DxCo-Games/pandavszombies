@@ -14,6 +14,8 @@ public:
 	JoystickMovimiento(GameModel* game, cocos2d::CCSprite* sprite, float radio);
 	void onMoved(cocos2d::CCPoint location, float angle, float intensity);
 	GameModel* game;
+	float width;
+	float height;
 };
 
 } /* namespace dxco */
