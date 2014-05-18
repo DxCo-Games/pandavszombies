@@ -38,8 +38,8 @@ public:
 		   bullet->getRightPosition() > maxX ||
 		   bullet->getBottomPosition() < minY ||
 		   bullet->getTopPosition() > maxY) {
-			//also making it invisible
-			bullet->getSprite()->setVisible(false);
+
+			this->model->mapa->removeChild(bullet->getSprite());
 			return true;
 		}
 
