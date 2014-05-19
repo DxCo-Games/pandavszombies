@@ -73,6 +73,8 @@ std::vector<Item*>& GameModel::getItems() {
 
 void GameModel::update(float dt) {
 	this->player->weapon->update(dt);
+	this->player->update(dt);
+
 	this->bombaTime+= dt;
 	this->enemyFactory->update(this, dt);
 

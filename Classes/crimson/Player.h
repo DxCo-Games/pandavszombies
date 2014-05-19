@@ -2,6 +2,7 @@
 #define PLAYER_H_
 
 #define PLAYER_LIFE 100
+#define PLAYER_SPEED 80
 
 #include "../dxco/Item.h"
 
@@ -26,8 +27,14 @@ public:
 	void hurt(float damage); //works with negative too
 	bool isActive();
 
+	void update(float dt);
 	int state;
 	float life;
+
+	float angle;
+	bool moving;
+	float width;
+	float height;
 
 	cocos2d::CCPoint getLocation();
 };
