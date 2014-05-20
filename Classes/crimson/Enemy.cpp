@@ -28,7 +28,7 @@ void Enemy::update(float dt) {
 		float angle = MathUtil::angle(this->getLocation(),
 				this->model->player->getLocation()) * -57.2957795;
 		SpriteUtil::setAngle(this->sprite, angle);
-		if (distance < this->getWidth() + this->model->player->getWidth() / 4) {
+		if (distance < this->getWidth()) {
 			this->beat(this->model->player, dt);
 		} else {
 			this->state = ENEMY_WALKING;
