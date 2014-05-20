@@ -26,6 +26,9 @@ int Player::getState() {
 
 void Player::hurt(float damage) {
 	this->life -= damage;
+	if(damage > 0) {
+		this->model->damage = true;
+	}
 
 	if (this->life > PLAYER_LIFE) {
 		this->life = PLAYER_LIFE;

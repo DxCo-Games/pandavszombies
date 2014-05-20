@@ -35,6 +35,7 @@ public:
 private:
     dxco::GameModel* model;
     dxco::JoystickController joystickController;
+    cocos2d::CCLayerColor* damageLayer;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

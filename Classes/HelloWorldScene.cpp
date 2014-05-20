@@ -47,6 +47,10 @@ bool HelloWorld::init()
     this->scheduleUpdate();
     this->setTouchEnabled(true);
 
+    this->damageLayer = CCLayerColor::create(ccc4(100, 10, 10, 180));
+    this->damageLayer->setVisible(false);
+    this->addChild(this->damageLayer, 4);
+
     CCSprite* joystickFondo = dxco::SpriteUtil::create("circulo.png", visibleSize.width *  0.85 - 80, 20, 80, 80);
     this->addChild(joystickFondo, 10);
     joystickFondo->setOpacity(128);
@@ -97,6 +101,7 @@ void HelloWorld::ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEve
 
 void HelloWorld::update(float dt) {
 	this->model->update(dt);
+	this->damageLayer->setVisible(this->model->damage);
 }
 
 void HelloWorld::initFire() {
