@@ -18,7 +18,7 @@ public:
 	void createEnemy(GameModel* model);
 	void createBoss(GameModel* model);
 
-	cocos2d::CCSprite* getRandomSprite(std::string texture, int width, int height);
+	cocos2d::CCSprite* getRandomSprite(GameModel* model, std::string texture, int width, int height);
 
 	float enemyDt;
 	float bossDt;

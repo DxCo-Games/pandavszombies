@@ -32,7 +32,7 @@ void EnemyFactory::createEnemy(GameModel* model) {
 	std::string snumber = StringUtil::toString(rand() % 8 + 1);
 
 	//create sprite
-	cocos2d::CCSprite* enemySprite = getRandomSprite("citizenzombie" + snumber + ".png", 35, 35);
+	cocos2d::CCSprite* enemySprite = getRandomSprite(model, "citizenzombie" + snumber + ".png", 35, 35);
 
 	//new enemy
 	std::map<int, dxco::Animation*> animations;
@@ -65,33 +65,70 @@ void EnemyFactory::createEnemy(GameModel* model) {
 }
 
 /* create a sprite in a random position outside the map */
-cocos2d::CCSprite* EnemyFactory::getRandomSprite(std::string texture, int width, int height) {
-	//make random point
+cocos2d::CCSprite* EnemyFactory::getRandomSprite(GameModel* model, std::string texture, int width, int height) {
 	cocos2d::CCSize visibleSize =
-			cocos2d::CCDirector::sharedDirector()->getVisibleSize();
+				cocos2d::CCDirector::sharedDirector()->getVisibleSize();
+
+	bool upVisible = false;
+	bool downVisible = false;
+	bool leftVisible = false;
+	bool rightVisible = false;
+
+	if (model->mapa->getPositionX() > 0) {
+		leftVisible = true;
+	}
+	if (model->mapa->getPositionX() + model->mapa->getWidth() < visibleSize.width) {
+		rightVisible = true;
+	}
+	if (model->mapa->getPositionY() > 0) {
+		downVisible = true;
+	}
+	if (model->mapa->getPositionY() + model->mapa->getHeight() < visibleSize.height) {
+		upVisible = true;
+	}
+
+
 	float x, y;
-	switch (rand() % 4) {
-	case 0: { //top
-		x = rand() % int(visibleSize.width);
-		y = visibleSize.height + height / 2;
-		break;
+	bool selected = false;
+	while (!selected) {
+		switch (rand() % 4) {
+			case 0: { //top
+				if (upVisible){
+					continue;
+				}
+				x = rand() % int(visibleSize.width) - model->mapa->getPositionX();
+				y = visibleSize.height - model->mapa->getPositionY() + height / 2;
+				break;
+			}
+			case 1: { //bottom
+				if (downVisible){
+					continue;
+				}
+				x = rand() % int(visibleSize.width) - model->mapa->getPositionX();
+				y = - model->mapa->getPositionY() - height / 2;
+				break;
+			}
+			case 2: { //left
+				if (leftVisible){
+					continue;
+				}
+				x = - model->mapa->getPositionX() - width / 2;
+				y = rand() % int(visibleSize.height) - model->mapa->getPositionY();
+				break;
+			}
+			case 3: { //right
+				if (rightVisible){
+					continue;
+				}
+				x = visibleSize.width - model->mapa->getPositionX() + width / 2;
+				y = rand() % int(visibleSize.height) - model->mapa->getPositionY();
+				break;
+			}
+			}
+		selected = true;
 	}
-	case 1: { //bottom
-		x = rand() % int(visibleSize.width);
-		y = - height / 2;
-		break;
-	}
-	case 2: { //left
-		x = - width / 2;
-		y = rand() % int(visibleSize.height);
-		break;
-	}
-	case 3: { //right
-		x = visibleSize.width + width / 2;
-		y = rand() % int(visibleSize.height);
-		break;
-	}
-	}
+
+
 
 	//create sprite
 	return dxco::SpriteUtil::create(texture, x, y, width, height);
@@ -101,7 +138,7 @@ void EnemyFactory::createBoss(GameModel* model) {
 	std::string snumber = StringUtil::toString(rand() % 8 + 1);
 
 	//create sprite
-	cocos2d::CCSprite* enemySprite = getRandomSprite("citizenzombieboss.png", 120, 120);
+	cocos2d::CCSprite* enemySprite = getRandomSprite(model, "citizenzombieboss.png", 120, 120);
 
 	//new enemy
 	std::map<int, dxco::Animation*> animations;
