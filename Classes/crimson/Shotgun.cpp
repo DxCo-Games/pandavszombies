@@ -15,10 +15,10 @@ void Shotgun::shoot() {
 	float rotation = this->model->player->getSprite()->getRotation();
 
 	this->createBullet(rotation);
-	this->createBullet(rotation + rotation * 0.02);
-	this->createBullet(rotation + rotation * 0.04);
-	this->createBullet(rotation - rotation * 0.02);
-	this->createBullet(rotation - rotation * 0.04);
+	this->createBullet(rotation + 10);
+	this->createBullet(rotation + 5);
+	this->createBullet(rotation - 10);
+	this->createBullet(rotation - 5);
 
 }
 

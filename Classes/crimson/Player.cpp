@@ -34,7 +34,8 @@ void Player::hurt(float damage) {
 
 
 void Player::update(float dt) {
-	Item::update(dt);
+	//FIXME this line is overriding the sprite of the weapon
+	//	Item::update(dt);
 
 	if (this->moving) {
 		cocos2d::CCPoint position = this->getLocation();
@@ -64,20 +65,18 @@ void Player::setWeapon(weapons type) {
 	switch(type) {
 	case SHOTGUN: {
 		this->weapon = new Shotgun(this->model);
-		cocos2d::CCTexture2D* texture = SpriteUtil::createTexture("citizenplayershotgun.png");
-		SpriteUtil::setTexture(this->sprite, texture);
+		SpriteUtil::setTexture(this->sprite, "citizenplayershotgun.png");
 		break;
 	}
 	case SMG_: {
 		this->weapon = new SMG(this->model);
-		cocos2d::CCTexture2D* texture = SpriteUtil::createTexture("citizenplayer_uzi.png");
-		SpriteUtil::setTexture(this->sprite, texture);
+		SpriteUtil::setTexture(this->sprite, "citizenplayer_uzi.png");
 		break;
 	}
 	default:{
 		this->weapon = new Weapon(this->model);
-		cocos2d::CCTexture2D* texture = SpriteUtil::createTexture("citizenplayer_handgun.png");
-		SpriteUtil::setTexture(this->sprite, texture);
+		SpriteUtil::setTexture(this->sprite, "citizenplayer_handgun.png");
+		break;
 	}
 	}
 }
