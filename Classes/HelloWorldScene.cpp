@@ -41,16 +41,7 @@ bool HelloWorld::init()
     
     this->mapa = new dxco::Mapa(0, 0, visibleSize.width * 2, visibleSize.height * 2);
 
-    CCSprite* pSprite = dxco::SpriteUtil::create("grass.jpg", 0, 0, visibleSize.width, visibleSize.height);
-    this->mapa->addChild(pSprite, -10);
-
-    pSprite = dxco::SpriteUtil::create("grass.jpg", 0, visibleSize.height, visibleSize.width, visibleSize.height);
-    this->mapa->addChild(pSprite, -10);
-
-    pSprite = dxco::SpriteUtil::create("grass.jpg", visibleSize.width, 0, visibleSize.width, visibleSize.height);
-    this->mapa->addChild(pSprite, -10);
-
-    pSprite = dxco::SpriteUtil::create("grass.jpg", visibleSize.width, visibleSize.height, visibleSize.width, visibleSize.height);
+    CCSprite* pSprite = dxco::SpriteUtil::create("grass-texture-2.jpg", 0, 0, visibleSize.width * 2, visibleSize.height * 2);
     this->mapa->addChild(pSprite, -10);
 
     this->scheduleUpdate();
