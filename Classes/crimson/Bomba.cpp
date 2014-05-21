@@ -12,9 +12,9 @@ Bomba::Bomba(GameModel* model) {
 }
 
 void Bomba::explode(float radio) {
-	cocos2d::CCTexture2D* texture = dxco::SpriteUtil::createTexture("star.png");
-	cocos2d::CCParticleExplosion* firework = cocos2d::CCParticleExplosion::create();
-	//cocos2d::CCParticleGalaxy * firework = cocos2d::CCParticleGalaxy::create();;
+//	cocos2d::CCTexture2D* texture = dxco::SpriteUtil::createTexture("fire.png");
+	cocos2d::CCParticleSystemQuad* firework = cocos2d::CCParticleSystemQuad::create("ball.plist");
+
 	cocos2d::CCSize visibleSize =
 				cocos2d::CCDirector::sharedDirector()->getVisibleSize();
 
@@ -22,9 +22,9 @@ void Bomba::explode(float radio) {
 	float y = rand() % int(visibleSize.height);
 
 	firework->setPosition(x, y);
-	firework->setTexture(texture);
-	firework->setEndSize(radio);
-	firework->setLife(0.5);
+//	firework->setTexture(texture);
+//	firework->setEndSize(radio);
+//	firework->setLife(0.5);
 
 	this->model->mapa->addChild(firework);
 
