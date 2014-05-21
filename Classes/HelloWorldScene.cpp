@@ -7,6 +7,7 @@
 #include "crimson/GameModel.h"
 #include "crimson/Player.h"
 #include "dxco/Animation.h"
+#include "dxco/Container.h"
 #include <map>
 
 USING_NS_CC;
@@ -50,6 +51,9 @@ bool HelloWorld::init()
     this->damageLayer = CCLayerColor::create(ccc4(100, 10, 10, 180));
     this->damageLayer->setVisible(false);
     this->addChild(this->damageLayer, 4);
+
+    this->clouds = new dxco::Container(0, 0, visibleSize.width * 2, visibleSize.height * 2);
+    this->addChild(this->clouds, 4);
 
     CCSprite* joystickFondo = dxco::SpriteUtil::create("circulo.png", visibleSize.width *  0.85 - 80, 20, 80, 80);
     this->addChild(joystickFondo, 10);

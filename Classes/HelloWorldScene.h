@@ -27,6 +27,7 @@ public:
     void ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
     virtual void update(float dt);
     dxco::Mapa* mapa;
+    dxco::Container* clouds;
 
     virtual void initFire();
     virtual void showFire();

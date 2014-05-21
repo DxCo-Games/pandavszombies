@@ -21,12 +21,10 @@ void Bomba::explode(float radio) {
 	float x = rand() % int(visibleSize.width);
 	float y = rand() % int(visibleSize.height);
 
-	firework->setPosition(x, y);
-//	firework->setTexture(texture);
-//	firework->setEndSize(radio);
-//	firework->setLife(0.5);
 
-	this->model->mapa->addChild(firework);
+	firework->setPosition(x, y);
+	firework->setPositionType(cocos2d::kCCPositionTypeRelative);
+	this->model->vista->clouds->addChild(firework);
 
 	for (int i = 0; i < this->model->enemies.size(); i++) {
 		Enemy* enemy = this->model->enemies[i];

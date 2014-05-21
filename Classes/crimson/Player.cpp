@@ -55,6 +55,7 @@ void Player::update(float dt) {
 		if (finalX > 0 && finalX < this->width && finalY > 0
 				&& finalY < this->height) {
 			this->model->mapa->move(-deltaX, -deltaY);
+			this->model->vista->clouds->move(-deltaX, -deltaY);
 		}
 	}
 }
