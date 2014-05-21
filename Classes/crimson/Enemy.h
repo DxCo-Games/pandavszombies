@@ -23,6 +23,8 @@ public:
 	float life;
 	float deadTime;
 	float strength;
+	bool dumb; //me cago en los patrones ;)
+	cocos2d::CCPoint* destiny;
 
 	enum estados { ENEMY_WALKING, ENEMY_BEATING, ENEMY_DEAD };
 

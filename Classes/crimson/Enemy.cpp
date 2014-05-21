@@ -15,28 +15,52 @@ Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite,
 	this->life = 20;
 	this->deadTime = 0;
 	this->strength = 10;
+
+	if (rand() % 2) {
+		this->dumb = false;
+	} else {
+		this->dumb = true;
+		this->destiny = new cocos2d::CCPoint(rand() % (int)this->model->mapa->getWidth(),
+				rand() % (int)this->model->mapa->getHeight());
+	}
 }
 
 void Enemy::update(float dt) {
 
 	Item::update(dt);
 	if (this->isActive()) {
-		float distance = MathUtil::distance(this->getLocation(),
-				this->model->player->getLocation());
+		cocos2d::CCPoint playerLocation = this->model->player->getLocation();
+		float distance = MathUtil::distance(this->getLocation(), playerLocation);
 
-		//look at player
-		float angle = MathUtil::angle(this->getLocation(),
-				this->model->player->getLocation()) * -57.2957795;
+		if (distance < this->model->player->getWidth() * 3){
+			//if close to player, start following him
+			this->dumb = false;
+		}
+
+		cocos2d::CCPoint destiny;
+		if (this->dumb) {
+			float destinyDistance = MathUtil::distance(this->getLocation(), *this->destiny);
+			if (destinyDistance < this->getWidth()) {
+				//if close to destiny, renew it
+				this->destiny = new cocos2d::CCPoint(rand() % (int)this->model->mapa->getWidth(),
+								rand() % (int)this->model->mapa->getHeight());
+			}
+			destiny = *this->destiny;
+		} else {
+			destiny = playerLocation;
+		}
+
+		//look at destiny
+		float angle = MathUtil::angle(this->getLocation(), destiny) * -57.2957795;
 		SpriteUtil::setAngle(this->sprite, angle);
 		if (distance < this->getWidth() / 2 + this->model->player->getWidth() / 4) {
 			this->beat(this->model->player, dt);
 		} else {
 			this->state = ENEMY_WALKING;
 
-			if (this->canAdvance(this->model->player->getLocation(),
-							ENEMY_SPEED * dt, this->model->getItems())) {
+			if (this->canAdvance(destiny, ENEMY_SPEED * dt, this->model->getItems())) {
 				//walk to player
-				this->goTo(this->model->player->getLocation(), ENEMY_SPEED * dt);
+				this->goTo(destiny, ENEMY_SPEED * dt);
 			}
 		}
 	} else {
