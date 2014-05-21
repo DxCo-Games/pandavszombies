@@ -1,6 +1,8 @@
 #ifndef BONUS_H_
 #define BONUS_H_
 
+#define WEAPON_DT 30
+
 #include "dxco/Item.h"
 
 namespace dxco {
@@ -14,8 +16,10 @@ public:
 
 	void update(float dt);
 	virtual void applyBonus() = 0;
+	void removeBonus();
 
 	GameModel* model;
+	float dt;
 };
 
 } /* namespace dxco */
