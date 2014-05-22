@@ -14,6 +14,7 @@ Boss::Boss(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*
 	this-> life = 120;
 	this->deadTime = 0;
 	this->strength = 50;
+	this->dumb = false;
 }
 
 
