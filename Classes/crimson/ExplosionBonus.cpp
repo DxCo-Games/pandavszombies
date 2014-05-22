@@ -1,35 +1,30 @@
-#include "Bomba.h"
+#include "ExplosionBonus.h"
 #include "GameModel.h"
+#include "Enemy.h"
 #include "../dxco/SpriteUtil.h"
 #include "../HelloWorldScene.h"
-#include "Enemy.h"
 #include "../dxco/MathUtil.h"
 
 namespace dxco {
 
-Bomba::Bomba(GameModel* model) {
-	this->model = model;
+ExplosionBonus::ExplosionBonus(GameModel* model, cocos2d::CCSprite* sprite,
+		std::map<int, Animation*>& animations): Bonus(model, sprite, animations) {
 }
 
-void Bomba::explode(float radio) {
-//	cocos2d::CCTexture2D* texture = dxco::SpriteUtil::createTexture("fire.png");
+void ExplosionBonus::applyBonus(){
 	cocos2d::CCParticleSystemQuad* firework = cocos2d::CCParticleSystemQuad::create("ball.plist");
 
 	cocos2d::CCSize visibleSize =
 				cocos2d::CCDirector::sharedDirector()->getVisibleSize();
 
-	float x = rand() % int(visibleSize.width);
-	float y = rand() % int(visibleSize.height);
-
-
-	firework->setPosition(x, y);
+	firework->setPosition(this->getLocation());
 	firework->setPositionType(cocos2d::kCCPositionTypeRelative);
 	this->model->vista->clouds->addChild(firework);
 
 	for (int i = 0; i < this->model->enemies.size(); i++) {
 		Enemy* enemy = this->model->enemies[i];
 
-		if (MathUtil::distance(firework->getPosition(), enemy->getLocation()) < visibleSize.width * 0.2) {
+		if (MathUtil::distance(firework->getPosition(), enemy->getLocation()) < visibleSize.width * 0.3) {
 			enemy->hurt(50);
 		}
 	}

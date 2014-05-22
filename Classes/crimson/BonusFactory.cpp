@@ -3,6 +3,7 @@
 #include "GameModel.h"
 #include "HealthBonus.h"
 #include "WeaponBonus.h"
+#include "ExplosionBonus.h"
 #include "../dxco/SpriteUtil.h"
 #include <cstdlib>
 
@@ -15,7 +16,7 @@ void BonusFactory::createBonus(GameModel* model, cocos2d::CCPoint location) {
 	if (rand() % 100 < BONUS_PROBABILITY) {
 		std::map<int, dxco::Animation*> animations;
 		Bonus* bonus;
-		switch (rand() % 4) {
+		switch (rand() % 5) {
 			case 0: {	//Health bonus
 				cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("health.png", location.x, location.y, 30, 20);
 				bonus = (Bonus*) new HealthBonus(model, bonusSprite, animations);
@@ -34,6 +35,11 @@ void BonusFactory::createBonus(GameModel* model, cocos2d::CCPoint location) {
 			case 3: {
 				cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("p.png", location.x, location.y, 35, 30);
 				bonus = (Bonus*) new WeaponBonus(model, bonusSprite, animations, Player::PISTOL);
+				break;
+			}
+			case 4: {
+				cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bomb.png", location.x, location.y, 30, 30);
+				bonus = (Bonus*) new ExplosionBonus(model, bonusSprite, animations);
 				break;
 			}
 		}

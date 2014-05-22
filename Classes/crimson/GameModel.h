@@ -11,8 +11,6 @@
 #include "Mapa.h"
 #include <vector>
 
-#define BOMBA_TIME 5
-
 class HelloWorld;
 
 namespace dxco {
@@ -34,7 +32,6 @@ public:
 
 	void update(float dt);
 	HelloWorld* vista;
-	float bombaTime;
 	Mapa* mapa;
 	void restartGame();
 	bool shouldDeleteBullet(Bullet* bullet);

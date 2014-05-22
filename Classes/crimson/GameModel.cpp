@@ -3,7 +3,6 @@
 #include "dxco/SpriteUtil.h"
 #include <cstdlib>
 #include "EnemyFactory.h"
-#include "Bomba.h"
 #include "Weapon.h"
 #include "Player.h"
 #include <algorithm>
@@ -56,7 +55,6 @@ GameModel::GameModel(HelloWorld* vista, Player* player) {
 
 	this->vista = vista;
 	this->mapa = vista->mapa;
-	this->bombaTime = 0;
 	this->enemyFactory = new EnemyFactory();
 	this->bonusFactory = new BonusFactory();
 	this->damage = false;
@@ -77,15 +75,7 @@ void GameModel::update(float dt) {
 	this->player->weapon->update(dt);
 	this->player->update(dt);
 
-	this->bombaTime+= dt;
 	this->enemyFactory->update(this, dt);
-
-	if (this->bombaTime > BOMBA_TIME) {
-		Bomba* bomba = new Bomba(this);
-
-		bomba->explode(10 + (rand() % 5));
-		this->bombaTime = 0;
-	}
 
 	for (int i = 0; i < this->bullets.size(); i++) {
 		Bullet* bullet = this->bullets[i];
