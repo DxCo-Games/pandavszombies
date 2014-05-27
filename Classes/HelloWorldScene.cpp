@@ -109,19 +109,25 @@ void HelloWorld::update(float dt) {
 }
 
 void HelloWorld::initFire() {
-	cocos2d::CCSize visibleSize =
-				cocos2d::CCDirector::sharedDirector()->getVisibleSize();
-	fire = new dxco::FireWeapon(this->model, visibleSize.width / 2, visibleSize.height / 2);
+//	cocos2d::CCSize visibleSize =
+//				cocos2d::CCDirector::sharedDirector()->getVisibleSize();
+//	fire = new dxco::FireWeapon(this->model, visibleSize.width / 2, visibleSize.height / 2);
+//
+//	this->addChild(fire);
 
-	//this->addChild(fire);
+	this->firework = cocos2d::CCParticleSystemQuad::create("fire.plist");
+	firework->setPositionType(cocos2d::kCCPositionTypeRelative);
+	firework->setPosition(this->model->player->getLocation());
+//	firework->setAnchorPoint(cocos2d::CCPoint(-5, 0));
+	this->clouds->addChild(firework);
 }
 
 void HelloWorld::showFire() {
-	fire->setVisible(true);
+//	fire->setVisible(true);
 }
 
 void HelloWorld::hideFire() {
-	fire->setVisible(false);
+//	fire->setVisible(false);
 }
 
 void HelloWorld::menuCloseCallback(CCObject* pSender)

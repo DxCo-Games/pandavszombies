@@ -32,7 +32,8 @@ public:
     virtual void initFire();
     virtual void showFire();
     virtual void hideFire();
-    dxco::FireWeapon* fire;
+//    dxco::FireWeapon* fire;
+    cocos2d::CCParticleSystemQuad* firework;
 private:
     dxco::GameModel* model;
     dxco::JoystickController joystickController;

@@ -11,6 +11,7 @@ FireWeapon::FireWeapon(GameModel* model, float x, float y) :
 	fire = cocos2d::CCParticleSystemQuad::create("fire.plist");
 
 	fire->setPosition(0, 0);
+	fire->setPositionType(cocos2d::kCCPositionTypeRelative);
 	fire->setTexture(texture);
 
 	this->addChild(fire);
