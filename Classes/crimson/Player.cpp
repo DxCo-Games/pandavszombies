@@ -55,8 +55,9 @@ void Player::update(float dt) {
 		if (finalX > 0 && finalX < this->width && finalY > 0
 				&& finalY < this->height) {
 			this->model->mapa->move(-deltaX, -deltaY);
-			this->model->vista->firework->setPosition(finalX, finalY);
 			this->model->vista->clouds->move(-deltaX, -deltaY);
+			//put the emmiter where the player is
+			this->model->vista->fire->setPosition(finalX, finalY);
 		}
 	}
 }

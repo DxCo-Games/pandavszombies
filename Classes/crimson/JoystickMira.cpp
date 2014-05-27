@@ -12,7 +12,9 @@ void JoystickMira::onMoved(cocos2d::CCPoint location, float angle, float intensi
 	Joystick::onMoved(location, angle, intensity);
 
 	SpriteUtil::rotateToDegree(this->game->player->getSprite(), - angle * 57.2957795);
-	this->game->vista->firework->setAngle(angle * 57.2957795);
+
+	/* setRotation would also rotate the particles, this only rotates the emmiter. */
+	this->game->vista->fire->setAngle(angle * 57.2957795);
 }
 
 } /* namespace dxco */

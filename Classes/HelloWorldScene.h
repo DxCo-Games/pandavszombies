@@ -5,7 +5,6 @@
 #include "dxco/JoystickController.h"
 #include "crimson/GameModel.h"
 #include "crimson/Mapa.h"
-#include "crimson/FireWeapon.h"
 
 class HelloWorld : public cocos2d::CCLayer
 {
@@ -30,10 +29,7 @@ public:
     dxco::Container* clouds;
 
     virtual void initFire();
-    virtual void showFire();
-    virtual void hideFire();
-//    dxco::FireWeapon* fire;
-    cocos2d::CCParticleSystemQuad* firework;
+    cocos2d::CCParticleSystemQuad* fire;
 private:
     dxco::GameModel* model;
     dxco::JoystickController joystickController;
