@@ -28,7 +28,7 @@ public:
     dxco::Mapa* mapa;
     dxco::Container* clouds;
 
-    virtual void initFire();
+    virtual void initFire(float x, float y);
     cocos2d::CCParticleSystemQuad* fire;
 private:
     dxco::GameModel* model;

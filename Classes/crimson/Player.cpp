@@ -67,7 +67,7 @@ bool Player::isActive() {
 }
 
 void Player::setWeapon(weapons type) {
-	//TODO change sprites
+	model->vista->fire->setVisible(false);
 	switch(type) {
 	case SHOTGUN: {
 		this->weapon = new Shotgun(this->model);
@@ -77,6 +77,12 @@ void Player::setWeapon(weapons type) {
 	case SMG_: {
 		this->weapon = new SMG(this->model);
 		SpriteUtil::setTexture(this->sprite, "citizenplayer_uzi.png");
+		break;
+	}
+	case FIRE: {
+		model->vista->fire->setVisible(true);
+		this->weapon = new SMG(this->model);
+		SpriteUtil::setTexture(this->sprite, "citizenplayershotgun.png");
 		break;
 	}
 	default:{

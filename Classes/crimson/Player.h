@@ -19,7 +19,7 @@ public:
 	GameModel* model;
 	Weapon* weapon;
 	enum estados { CAMINANDO, QUIETO };
-	enum weapons { PISTOL, SHOTGUN, SMG_, MACHINE_GUN};
+	enum weapons { PISTOL, SHOTGUN, SMG_, MACHINE_GUN, FIRE};
 
 	void setWeapon(weapons type);
 
