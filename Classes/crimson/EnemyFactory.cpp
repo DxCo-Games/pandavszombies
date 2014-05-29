@@ -126,6 +126,9 @@ cocos2d::CCSprite* EnemyFactory::getRandomSprite(GameModel* model, std::string t
 			}
 			}
 		selected = true;
+		if(x < 0 || x > model->mapa->getWidth() || y < 0 || y > model->mapa->getHeight()){
+			selected = false;
+		}
 	}
 
 
