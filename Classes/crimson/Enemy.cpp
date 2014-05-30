@@ -4,6 +4,7 @@
 #include "../dxco/MathUtil.h"
 #include "cocos2d.h"
 #include "Player.h"
+#include "FireWeapon.h"
 #include <algorithm>
 
 namespace dxco {
@@ -15,6 +16,7 @@ Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite,
 	this->life = 20;
 	this->deadTime = 0;
 	this->strength = 10;
+	this->burning = false;
 
 	if (rand() % 2) {
 		this->dumb = false;
@@ -53,6 +55,9 @@ void Enemy::update(float dt) {
 		//look at destiny
 		float angle = MathUtil::angle(this->getLocation(), destiny) * -57.2957795;
 		SpriteUtil::setAngle(this->sprite, angle);
+
+		this->burn(dt, playerLocation, distance, angle);
+
 		if (distance < this->getWidth() / 2 + this->model->player->getWidth() / 4) {
 			this->beat(this->model->player, dt);
 		} else {
@@ -114,6 +119,22 @@ bool Enemy::shoot(Bullet* bullet) {
 
 void Enemy::hurt(float value) {
 	this->life -= value;
+}
+
+void Enemy::burn(float dt, cocos2d::CCPoint playerLocation, float distance, float angle) {
+	float wasBurning = this->burning;
+	/*If has fire weapon and close to the player and in front of the player */
+	this->burning =(this->model->player->weaponType == Player::FIRE &&
+			distance < this->model->player->getWidth() * 2 &&
+			abs(abs(this->model->player->getSprite()->getRotation() - angle) - 180) < 60);
+
+//	if (distance < this->model->player->getWidth() * 2) {
+//		CCLOG("Rotation %f", this->model->player->getSprite()->getRotation());
+//		CCLOG("Angulo %f", angle);
+//	}
+	if (this->burning && wasBurning){
+		this->hurt(FIRE_DAMAGE * dt);
+	}
 }
 
 float Enemy::getColitionRatio() {

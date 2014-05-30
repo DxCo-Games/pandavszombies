@@ -23,6 +23,7 @@ public:
 	float life;
 	float deadTime;
 	float strength;
+	bool burning;
 	bool dumb; //me cago en los patrones ;)
 	cocos2d::CCPoint* destiny;
 
@@ -30,6 +31,7 @@ public:
 
 	void beat(Player* player, float dt);
 	void hurt(float value);
+	void burn(float dt, cocos2d::CCPoint playerLocation, float distance, float angle);
 	virtual bool isActive();
 
 	virtual float getColitionRatio();

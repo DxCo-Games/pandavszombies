@@ -3,11 +3,14 @@
 
 #include "Weapon.h"
 
+#define FIRE_DAMAGE 80
+
 namespace dxco {
 
 class FireWeapon: public Weapon {
 public:
 	FireWeapon(GameModel* model);
+	void update(float dt);
 	void shoot();
 };
 
