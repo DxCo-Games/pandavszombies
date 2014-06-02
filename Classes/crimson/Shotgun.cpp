@@ -12,7 +12,7 @@ Shotgun::Shotgun(GameModel* model): Weapon(model) {
 }
 
 void Shotgun::shoot() {
-	float rotation = this->model->player->getSprite()->getRotation();
+	float rotation = this->model->player->getRotation();
 
 	this->createBullet(rotation);
 	this->createBullet(rotation + 10);
