@@ -8,6 +8,7 @@
 #include "crimson/Player.h"
 #include "dxco/Animation.h"
 #include "dxco/Container.h"
+#include "dxco/StringUtil.h"
 #include <map>
 
 USING_NS_CC;
@@ -72,12 +73,8 @@ bool HelloWorld::init()
     this->initFire(visibleSize.width / 2,  visibleSize.height / 2);
 
     this->addChild(mapa);
-    CCSprite* spriteGuy = dxco::SpriteUtil::create("citizenplayer_handgun.png", visibleSize.width / 2,  visibleSize.height / 2, 40, 40);
-    this->addChild(spriteGuy, 2);
-    
-    std::map<int, dxco::Animation*> animations;
 
-    dxco::Player* player = new dxco::Player(spriteGuy, animations);
+    dxco::Player* player = this->createPlayer();
 
     model = new dxco::GameModel(this, player);
     dxco::Joystick* joystick = new dxco::JoystickMira(model, joystickBoton, 65);
@@ -89,7 +86,40 @@ bool HelloWorld::init()
     return true;
 }
 
+dxco::Player* HelloWorld::createPlayer() {
 
+	CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
+    CCSprite* spriteGuy = dxco::SpriteUtil::create("koala/koala-01.png", visibleSize.width / 2,  visibleSize.height / 2, 50, 50);
+    this->addChild(spriteGuy, 2);
+
+    std::map<int, dxco::Animation*> animations;
+
+    //Animation(std::vector<cocos2d::CCTexture2D*> textures, float frameTime, bool repeat = true);
+
+    for (int i = 0; i < 16; i++) {
+    	std::vector<cocos2d::CCTexture2D*> texturesAnimation;
+    	std::string texture = "koala/koala-";
+    	int j = i + 1;
+
+    	if (j < 10) {
+    		texture += "0";
+    		texture += dxco::StringUtil::toString(j);
+    	} else {
+    		texture += dxco::StringUtil::toString(j);
+    	}
+
+    	texture += ".png";
+
+    	texturesAnimation.push_back(dxco::SpriteUtil::createTexture(texture));
+
+    	dxco::Animation* animation = new dxco::Animation(texturesAnimation, 0.5);
+    	animations[i] = animation;
+    }
+
+    dxco::Player* player = new dxco::Player(spriteGuy, animations);
+
+    return player;
+}
 
 void HelloWorld::ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent) {
 	joystickController.ccTouchesBegan(pTouches, pEvent);

@@ -31,6 +31,7 @@ public:
     virtual void initFire(float x, float y);
     cocos2d::CCParticleSystemQuad* fire;
 private:
+    dxco::Player* createPlayer();
     dxco::GameModel* model;
     dxco::JoystickController joystickController;
     cocos2d::CCLayerColor* damageLayer;
