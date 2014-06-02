@@ -31,12 +31,21 @@ public:
 	int state;
 	float life;
 
-	float angle;
 	bool moving;
 	float width;
 	float height;
 
 	cocos2d::CCPoint getLocation();
+
+	float angle;
+
+	void setAngleState(float angle);
+	float getAngleState();
+	float getRotation();
+	void setRotation(float rotation);
+private:
+	float rotation;
+	float angleState;
 };
 
 } /* namespace dxco */

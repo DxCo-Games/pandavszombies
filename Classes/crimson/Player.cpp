@@ -18,10 +18,20 @@ Player::Player(cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations)
 			cocos2d::CCDirector::sharedDirector()->getVisibleSize();
 	this->width = size.width * 2;
 	this->height = size.height * 2;
+	this->rotation = 0;
 }
 
 int Player::getState() {
-	return this->state;
+	int state = this->angleState;
+	return state;
+}
+
+float Player::getRotation() {
+	return this->rotation;
+}
+
+void Player::setRotation(float rotation) {
+	this->rotation = rotation;
 }
 
 void Player::hurt(float damage) {
@@ -38,7 +48,7 @@ void Player::hurt(float damage) {
 
 void Player::update(float dt) {
 	//FIXME this line is overriding the sprite of the weapon
-	//	Item::update(dt);
+	Item::update(dt);
 
 	if (this->moving) {
 		cocos2d::CCPoint position = this->getLocation();
@@ -69,22 +79,30 @@ void Player::setWeapon(weapons type) {
 	switch(type) {
 	case SHOTGUN: {
 		this->weapon = new Shotgun(this->model);
-		SpriteUtil::setTexture(this->sprite, "citizenplayershotgun.png");
+		SpriteUtil::setTexture(this->sprite, "koala/koala-02.png");
 		break;
 	}
 	case SMG_: {
 		this->weapon = new SMG(this->model);
-		SpriteUtil::setTexture(this->sprite, "citizenplayer_uzi.png");
+		SpriteUtil::setTexture(this->sprite, "koala/koala-02.png");
 		break;
 	}
 	default:{
 		this->weapon = new Weapon(this->model);
-		SpriteUtil::setTexture(this->sprite, "citizenplayer_handgun.png");
+		SpriteUtil::setTexture(this->sprite, "koala/koala-02.png");
 		break;
 	}
 	}
 }
 
+void Player::setAngleState(float angle) {
+	int newAngle = -angle / 22.5;
+	this->angleState = newAngle;
+}
+
+float Player::getAngleState() {
+	return this->angleState;
+}
 
 cocos2d::CCPoint Player::getLocation() {
 	cocos2d::CCPoint location = Item::getLocation();

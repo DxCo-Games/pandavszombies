@@ -20,7 +20,7 @@ void Weapon::update(float dt) {
 }
 
 void Weapon::shoot() {
-	float rotation = this->model->player->getSprite()->getRotation();
+	float rotation = this->model->player->getRotation();
 	this->createBullet(rotation);
 }
 

@@ -11,7 +11,9 @@ JoystickMira::JoystickMira(GameModel* game, cocos2d::CCSprite* sprite, float rad
 void JoystickMira::onMoved(cocos2d::CCPoint location, float angle, float intensity) {
 	Joystick::onMoved(location, angle, intensity);
 
-	SpriteUtil::rotateToDegree(this->game->player->getSprite(), - angle * 57.2957795);
+	//SpriteUtil::rotateToDegree(this->game->player->getSprite(), -angle * 57.2957795);
+	this->game->player->setRotation(-angle * 57.2957795);
+	this->game->player->setAngleState(-angle * 57.2957795);
 	this->game->vista->fire->setRotation(-angle * 57.2957795);
 }
 

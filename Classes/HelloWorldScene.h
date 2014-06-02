@@ -34,6 +34,7 @@ public:
     virtual void hideFire();
     dxco::FireWeapon* fire;
 private:
+    dxco::Player* createPlayer();
     dxco::GameModel* model;
     dxco::JoystickController joystickController;
     cocos2d::CCLayerColor* damageLayer;
