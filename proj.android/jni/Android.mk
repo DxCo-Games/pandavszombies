@@ -51,12 +51,12 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/crimson/HealthBonus.cpp \
                    ../../Classes/crimson/WeaponBonus.cpp \
                    ../../Classes/crimson/Weapon.cpp \
+                   ../../Classes/crimson/FireWeapon.cpp \
                    ../../Classes/crimson/SMG.cpp \
                    ../../Classes/crimson/Shotgun.cpp \
                    ../../Classes/crimson/EnemyFactory.cpp \
                    ../../Classes/crimson/ExplosionBonus.cpp \
-                   ../../Classes/crimson/Mapa.cpp \
-                   ../../Classes/crimson/FireWeapon.cpp
+                   ../../Classes/crimson/Mapa.cpp 
                    
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes

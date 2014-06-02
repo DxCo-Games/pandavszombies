@@ -45,7 +45,7 @@
 <key>minRadius</key>
 <real>0</real>
 <key>particleLifespan</key>
-<real>0.9</real>
+<real>0.6</real>
 <key>particleLifespanVariance</key>
 <real>0.2</real>
 <key>radialAccelVariance</key>
@@ -65,7 +65,7 @@
 <key>sourcePositiony</key>
 <real>0</real>
 <key>speed</key>
-<real>89</real>
+<real>130</real>
 <key>speedVariance</key>
 <real>2</real>
 <key>startColorAlpha</key>

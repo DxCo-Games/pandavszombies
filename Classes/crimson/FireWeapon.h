@@ -1,20 +1,19 @@
 #ifndef FIREWEAPON_H_
 #define FIREWEAPON_H_
 
-#include "cocos2d.h"
-#include "../dxco/Container.h"
+#include "Weapon.h"
+
+#define FIRE_DAMAGE 80
 
 namespace dxco {
 
-class GameModel;
-class FireWeapon : public Container {
+class FireWeapon: public Weapon {
 public:
-	FireWeapon(GameModel* model, float x, float y);
-
-	GameModel* model;
-	void setRotation(float rotation);
-	cocos2d::CCParticleSystem* fire;
+	FireWeapon(GameModel* model);
+	void update(float dt);
+	void shoot();
 };
 
 } /* namespace dxco */
+
 #endif /* FIREWEAPON_H_ */

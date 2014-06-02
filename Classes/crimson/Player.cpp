@@ -3,6 +3,7 @@
 #include "GameModel.h"
 #include "Weapon.h"
 #include "Shotgun.h"
+#include "FireWeapon.h"
 #include "SMG.h"
 #include "../HelloWorldScene.h"
 #include "../dxco/SpriteUtil.h"
@@ -66,6 +67,8 @@ void Player::update(float dt) {
 				&& finalY < this->height) {
 			this->model->mapa->move(-deltaX, -deltaY);
 			this->model->vista->clouds->move(-deltaX, -deltaY);
+			//put the emmiter where the player is
+			this->model->vista->fire->setPosition(finalX, finalY);
 		}
 	}
 }
@@ -75,7 +78,8 @@ bool Player::isActive() {
 }
 
 void Player::setWeapon(weapons type) {
-	//TODO change sprites
+	this->weaponType = type;
+	model->vista->fire->setVisible(false);
 	switch(type) {
 	case SHOTGUN: {
 		this->weapon = new Shotgun(this->model);
@@ -85,6 +89,12 @@ void Player::setWeapon(weapons type) {
 	case SMG_: {
 		this->weapon = new SMG(this->model);
 		SpriteUtil::setTexture(this->sprite, "koala/koala-02.png");
+		break;
+	}
+	case FIRE: {
+		model->vista->fire->setVisible(true);
+		this->weapon = new FireWeapon(this->model);
+		SpriteUtil::setTexture(this->sprite, "citizenplayershotgun.png");
 		break;
 	}
 	default:{

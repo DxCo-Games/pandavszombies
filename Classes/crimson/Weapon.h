@@ -9,7 +9,7 @@ class Weapon {
 public:
 	Weapon(GameModel* model);
 
-	void update(float dt);
+	virtual void update(float dt);
 
 	virtual void shoot();
 

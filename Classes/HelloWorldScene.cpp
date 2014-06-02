@@ -70,6 +70,8 @@ bool HelloWorld::init()
     CCSprite* joystickBotonMovimiento = dxco::SpriteUtil::create("boton.png", visibleSize.width * 0.15 + 20,  40, 40, 40);
     this->addChild(joystickBotonMovimiento, 12);
 
+    this->initFire(visibleSize.width / 2,  visibleSize.height / 2);
+
     this->addChild(mapa);
 
     dxco::Player* player = this->createPlayer();
@@ -81,8 +83,6 @@ bool HelloWorld::init()
     joystick = new dxco::JoystickMovimiento(model, joystickBotonMovimiento, 65);
     this->joystickController.addJoystick(joystick);
 
-    this->initFire();
-    this->showFire();
     return true;
 }
 
@@ -138,21 +138,16 @@ void HelloWorld::update(float dt) {
 	this->damageLayer->setVisible(this->model->damage);
 }
 
-void HelloWorld::initFire() {
-	cocos2d::CCSize visibleSize =
-				cocos2d::CCDirector::sharedDirector()->getVisibleSize();
-	fire = new dxco::FireWeapon(this->model, visibleSize.width / 2, visibleSize.height / 2);
+void HelloWorld::initFire(float x, float y) {
+	this->fire = cocos2d::CCParticleSystemQuad::create("fire.plist");
 
-	this->addChild(fire);
+	/* The position is relative to the map, so emmited particles move with the map
+	 * and not the emmiter. */
+	fire->setPositionType(cocos2d::kCCPositionTypeRelative);
+	fire->setPosition(x, y);
+	this->clouds->addChild(fire);
 }
 
-void HelloWorld::showFire() {
-	fire->setVisible(true);
-}
-
-void HelloWorld::hideFire() {
-	fire->setVisible(false);
-}
 
 void HelloWorld::menuCloseCallback(CCObject* pSender)
 {

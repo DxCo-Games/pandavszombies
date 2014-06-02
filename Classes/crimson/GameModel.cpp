@@ -51,9 +51,9 @@ GameModel::GameModel(HelloWorld* vista, Player* player) {
 	//not very nice
 	this->player = player;
 	player->model = this;
-	this->player->setWeapon(Player::PISTOL);
-
 	this->vista = vista;
+
+	this->player->setWeapon(Player::FIRE);
 	this->mapa = vista->mapa;
 	this->enemyFactory = new EnemyFactory();
 	this->bonusFactory = new BonusFactory();
@@ -121,6 +121,7 @@ void GameModel::restartGame() {
 	this->player->life = PLAYER_LIFE;
 	this->player->setWeapon(Player::PISTOL);
 	this->mapa->moveToAbsolute(0, 0);
+	this->vista->clouds->moveToAbsolute(0, 0);
 
 	for (int i = 0; i < this->items.size(); i++) {
 		this->items[i]->getSprite()->setVisible(false);
