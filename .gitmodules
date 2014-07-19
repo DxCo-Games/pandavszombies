@@ -1,0 +1,3 @@
+[submodule "Classes/dxco"]
+	path = Classes/dxco
+	url = git@bitbucket.org:dxco/lib-dxco.git
