@@ -10,29 +10,16 @@
 
 namespace dxco {
 
-Player::Player(cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations) : Item(sprite, animations) {
+Player::Player(cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations) : TopDownItem(sprite, animations, 16) {
 	this->state = QUIETO;
 	this->life = PLAYER_LIFE;
 	this->moving = false;
+	this->moveRotation;
 
 	cocos2d::CCSize size =
 			cocos2d::CCDirector::sharedDirector()->getVisibleSize();
 	this->width = size.width * 2;
 	this->height = size.height * 2;
-	this->rotation = 0;
-}
-
-int Player::getState() {
-	int state = this->angleState;
-	return state;
-}
-
-float Player::getRotation() {
-	return this->rotation;
-}
-
-void Player::setRotation(float rotation) {
-	this->rotation = rotation;
 }
 
 void Player::hurt(float damage) {
@@ -57,8 +44,8 @@ void Player::update(float dt) {
 		float x = position.x;
 		float y = position.y;
 
-		float deltaX = cos(this->angle) * PLAYER_SPEED * dt;
-		float deltaY = sin(this->angle) * PLAYER_SPEED * dt;
+		float deltaX = cos(this->moveRotation) * PLAYER_SPEED * dt;
+		float deltaY = sin(this->moveRotation) * PLAYER_SPEED * dt;
 
 		float finalX = x + deltaX;
 		float finalY = y + deltaY;
@@ -103,15 +90,6 @@ void Player::setWeapon(weapons type) {
 		break;
 	}
 	}
-}
-
-void Player::setAngleState(float angle) {
-	int newAngle = -angle / 22.5;
-	this->angleState = newAngle;
-}
-
-float Player::getAngleState() {
-	return this->angleState;
 }
 
 cocos2d::CCPoint Player::getLocation() {
