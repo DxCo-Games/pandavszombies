@@ -3,9 +3,10 @@
 
 #define ENEMY_SPEED 15
 #define ENEMY_DEAD_TIME 180
+#define ENEMY_ANGLE_POSITIONS 8
 
 #include "cocos2d.h"
-#include "../dxco/Item.h"
+#include "TopDownItem.h"
 #include "Bullet.h"
 
 namespace dxco {
@@ -13,7 +14,7 @@ namespace dxco {
 class GameModel;
 class Player;
 
-class Enemy : public Item {
+class Enemy : public TopDownItem {
 public:
 	Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations);
 	void update(float dt);

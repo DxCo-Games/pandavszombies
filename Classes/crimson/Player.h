@@ -3,6 +3,7 @@
 
 #define PLAYER_LIFE 100
 #define PLAYER_SPEED 80
+#define PLAYER_ANGLE_POSITIONS 16
 
 #include "TopDownItem.h"
 

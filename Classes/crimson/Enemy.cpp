@@ -11,12 +11,13 @@ namespace dxco {
 
 Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite,
 		std::map<int, Animation*>& animations) :
-		Item(sprite, animations) {
+		TopDownItem(sprite, animations, ENEMY_ANGLE_POSITIONS) {
 	this->model = model;
 	this->life = 20;
 	this->deadTime = 0;
 	this->strength = 10;
 	this->burning = false;
+	this->state = ENEMY_WALKING;
 
 	if (rand() % 2) {
 		this->dumb = false;
@@ -28,7 +29,6 @@ Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite,
 }
 
 void Enemy::update(float dt) {
-
 	Item::update(dt);
 	if (this->isActive()) {
 		cocos2d::CCPoint playerLocation = this->model->player->getLocation();
@@ -54,11 +54,12 @@ void Enemy::update(float dt) {
 
 		//look at destiny
 		float angle = MathUtil::angle(this->getLocation(), destiny) * -57.2957795;
-		SpriteUtil::setAngle(this->sprite, angle);
+//		SpriteUtil::setAngle(this->sprite, angle);
+		this->setRotation(-360 - angle);
 
 		this->burn(dt, playerLocation, distance, angle);
 
-		if (distance < this->getWidth() / 2 + this->model->player->getWidth() / 4) {
+		if (distance < this->getWidth() / 4 + this->model->player->getWidth() / 4) {
 			this->beat(this->model->player, dt);
 		} else {
 			this->state = ENEMY_WALKING;

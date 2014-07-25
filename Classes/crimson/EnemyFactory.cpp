@@ -23,40 +23,38 @@ void EnemyFactory::update(GameModel* model, float dt) {
 
 	this->bossDt += dt;
 	if (this->bossDt > BOSS_DT){
-		this->createBoss(model);
+//		this->createBoss(model);
 		this->bossDt = 0;
 	}
 }
 
 void EnemyFactory::createEnemy(GameModel* model) {
-	std::string snumber = StringUtil::toString(rand() % 8 + 1);
-
 	//create sprite
-	cocos2d::CCSprite* enemySprite = getRandomSprite(model, "citizenzombie" + snumber + ".png", 35, 35);
+	cocos2d::CCSprite* enemySprite = getRandomSprite(model, "z1/1.png", 50, 50);
 
-	//new enemy
-	std::map<int, dxco::Animation*> animations;
-	std::vector<cocos2d::CCTexture2D*> textures;
-	std::vector<cocos2d::CCTexture2D*> texturesMuerto;
 	float frameTime = 0.18;
 
-	//FIXME animate the rest of the zombies
-	if (snumber == "1") {
-		textures.push_back(dxco::SpriteUtil::createTexture("citizenzombie1.png"));
-		textures.push_back(dxco::SpriteUtil::createTexture("citizenzombie1-pega.png"));
-	} else {
-		textures.push_back(dxco::SpriteUtil::createTexture("citizenzombie" + snumber + ".png"));
-		textures.push_back(dxco::SpriteUtil::createTexture("citizenzombie" + snumber + ".png"));
+	cocos2d::CCTexture2D* textureDead = dxco::SpriteUtil::createTexture("BloodSplat1.png");
+	std::vector<cocos2d::CCTexture2D*> texturesDead;
+	texturesDead.push_back(textureDead);
+	dxco::Animation* deadAnimation = new Animation(texturesDead, frameTime);
+
+	std::map<int, dxco::Animation*> animations;
+	for (int i = 0; i < ENEMY_ANGLE_POSITIONS; i++) {
+		std::vector<cocos2d::CCTexture2D*> texturesWalking;
+		texturesWalking.push_back(dxco::SpriteUtil::createTexture("z1/" + dxco::StringUtil::toString(i + 1) + ".png"));
+		dxco::Animation* animation = new Animation(texturesWalking, frameTime);
+		animations[Enemy::ENEMY_WALKING * ENEMY_ANGLE_POSITIONS + i] = animation;
+
+		std::vector<cocos2d::CCTexture2D*> texturesBeating;
+		texturesBeating.push_back(dxco::SpriteUtil::createTexture("z1/" + dxco::StringUtil::toString(i + 1) + ".png"));
+		texturesBeating.push_back(dxco::SpriteUtil::createTexture("z1/p" + dxco::StringUtil::toString(i + 1) + ".png"));
+		animation = new Animation(texturesBeating, frameTime);
+		animations[Enemy::ENEMY_BEATING * ENEMY_ANGLE_POSITIONS + i] = animation;
+
+		animations[Enemy::ENEMY_DEAD * ENEMY_ANGLE_POSITIONS + i] = deadAnimation;
 	}
 
-	dxco::Animation* animation = new Animation(textures, frameTime);
-
-	animations[Enemy::ENEMY_BEATING] = animation;
-
-	texturesMuerto.push_back(dxco::SpriteUtil::createTexture("BloodSplat1.png"));
-	animation = new Animation(texturesMuerto, 1);
-
-	animations[Enemy::ENEMY_DEAD] = animation;
 	Enemy* enemy = new Enemy(model, enemySprite, animations);
 
 	model->enemies.push_back(enemy);
