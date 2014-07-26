@@ -23,7 +23,7 @@ void EnemyFactory::update(GameModel* model, float dt) {
 
 	this->bossDt += dt;
 	if (this->bossDt > BOSS_DT){
-//		this->createBoss(model);
+		this->createBoss(model);
 		this->bossDt = 0;
 	}
 }
@@ -136,28 +136,32 @@ cocos2d::CCSprite* EnemyFactory::getRandomSprite(GameModel* model, std::string t
 }
 
 void EnemyFactory::createBoss(GameModel* model) {
-	std::string snumber = StringUtil::toString(rand() % 8 + 1);
 
 	//create sprite
-	cocos2d::CCSprite* enemySprite = getRandomSprite(model, "citizenzombieboss.png", 120, 120);
-
-	//new enemy
-	std::map<int, dxco::Animation*> animations;
-	std::vector<cocos2d::CCTexture2D*> textures;
-	std::vector<cocos2d::CCTexture2D*> texturesMuerto;
+	cocos2d::CCSprite* enemySprite = getRandomSprite(model, "b/1.png", 120, 120);
 	float frameTime = 0.18;
 
-	dxco::Animation* animation = new Animation(textures, frameTime);
+	//new enemy
+	cocos2d::CCTexture2D* textureDead = dxco::SpriteUtil::createTexture("BloodSplat1.png");
+	std::vector<cocos2d::CCTexture2D*> texturesDead;
+	texturesDead.push_back(textureDead);
+	dxco::Animation* deadAnimation = new Animation(texturesDead, frameTime);
 
-	texturesMuerto.push_back(dxco::SpriteUtil::createTexture("BloodSplat1.png"));
-	animation = new Animation(texturesMuerto, 1);
-	animations[Enemy::ENEMY_DEAD] = animation;
+	std::map<int, dxco::Animation*> animations;
+	for (int i = 0; i < ENEMY_ANGLE_POSITIONS; i++) {
+		std::vector<cocos2d::CCTexture2D*> texturesWalking;
+		texturesWalking.push_back(dxco::SpriteUtil::createTexture("b/" + dxco::StringUtil::toString(i + 1) + ".png"));
+		dxco::Animation* animation = new Animation(texturesWalking, frameTime);
+		animations[Enemy::ENEMY_WALKING * ENEMY_ANGLE_POSITIONS + i] = animation;
 
-	Boss* enemy = new Boss(model, enemySprite, animations);
+		animations[Enemy::ENEMY_DEAD * ENEMY_ANGLE_POSITIONS + i] = deadAnimation;
+	}
+
+	Enemy* enemy = new Boss(model, enemySprite, animations);
 
 	model->enemies.push_back(enemy);
 	model->items.push_back(enemy);
-	model->vista->mapa->addChild(enemy->getSprite());
+	model->mapa->addChild(enemy->getSprite());
 }
 
 } /* namespace dxco */
