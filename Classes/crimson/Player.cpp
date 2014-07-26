@@ -15,11 +15,6 @@ Player::Player(cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations)
 	this->life = PLAYER_LIFE;
 	this->moving = false;
 	this->moveRotation;
-
-	cocos2d::CCSize size =
-			cocos2d::CCDirector::sharedDirector()->getVisibleSize();
-	this->width = size.width * 2;
-	this->height = size.height * 2;
 }
 
 void Player::hurt(float damage) {
@@ -50,8 +45,11 @@ void Player::update(float dt) {
 		float finalX = x + deltaX;
 		float finalY = y + deltaY;
 
-		if (finalX > 0 && finalX < this->width && finalY > 0
-				&& finalY < this->height) {
+		float mapWidth = this->model->mapa->getWidth();
+		float mapHeight = this->model->mapa->getHeight();
+
+		if (finalX > 0 && finalX < mapWidth && finalY > 0
+				&& finalY < mapHeight) {
 			this->model->mapa->move(-deltaX, -deltaY);
 			this->model->vista->clouds->move(-deltaX, -deltaY);
 			//put the emmiter where the player is

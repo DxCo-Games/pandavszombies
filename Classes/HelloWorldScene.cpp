@@ -40,10 +40,15 @@ bool HelloWorld::init()
     }
     
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-    
-    this->mapa = new dxco::Mapa(0, 0, visibleSize.width * 2, visibleSize.height * 2);
+    float mapWidth = visibleSize.width * 1.5;
+    float mapHeight = visibleSize.height * 1.5;
+    float mapCornerX = - (mapWidth - visibleSize.width) / 2;
+    float mapCornerY = - (mapHeight - visibleSize.height) / 2;
 
-    CCSprite* pSprite = dxco::SpriteUtil::create("grass-texture-2.jpg", 0, 0, visibleSize.width * 2, visibleSize.height * 2);
+    //FIXME replace /6 with a generic formula for all map sizes
+    this->mapa = new dxco::Mapa(mapCornerX, mapCornerY, mapWidth, mapHeight);
+
+    CCSprite* pSprite = dxco::SpriteUtil::create("grass-texture-2.jpg", 0, 0, mapWidth, mapHeight);
     this->mapa->addChild(pSprite, -10);
 
     this->scheduleUpdate();
@@ -53,7 +58,7 @@ bool HelloWorld::init()
     this->damageLayer->setVisible(false);
     this->addChild(this->damageLayer, 4);
 
-    this->clouds = new dxco::Container(0, 0, visibleSize.width * 2, visibleSize.height * 2);
+    this->clouds = new dxco::Container(mapCornerX, mapCornerY, mapWidth, mapHeight);
     this->addChild(this->clouds, 4);
 
     CCSprite* joystickFondo = dxco::SpriteUtil::create("circulo.png", visibleSize.width *  0.85 - 80, 20, 80, 80);

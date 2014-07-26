@@ -67,71 +67,74 @@ cocos2d::CCSprite* EnemyFactory::getRandomSprite(GameModel* model, std::string t
 	cocos2d::CCSize visibleSize =
 				cocos2d::CCDirector::sharedDirector()->getVisibleSize();
 
-	bool upVisible = false;
-	bool downVisible = false;
-	bool leftVisible = false;
-	bool rightVisible = false;
-
-	if (model->mapa->getPositionX() > 0) {
-		leftVisible = true;
-	}
-	if (model->mapa->getPositionX() + model->mapa->getWidth() < visibleSize.width) {
-		rightVisible = true;
-	}
-	if (model->mapa->getPositionY() > 0) {
-		downVisible = true;
-	}
-	if (model->mapa->getPositionY() + model->mapa->getHeight() < visibleSize.height) {
-		upVisible = true;
-	}
-
-
-	float x, y;
-	bool selected = false;
-	while (!selected) {
-		switch (rand() % 4) {
-			case 0: { //top
-				if (upVisible){
-					continue;
-				}
-				x = rand() % int(visibleSize.width) - model->mapa->getPositionX();
-				y = visibleSize.height - model->mapa->getPositionY() + height / 2;
-				break;
-			}
-			case 1: { //bottom
-				if (downVisible){
-					continue;
-				}
-				x = rand() % int(visibleSize.width) - model->mapa->getPositionX();
-				y = - model->mapa->getPositionY() - height / 2;
-				break;
-			}
-			case 2: { //left
-				if (leftVisible){
-					continue;
-				}
-				x = - model->mapa->getPositionX() - width / 2;
-				y = rand() % int(visibleSize.height) - model->mapa->getPositionY();
-				break;
-			}
-			case 3: { //right
-				if (rightVisible){
-					continue;
-				}
-				x = visibleSize.width - model->mapa->getPositionX() + width / 2;
-				y = rand() % int(visibleSize.height) - model->mapa->getPositionY();
-				break;
-			}
-			}
-		selected = true;
-		if(x < 0 || x > model->mapa->getWidth() || y < 0 || y > model->mapa->getHeight()){
-			selected = false;
-		}
-	}
+//	bool upVisible = false;
+//	bool downVisible = false;
+//	bool leftVisible = false;
+//	bool rightVisible = false;
+//
+//	if (model->mapa->getPositionX() > 0) {
+//		leftVisible = true;
+//	}
+//	if (model->mapa->getPositionX() + model->mapa->getWidth() < visibleSize.width) {
+//		rightVisible = true;
+//	}
+//	if (model->mapa->getPositionY() > 0) {
+//		downVisible = true;
+//	}
+//	if (model->mapa->getPositionY() + model->mapa->getHeight() < visibleSize.height) {
+//		upVisible = true;
+//	}
+//
+//
+//	float x, y;
+//	bool selected = false;
+//	while (!selected) {
+//		switch (rand() % 4) {
+//			case 0: { //top
+//				if (upVisible){
+//					continue;
+//				}
+//				x = rand() % int(visibleSize.width) - model->mapa->getPositionX();
+//				y = visibleSize.height - model->mapa->getPositionY() + height / 2;
+//				break;
+//			}
+//			case 1: { //bottom
+//				if (downVisible){
+//					continue;
+//				}
+//				x = rand() % int(visibleSize.width) - model->mapa->getPositionX();
+//				y = - model->mapa->getPositionY() - height / 2;
+//				break;
+//			}
+//			case 2: { //left
+//				if (leftVisible){
+//					continue;
+//				}
+//				x = - model->mapa->getPositionX() - width / 2;
+//				y = rand() % int(visibleSize.height) - model->mapa->getPositionY();
+//				break;
+//			}
+//			case 3: { //right
+//				if (rightVisible){
+//					continue;
+//				}
+//				x = visibleSize.width - model->mapa->getPositionX() + width / 2;
+//				y = rand() % int(visibleSize.height) - model->mapa->getPositionY();
+//				break;
+//			}
+//			}
+//		selected = true;
+//		if(x < 0 || x > model->mapa->getWidth() || y < 0 || y > model->mapa->getHeight()){
+//			selected = false;
+//		}
+//	}
 
 
 
 	//create sprite
+	float x, y;
+	x = rand() % int(visibleSize.width) - model->mapa->getPositionX();
+	y = rand() % int(visibleSize.height) - model->mapa->getPositionY();
 	return dxco::SpriteUtil::create(texture, x, y, width, height);
 }
 

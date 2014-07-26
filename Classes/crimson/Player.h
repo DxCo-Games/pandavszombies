@@ -32,8 +32,6 @@ public:
 	float life;
 
 	bool moving;
-	float width;
-	float height;
 
 	/* Since the player can move and look in different directions
 	 * we use a specific angle to track movement direction.
