@@ -123,6 +123,10 @@ dxco::Player* HelloWorld::createPlayer() {
 
     dxco::Player* player = new dxco::Player(spriteGuy, animations);
 
+    //start looking up
+    player->setRotation(-90);
+	this->fire->setAngle(-90);
+
     return player;
 }
 
