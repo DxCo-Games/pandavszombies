@@ -35,11 +35,6 @@ void EnemyFactory::createEnemy(GameModel* model) {
 
 	float frameTime = 0.18;
 
-	cocos2d::CCTexture2D* textureDead = dxco::SpriteUtil::createTexture("BloodSplat1.png");
-	std::vector<cocos2d::CCTexture2D*> texturesDead;
-	texturesDead.push_back(textureDead);
-	dxco::Animation* deadAnimation = new Animation(texturesDead, frameTime);
-
 	std::map<int, dxco::Animation*> animations;
 	for (int i = 0; i < ENEMY_ANGLE_POSITIONS; i++) {
 		std::vector<cocos2d::CCTexture2D*> texturesWalking;
@@ -52,8 +47,6 @@ void EnemyFactory::createEnemy(GameModel* model) {
 		texturesBeating.push_back(dxco::SpriteUtil::createTexture("z1/p" + dxco::StringUtil::toString(i + 1) + ".png"));
 		animation = new Animation(texturesBeating, frameTime);
 		animations[Enemy::ENEMY_BEATING * ENEMY_ANGLE_POSITIONS + i] = animation;
-
-		animations[Enemy::ENEMY_DEAD * ENEMY_ANGLE_POSITIONS + i] = deadAnimation;
 	}
 
 	Enemy* enemy = new Enemy(model, enemySprite, animations);
@@ -93,10 +86,6 @@ void EnemyFactory::createBoss(GameModel* model) {
 	float frameTime = 0.18;
 
 	//new enemy
-	cocos2d::CCTexture2D* textureDead = dxco::SpriteUtil::createTexture("BloodSplat1.png");
-	std::vector<cocos2d::CCTexture2D*> texturesDead;
-	texturesDead.push_back(textureDead);
-	dxco::Animation* deadAnimation = new Animation(texturesDead, frameTime);
 
 	std::map<int, dxco::Animation*> animations;
 	for (int i = 0; i < ENEMY_ANGLE_POSITIONS; i++) {
@@ -104,8 +93,6 @@ void EnemyFactory::createBoss(GameModel* model) {
 		texturesWalking.push_back(dxco::SpriteUtil::createTexture("b/" + dxco::StringUtil::toString(i + 1) + ".png"));
 		dxco::Animation* animation = new Animation(texturesWalking, frameTime);
 		animations[Enemy::ENEMY_WALKING * ENEMY_ANGLE_POSITIONS + i] = animation;
-
-		animations[Enemy::ENEMY_DEAD * ENEMY_ANGLE_POSITIONS + i] = deadAnimation;
 	}
 
 	Enemy* enemy = new Boss(model, enemySprite, animations);

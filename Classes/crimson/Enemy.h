@@ -2,7 +2,6 @@
 #define ENEMY_H_
 
 #define ENEMY_SPEED 15
-#define ENEMY_DEAD_TIME 180
 #define ENEMY_ANGLE_POSITIONS 8
 
 #include "cocos2d.h"
@@ -22,13 +21,12 @@ public:
 	bool shoot(Bullet* bullet);
 	GameModel* model;
 	float life;
-	float deadTime;
 	float strength;
 	bool burning;
 	bool dumb; //me cago en los patrones ;)
 	cocos2d::CCPoint* destiny;
 
-	enum estados { ENEMY_WALKING, ENEMY_BEATING, ENEMY_DEAD };
+	enum estados { ENEMY_WALKING, ENEMY_BEATING };
 
 	void beat(Player* player, float dt);
 	void hurt(float value);

@@ -1,8 +1,8 @@
 #ifndef ENEMYFACTORY_H_
 #define ENEMYFACTORY_H_
 
-#define ENEMY_DT 0.3
-#define BOSS_DT 15
+#define ENEMY_DT 0.2
+#define BOSS_DT 13
 
 #include "cocos2d.h"
 

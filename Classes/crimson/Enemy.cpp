@@ -14,7 +14,6 @@ Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite,
 		TopDownItem(sprite, animations, ENEMY_ANGLE_POSITIONS) {
 	this->model = model;
 	this->life = 20;
-	this->deadTime = 0;
 	this->strength = 10;
 	this->burning = false;
 	this->state = ENEMY_WALKING;
@@ -80,22 +79,14 @@ void Enemy::update(float dt) {
 			}
 		}
 	} else {
-		if (this->state != ENEMY_DEAD) {
-			this->model->bonusFactory->createBonus(this->model, this->getLocation());
-			this->state = ENEMY_DEAD;
-			this->sprite->setZOrder(-1);
-		}
+		this->model->bonusFactory->createBonus(this->model, this->getLocation());
+		this->model->mapa->removeChild(this->getSprite());
+		//this removes the enemies. cpp, don't ask.
+		this->model->enemies.erase(std::remove(this->model->enemies.begin(), this->model->enemies.end(), this),
+				this->model->enemies.end());
+		this->model->items.erase(std::remove(this->model->items.begin(), this->model->items.end(), this),
+							this->model->items.end());
 
-		this->deadTime += dt;
-		if (this->deadTime > ENEMY_DEAD_TIME) {
-			this->getSprite()->setVisible(false);
-
-			//this removes the enemies. cpp, don't ask.
-			this->model->enemies.erase(std::remove(this->model->enemies.begin(), this->model->enemies.end(), this),
-					this->model->enemies.end());
-			this->model->items.erase(std::remove(this->model->items.begin(), this->model->items.end(), this),
-								this->model->items.end());
-		}
 	}
 }
 
@@ -112,7 +103,7 @@ void Enemy::beat(Player* player, float dt) {
 bool Enemy::shoot(Bullet* bullet) {
 	bool result = false;
 
-	if (bullet && !bullet->used && this->state != ENEMY_DEAD) {
+	if (bullet && !bullet->used && this->isActive()) {
 
 		float distance = MathUtil::distance(this->getLocation(),
 				bullet->getLocation());
