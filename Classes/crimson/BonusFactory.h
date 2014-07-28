@@ -3,7 +3,7 @@
 
 #include "cocos2d.h"
 
-#define BONUS_PROBABILITY 5
+#define BONUS_PROBABILITY 3
 
 namespace dxco {
 

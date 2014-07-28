@@ -7,6 +7,7 @@
 
 #include "Bonus.h"
 #include "GameModel.h"
+#include "../dxco/MathUtil.h"
 #include <algorithm>
 
 namespace dxco {
@@ -19,12 +20,13 @@ Bonus::Bonus(GameModel* model, cocos2d::CCSprite* sprite,
 }
 
 void Bonus::update(float dt) {
-	if (this->collides(this->model->player)) {
+	float distance = MathUtil::distance(this->getLocation(), this->model->player->getLocation());
+	if (distance < this->getWidth()) {
 		this->applyBonus();
 		this->removeBonus();
 	} else {
 		this->dt += dt;
-		if (this->dt > WEAPON_DT) {
+		if (this->dt > BONUS_DT) {
 			this->removeBonus();
 		}
 	}

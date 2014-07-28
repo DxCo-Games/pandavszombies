@@ -1,7 +1,7 @@
 #ifndef BONUS_H_
 #define BONUS_H_
 
-#define WEAPON_DT 30
+#define BONUS_DT 30
 
 #include "dxco/Item.h"
 
