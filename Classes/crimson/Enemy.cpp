@@ -75,13 +75,15 @@ void Enemy::update(float dt) {
 				int zorder = 100 - this->getLocation().y * 100 / this->model->mapa->getHeight();
 				this->model->mapa->reorderChild(this->sprite, zorder);
 
-			} else if (this->dumb) {
+			} else {
 				this->state = ENEMY_STANDING;
-				//if it's dumb and got blocked, try a new direction
-				this->setDumbDestiny();
-				if (!this->canAdvance(*this->destiny, ENEMY_SPEED * dt, this->model->getItems())) {
-					//if still blocked just follow the player
-					this->dumb = false;
+				if (this->dumb) {
+					//if it's dumb and got blocked, try a new direction
+					this->setDumbDestiny();
+					if (!this->canAdvance(*this->destiny, ENEMY_SPEED * dt, this->model->getItems())) {
+						//if still blocked just follow the player
+						this->dumb = false;
+					}
 				}
 			}
 		}
