@@ -10,6 +10,7 @@
 #include "dxco/Animation.h"
 #include "dxco/Container.h"
 #include "dxco/StringUtil.h"
+#include "dxco/LabelUtil.h"
 #include <map>
 
 USING_NS_CC;
@@ -87,6 +88,11 @@ bool HelloWorld::init()
 
     joystick = new dxco::JoystickMovimiento(model, joystickBotonMovimiento, 65);
     this->joystickController.addJoystick(joystick);
+
+    this->playerHPLabel = dxco::LabelUtil::create("HP: " +  dxco::StringUtil::toString(player->life),
+			18, 10, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT);
+
+    this->addChild(playerHPLabel);
 
     return true;
 }
@@ -168,6 +174,14 @@ void HelloWorld::ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEve
 void HelloWorld::update(float dt) {
 	this->model->update(dt);
 	this->damageLayer->setVisible(this->model->damage);
+
+	updatePlayerLifeLabel();
+}
+
+void HelloWorld::updatePlayerLifeLabel() {
+	std::string playerLife = "HP: " + dxco::StringUtil::toString((float)round(this->model->player->life));
+
+	this->playerHPLabel->setString(playerLife.c_str());
 }
 
 void HelloWorld::initFire(float x, float y) {

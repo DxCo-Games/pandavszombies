@@ -30,11 +30,15 @@ public:
 
     virtual void initFire(float x, float y);
     cocos2d::CCParticleSystemQuad* fire;
+
+    void updatePlayerLifeLabel();
 private:
     dxco::Player* createPlayer();
     dxco::GameModel* model;
     dxco::JoystickController joystickController;
     cocos2d::CCLayerColor* damageLayer;
+
+    cocos2d::CCLabelTTF* playerHPLabel;
 };
 
 #endif // __HELLOWORLD_SCENE_H__
