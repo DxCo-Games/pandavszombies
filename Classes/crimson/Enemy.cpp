@@ -70,6 +70,11 @@ void Enemy::update(float dt) {
 				//walk to destiny
 				this->state = ENEMY_WALKING;
 				this->goTo(destiny, ENEMY_SPEED * dt);
+
+				//update z order for isometric ordering of zombies
+				int zorder = 100 - this->getLocation().y * 100 / this->model->mapa->getHeight();
+				this->model->mapa->reorderChild(this->sprite, zorder);
+
 			} else if (this->dumb) {
 				this->state = ENEMY_STANDING;
 				//if it's dumb and got blocked, try a new direction
