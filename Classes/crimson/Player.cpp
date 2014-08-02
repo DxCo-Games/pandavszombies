@@ -21,6 +21,11 @@ void Player::hurt(float damage) {
 	this->life -= damage;
 	if(damage > 0) {
 		this->model->damage = true;
+
+		if(this->state != HERIDO1 && this->state != HERIDO2) {
+			//TODO use both animations
+			this->state = HERIDO2;
+		}
 	}
 
 	if (this->life > PLAYER_LIFE) {
@@ -34,6 +39,7 @@ void Player::update(float dt) {
 	Item::update(dt);
 
 	if (this->moving) {
+		this->state = CAMINANDO;
 		cocos2d::CCPoint position = this->getLocation();
 
 		float x = position.x;
@@ -55,6 +61,8 @@ void Player::update(float dt) {
 			//put the emmiter where the player is
 			this->model->vista->fire->setPosition(finalX, finalY);
 		}
+	} else {
+		this->state = QUIETO;
 	}
 }
 

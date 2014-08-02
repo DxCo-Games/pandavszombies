@@ -2,8 +2,8 @@
 #define PLAYER_H_
 
 #define PLAYER_LIFE 100
-#define PLAYER_SPEED 80
-#define PLAYER_ANGLE_POSITIONS 16
+#define PLAYER_SPEED 65
+#define PLAYER_ANGLE_POSITIONS 8
 
 #include "TopDownItem.h"
 
@@ -18,7 +18,7 @@ public:
 	void disparar();
 
 	GameModel* model;
-	enum estados { QUIETO, CAMINANDO };
+	enum estados { QUIETO, CAMINANDO, HERIDO1, HERIDO2 };
 	enum weapons { PISTOL, SHOTGUN, SMG_, MACHINE_GUN, FIRE};
 	Weapon* weapon;
 	weapons weaponType;

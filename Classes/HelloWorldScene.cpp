@@ -2,6 +2,7 @@
 #include "AppMacros.h"
 #include "dxco/SpriteUtil.h"
 #include "dxco/Joystick.h"
+#include "dxco/Animation.h"
 #include "crimson/JoystickMira.h"
 #include "crimson/JoystickMovimiento.h"
 #include "crimson/GameModel.h"
@@ -94,31 +95,47 @@ bool HelloWorld::init()
 dxco::Player* HelloWorld::createPlayer() {
 
 	CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-    CCSprite* spriteGuy = dxco::SpriteUtil::create("koala/koala-01.png", visibleSize.width / 2,  visibleSize.height / 2, 50, 50);
+    CCSprite* spriteGuy = dxco::SpriteUtil::create("panda/herida1_1_0000.png", visibleSize.width / 2,  visibleSize.height / 2, 70, 70);
     this->addChild(spriteGuy, 2);
 
     std::map<int, dxco::Animation*> animations;
 
-    //Animation(std::vector<cocos2d::CCTexture2D*> textures, float frameTime, bool repeat = true);
+    float frameTime = 0.02;
+    int angles = 8;
 
-    for (int i = 0; i < 16; i++) {
-    	std::vector<cocos2d::CCTexture2D*> texturesAnimation;
-    	std::string texture = "koala/koala-";
-    	int j = i + 1;
+    for (int i = 0; i < angles; i++) {
+    	std::vector<cocos2d::CCTexture2D*> texturesStanding;
+    	texturesStanding.push_back(dxco::SpriteUtil::createTexture("panda/herida1_" + dxco::StringUtil::toString(i + 1)  + "_0000.png"));
+    	dxco::Animation* standingAnimation = new dxco::Animation(texturesStanding, frameTime);
+    	animations[dxco::Player::QUIETO * angles + i] = standingAnimation;
 
-    	if (j < 10) {
-    		texture += "0";
-    		texture += dxco::StringUtil::toString(j);
-    	} else {
-    		texture += dxco::StringUtil::toString(j);
+    	std::vector<cocos2d::CCTexture2D*> texturesWalking;
+    	for (int j = 0; j < 20; j++){
+    		std::string index = "00" + dxco::StringUtil::toString(j);
+    		if (j < 10){
+    			index = "0" + index;
+    		}
+    		texturesWalking.push_back(dxco::SpriteUtil::createTexture("panda/caminata_" + dxco::StringUtil::toString(i + 1)  +
+    				"_" + index + ".png"));
     	}
+    	dxco::Animation* walkingAnimation = new dxco::Animation(texturesWalking, frameTime);
+    	animations[dxco::Player::CAMINANDO * angles + i] = walkingAnimation;
 
-    	texture += ".png";
+    	std::vector<cocos2d::CCTexture2D*> texturesHerida1;
+    	for (int j = 0; j < 10; j++){
+    		texturesHerida1.push_back(dxco::SpriteUtil::createTexture("panda/herida1_" + dxco::StringUtil::toString(i + 1)  +
+					"_000" + dxco::StringUtil::toString(j) +".png"));
+		}
+    	dxco::Animation* herida1Animation = new dxco::Animation(texturesHerida1, frameTime);
+		animations[dxco::Player::HERIDO1 * angles + i] = herida1Animation;
 
-    	texturesAnimation.push_back(dxco::SpriteUtil::createTexture(texture));
-
-    	dxco::Animation* animation = new dxco::Animation(texturesAnimation, 0.5);
-    	animations[i] = animation;
+    	std::vector<cocos2d::CCTexture2D*> texturesHerida2;
+    	for (int j = 0; j < 10; j++){
+			texturesHerida2.push_back(dxco::SpriteUtil::createTexture("panda/herida2_" + dxco::StringUtil::toString(i + 1)  +
+					"_000" + dxco::StringUtil::toString(j) +".png"));
+		}
+		dxco::Animation* herida2Animation = new dxco::Animation(texturesHerida2, frameTime);
+		animations[dxco::Player::HERIDO2 * angles + i] = herida2Animation;
     }
 
     dxco::Player* player = new dxco::Player(spriteGuy, animations);

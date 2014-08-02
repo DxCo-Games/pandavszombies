@@ -56,7 +56,7 @@ void Enemy::update(float dt) {
 
 		//look at destiny
 		float angle = MathUtil::angle(this->getLocation(), destiny) * -57.2957795;
-//		SpriteUtil::setAngle(this->sprite, angle);
+		//fixme this -1 probably is because of the sprites wrong ordering
 		this->setRotation(-360 - angle);
 
 		this->burn(dt, playerLocation, distance, angle);
