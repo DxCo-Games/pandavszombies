@@ -68,8 +68,16 @@ void Enemy::update(float dt) {
 
 			if (this->canAdvance(destiny, ENEMY_SPEED * dt, this->model->getItems())) {
 				//walk to destiny
-				this->state = ENEMY_WALKING;
+				cocos2d::CCPoint oldPosition =  this->getLocation();
 				this->goTo(destiny, ENEMY_SPEED * dt);
+
+				//before putting it to walk, make sure it will be able to keep moving
+				if (this->canAdvance(destiny, ENEMY_SPEED * dt, this->model->getItems())) {
+					this->state = ENEMY_WALKING;
+				} else {
+					//if it can't move further, undo this movement.
+					this->moveTo(oldPosition.x, oldPosition.y);
+				}
 
 				//update z order for isometric ordering of characters
 				int zorder = 100 - this->getLocation().y * 100 / this->model->mapa->getHeight();
