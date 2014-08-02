@@ -16,7 +16,7 @@ Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite,
 	this->life = 20;
 	this->strength = 10;
 	this->burning = false;
-	this->state = ENEMY_WALKING;
+	this->state = ENEMY_STANDING;
 
 	if (rand() % 2) {
 		this->dumb = false;
@@ -56,20 +56,22 @@ void Enemy::update(float dt) {
 
 		//look at destiny
 		float angle = MathUtil::angle(this->getLocation(), destiny) * -57.2957795;
-		//fixme this -1 probably is because of the sprites wrong ordering
-		this->setRotation(-360 - angle);
+		this->setRotation(angle);
 
 		this->burn(dt, playerLocation, distance, angle);
 
 		if (distance < this->getWidth() / 4 + this->model->player->getWidth() / 4) {
+			//if close to the player, attacl
+			this->state = ENEMY_STANDING;
 			this->beat(this->model->player, dt);
 		} else {
-			this->state = ENEMY_WALKING;
 
 			if (this->canAdvance(destiny, ENEMY_SPEED * dt, this->model->getItems())) {
 				//walk to destiny
+				this->state = ENEMY_WALKING;
 				this->goTo(destiny, ENEMY_SPEED * dt);
 			} else if (this->dumb) {
+				this->state = ENEMY_STANDING;
 				//if it's dumb and got blocked, try a new direction
 				this->setDumbDestiny();
 				if (!this->canAdvance(*this->destiny, ENEMY_SPEED * dt, this->model->getItems())) {
@@ -91,13 +93,8 @@ void Enemy::update(float dt) {
 }
 
 void Enemy::beat(Player* player, float dt) {
-	if (this->state != ENEMY_BEATING) {
-		//start to attack
-		this->state = ENEMY_BEATING;
-	} else {
-		//already atacking -> make damage
-		player->hurt(this->strength * dt);
-	}
+	//make damage
+	player->hurt(this->strength * dt);
 }
 
 bool Enemy::shoot(Bullet* bullet) {

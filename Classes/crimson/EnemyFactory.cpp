@@ -30,23 +30,37 @@ void EnemyFactory::update(GameModel* model, float dt) {
 }
 
 void EnemyFactory::createEnemy(GameModel* model) {
-	//create sprite
-	cocos2d::CCSprite* enemySprite = getRandomSprite(model, "z1/1.png", 50, 50);
+	//random sprite type
+	std::string type;
+	if (rand() % 2) {
+		type = "campesino_";
+	} else {
+		type = "oficinista_";
+	}
 
-	float frameTime = 0.18;
+	//create sprite
+	cocos2d::CCSprite* enemySprite = getRandomSprite(model, "zombies/" + type + "1_0000.png", 75, 75);
+	float frameTime = 0.02;
 
 	std::map<int, dxco::Animation*> animations;
 	for (int i = 0; i < ENEMY_ANGLE_POSITIONS; i++) {
-		std::vector<cocos2d::CCTexture2D*> texturesWalking;
-		texturesWalking.push_back(dxco::SpriteUtil::createTexture("z1/" + dxco::StringUtil::toString(i + 1) + ".png"));
-		dxco::Animation* animation = new Animation(texturesWalking, frameTime);
-		animations[Enemy::ENEMY_WALKING * ENEMY_ANGLE_POSITIONS + i] = animation;
+		std::vector<cocos2d::CCTexture2D*> texturesStanding;
+		texturesStanding.push_back(dxco::SpriteUtil::createTexture("zombies/" + type + dxco::StringUtil::toString(i + 1) + "_0000.png"));
+		dxco::Animation* animation = new Animation(texturesStanding, frameTime);
+		animations[Enemy::ENEMY_STANDING * ENEMY_ANGLE_POSITIONS + i] = animation;
 
-		std::vector<cocos2d::CCTexture2D*> texturesBeating;
-		texturesBeating.push_back(dxco::SpriteUtil::createTexture("z1/" + dxco::StringUtil::toString(i + 1) + ".png"));
-		texturesBeating.push_back(dxco::SpriteUtil::createTexture("z1/p" + dxco::StringUtil::toString(i + 1) + ".png"));
-		animation = new Animation(texturesBeating, frameTime);
-		animations[Enemy::ENEMY_BEATING * ENEMY_ANGLE_POSITIONS + i] = animation;
+		std::vector<cocos2d::CCTexture2D*> texturesWalking;
+		for (int j = 0; j < 20; j++){
+			std::string index = "00" + dxco::StringUtil::toString(j);
+			if (j < 10){
+				index = "0" + index;
+			}
+
+			texturesWalking.push_back(dxco::SpriteUtil::createTexture("zombies/" + type + dxco::StringUtil::toString(i + 1)
+			+ "_" + index + ".png"));
+		}
+		animation = new Animation(texturesWalking, frameTime);
+		animations[Enemy::ENEMY_WALKING * ENEMY_ANGLE_POSITIONS + i] = animation;
 	}
 
 	Enemy* enemy = new Enemy(model, enemySprite, animations);
@@ -79,19 +93,31 @@ cocos2d::CCSprite* EnemyFactory::getRandomSprite(GameModel* model, std::string t
 	return dxco::SpriteUtil::create(texture, x, y, width, height);
 }
 
+//TODO too much duplication
 void EnemyFactory::createBoss(GameModel* model) {
 
 	//create sprite
-	cocos2d::CCSprite* enemySprite = getRandomSprite(model, "b/1.png", 120, 120);
-	float frameTime = 0.18;
-
-	//new enemy
+	cocos2d::CCSprite* enemySprite = getRandomSprite(model, "zombies/elvis_1_0000.png", 90, 90);
+	float frameTime = 0.03;
 
 	std::map<int, dxco::Animation*> animations;
 	for (int i = 0; i < ENEMY_ANGLE_POSITIONS; i++) {
+		std::vector<cocos2d::CCTexture2D*> texturesStanding;
+		texturesStanding.push_back(dxco::SpriteUtil::createTexture("zombies/elvis_" + dxco::StringUtil::toString(i + 1) + "_0000.png"));
+		dxco::Animation* animation = new Animation(texturesStanding, frameTime);
+		animations[Enemy::ENEMY_STANDING * ENEMY_ANGLE_POSITIONS + i] = animation;
+
 		std::vector<cocos2d::CCTexture2D*> texturesWalking;
-		texturesWalking.push_back(dxco::SpriteUtil::createTexture("b/" + dxco::StringUtil::toString(i + 1) + ".png"));
-		dxco::Animation* animation = new Animation(texturesWalking, frameTime);
+		for (int j = 0; j < 20; j++){
+			std::string index = "00" + dxco::StringUtil::toString(j);
+			if (j < 10){
+				index = "0" + index;
+			}
+
+			texturesWalking.push_back(dxco::SpriteUtil::createTexture("zombies/elvis_" + dxco::StringUtil::toString(i + 1)
+			+ "_" + index + ".png"));
+		}
+		animation = new Animation(texturesWalking, frameTime);
 		animations[Enemy::ENEMY_WALKING * ENEMY_ANGLE_POSITIONS + i] = animation;
 	}
 

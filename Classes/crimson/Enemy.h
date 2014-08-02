@@ -26,7 +26,7 @@ public:
 	bool dumb; //me cago en los patrones ;)
 	cocos2d::CCPoint* destiny;
 
-	enum estados { ENEMY_WALKING, ENEMY_BEATING };
+	enum estados { ENEMY_STANDING, ENEMY_WALKING };
 
 	void beat(Player* player, float dt);
 	void hurt(float value);
