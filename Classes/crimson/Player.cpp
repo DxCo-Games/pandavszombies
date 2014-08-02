@@ -57,8 +57,15 @@ void Player::update(float dt) {
 		if (finalX > 0 && finalX < mapWidth && finalY > 0
 				&& finalY < mapHeight) {
 			this->model->mapa->move(-deltaX, -deltaY);
-			SpriteUtil::move(this->sprite, deltaX, deltaY);
 			this->model->vista->clouds->move(-deltaX, -deltaY);
+
+			//undo map movement so player stays in the middle
+			SpriteUtil::move(this->sprite, deltaX, deltaY);
+
+			//update z order for isometric ordering of characters
+			int zorder = 100 - y * 100 / mapHeight;
+			this->model->mapa->reorderChild(this->sprite, zorder);
+
 			//put the emmiter where the player is
 			this->model->vista->fire->setPosition(finalX, finalY);
 		}

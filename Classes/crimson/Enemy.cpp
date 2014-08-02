@@ -71,7 +71,7 @@ void Enemy::update(float dt) {
 				this->state = ENEMY_WALKING;
 				this->goTo(destiny, ENEMY_SPEED * dt);
 
-				//update z order for isometric ordering of zombies
+				//update z order for isometric ordering of characters
 				int zorder = 100 - this->getLocation().y * 100 / this->model->mapa->getHeight();
 				this->model->mapa->reorderChild(this->sprite, zorder);
 
