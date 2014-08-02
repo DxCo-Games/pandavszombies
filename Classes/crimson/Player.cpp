@@ -57,6 +57,7 @@ void Player::update(float dt) {
 		if (finalX > 0 && finalX < mapWidth && finalY > 0
 				&& finalY < mapHeight) {
 			this->model->mapa->move(-deltaX, -deltaY);
+			SpriteUtil::move(this->sprite, deltaX, deltaY);
 			this->model->vista->clouds->move(-deltaX, -deltaY);
 			//put the emmiter where the player is
 			this->model->vista->fire->setPosition(finalX, finalY);
@@ -100,8 +101,8 @@ void Player::setWeapon(weapons type) {
 
 cocos2d::CCPoint Player::getLocation() {
 	cocos2d::CCPoint location = Item::getLocation();
-	location.setPoint(location.x - this->model->vista->mapa->getPositionX(),
-			location.y - this->model->vista->mapa->getPositionY());
+//	location.setPoint(location.x - this->model->vista->mapa->getPositionX(),
+//			location.y - this->model->vista->mapa->getPositionY());
 
 	return location;
 }

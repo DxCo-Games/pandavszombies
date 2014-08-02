@@ -46,7 +46,6 @@ bool HelloWorld::init()
     float mapCornerX = - (mapWidth - visibleSize.width) / 2;
     float mapCornerY = - (mapHeight - visibleSize.height) / 2;
 
-    //FIXME replace /6 with a generic formula for all map sizes
     this->mapa = new dxco::Mapa(mapCornerX, mapCornerY, mapWidth, mapHeight);
 
     CCSprite* pSprite = dxco::SpriteUtil::create("grass-texture-2.jpg", 0, 0, mapWidth, mapHeight);
@@ -95,8 +94,8 @@ bool HelloWorld::init()
 dxco::Player* HelloWorld::createPlayer() {
 
 	CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-    CCSprite* spriteGuy = dxco::SpriteUtil::create("panda/herida1_1_0000.png", visibleSize.width / 2,  visibleSize.height / 2, 70, 70);
-    this->addChild(spriteGuy, 2);
+    CCSprite* spriteGuy = dxco::SpriteUtil::create("panda/herida1_1_0000.png", this->mapa->getWidth() / 2,  this->mapa->getHeight() / 2, 70, 70);
+    this->mapa->addChild(spriteGuy, 2);
 
     std::map<int, dxco::Animation*> animations;
 
