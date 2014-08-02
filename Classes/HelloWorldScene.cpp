@@ -100,6 +100,7 @@ dxco::Player* HelloWorld::createPlayer() {
     std::map<int, dxco::Animation*> animations;
 
     float frameTime = 0.02;
+    float hurtFrameTime = 0.04;
     int angles = 8;
 
     for (int i = 0; i < angles; i++) {
@@ -125,7 +126,10 @@ dxco::Player* HelloWorld::createPlayer() {
     		texturesHerida1.push_back(dxco::SpriteUtil::createTexture("panda/herida1_" + dxco::StringUtil::toString(i + 1)  +
 					"_000" + dxco::StringUtil::toString(j) +".png"));
 		}
-    	dxco::Animation* herida1Animation = new dxco::Animation(texturesHerida1, frameTime);
+    	//duplicate first frame
+    	texturesHerida1.push_back(dxco::SpriteUtil::createTexture("panda/herida1_" + dxco::StringUtil::toString(i + 1)  +
+    						"_0000.png"));
+    	dxco::Animation* herida1Animation = new dxco::Animation(texturesHerida1, hurtFrameTime);
 		animations[dxco::Player::HERIDO1 * angles + i] = herida1Animation;
 
     	std::vector<cocos2d::CCTexture2D*> texturesHerida2;
@@ -133,7 +137,10 @@ dxco::Player* HelloWorld::createPlayer() {
 			texturesHerida2.push_back(dxco::SpriteUtil::createTexture("panda/herida2_" + dxco::StringUtil::toString(i + 1)  +
 					"_000" + dxco::StringUtil::toString(j) +".png"));
 		}
-		dxco::Animation* herida2Animation = new dxco::Animation(texturesHerida2, frameTime);
+    	//duplicate first frame
+    	texturesHerida2.push_back(dxco::SpriteUtil::createTexture("panda/herida2_" + dxco::StringUtil::toString(i + 1)  +
+    						"_0000.png"));
+		dxco::Animation* herida2Animation = new dxco::Animation(texturesHerida2, hurtFrameTime);
 		animations[dxco::Player::HERIDO2 * angles + i] = herida2Animation;
     }
 
