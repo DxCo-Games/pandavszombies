@@ -97,7 +97,7 @@ cocos2d::CCSprite* EnemyFactory::getRandomSprite(GameModel* model, std::string t
 void EnemyFactory::createBoss(GameModel* model) {
 
 	//create sprite
-	cocos2d::CCSprite* enemySprite = getRandomSprite(model, "zombies/elvis_1_0000.png", 90, 90);
+	cocos2d::CCSprite* enemySprite = getRandomSprite(model, "zombies/elvis_1_0000.png", 110, 110);
 	float frameTime = 0.03;
 
 	std::map<int, dxco::Animation*> animations;
