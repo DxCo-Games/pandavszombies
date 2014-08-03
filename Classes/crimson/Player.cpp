@@ -13,6 +13,7 @@ namespace dxco {
 Player::Player(cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations) : TopDownItem(sprite, animations, PLAYER_ANGLE_POSITIONS) {
 	this->state = QUIETO;
 	this->life = PLAYER_LIFE;
+	this->score = 0;
 	this->moving = false;
 	this->moveRotation;
 }

@@ -32,6 +32,10 @@ public:
     cocos2d::CCParticleSystemQuad* fire;
 
     void updatePlayerLifeLabel();
+    void updateScoreLabel();
+    void updateTimerLabel();
+
+    double timer;
 private:
     dxco::Player* createPlayer();
     dxco::GameModel* model;
@@ -39,6 +43,8 @@ private:
     cocos2d::CCLayerColor* damageLayer;
 
     cocos2d::CCLabelTTF* playerHPLabel;
+    cocos2d::CCLabelTTF* playerScoreLabel;
+    cocos2d::CCLabelTTF* timerLabel;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

@@ -97,6 +97,10 @@ void GameModel::update(float dt) {
 	for (int i = 0; i < this->enemies.size(); i++) {
 		Enemy* enemy = this->enemies[i];
 		enemy->update(dt);
+
+		if (!enemy->isActive()) {
+			player->score += 10;
+		}
 	}
 
 	for (int i = 0; i < this->bonuses.size(); i++) {
@@ -119,9 +123,11 @@ void GameModel::update(float dt) {
 void GameModel::restartGame() {
 	this->player->restartPosition();
 	this->player->life = PLAYER_LIFE;
+	this->player->score = 0;
 	this->player->setWeapon(Player::PISTOL);
 	this->mapa->moveToAbsolute(0, 0);
 	this->vista->clouds->moveToAbsolute(0, 0);
+	this->vista->timer = 0;
 
 	for (int i = 0; i < this->items.size(); i++) {
 		this->items[i]->getSprite()->setVisible(false);

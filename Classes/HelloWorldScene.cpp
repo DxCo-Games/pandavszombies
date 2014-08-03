@@ -47,6 +47,8 @@ bool HelloWorld::init()
     float mapCornerX = - (mapWidth - visibleSize.width) / 2;
     float mapCornerY = - (mapHeight - visibleSize.height) / 2;
 
+    this->timer = 0.0;
+
     this->mapa = new dxco::Mapa(mapCornerX, mapCornerY, mapWidth, mapHeight);
 
     CCSprite* pSprite = dxco::SpriteUtil::create("grass-texture-2.jpg", 0, 0, mapWidth, mapHeight);
@@ -89,10 +91,13 @@ bool HelloWorld::init()
     joystick = new dxco::JoystickMovimiento(model, joystickBotonMovimiento, 65);
     this->joystickController.addJoystick(joystick);
 
-    this->playerHPLabel = dxco::LabelUtil::create("HP: " +  dxco::StringUtil::toString(player->life),
-			18, 10, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT);
+    this->playerHPLabel = dxco::LabelUtil::create("HP: " +  dxco::StringUtil::toString(player->life), 18, 10, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT);
+    this->playerScoreLabel = dxco::LabelUtil::create("Score: 0", 18, 10, 30, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT);
+    this->timerLabel = dxco::LabelUtil::create("Time: 0s", 18, 10, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::RIGHT);
 
     this->addChild(playerHPLabel);
+    this->addChild(playerScoreLabel);
+    this->addChild(timerLabel);
 
     return true;
 }
@@ -174,14 +179,30 @@ void HelloWorld::ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEve
 void HelloWorld::update(float dt) {
 	this->model->update(dt);
 	this->damageLayer->setVisible(this->model->damage);
+	this->timer += dt;
 
+	updateTimerLabel();
 	updatePlayerLifeLabel();
+	updateScoreLabel();
 }
 
-void HelloWorld::updatePlayerLifeLabel() {
-	std::string playerLife = "HP: " + dxco::StringUtil::toString((float)round(this->model->player->life));
+void HelloWorld::updateTimerLabel() {
+	std::string timerText = dxco::StringUtil::toString((float)round(this->timer)) + "s";
 
-	this->playerHPLabel->setString(playerLife.c_str());
+	this->timerLabel->setString(timerText.c_str());
+}
+
+
+void HelloWorld::updatePlayerLifeLabel() {
+	std::string playerLifeText = "HP: " + dxco::StringUtil::toString((float)round(this->model->player->life));
+
+	this->playerHPLabel->setString(playerLifeText.c_str());
+}
+
+void HelloWorld::updateScoreLabel() {
+	std::string playerScoreText = "Score: " + dxco::StringUtil::toString(this->model->player->score);
+
+	this->playerScoreLabel->setString(playerScoreText.c_str());
 }
 
 void HelloWorld::initFire(float x, float y) {
