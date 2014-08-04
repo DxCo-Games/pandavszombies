@@ -121,12 +121,21 @@ void GameModel::update(float dt) {
 }
 
 void GameModel::restartGame() {
+
+	//reset positions
+	cocos2d::CCSize visibleSize = cocos2d::CCDirector::sharedDirector()->getVisibleSize();
+	float mapWidth = visibleSize.width * 1.5;
+	float mapHeight = visibleSize.height * 1.5;
+	float mapCornerX = - (mapWidth - visibleSize.width) / 2;
+	float mapCornerY = - (mapHeight - visibleSize.height) / 2;
+	this->mapa->moveToAbsolute(mapCornerX, mapCornerY);
+	this->vista->clouds->moveToAbsolute(mapCornerX, mapCornerY);
+
 	this->player->restartPosition();
 	this->player->life = PLAYER_LIFE;
 	this->player->score = 0;
 	this->player->setWeapon(Player::PISTOL);
-	this->mapa->moveToAbsolute(0, 0);
-	this->vista->clouds->moveToAbsolute(0, 0);
+
 	this->vista->timer = 0;
 
 	for (int i = 0; i < this->items.size(); i++) {
