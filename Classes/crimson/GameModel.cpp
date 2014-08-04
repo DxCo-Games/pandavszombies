@@ -88,7 +88,7 @@ void GameModel::update(float dt) {
 				bool shooted = enemy->shoot(bullet);
 
 				if (shooted) {
-					continue;
+					break;
 				}
 			}
 		}
