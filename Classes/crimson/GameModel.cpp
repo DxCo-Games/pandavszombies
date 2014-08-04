@@ -57,7 +57,7 @@ GameModel::GameModel(HelloWorld* vista, Player* player) {
 	this->mapa = vista->mapa;
 	this->enemyFactory = new EnemyFactory();
 	this->bonusFactory = new BonusFactory();
-	this->damage = false;
+	this->playerHurt = false;
 }
 
 void GameModel::addBullet(Bullet* bullet) {
@@ -71,7 +71,7 @@ std::vector<Item*>& GameModel::getItems() {
 }
 
 void GameModel::update(float dt) {
-	this->damage = false;
+	this->playerHurt = false;
 	this->player->weapon->update(dt);
 	this->player->update(dt);
 

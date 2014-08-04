@@ -21,7 +21,7 @@ Player::Player(cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations)
 void Player::hurt(float damage) {
 	this->life -= damage;
 	if(damage > 0) {
-		this->model->damage = true;
+		this->model->playerHurt = true;
 
 		if(this->state != HERIDO1 && this->state != HERIDO2) {
 			//TODO use both animations

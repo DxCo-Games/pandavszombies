@@ -35,7 +35,7 @@ public:
 	Mapa* mapa;
 	void restartGame();
 	bool shouldDeleteBullet(Bullet* bullet);
-	bool damage;
+	bool playerHurt;
 };
 
 } /* namespace dxco */
