@@ -99,7 +99,7 @@ void GameModel::update(float dt) {
 		enemy->update(dt);
 
 		if (!enemy->isActive()) {
-			player->score += 10;
+			player->score += enemy->score;
 		}
 	}
 
