@@ -139,18 +139,18 @@ void GameModel::restartGame() {
 	this->vista->timer = 0;
 
 	for (int i = 0; i < this->items.size(); i++) {
-		this->items[i]->getSprite()->setVisible(false);
+		this->mapa->removeChild(this->items[i]->getSprite());
 	}
 	this->items.clear();
 	this->enemies.clear();
 
 	for (int i = 0; i < this->bullets.size(); i++) {
-		this->bullets[i]->getSprite()->setVisible(false);
+		this->mapa->removeChild(this->bullets[i]->getSprite());
 	}
 	this->bullets.clear();
 
 	for (int i = 0; i < this->bonuses.size(); i++) {
-		this->bonuses[i]->getSprite()->setVisible(false);
+		this->mapa->removeChild(this->bonuses[i]->getSprite());
 	}
 	this->bonuses.clear();
 
