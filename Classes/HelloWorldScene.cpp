@@ -177,10 +177,7 @@ void HelloWorld::update(float dt) {
 
 	updateTimerLabel();
 	updateScoreLabel();
-
-	if (this->model->playerHurt) {
-		updatePlayerLifeLabel();
-	}
+	updatePlayerLifeLabel();
 }
 
 void HelloWorld::updateTimerLabel() {
