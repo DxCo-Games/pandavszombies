@@ -36,7 +36,6 @@ void Player::hurt(float damage) {
 
 
 void Player::update(float dt) {
-	//FIXME this line is overriding the sprite of the weapon
 	Item::update(dt);
 
 	if (this->moving) {
@@ -55,8 +54,8 @@ void Player::update(float dt) {
 		float mapWidth = this->model->mapa->getWidth();
 		float mapHeight = this->model->mapa->getHeight();
 
-		if (finalX > 0 && finalX < mapWidth && finalY > 0
-				&& finalY < mapHeight) {
+		if (finalX - this->getWidth() / 4 > 0 && finalX + this->getWidth() / 4 < mapWidth &&
+				finalY - this->getHeight() / 2 > 0 && finalY < mapHeight) {
 			this->model->mapa->move(-deltaX, -deltaY);
 			this->model->vista->clouds->move(-deltaX, -deltaY);
 
@@ -102,14 +101,6 @@ void Player::setWeapon(weapons type) {
 		break;
 	}
 	}
-}
-
-cocos2d::CCPoint Player::getLocation() {
-	cocos2d::CCPoint location = Item::getLocation();
-//	location.setPoint(location.x - this->model->vista->mapa->getPositionX(),
-//			location.y - this->model->vista->mapa->getPositionY());
-
-	return location;
 }
 
 } /* namespace dxco */
