@@ -100,8 +100,8 @@ cocos2d::CCSprite* EnemyFactory::createSpriteInRandomPosition(GameModel* model, 
 	float x, y;
 	bool selected = false;
 	while (!selected) {
-		x = rand() % int(model->mapa->getWidth());
-		y = rand() % int(model->mapa->getHeight());
+		x = width / 2 + rand() % int(model->mapa->getWidth() - width / 2);
+		y = height / 2 + rand() % int(model->mapa->getHeight() - height / 2);
 
 		float distance = MathUtil::distance(cocos2d::CCPoint(x, y), model->player->getLocation());
 		selected = distance > model->player->getWidth() * 2;
