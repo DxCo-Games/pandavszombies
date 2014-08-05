@@ -173,7 +173,7 @@ void HelloWorld::ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEve
 
 void HelloWorld::update(float dt) {
 	this->model->update(dt);
-	this->damageLayer->setVisible(this->model->damage);
+	//TODO remover realmente this->damageLayer->setVisible(this->model->damage);
 
 	updatePlayerLifeLabel();
 }
