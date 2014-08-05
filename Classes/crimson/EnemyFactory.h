@@ -6,6 +6,9 @@
 
 #include "cocos2d.h"
 
+#include "../dxco/Animation.h"
+#include "Enemy.h"
+
 namespace dxco {
 
 class GameModel;
@@ -18,10 +21,14 @@ public:
 	void createEnemy(GameModel* model);
 	void createBoss(GameModel* model);
 
-	cocos2d::CCSprite* getRandomSprite(GameModel* model, std::string texture, int width, int height);
+	cocos2d::CCSprite* createSpriteInRandomPosition(GameModel* model, std::string texture, int width, int height);
 
 	float enemyDt;
 	float bossDt;
+
+	std::map<int, dxco::Animation*> loadAnimations(GameModel* model, std::string type, float frameTime);
+private:
+	void addEnemy(GameModel* model, Enemy* enemy);
 };
 
 } /* namespace dxco */
