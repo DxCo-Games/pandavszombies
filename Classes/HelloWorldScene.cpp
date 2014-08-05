@@ -88,8 +88,8 @@ bool HelloWorld::init()
     this->joystickController.addJoystick(joystick);
 
     this->playerHPLabel = dxco::LabelUtil::create("HP: " +  dxco::StringUtil::toString(player->life), 18, 10, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT);
-    this->playerScoreLabel = dxco::LabelUtil::create("Score: 0", 18, 10, 30, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT);
-    this->timerLabel = dxco::LabelUtil::create("Time: 0s", 18, 10, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::RIGHT);
+    this->playerScoreLabel = dxco::LabelUtil::create("0", 18, 10, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::RIGHT);
+    this->timerLabel = dxco::LabelUtil::create("00:00", 18, visibleSize.width / 2, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT);
 
     this->addChild(playerHPLabel);
     this->addChild(playerScoreLabel);
@@ -185,7 +185,15 @@ void HelloWorld::update(float dt) {
 }
 
 void HelloWorld::updateTimerLabel() {
-	std::string timerText = dxco::StringUtil::toString((float)round(this->timer)) + "s";
+	int totalTime = round(this->timer);
+
+	int minutes = ceil(totalTime / 60);
+	int seconds = totalTime % 60;
+
+	std::string stringMinutes =  dxco::StringUtil::padLeft(minutes, 2);
+	std::string stringSeconds = dxco::StringUtil::padLeft(seconds, 2);
+
+	std::string timerText = stringMinutes + ":" + stringSeconds;
 
 	this->timerLabel->setString(timerText.c_str());
 }
