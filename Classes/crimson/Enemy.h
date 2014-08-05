@@ -24,6 +24,9 @@ public:
 	float strength;
 	bool burning;
 	bool dumb; //me cago en los patrones ;)
+
+	int score;
+
 	cocos2d::CCPoint* destiny;
 
 	enum estados { ENEMY_STANDING, ENEMY_WALKING };

@@ -57,7 +57,7 @@ GameModel::GameModel(HelloWorld* vista, Player* player) {
 	this->mapa = vista->mapa;
 	this->enemyFactory = new EnemyFactory();
 	this->bonusFactory = new BonusFactory();
-	this->damage = false;
+	this->playerHurt = false;
 }
 
 void GameModel::addBullet(Bullet* bullet) {
@@ -71,7 +71,7 @@ std::vector<Item*>& GameModel::getItems() {
 }
 
 void GameModel::update(float dt) {
-	this->damage = false;
+	this->playerHurt = false;
 	this->player->weapon->update(dt);
 	this->player->update(dt);
 
@@ -88,7 +88,7 @@ void GameModel::update(float dt) {
 				bool shooted = enemy->shoot(bullet);
 
 				if (shooted) {
-					continue;
+					break;
 				}
 			}
 		}
@@ -99,7 +99,7 @@ void GameModel::update(float dt) {
 		enemy->update(dt);
 
 		if (!enemy->isActive()) {
-			player->score += 10;
+			player->score += enemy->score;
 		}
 	}
 
@@ -139,18 +139,18 @@ void GameModel::restartGame() {
 	this->vista->timer = 0;
 
 	for (int i = 0; i < this->items.size(); i++) {
-		this->items[i]->getSprite()->setVisible(false);
+		this->mapa->removeChild(this->items[i]->getSprite());
 	}
 	this->items.clear();
 	this->enemies.clear();
 
 	for (int i = 0; i < this->bullets.size(); i++) {
-		this->bullets[i]->getSprite()->setVisible(false);
+		this->mapa->removeChild(this->bullets[i]->getSprite());
 	}
 	this->bullets.clear();
 
 	for (int i = 0; i < this->bonuses.size(); i++) {
-		this->bonuses[i]->getSprite()->setVisible(false);
+		this->mapa->removeChild(this->bonuses[i]->getSprite());
 	}
 	this->bonuses.clear();
 

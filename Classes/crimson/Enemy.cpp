@@ -14,6 +14,7 @@ Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite,
 		TopDownItem(sprite, animations, ENEMY_ANGLE_POSITIONS) {
 	this->model = model;
 	this->life = 20;
+	this->score = 10;
 	this->strength = 10;
 	this->burning = false;
 	this->state = ENEMY_STANDING;

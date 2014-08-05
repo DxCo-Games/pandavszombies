@@ -40,7 +40,6 @@ private:
     dxco::Player* createPlayer();
     dxco::GameModel* model;
     dxco::JoystickController joystickController;
-    cocos2d::CCLayerColor* damageLayer;
 
     cocos2d::CCLabelTTF* playerHPLabel;
     cocos2d::CCLabelTTF* playerScoreLabel;

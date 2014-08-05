@@ -57,10 +57,6 @@ bool HelloWorld::init()
     this->scheduleUpdate();
     this->setTouchEnabled(true);
 
-    this->damageLayer = CCLayerColor::create(ccc4(100, 10, 10, 180));
-    this->damageLayer->setVisible(false);
-    this->addChild(this->damageLayer, 4);
-
     this->clouds = new dxco::Container(mapCornerX, mapCornerY, mapWidth, mapHeight);
     this->addChild(this->clouds, 4);
 
@@ -178,12 +174,14 @@ void HelloWorld::ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEve
 
 void HelloWorld::update(float dt) {
 	this->model->update(dt);
-	this->damageLayer->setVisible(this->model->damage);
 	this->timer += dt;
 
 	updateTimerLabel();
-	updatePlayerLifeLabel();
 	updateScoreLabel();
+
+	if (this->model->playerHurt) {
+		updatePlayerLifeLabel();
+	}
 }
 
 void HelloWorld::updateTimerLabel() {
