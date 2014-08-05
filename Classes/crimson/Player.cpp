@@ -54,8 +54,19 @@ void Player::update(float dt) {
 		float mapWidth = this->model->mapa->getWidth();
 		float mapHeight = this->model->mapa->getHeight();
 
-		if (finalX - this->getWidth() / 4 > 0 && finalX + this->getWidth() / 4 < mapWidth &&
-				finalY - this->getHeight() / 2 > 0 && finalY < mapHeight) {
+		if (finalX - this->getWidth() / 4 < 0 || finalX + this->getWidth() / 4 > mapWidth){
+			//cancel X movement
+			deltaX = 0;
+			finalX = x;
+		}
+
+		if (finalY - this->getHeight() / 2 < 0 || finalY > mapHeight){
+			//cancel Y movement
+			deltaY = 0;
+			finalY = y;
+		}
+
+		if (deltaX != 0 || deltaY != 0) {
 			this->model->mapa->move(-deltaX, -deltaY);
 			this->model->vista->clouds->move(-deltaX, -deltaY);
 
