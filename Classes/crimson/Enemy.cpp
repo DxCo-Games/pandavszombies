@@ -14,6 +14,7 @@ Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite,
 		TopDownItem(sprite, animations, ENEMY_ANGLE_POSITIONS) {
 	this->model = model;
 	this->life = 20;
+	this->score = 10;
 	this->strength = 10;
 	this->burning = false;
 	this->state = ENEMY_STANDING;
@@ -68,20 +69,19 @@ void Enemy::update(float dt) {
 
 			if (this->canAdvance(destiny, ENEMY_SPEED * dt, this->model->getItems())) {
 				//walk to destiny
-				cocos2d::CCPoint oldPosition =  this->getLocation();
+				cocos2d::CCPoint oldPosition = this->getLocation();
 				this->goTo(destiny, ENEMY_SPEED * dt);
 
 				//before putting it to walk, make sure it will be able to keep moving
 				if (this->canAdvance(destiny, ENEMY_SPEED * dt, this->model->getItems())) {
 					this->state = ENEMY_WALKING;
+					//update z order for isometric ordering of characters
+					int zorder = 100 - this->getLocation().y * 100 / this->model->mapa->getHeight();
+					this->model->mapa->reorderChild(this->sprite, zorder);
 				} else {
 					//if it can't move further, undo this movement.
-					this->moveTo(oldPosition.x, oldPosition.y);
+					this->goTo(destiny, - ENEMY_SPEED * dt);
 				}
-
-				//update z order for isometric ordering of characters
-				int zorder = 100 - this->getLocation().y * 100 / this->model->mapa->getHeight();
-				this->model->mapa->reorderChild(this->sprite, zorder);
 
 			} else {
 				this->state = ENEMY_STANDING;

@@ -47,6 +47,8 @@ bool HelloWorld::init()
     float mapCornerX = - (mapWidth - visibleSize.width) / 2;
     float mapCornerY = - (mapHeight - visibleSize.height) / 2;
 
+    this->timer = 0.0;
+
     this->mapa = new dxco::Mapa(mapCornerX, mapCornerY, mapWidth, mapHeight);
 
     CCSprite* pSprite = dxco::SpriteUtil::create("grass-texture-2.jpg", 0, 0, mapWidth, mapHeight);
@@ -54,10 +56,6 @@ bool HelloWorld::init()
 
     this->scheduleUpdate();
     this->setTouchEnabled(true);
-
-    this->damageLayer = CCLayerColor::create(ccc4(100, 10, 10, 180));
-    this->damageLayer->setVisible(false);
-    this->addChild(this->damageLayer, 4);
 
     this->clouds = new dxco::Container(mapCornerX, mapCornerY, mapWidth, mapHeight);
     this->addChild(this->clouds, 4);
@@ -89,10 +87,13 @@ bool HelloWorld::init()
     joystick = new dxco::JoystickMovimiento(model, joystickBotonMovimiento, 65);
     this->joystickController.addJoystick(joystick);
 
-    this->playerHPLabel = dxco::LabelUtil::create("HP: " +  dxco::StringUtil::toString(player->life),
-			18, 10, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT);
+    this->playerHPLabel = dxco::LabelUtil::create("HP: " +  dxco::StringUtil::toString(player->life), 18, 10, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT);
+    this->playerScoreLabel = dxco::LabelUtil::create("0", 18, 10, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::RIGHT);
+    this->timerLabel = dxco::LabelUtil::create("00:00", 18, visibleSize.width / 2, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT);
 
     this->addChild(playerHPLabel);
+    this->addChild(playerScoreLabel);
+    this->addChild(timerLabel);
 
     return true;
 }
@@ -100,14 +101,13 @@ bool HelloWorld::init()
 dxco::Player* HelloWorld::createPlayer() {
 
 	CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-    CCSprite* spriteGuy = dxco::SpriteUtil::create("panda/herida1_1_0000.png", this->mapa->getWidth() / 2,  this->mapa->getHeight() / 2, 70, 70);
+    CCSprite* spriteGuy = dxco::SpriteUtil::create("panda/herida1_1_0000.png", this->mapa->getWidth() / 2,  this->mapa->getHeight() / 2, 80, 80);
     this->mapa->addChild(spriteGuy, 2);
 
     std::map<int, dxco::Animation*> animations;
 
-    float frameTime = 0.02;
-    float hurtFrameTime = 0.04;
-    int angles = 8;
+    float frameTime = 0.03;
+    int angles = 16;
 
     for (int i = 0; i < angles; i++) {
     	std::vector<cocos2d::CCTexture2D*> texturesStanding;
@@ -116,7 +116,7 @@ dxco::Player* HelloWorld::createPlayer() {
     	animations[dxco::Player::QUIETO * angles + i] = standingAnimation;
 
     	std::vector<cocos2d::CCTexture2D*> texturesWalking;
-    	for (int j = 0; j < 20; j++){
+    	for (int j = 0; j <= 13; j++){
     		std::string index = "00" + dxco::StringUtil::toString(j);
     		if (j < 10){
     			index = "0" + index;
@@ -135,18 +135,18 @@ dxco::Player* HelloWorld::createPlayer() {
     	//duplicate first frame
     	texturesHerida1.push_back(dxco::SpriteUtil::createTexture("panda/herida1_" + dxco::StringUtil::toString(i + 1)  +
     						"_0000.png"));
-    	dxco::Animation* herida1Animation = new dxco::Animation(texturesHerida1, hurtFrameTime);
+    	dxco::Animation* herida1Animation = new dxco::Animation(texturesHerida1, frameTime);
 		animations[dxco::Player::HERIDO1 * angles + i] = herida1Animation;
 
     	std::vector<cocos2d::CCTexture2D*> texturesHerida2;
-    	for (int j = 0; j < 10; j++){
+    	for (int j = 0; j <= 9; j++){
 			texturesHerida2.push_back(dxco::SpriteUtil::createTexture("panda/herida2_" + dxco::StringUtil::toString(i + 1)  +
 					"_000" + dxco::StringUtil::toString(j) +".png"));
 		}
     	//duplicate first frame
     	texturesHerida2.push_back(dxco::SpriteUtil::createTexture("panda/herida2_" + dxco::StringUtil::toString(i + 1)  +
     						"_0000.png"));
-		dxco::Animation* herida2Animation = new dxco::Animation(texturesHerida2, hurtFrameTime);
+		dxco::Animation* herida2Animation = new dxco::Animation(texturesHerida2, frameTime);
 		animations[dxco::Player::HERIDO2 * angles + i] = herida2Animation;
     }
 
@@ -173,15 +173,40 @@ void HelloWorld::ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEve
 
 void HelloWorld::update(float dt) {
 	this->model->update(dt);
-	//TODO remover realmente this->damageLayer->setVisible(this->model->damage);
+	this->timer += dt;
 
-	updatePlayerLifeLabel();
+	updateTimerLabel();
+	updateScoreLabel();
+
+	if (this->model->playerHurt) {
+		updatePlayerLifeLabel();
+	}
+}
+
+void HelloWorld::updateTimerLabel() {
+	int totalTime = round(this->timer);
+
+	int minutes = ceil(totalTime / 60);
+	int seconds = totalTime % 60;
+
+	std::string stringMinutes =  dxco::StringUtil::padLeft(minutes, 2);
+	std::string stringSeconds = dxco::StringUtil::padLeft(seconds, 2);
+
+	std::string timerText = stringMinutes + ":" + stringSeconds;
+
+	this->timerLabel->setString(timerText.c_str());
 }
 
 void HelloWorld::updatePlayerLifeLabel() {
-	std::string playerLife = "HP: " + dxco::StringUtil::toString((float)round(this->model->player->life));
+	std::string playerLifeText = "HP: " + dxco::StringUtil::toString((float)round(this->model->player->life));
 
-	this->playerHPLabel->setString(playerLife.c_str());
+	this->playerHPLabel->setString(playerLifeText.c_str());
+}
+
+void HelloWorld::updateScoreLabel() {
+	std::string playerScoreText = "Score: " + dxco::StringUtil::toString(this->model->player->score);
+
+	this->playerScoreLabel->setString(playerScoreText.c_str());
 }
 
 void HelloWorld::initFire(float x, float y) {

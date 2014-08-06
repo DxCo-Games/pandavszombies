@@ -15,7 +15,7 @@ int TopDownItem::getState() {
 
 	//add angleRange/2 so the ranges are centered around each anglePosition
 	int angleState = - (this->rotation - angleRange / 2) / angleRange;
-	if (angleState > 7) {
+	if (angleState > this->anglePositions - 1) {
 		angleState = 0;
 	}
 

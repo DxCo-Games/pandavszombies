@@ -17,7 +17,7 @@ void Bullet::update(float dt) {
 
 
 void Bullet::use() {
-	this->getSprite()->setVisible(false);
+	this->getSprite()->removeFromParent();
 	this->used = true;
 }
 

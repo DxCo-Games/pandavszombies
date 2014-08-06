@@ -57,7 +57,7 @@ GameModel::GameModel(HelloWorld* vista, Player* player) {
 	this->mapa = vista->mapa;
 	this->enemyFactory = new EnemyFactory();
 	this->bonusFactory = new BonusFactory();
-	this->damage = false;
+	this->playerHurt = false;
 }
 
 void GameModel::addBullet(Bullet* bullet) {
@@ -71,7 +71,7 @@ std::vector<Item*>& GameModel::getItems() {
 }
 
 void GameModel::update(float dt) {
-	this->damage = false;
+	this->playerHurt = false;
 	this->player->weapon->update(dt);
 	this->player->update(dt);
 
@@ -88,7 +88,7 @@ void GameModel::update(float dt) {
 				bool shooted = enemy->shoot(bullet);
 
 				if (shooted) {
-					continue;
+					break;
 				}
 			}
 		}
@@ -97,6 +97,10 @@ void GameModel::update(float dt) {
 	for (int i = 0; i < this->enemies.size(); i++) {
 		Enemy* enemy = this->enemies[i];
 		enemy->update(dt);
+
+		if (!enemy->isActive()) {
+			player->score += enemy->score;
+		}
 	}
 
 	for (int i = 0; i < this->bonuses.size(); i++) {
@@ -117,25 +121,36 @@ void GameModel::update(float dt) {
 }
 
 void GameModel::restartGame() {
+
+	//reset positions
+	cocos2d::CCSize visibleSize = cocos2d::CCDirector::sharedDirector()->getVisibleSize();
+	float mapWidth = visibleSize.width * 1.5;
+	float mapHeight = visibleSize.height * 1.5;
+	float mapCornerX = - (mapWidth - visibleSize.width) / 2;
+	float mapCornerY = - (mapHeight - visibleSize.height) / 2;
+	this->mapa->moveToAbsolute(mapCornerX, mapCornerY);
+	this->vista->clouds->moveToAbsolute(mapCornerX, mapCornerY);
+
 	this->player->restartPosition();
 	this->player->life = PLAYER_LIFE;
+	this->player->score = 0;
 	this->player->setWeapon(Player::PISTOL);
-	this->mapa->moveToAbsolute(0, 0);
-	this->vista->clouds->moveToAbsolute(0, 0);
+
+	this->vista->timer = 0;
 
 	for (int i = 0; i < this->items.size(); i++) {
-		this->items[i]->getSprite()->setVisible(false);
+		this->mapa->removeChild(this->items[i]->getSprite());
 	}
 	this->items.clear();
 	this->enemies.clear();
 
 	for (int i = 0; i < this->bullets.size(); i++) {
-		this->bullets[i]->getSprite()->setVisible(false);
+		this->mapa->removeChild(this->bullets[i]->getSprite());
 	}
 	this->bullets.clear();
 
 	for (int i = 0; i < this->bonuses.size(); i++) {
-		this->bonuses[i]->getSprite()->setVisible(false);
+		this->mapa->removeChild(this->bonuses[i]->getSprite());
 	}
 	this->bonuses.clear();
 

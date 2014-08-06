@@ -2,8 +2,8 @@
 #define PLAYER_H_
 
 #define PLAYER_LIFE 100
-#define PLAYER_SPEED 65
-#define PLAYER_ANGLE_POSITIONS 8
+#define PLAYER_SPEED 75
+#define PLAYER_ANGLE_POSITIONS 16
 
 #include "TopDownItem.h"
 
@@ -30,6 +30,7 @@ public:
 
 	void update(float dt);
 	float life;
+	int score;
 
 	bool moving;
 
