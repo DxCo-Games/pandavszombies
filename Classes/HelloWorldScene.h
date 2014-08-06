@@ -37,6 +37,7 @@ public:
 
     double timer;
 private:
+    void preloadTextures();
     dxco::Player* createPlayer();
     dxco::GameModel* model;
     dxco::JoystickController joystickController;
@@ -44,6 +45,11 @@ private:
     cocos2d::CCLabelTTF* playerHPLabel;
     cocos2d::CCLabelTTF* playerScoreLabel;
     cocos2d::CCLabelTTF* timerLabel;
+    bool preloaded;
+    void realInit();
+    int angulosCargados;
+    cocos2d::CCLabelTTF* porcentajeCargado;
+    cocos2d::CCSprite* loading;
 };
 
 #endif // __HELLOWORLD_SCENE_H__
