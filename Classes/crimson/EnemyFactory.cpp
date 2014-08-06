@@ -52,7 +52,7 @@ void EnemyFactory::createBoss(GameModel* model) {
 
 	std::map<int, dxco::Animation*> animations = loadAnimations(model, "elvis", 0.03);
 
-	cocos2d::CCSprite* enemySprite = createSpriteInRandomPosition(model, "zombies/elvis_1_0000.png", 110, 110);
+	cocos2d::CCSprite* enemySprite = createSpriteInRandomPosition(model, "zombies/elvis_1_0000.png", 150, 150);
 	Enemy* enemy = new Boss(model, enemySprite, animations);
 	addEnemy(model, enemy);
 
