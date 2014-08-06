@@ -18,6 +18,7 @@ Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite,
 	this->strength = 10;
 	this->burning = false;
 	this->state = ENEMY_STANDING;
+	this->action = NULL;
 
 	if (rand() % 2) {
 		this->dumb = false;
@@ -96,14 +97,21 @@ void Enemy::update(float dt) {
 			}
 		}
 	} else {
+
 		this->model->bonusFactory->createBonus(this->model, this->getLocation());
-		this->model->mapa->removeChild(this->getSprite());
 		//this removes the enemies. cpp, don't ask.
 		this->model->enemies.erase(std::remove(this->model->enemies.begin(), this->model->enemies.end(), this),
-				this->model->enemies.end());
+		this->model->enemies.end());
 		this->model->items.erase(std::remove(this->model->items.begin(), this->model->items.end(), this),
-							this->model->items.end());
+		this->model->items.end());
 
+		if (!this->action) {
+			this->action = SpriteUtil::fadeOut(this->getSprite());
+		}
+
+		if (this->action->isDone()) {
+			this->model->mapa->removeChild(this->getSprite());
+		}
 	}
 }
 

@@ -7,6 +7,7 @@
 #include "cocos2d.h"
 #include "TopDownItem.h"
 #include "Bullet.h"
+#include "../dxco/Action.h"
 
 namespace dxco {
 
@@ -38,6 +39,7 @@ public:
 	void setDumbDestiny();
 
 	virtual float getColitionRatio();
+	cocos2d::CCAction* action;
 };
 
 } /* namespace dxco */
