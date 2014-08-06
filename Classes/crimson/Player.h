@@ -39,8 +39,6 @@ public:
 	 * */
 	float moveRotation;
 
-	cocos2d::CCPoint getLocation();
-
 };
 
 } /* namespace dxco */
