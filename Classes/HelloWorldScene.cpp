@@ -194,7 +194,6 @@ void HelloWorld::updateTimerLabel() {
 	this->timerLabel->setString(timerText.c_str());
 }
 
-
 void HelloWorld::updatePlayerLifeLabel() {
 	std::string playerLifeText = "HP: " + dxco::StringUtil::toString((float)round(this->model->player->life));
 
