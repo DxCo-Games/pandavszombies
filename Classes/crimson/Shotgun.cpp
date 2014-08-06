@@ -13,13 +13,15 @@ Shotgun::Shotgun(GameModel* model): Weapon(model) {
 
 void Shotgun::shoot() {
 	float rotation = this->model->player->getRotation();
+	cocos2d::CCPoint location = this->model->player->getLocation();
 
-	this->createBullet(rotation);
-	this->createBullet(rotation + 10);
-	this->createBullet(rotation + 5);
-	this->createBullet(rotation - 10);
-	this->createBullet(rotation - 5);
+	this->createBullet(location.x, location.y, rotation);
+	this->createBullet(location.x, location.y, rotation + 10);
+	this->createBullet(location.x, location.y, rotation + 5);
+	this->createBullet(location.x, location.y, rotation - 10);
+	this->createBullet(location.x, location.y, rotation - 5);
 
+	this->runFlash(location.x, location.y, rotation);
 }
 
 } /* namespace dxco */

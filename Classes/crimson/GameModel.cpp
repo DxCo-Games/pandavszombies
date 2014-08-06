@@ -52,9 +52,9 @@ GameModel::GameModel(HelloWorld* vista, Player* player) {
 	this->player = player;
 	player->model = this;
 	this->vista = vista;
+	this->mapa = vista->mapa;
 
 	this->player->setWeapon(Player::PISTOL);
-	this->mapa = vista->mapa;
 	this->enemyFactory = new EnemyFactory();
 	this->bonusFactory = new BonusFactory();
 	this->playerHurt = false;
