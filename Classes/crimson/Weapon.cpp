@@ -51,10 +51,18 @@ void Weapon::runFlash(float x, float y, float rotation) {
 	int width = this->model->player->getWidth();
 	int height = this->model->player->getHeight();
 
-	//FIXME calculate this only once.
+	//FIXME calculate this only one.
 	//TODO fix rotation to match the end of the weapon
-	//TODO fix z level
 	//TODO move better along the player?
+	//TODO reset flash on player restart
+
+	if (angleState < 8) {
+		//put the flash below the panda
+		this->flashSprite->setZOrder(this->model->player->getSprite()->getZOrder() - 10);
+	} else {
+		this->flashSprite->setZOrder(this->model->player->getSprite()->getZOrder() + 1);
+	}
+
 	switch(angleState) {
 	case 0: {
 		this->flashSprite->setPositionX(1.2 * width);
@@ -102,59 +110,61 @@ void Weapon::runFlash(float x, float y, float rotation) {
 	}
 	case 7: {
 		//appears again
-		this->flashSprite->setPositionX(0);
+		this->flashSprite->setPositionX(-0.1);
 		this->flashSprite->setPositionY(0.65 * height);
 		this->flashSprite->setRotation(-157.5);
 		break;
 	}
 	case 8: {
-			this->flashSprite->setPositionX(1.2 * width);
-			this->flashSprite->setPositionY(0.5 * height);
-			this->flashSprite->setRotation(-180);
-			break;
-		}
+		this->flashSprite->setPositionX(-0.15 * width);
+		this->flashSprite->setPositionY(0.53 * height);
+		this->flashSprite->setRotation(-180);
+		break;
+	}
 	case 9: {
-			this->flashSprite->setPositionX(1.2 * width);
-			this->flashSprite->setPositionY(0.5 * height);
-			this->flashSprite->setRotation(-202.5);
-			break;
-		}
+		this->flashSprite->setPositionX(-0.17 * width);
+		this->flashSprite->setPositionY(0.37 * height);
+		this->flashSprite->setRotation(-202.5);
+		break;
+	}
 	case 10: {
-				this->flashSprite->setPositionX(1.2 * width);
-				this->flashSprite->setPositionY(0.5 * height);
-				this->flashSprite->setRotation(-225);
-				break;
-			}
+		//FIXME
+		this->flashSprite->setPositionX(-0.1 * width);
+		this->flashSprite->setPositionY(0.25 * height);
+		this->flashSprite->setRotation(-225);
+		break;
+	}
 	case 11: {
-					this->flashSprite->setPositionX(1.2 * width);
-					this->flashSprite->setPositionY(0.5 * height);
-					this->flashSprite->setRotation(-247.5);
-					break;
-				}
+		this->flashSprite->setPositionX(0.1 * width);
+		this->flashSprite->setPositionY(0.15 * height);
+		this->flashSprite->setRotation(-247.5);
+		break;
+	}
 	case 12: {
-					this->flashSprite->setPositionX(1.2 * width);
-					this->flashSprite->setPositionY(0.5 * height);
-					this->flashSprite->setRotation(-270);
-					break;
-				}
+		this->flashSprite->setPositionX(0.30 * width);
+		this->flashSprite->setPositionY(0.1 * height);
+		this->flashSprite->setRotation(-270);
+		break;
+	}
 	case 13: {
-					this->flashSprite->setPositionX(1.2 * width);
-					this->flashSprite->setPositionY(0.5 * height);
-					this->flashSprite->setRotation(-292.5);
-					break;
-				}
+		this->flashSprite->setPositionX(0.58 * width);
+		this->flashSprite->setPositionY(0.1 * height);
+		this->flashSprite->setRotation(-292.5);
+		break;
+	}
 	case 14: {
-					this->flashSprite->setPositionX(1.2 * width);
-					this->flashSprite->setPositionY(0.5 * height);
-					this->flashSprite->setRotation(-315);
-					break;
-				}
+		//FIXME
+		this->flashSprite->setPositionX(0.83 * width);
+		this->flashSprite->setPositionY(0.18 * height);
+		this->flashSprite->setRotation(-315);
+		break;
+	}
 	case 15: {
-					this->flashSprite->setPositionX(1.2 * width);
-					this->flashSprite->setPositionY(0.5 * height);
-					this->flashSprite->setRotation(-337.5);
-					break;
-				}
+		this->flashSprite->setPositionX(1.05 * width);
+		this->flashSprite->setPositionY(0.27 * height);
+		this->flashSprite->setRotation(-337.5);
+		break;
+	}
 	}
 
 	this->flashSprite->setVisible(true);
