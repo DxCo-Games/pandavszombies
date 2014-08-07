@@ -15,7 +15,7 @@ Weapon::Weapon(GameModel* model) {
 	flashTextures.push_back(dxco::SpriteUtil::createTexture("disparo/disparo01.png"));
 	flashTextures.push_back(dxco::SpriteUtil::createTexture("disparo/disparo02.png"));
 	flashTextures.push_back(dxco::SpriteUtil::createTexture("disparo/disparo03.png"));
-	this-> flashAnimation = new dxco::Animation(flashTextures, 0.04, false);
+	this-> flashAnimation = new dxco::Animation(flashTextures, 0.03, false);
 
 	model->player->getSprite()->addChild(this->flashSprite);
 }
@@ -51,16 +51,16 @@ void Weapon::runFlash(float x, float y, float rotation) {
 	int width = this->model->player->getWidth();
 	int height = this->model->player->getHeight();
 
-	//FIXME calculate this only one.
+	//FIXME calculate this only once.
 	//TODO fix rotation to match the end of the weapon
 	//TODO move better along the player?
 	//TODO reset flash on player restart
 
 	if (angleState < 8) {
 		//put the flash below the panda
-		this->flashSprite->setZOrder(this->model->player->getSprite()->getZOrder() - 10);
+		this->flashSprite->setZOrder(-10);
 	} else {
-		this->flashSprite->setZOrder(this->model->player->getSprite()->getZOrder() + 1);
+		this->flashSprite->setZOrder(10);
 	}
 
 	switch(angleState) {
@@ -173,6 +173,10 @@ void Weapon::runFlash(float x, float y, float rotation) {
 
 void Weapon::createBullet(float x, float y, float rotation) {
 
+	//need to tweak the coordinates as the location of the panda is not exactly its center.
+	int width = this->model->player->getWidth();
+	y = y - 0.3 * width;
+
 	cocos2d::CCSprite* spriteBullet = SpriteUtil::create("bullet.png", x, y, 5, 5);
 
 	spriteBullet->setRotation(rotation);
@@ -180,9 +184,9 @@ void Weapon::createBullet(float x, float y, float rotation) {
 	/** degrees to radians */
 	float angle = -rotation / 57.2957795;
 
-	//fix position of the bullet to actually come out the weapon. the last number fixes sprites nonesense
-	float R = 18;
-	SpriteUtil::moveTo(spriteBullet, x + R * cos(angle), y + R * sin(angle) - 16);
+	//put the bullet in front of the panda instead of the center
+	float R = 0.5 * width;
+	SpriteUtil::moveTo(spriteBullet, x + R * cos(angle), y + R * sin(angle));
 
 	std::map<int, Animation*> animations;
 	Bullet* bullet = new Bullet(spriteBullet, angle, animations);
