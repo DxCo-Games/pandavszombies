@@ -16,6 +16,7 @@ Player::Player(cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations)
 	this->score = 0;
 	this->moving = false;
 	this->moveRotation;
+	this->weapon = NULL;
 }
 
 void Player::hurt(float damage) {
@@ -92,6 +93,10 @@ bool Player::isActive() {
 void Player::setWeapon(weapons type) {
 	this->weaponType = type;
 	model->vista->fire->setVisible(false);
+
+	if (this->weapon != NULL) {
+		this->sprite->removeChild(this->weapon->flashSprite, true);
+	}
 
 	switch(type) {
 	case SHOTGUN: {

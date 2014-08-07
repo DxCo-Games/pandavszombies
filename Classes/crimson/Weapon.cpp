@@ -52,9 +52,7 @@ void Weapon::runFlash(float x, float y, float rotation) {
 	int height = this->model->player->getHeight();
 
 	//FIXME calculate this only once.
-	//TODO fix rotation to match the end of the weapon
-	//TODO move better along the player?
-	//TODO reset flash on player restart
+	//TODO fix rotation to match the direction of the weapon
 
 	if (angleState < 8) {
 		//put the flash below the panda
