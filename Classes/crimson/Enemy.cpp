@@ -59,7 +59,8 @@ void Enemy::update(float dt) {
 		}
 
 		//look at destiny
-		float angle = MathUtil::angle(this->getLocation(), destiny) * -57.2957795;
+		float radian_angle = MathUtil::angle(this->getLocation(), destiny);
+		float angle = radian_angle * -57.2957795;
 		this->setRotation(angle);
 
 		this->burn(dt, playerLocation, distance, angle);
@@ -75,18 +76,18 @@ void Enemy::update(float dt) {
 
 			if (this->up) {
 
-				if (this->upTime > 0.35) {
+				if (this->upTime > 0.15) {
 					this->up = false;
 					this->upTime = 0;
 				}
-				SpriteUtil::move(this->getSprite(), 6 * cos (angle) * dt, 6 * sin(angle) * dt);
+				SpriteUtil::move(this->getSprite(), 75 * cos (radian_angle) * dt, 75 * sin(radian_angle) * dt);
 			} else {
-				if (this->upTime > 0.35) {
+				if (this->upTime > 0.15) {
 					this->up = true;
 					this->upTime = 0;
 				}
 
-				SpriteUtil::move(this->getSprite(), -6 * cos (angle) * dt, -6 * sin(angle) * dt);
+				SpriteUtil::move(this->getSprite(), -75 * cos (radian_angle) * dt, -75 * sin(radian_angle) * dt);
 			}
 
 		} else {
