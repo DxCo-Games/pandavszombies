@@ -10,7 +10,7 @@ TopDownItem::TopDownItem(cocos2d::CCSprite* sprite, std::map<int, Animation*>& a
 	this->state = 0;
 }
 
-int TopDownItem::getState() {
+int TopDownItem::getAngleState() {
 	float angleRange = 360 / float(this->anglePositions);
 
 	//add angleRange/2 so the ranges are centered around each anglePosition
@@ -18,8 +18,11 @@ int TopDownItem::getState() {
 	if (angleState > this->anglePositions - 1) {
 		angleState = 0;
 	}
+	return angleState;
+}
 
-	return this->anglePositions * this->state + angleState;
+int TopDownItem::getState() {
+	return this->anglePositions * this->state + this->getAngleState();
 }
 
 float TopDownItem::getRotation() {

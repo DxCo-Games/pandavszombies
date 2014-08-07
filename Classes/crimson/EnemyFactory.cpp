@@ -18,13 +18,13 @@ EnemyFactory::EnemyFactory(){
 void EnemyFactory::update(GameModel* model, float dt) {
 	this->enemyDt += dt;
 	if (this->enemyDt > ENEMY_DT){
-		this->createEnemy(model);
+//		this->createEnemy(model);
 		this->enemyDt = 0;
 	}
 
 	this->bossDt += dt;
 	if (this->bossDt > BOSS_DT){
-		this->createBoss(model);
+//		this->createBoss(model);
 		this->bossDt = 0;
 	}
 }

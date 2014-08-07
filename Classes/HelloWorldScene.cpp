@@ -42,60 +42,97 @@ bool HelloWorld::init()
     }
     
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-    float mapWidth = visibleSize.width * 1.5;
-    float mapHeight = visibleSize.height * 1.5;
-    float mapCornerX = - (mapWidth - visibleSize.width) / 2;
-    float mapCornerY = - (mapHeight - visibleSize.height) / 2;
+    this->loading = dxco::SpriteUtil::create("loading.png", 0, 0, visibleSize.width, visibleSize.height);
+    this->addChild(loading);
+    this->porcentajeCargado = dxco::LabelUtil::create("0%", 32, visibleSize.width / 2, visibleSize.height / 2,
+    																			dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT);
+    this->addChild(porcentajeCargado);
 
-    this->timer = 0.0;
-
-    this->mapa = new dxco::Mapa(mapCornerX, mapCornerY, mapWidth, mapHeight);
-
-    CCSprite* pSprite = dxco::SpriteUtil::create("grass-texture-2.jpg", 0, 0, mapWidth, mapHeight);
-    this->mapa->addChild(pSprite, -10);
-
+    this->preloaded = false;
+    this->angulosCargados = 0;
     this->scheduleUpdate();
-    this->setTouchEnabled(true);
-
-    this->clouds = new dxco::Container(mapCornerX, mapCornerY, mapWidth, mapHeight);
-    this->addChild(this->clouds, 4);
-
-    CCSprite* joystickFondo = dxco::SpriteUtil::create("circulo.png", visibleSize.width *  0.85 - 80, 20, 80, 80);
-    this->addChild(joystickFondo, 10);
-    joystickFondo->setOpacity(128);
-
-    CCSprite* joystickBoton = dxco::SpriteUtil::create("boton.png", visibleSize.width * 0.85 - 60,  40, 40, 40);
-    this->addChild(joystickBoton, 12);
-
-    joystickFondo = dxco::SpriteUtil::create("circulo.png", visibleSize.width *  0.15, 20, 80, 80);
-    this->addChild(joystickFondo, 12);
-    joystickFondo->setOpacity(128);
-
-    CCSprite* joystickBotonMovimiento = dxco::SpriteUtil::create("boton.png", visibleSize.width * 0.15 + 20,  40, 40, 40);
-    this->addChild(joystickBotonMovimiento, 12);
-
-    this->initFire(visibleSize.width / 2,  visibleSize.height / 2);
-
-    this->addChild(mapa);
-
-    dxco::Player* player = this->createPlayer();
-
-    model = new dxco::GameModel(this, player);
-    dxco::Joystick* joystick = new dxco::JoystickMira(model, joystickBoton, 65);
-    this->joystickController.addJoystick(joystick);
-
-    joystick = new dxco::JoystickMovimiento(model, joystickBotonMovimiento, 65);
-    this->joystickController.addJoystick(joystick);
-
-    this->playerHPLabel = dxco::LabelUtil::create("HP: " +  dxco::StringUtil::toString(player->life), 18, 10, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT);
-    this->playerScoreLabel = dxco::LabelUtil::create("0", 18, 10, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::RIGHT);
-    this->timerLabel = dxco::LabelUtil::create("00:00", 18, visibleSize.width / 2, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT);
-
-    this->addChild(playerHPLabel);
-    this->addChild(playerScoreLabel);
-    this->addChild(timerLabel);
 
     return true;
+}
+
+void HelloWorld::realInit() {
+		CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
+	    float mapWidth = visibleSize.width * 1.5;
+	    float mapHeight = visibleSize.height * 1.5;
+	    float mapCornerX = - (mapWidth - visibleSize.width) / 2;
+	    float mapCornerY = - (mapHeight - visibleSize.height) / 2;
+
+	    this->timer = 0.0;
+
+	    this->mapa = new dxco::Mapa(mapCornerX, mapCornerY, mapWidth, mapHeight);
+
+	    CCSprite* pSprite = dxco::SpriteUtil::create("grass-texture-2.jpg", 0, 0, mapWidth, mapHeight);
+	    this->mapa->addChild(pSprite, -10);
+
+	    this->setTouchEnabled(true);
+
+	    this->clouds = new dxco::Container(mapCornerX, mapCornerY, mapWidth, mapHeight);
+	    this->addChild(this->clouds, 4);
+
+	    CCSprite* joystickFondo = dxco::SpriteUtil::create("circulo.png", visibleSize.width *  0.85 - 80, 20, 80, 80);
+	    this->addChild(joystickFondo, 10);
+	    joystickFondo->setOpacity(128);
+
+	    CCSprite* joystickBoton = dxco::SpriteUtil::create("boton.png", visibleSize.width * 0.85 - 60,  40, 40, 40);
+	    this->addChild(joystickBoton, 12);
+
+	    joystickFondo = dxco::SpriteUtil::create("circulo.png", visibleSize.width *  0.15, 20, 80, 80);
+	    this->addChild(joystickFondo, 12);
+	    joystickFondo->setOpacity(128);
+
+	    CCSprite* joystickBotonMovimiento = dxco::SpriteUtil::create("boton.png", visibleSize.width * 0.15 + 20,  40, 40, 40);
+	    this->addChild(joystickBotonMovimiento, 12);
+
+	    this->initFire(visibleSize.width / 2,  visibleSize.height / 2);
+
+	    this->addChild(mapa);
+
+	    dxco::Player* player = this->createPlayer();
+
+	    model = new dxco::GameModel(this, player);
+	    dxco::Joystick* joystick = new dxco::JoystickMira(model, joystickBoton, 65);
+	    this->joystickController.addJoystick(joystick);
+
+	    joystick = new dxco::JoystickMovimiento(model, joystickBotonMovimiento, 65);
+	    this->joystickController.addJoystick(joystick);
+
+	    this->playerHPLabel = dxco::LabelUtil::create("HP: " +  dxco::StringUtil::toString(player->life), 18, 10, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT);
+	    this->playerScoreLabel = dxco::LabelUtil::create("0", 18, 10, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::RIGHT);
+	    this->timerLabel = dxco::LabelUtil::create("00:00", 18, visibleSize.width / 2, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT);
+
+	    this->addChild(playerHPLabel);
+	    this->addChild(playerScoreLabel);
+	    this->addChild(timerLabel);
+}
+
+void HelloWorld::preloadTextures() {
+
+
+	if (!this->preloaded) {
+
+		dxco::SpriteUtil::preloadTexture("zombies/campesino_" + dxco::StringUtil::toString(angulosCargados + 1) + "_0000.png");
+		dxco::SpriteUtil::preloadTexture("zombies/oficinista_" + dxco::StringUtil::toString(angulosCargados + 1) + "_0000.png");
+		dxco::SpriteUtil::preloadTexture("zombies/elvis_" + dxco::StringUtil::toString(angulosCargados + 1) + "_0000.png");
+
+		for (int j = 0; j < 20; j++){
+			std::string index = dxco::StringUtil::padLeft(j, 4);
+			dxco::SpriteUtil::preloadTexture("zombies/campesino_" + dxco::StringUtil::toString(angulosCargados + 1) + "_" + index + ".png");
+			dxco::SpriteUtil::preloadTexture("zombies/oficinista_" + dxco::StringUtil::toString(angulosCargados + 1) + "_" + index + ".png");
+			dxco::SpriteUtil::preloadTexture("zombies/elvis_" + dxco::StringUtil::toString(angulosCargados + 1) + "_" + index + ".png");
+		}
+
+		angulosCargados++;
+		this->preloaded = angulosCargados >= ENEMY_ANGLE_POSITIONS;
+
+		if (this->preloaded) {
+			this->realInit();
+		}
+	}
 }
 
 dxco::Player* HelloWorld::createPlayer() {
@@ -172,12 +209,26 @@ void HelloWorld::ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEve
 }
 
 void HelloWorld::update(float dt) {
-	this->model->update(dt);
-	this->timer += dt;
 
-	updateTimerLabel();
-	updateScoreLabel();
-	updatePlayerLifeLabel();
+	if (this->preloaded) {
+		this->removeChild(porcentajeCargado);
+		this->removeChild(loading);
+
+		this->model->update(dt);
+		this->timer += dt;
+
+		updateTimerLabel();
+		updateScoreLabel();
+		updatePlayerLifeLabel();
+	} else {
+		this->preloadTextures();
+		float angulosCargados = this->angulosCargados;
+		float cantAngulos = ENEMY_ANGLE_POSITIONS;
+
+		std::string porcentaje = dxco::StringUtil::toString((angulosCargados / cantAngulos) * 100);
+		porcentaje += "%";
+		porcentajeCargado->setString(porcentaje.c_str());
+	}
 }
 
 void HelloWorld::updateTimerLabel() {

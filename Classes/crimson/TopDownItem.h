@@ -24,6 +24,9 @@ public:
 	 * item state.
 	 * */
 	int getState();
+
+	//from 0 to anglePositions - 1 based on current rotation
+	int getAngleState();
 	float getRotation();
 	void setRotation(float rotation);
 };
