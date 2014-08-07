@@ -23,11 +23,7 @@ void Player::hurt(float damage) {
 	this->life -= damage;
 	if(damage > 0) {
 		this->model->playerHurt = true;
-
-		if(this->state != HERIDO1 && this->state != HERIDO2) {
-			//TODO use both animations
-			this->state = HERIDO2;
-		}
+		this->state = HERIDO;
 	}
 
 	if (this->life > PLAYER_LIFE) {
