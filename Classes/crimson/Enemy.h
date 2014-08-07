@@ -1,7 +1,6 @@
 #ifndef ENEMY_H_
 #define ENEMY_H_
 
-#define ENEMY_SPEED 15
 #define ENEMY_ANGLE_POSITIONS 8
 
 #include "cocos2d.h"
@@ -18,6 +17,8 @@ class Enemy : public TopDownItem {
 public:
 	Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations);
 	void update(float dt);
+
+	static int ENEMY_SPEED;
 
 	bool shoot(Bullet* bullet);
 	GameModel* model;

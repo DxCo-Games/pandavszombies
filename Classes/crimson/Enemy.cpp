@@ -9,6 +9,9 @@
 
 namespace dxco {
 
+//initialize the default speed. can't do it in Enemy.h gotta love cpp
+int Enemy::ENEMY_SPEED = 15;
+
 Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite,
 		std::map<int, Animation*>& animations) :
 		TopDownItem(sprite, animations, ENEMY_ANGLE_POSITIONS) {
