@@ -18,7 +18,7 @@ public:
 	void disparar();
 
 	GameModel* model;
-	enum estados { QUIETO, CAMINANDO, HERIDO1, HERIDO2 };
+	enum estados { QUIETO, CAMINANDO, HERIDO };
 	enum weapons { PISTOL, SHOTGUN, SMG_, MACHINE_GUN, FIRE};
 	Weapon* weapon;
 	weapons weaponType;

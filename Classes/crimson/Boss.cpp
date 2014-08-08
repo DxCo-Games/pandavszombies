@@ -1,10 +1,3 @@
-/*
- * Boss.cpp
- *
- *  Created on: May 15, 2014
- *      Author: facundo
- */
-
 #include "Boss.h"
 
 namespace dxco {

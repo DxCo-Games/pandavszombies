@@ -8,6 +8,7 @@ Weapon::Weapon(GameModel* model) {
 	this->model = model;
 	this->bulletDt = 0;
 	this->bulletFrequency = 0.25;
+	this->bullets = -1; //infinite bullets by default
 
 	this->flashSprite = SpriteUtil::create("disparo/disparo01.png", 0, 0, 50, 50);
 
@@ -18,6 +19,7 @@ Weapon::Weapon(GameModel* model) {
 	this-> flashAnimation = new dxco::Animation(flashTextures, 0.03, false);
 
 	model->player->getSprite()->addChild(this->flashSprite);
+	this->flashSprite->setVisible(false);
 }
 
 void Weapon::update(float dt) {
@@ -170,7 +172,7 @@ void Weapon::runFlash(float x, float y, float rotation) {
 }
 
 void Weapon::createBullet(float x, float y, float rotation) {
-
+	this->bullets -= 1;
 	//need to tweak the coordinates as the location of the panda is not exactly its center.
 	int width = this->model->player->getWidth();
 	y = y - 0.3 * width;

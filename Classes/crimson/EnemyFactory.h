@@ -3,6 +3,7 @@
 
 #define ENEMY_DT 0.3
 #define BOSS_DT 15
+#define SPEED_DT 30
 
 #include "cocos2d.h"
 
@@ -25,6 +26,7 @@ public:
 
 	float enemyDt;
 	float bossDt;
+	float speedDt;
 
 	std::map<int, dxco::Animation*> loadAnimations(GameModel* model, std::string type, float frameTime);
 private:

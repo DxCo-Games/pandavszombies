@@ -4,10 +4,11 @@
 namespace dxco {
 
 FireWeapon::FireWeapon(GameModel* model): Weapon(model) {
-	// TODO Auto-generated constructor stub
+	this->bullets = 2000;
 }
 
 void FireWeapon::update(float dt) {
+	this->bullets -= dt * 100;
 }
 
 void FireWeapon::shoot(){

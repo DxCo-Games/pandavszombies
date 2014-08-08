@@ -13,6 +13,7 @@ namespace dxco {
 EnemyFactory::EnemyFactory(){
 	this->enemyDt = 0;
 	this->bossDt = 0;
+	this->speedDt = 0;
 }
 
 void EnemyFactory::update(GameModel* model, float dt) {
@@ -26,6 +27,11 @@ void EnemyFactory::update(GameModel* model, float dt) {
 	if (this->bossDt > BOSS_DT){
 		this->createBoss(model);
 		this->bossDt = 0;
+	}
+	this->speedDt += dt;
+	if (this->speedDt > SPEED_DT){
+		Enemy::ENEMY_SPEED = 1.1 * Enemy::ENEMY_SPEED;
+		this->speedDt = 0;
 	}
 }
 

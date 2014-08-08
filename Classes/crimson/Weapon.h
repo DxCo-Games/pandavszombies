@@ -17,6 +17,7 @@ public:
 	void runFlash(float x, float y, float rotation);
 	void createBullet(float x, float y, float rotation);
 
+	int bullets;
 	GameModel* model;
 	float bulletDt;
 	float bulletFrequency;

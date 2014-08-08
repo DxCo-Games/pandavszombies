@@ -73,6 +73,11 @@ std::vector<Item*>& GameModel::getItems() {
 void GameModel::update(float dt) {
 	this->playerHurt = false;
 	this->player->weapon->update(dt);
+	if (this->player->weapon->bullets <= 0 &&
+			this->player->weaponType != Player::PISTOL){
+		this->player->setWeapon(Player::PISTOL);
+	}
+
 	this->player->update(dt);
 
 	this->enemyFactory->update(this, dt);
@@ -130,6 +135,8 @@ void GameModel::restartGame() {
 	float mapCornerY = - (mapHeight - visibleSize.height) / 2;
 	this->mapa->moveToAbsolute(mapCornerX, mapCornerY);
 	this->vista->clouds->moveToAbsolute(mapCornerX, mapCornerY);
+
+	Enemy::ENEMY_SPEED = 15;
 
 	this->player->restartPosition();
 	this->player->life = PLAYER_LIFE;
