@@ -19,8 +19,6 @@ Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite,
 	this->burning = false;
 	this->state = ENEMY_STANDING;
 	this->action = NULL;
-	this->up = true;
-	this->upTime = 0;
 
 	if (rand() % 2) {
 		this->dumb = false;
@@ -69,27 +67,6 @@ void Enemy::update(float dt) {
 			//if close to the player, attacl
 			this->state = ENEMY_STANDING;
 			this->beat(this->model->player, dt);
-
-			/* cuando estoy al lado del panda, hago que los zombies peguen
-			saltitos */
-			this->upTime += dt;
-
-			if (this->up) {
-
-				if (this->upTime > 0.15) {
-					this->up = false;
-					this->upTime = 0;
-				}
-				SpriteUtil::move(this->getSprite(), 75 * cos (radian_angle) * dt, 75 * sin(radian_angle) * dt);
-			} else {
-				if (this->upTime > 0.15) {
-					this->up = true;
-					this->upTime = 0;
-				}
-
-				SpriteUtil::move(this->getSprite(), -75 * cos (radian_angle) * dt, -75 * sin(radian_angle) * dt);
-			}
-
 		} else {
 
 			if (this->canAdvance(destiny, ENEMY_SPEED * dt, this->model->getItems())) {
