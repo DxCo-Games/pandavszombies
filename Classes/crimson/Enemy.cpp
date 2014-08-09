@@ -22,7 +22,6 @@ Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite,
 	this->burning = false;
 	this->state = ENEMY_STANDING;
 	this->action = NULL;
-	this->dead = false;
 
 	if (rand() % 2) {
 		this->dumb = false;
@@ -102,21 +101,21 @@ void Enemy::update(float dt) {
 			}
 		}
 	} else {
-		if (!dead) { // First time only
-			dead = true;
+
+		this->model->bonusFactory->createBonus(this->model, this->getLocation());
+		//this removes the enemies. cpp, don't ask.
+		this->model->enemies.erase(std::remove(this->model->enemies.begin(), this->model->enemies.end(), this),
+		this->model->enemies.end());
+		this->model->items.erase(std::remove(this->model->items.begin(), this->model->items.end(), this),
+		this->model->items.end());
+
+		if (!this->action) {
 			this->getSprite()->stopAllActions(); // Stop fadeIn action
 			this->action = SpriteUtil::fadeOut(this->getSprite(), 0.25);
-			this->model->bonusFactory->createBonus(this->model, this->getLocation());
 		}
 
-		if (this->action == NULL) { // FadeOut is over. IsDone doesn't work because action is already released
+		if (this->action->isDone()) {
 			this->model->mapa->removeChild(this->getSprite());
-
-			//this removes the enemies. cpp, don't ask.
-			this->model->enemies.erase(std::remove(this->model->enemies.begin(), this->model->enemies.end(), this),
-			this->model->enemies.end());
-			this->model->items.erase(std::remove(this->model->items.begin(), this->model->items.end(), this),
-			this->model->items.end());
 		}
 	}
 }
@@ -125,7 +124,7 @@ void Enemy::beat(Player* player, float dt) {
 	//make damage
 	player->hurt(this->strength * dt);
 	cocos2d::CCAction* hurtAction = cocos2d::CCSequence::create(
-	        cocos2d::CCTintTo::create(0.01f, 255, 0, 0), cocos2d::CCTintTo::create(0.1f, 255, 255, 255), NULL);
+	        cocos2d::CCTintTo::create(0.01f, 255, 0, 0), cocos2d::CCTintTo::create(0.05f, 255, 255, 255), NULL);
 
 	player->getSprite()->runAction(hurtAction);
 }
@@ -144,7 +143,7 @@ bool Enemy::shoot(Bullet* bullet) {
 
 			this->life -= bullet->getDamage();
 			cocos2d::CCAction* hurtAction = cocos2d::CCSequence::create(
-			        cocos2d::CCTintTo::create(0.2f, 255, 0, 0), cocos2d::CCTintTo::create(0.2f, 255, 255, 255), NULL);
+			        cocos2d::CCTintTo::create(0.05f, 255, 0, 0), cocos2d::CCTintTo::create(0.05f, 255, 255, 255), NULL);
 
 			this->getSprite()->runAction(hurtAction);
 		}
