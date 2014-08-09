@@ -124,6 +124,10 @@ void Enemy::update(float dt) {
 void Enemy::beat(Player* player, float dt) {
 	//make damage
 	player->hurt(this->strength * dt);
+	cocos2d::CCAction* hurtAction = cocos2d::CCSequence::create(
+	        cocos2d::CCTintTo::create(0.01f, 255, 0, 0), cocos2d::CCTintTo::create(0.1f, 255, 255, 255), NULL);
+
+	player->getSprite()->runAction(hurtAction);
 }
 
 bool Enemy::shoot(Bullet* bullet) {
@@ -139,6 +143,10 @@ bool Enemy::shoot(Bullet* bullet) {
 			result = true;
 
 			this->life -= bullet->getDamage();
+			cocos2d::CCAction* hurtAction = cocos2d::CCSequence::create(
+			        cocos2d::CCTintTo::create(0.2f, 255, 0, 0), cocos2d::CCTintTo::create(0.2f, 255, 255, 255), NULL);
+
+			this->getSprite()->runAction(hurtAction);
 		}
 	}
 

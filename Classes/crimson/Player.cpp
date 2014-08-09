@@ -92,7 +92,7 @@ void Player::setWeapon(weapons type) {
 	model->vista->fire->setVisible(false);
 
 	if (this->weapon != NULL) {
-		this->sprite->removeChild(this->weapon->flashSprite, true);
+		this->model->vista->mapa->removeChild(this->weapon->flashSprite, true);
 	}
 
 	switch(type) {
