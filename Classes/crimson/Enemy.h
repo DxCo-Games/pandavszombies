@@ -42,8 +42,6 @@ public:
 
 	virtual float getColitionRatio();
 	cocos2d::CCAction* action;
-	bool up;
-	float upTime;
 };
 
 } /* namespace dxco */
