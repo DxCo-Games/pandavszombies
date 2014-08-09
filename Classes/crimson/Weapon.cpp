@@ -1,6 +1,7 @@
 #include "Weapon.h"
 #include "GameModel.h"
 #include "../dxco/SpriteUtil.h"
+#include "HelloWorldScene.h"
 
 namespace dxco {
 
@@ -10,15 +11,17 @@ Weapon::Weapon(GameModel* model) {
 	this->bulletFrequency = 0.25;
 	this->bullets = -1; //infinite bullets by default
 
-	this->flashSprite = SpriteUtil::create("disparo/disparo01.png", 0, 0, 50, 50);
+	cocos2d::CCPoint location = model->player->getLocation();
+	this->flashSprite = SpriteUtil::create("disparo/disparo01.png", 10, 10, 40, 40);
 
 	std::vector<cocos2d::CCTexture2D*> flashTextures;
 	flashTextures.push_back(dxco::SpriteUtil::createTexture("disparo/disparo01.png"));
 	flashTextures.push_back(dxco::SpriteUtil::createTexture("disparo/disparo02.png"));
 	flashTextures.push_back(dxco::SpriteUtil::createTexture("disparo/disparo03.png"));
-	this-> flashAnimation = new dxco::Animation(flashTextures, 0.03, false);
 
-	model->player->getSprite()->addChild(this->flashSprite);
+	this->flashAnimation = new dxco::Animation(flashTextures, 0.03, false);
+
+	this->model->vista->mapa->addChild(this->flashSprite, 2);
 	this->flashSprite->setVisible(false);
 }
 
@@ -50,146 +53,294 @@ void Weapon::runFlash(float x, float y, float rotation) {
 
 	//update position depending on player's angle state
 	int angleState = this->model->player->getAngleState();
-	int width = this->model->player->getWidth();
-	int height = this->model->player->getHeight();
 
+	int screenCenterX = x - 40;
+	int screenCenterY = y - 40;
+
+	int playerWidth = 40;
+	int playerHeight = 40;
 	//FIXME calculate this only once.
 	//TODO fix rotation to match the direction of the weapon
+	//TODOmorrow
 
 	if (angleState < 8) {
 		//put the flash below the panda
-		this->flashSprite->setZOrder(-10);
+		this->flashSprite->setZOrder(model->player->getSprite()->getZOrder() - 2);
+		//this->flashSprite->setZOrder(-10);
 	} else {
-		this->flashSprite->setZOrder(10);
+		this->flashSprite->setZOrder(model->player->getSprite()->getZOrder() + 2);
+		//this->flashSprite->setZOrder(10);
 	}
 
-	switch(angleState) {
+	float rotationAngle = angleState * -22.5;
+	float radianAngle = rotationAngle / -57.2957795;
+	this->flashSprite->setVisible(true);
+	switch (angleState) {
+
 	case 0: {
-		this->flashSprite->setPositionX(1.2 * width);
-		this->flashSprite->setPositionY(0.4 * height);
+		this->flashSprite->setPositionX(
+				screenCenterX + 47 + cos(radianAngle) * playerWidth);
+		this->flashSprite->setPositionY(
+				screenCenterY + 31 + sin(radianAngle) * playerHeight);
 		this->flashSprite->setRotation(0);
 		break;
 	}
 	case 1: {
-		this->flashSprite->setPositionX(1.25 * width);
-		this->flashSprite->setPositionY(0.55 * height);
-		this->flashSprite->setRotation(-22.5);
+		this->flashSprite->setPositionX(
+				screenCenterX + 54 + cos(radianAngle) * playerWidth);
+		this->flashSprite->setPositionY(
+				screenCenterY + 22 + sin(radianAngle) * playerHeight);
+		this->flashSprite->setRotation(-13);
 		break;
 	}
 	case 2: {
-		this->flashSprite->setPositionX(1.2 * width);
-		this->flashSprite->setPositionY(0.7 * height);
-		this->flashSprite->setRotation(-45);
+		this->flashSprite->setPositionX(
+				screenCenterX + 62 + cos(radianAngle) * playerWidth);
+		this->flashSprite->setPositionY(
+				screenCenterY + 16 + sin(radianAngle) * playerHeight);
+		this->flashSprite->setRotation(-22);
 		break;
 	}
 	case 3: {
-		this->flashSprite->setPositionX(1 * width);
-		this->flashSprite->setPositionY(0.8 * height);
-		this->flashSprite->setRotation(-67.5);
+		this->flashSprite->setPositionX(
+				screenCenterX + 66 + cos(radianAngle) * playerWidth);
+		this->flashSprite->setPositionY(
+				screenCenterY + 15 + sin(radianAngle) * playerHeight);
+		this->flashSprite->setRotation(-35);
 		break;
 	}
 	case 4: {
-		//should be under panda
-		this->flashSprite->setPositionX(0.75 * width);
-		this->flashSprite->setPositionY(0.85 * height);
+		this->flashSprite->setPositionX(
+				screenCenterX + 57 + cos(radianAngle) * playerWidth);
+		this->flashSprite->setPositionY(
+				screenCenterY + 22 + sin(radianAngle) * playerHeight);
 		this->flashSprite->setRotation(-90);
 		break;
 	}
 	case 5: {
-		//don't show it?
-		this->flashSprite->setPositionX(0.4 * width);
-		this->flashSprite->setPositionY(0.9 * height);
-		this->flashSprite->setRotation(-112.5);
+		this->flashSprite->setPositionX(
+				screenCenterX + 50 + cos(radianAngle) * playerWidth);
+		this->flashSprite->setPositionY(
+				screenCenterY + 25 + sin(radianAngle) * playerHeight);
+		this->flashSprite->setRotation(-125);
 		break;
 	}
 	case 6: {
-		this->flashSprite->setPositionX(0.2 * width);
-		this->flashSprite->setPositionY(0.8 * height);
-		this->flashSprite->setRotation(-135);
+		this->flashSprite->setPositionX(
+				screenCenterX + 40 + cos(radianAngle) * playerWidth);
+		this->flashSprite->setPositionY(
+				screenCenterY + 25 + sin(radianAngle) * playerHeight);
+		this->flashSprite->setRotation(-150);
 		break;
 	}
 	case 7: {
-		//appears again
-		this->flashSprite->setPositionX(-0.1);
-		this->flashSprite->setPositionY(0.65 * height);
-		this->flashSprite->setRotation(-157.5);
+		this->flashSprite->setPositionX(
+				screenCenterX + 38 + cos(radianAngle) * playerWidth);
+		this->flashSprite->setPositionY(
+				screenCenterY + 30 + sin(radianAngle) * playerHeight);
+		this->flashSprite->setRotation(-170);
 		break;
 	}
 	case 8: {
-		this->flashSprite->setPositionX(-0.15 * width);
-		this->flashSprite->setPositionY(0.53 * height);
+		this->flashSprite->setPositionX(
+				screenCenterX + 33 + cos(radianAngle) * playerWidth);
+		this->flashSprite->setPositionY(
+				screenCenterY + 39 + sin(radianAngle) * playerHeight);
 		this->flashSprite->setRotation(-180);
 		break;
 	}
 	case 9: {
-		this->flashSprite->setPositionX(-0.17 * width);
-		this->flashSprite->setPositionY(0.37 * height);
-		this->flashSprite->setRotation(-202.5);
+		this->flashSprite->setPositionX(
+				screenCenterX + 26 + cos(radianAngle) * playerWidth);
+		this->flashSprite->setPositionY(
+				screenCenterY + 50 + sin(radianAngle) * playerHeight);
+		this->flashSprite->setRotation(-185);
 		break;
 	}
 	case 10: {
-		//FIXME
-		this->flashSprite->setPositionX(-0.1 * width);
-		this->flashSprite->setPositionY(0.25 * height);
-		this->flashSprite->setRotation(-225);
+		this->flashSprite->setPositionX(
+				screenCenterX + 18 + cos(radianAngle) * playerWidth);
+		this->flashSprite->setPositionY(
+				screenCenterY + 56 + sin(radianAngle) * playerHeight);
+		this->flashSprite->setRotation(-193);
 		break;
 	}
 	case 11: {
-		this->flashSprite->setPositionX(0.1 * width);
-		this->flashSprite->setPositionY(0.15 * height);
-		this->flashSprite->setRotation(-247.5);
+		this->flashSprite->setPositionX(
+				screenCenterX + 14 + cos(radianAngle) * playerWidth);
+		this->flashSprite->setPositionY(
+				screenCenterY + 55 + sin(radianAngle) * playerHeight);
+		this->flashSprite->setRotation(-220);
 		break;
 	}
 	case 12: {
-		this->flashSprite->setPositionX(0.30 * width);
-		this->flashSprite->setPositionY(0.1 * height);
+		this->flashSprite->setPositionX(
+				screenCenterX + 23 + cos(radianAngle) * playerWidth);
+		this->flashSprite->setPositionY(
+				screenCenterY + 50 + sin(radianAngle) * playerHeight);
 		this->flashSprite->setRotation(-270);
 		break;
 	}
 	case 13: {
-		this->flashSprite->setPositionX(0.58 * width);
-		this->flashSprite->setPositionY(0.1 * height);
-		this->flashSprite->setRotation(-292.5);
+		this->flashSprite->setPositionX(
+				screenCenterX + 31 + cos(radianAngle) * playerWidth);
+		this->flashSprite->setPositionY(
+				screenCenterY + 51 + sin(radianAngle) * playerHeight);
+		this->flashSprite->setRotation(-314);
 		break;
 	}
 	case 14: {
-		//FIXME
-		this->flashSprite->setPositionX(0.83 * width);
-		this->flashSprite->setPositionY(0.18 * height);
-		this->flashSprite->setRotation(-315);
+		this->flashSprite->setPositionX(
+				screenCenterX + 37 + cos(radianAngle) * playerWidth);
+		this->flashSprite->setPositionY(
+				screenCenterY + 49 + sin(radianAngle) * playerHeight);
+		this->flashSprite->setRotation(-340);
 		break;
-	}
-	case 15: {
-		this->flashSprite->setPositionX(1.05 * width);
-		this->flashSprite->setPositionY(0.27 * height);
-		this->flashSprite->setRotation(-337.5);
-		break;
-	}
 	}
 
-	this->flashSprite->setVisible(true);
+	case 15: {
+		this->flashSprite->setPositionX(
+				screenCenterX + 40 + cos(radianAngle) * playerWidth);
+		this->flashSprite->setPositionY(
+				screenCenterY + 42 + sin(radianAngle) * playerHeight);
+		this->flashSprite->setRotation(-355);
+		break;
+	}
+	default: {
+		this->flashSprite->setVisible(false);
+	}
+	}
 	this->flashAnimation->restart();
 }
 
 void Weapon::createBullet(float x, float y, float rotation) {
 	this->bullets -= 1;
+
+	int angleState = this->model->player->getAngleState();
+
+	int screenCenterX = x - 40;
+	int screenCenterY = y - 40;
+
+	int playerWidth = 40;
+	int playerHeight = 40;
+
+	float xBulletPosition, yBulletPosition, angleBullet;
+	//FIXME calculate this only once.
+
+	float rotationAngle = angleState * -22.5;
+	float radianAngle = rotationAngle / -57.2957795;
+
+	switch (angleState) {
+
+	case 0: {
+		xBulletPosition = screenCenterX + 47 + cos(radianAngle) * playerWidth;
+		yBulletPosition = screenCenterY + 30 + sin(radianAngle) * playerHeight;
+		angleBullet = 0;
+		break;
+	}
+	case 1: {
+		xBulletPosition = screenCenterX + 57 + cos(radianAngle) * playerWidth;
+		yBulletPosition = screenCenterY + 17 + sin(radianAngle) * playerHeight;
+		angleBullet = -8;
+		break;
+	}
+	case 2: {
+		xBulletPosition = screenCenterX + 70 + cos(radianAngle) * playerWidth;
+		yBulletPosition = screenCenterY + 10 + sin(radianAngle) * playerHeight;
+		angleBullet = -17;
+		break;
+	}
+	case 3: {
+		xBulletPosition = screenCenterX + 90 + cos(radianAngle) * playerWidth;
+		yBulletPosition = screenCenterY + 15 + sin(radianAngle) * playerHeight;
+		angleBullet = -35;
+		break;
+	}
+	case 4: {
+		xBulletPosition = screenCenterX + 78 + cos(radianAngle) * playerWidth;
+		yBulletPosition = screenCenterY + 17 + sin(radianAngle) * playerHeight;
+		angleBullet = -90;
+		break;
+	}
+	case 5: {
+		xBulletPosition = screenCenterX + 65 + cos(radianAngle) * playerWidth;
+		yBulletPosition = screenCenterY + 25 + sin(radianAngle) * playerHeight;
+		angleBullet = -135;
+		break;
+	}
+	case 6: {
+		xBulletPosition = screenCenterX + 40 + cos(radianAngle) * playerWidth;
+		yBulletPosition = screenCenterY + 25 + sin(radianAngle) * playerHeight;
+		angleBullet = -150;
+		break;
+	}
+	case 7: {
+		xBulletPosition = screenCenterX + 50 + cos(radianAngle) * playerWidth;
+		yBulletPosition = screenCenterY + 26 + sin(radianAngle) * playerHeight;
+		angleBullet = -173;
+		break;
+	}
+	case 8: {
+		xBulletPosition = screenCenterX + 37 + cos(radianAngle) * playerWidth;
+		yBulletPosition = screenCenterY + 37 + sin(radianAngle) * playerHeight;
+		angleBullet = -180;
+		break;
+	}
+	case 9: {
+		xBulletPosition = screenCenterX + 35 + cos(radianAngle) * playerWidth;
+		yBulletPosition = screenCenterY + 45 + sin(radianAngle) * playerHeight;
+		angleBullet = -188;
+		break;
+	}
+	case 10: {
+		xBulletPosition = screenCenterX + 30 + cos(radianAngle) * playerWidth;
+		yBulletPosition = screenCenterY + 50 + sin(radianAngle) * playerHeight;
+		angleBullet = -193;
+		break;
+	}
+	case 11: {
+		xBulletPosition = screenCenterX + 30 + cos(radianAngle) * playerWidth;
+		yBulletPosition = screenCenterY + 55 + sin(radianAngle) * playerHeight;
+		angleBullet = -216;
+		break;
+	}
+	case 12: {
+		xBulletPosition = screenCenterX + 40 + cos(radianAngle) * playerWidth;
+		yBulletPosition = screenCenterY + 50 + sin(radianAngle) * playerHeight;
+		angleBullet = -270;
+		break;
+	}
+	case 13: {
+		xBulletPosition = screenCenterX + 40 + cos(radianAngle) * playerWidth;
+		yBulletPosition = screenCenterY + 59 + sin(radianAngle) * playerHeight;
+		angleBullet = -316;
+		break;
+	}
+	case 14: {
+		xBulletPosition = screenCenterX + 37 + cos(radianAngle) * playerWidth;
+		yBulletPosition = screenCenterY + 51 + sin(radianAngle) * playerHeight;
+		angleBullet = -340;
+		break;
+	}
+
+	case 15: {
+		xBulletPosition = screenCenterX + 40 + cos(radianAngle) * playerWidth;
+		yBulletPosition = screenCenterY + 40 + sin(radianAngle) * playerHeight;
+		angleBullet = -355;
+		break;
+	}
+	}
+
 	//need to tweak the coordinates as the location of the panda is not exactly its center.
-	int width = this->model->player->getWidth();
-	y = y - 0.3 * width;
+	cocos2d::CCSprite* spriteBullet = SpriteUtil::create("bullet.png", xBulletPosition - 2.5 - 20, yBulletPosition - 2.5 - 20, 5, 5);
 
-	cocos2d::CCSprite* spriteBullet = SpriteUtil::create("bullet.png", x, y, 5, 5);
-
-	spriteBullet->setRotation(rotation);
+	spriteBullet->setRotation(angleBullet);
 
 	/** degrees to radians */
-	float angle = -rotation / 57.2957795;
-
-	//put the bullet in front of the panda instead of the center
-	float R = 0.5 * width;
-	SpriteUtil::moveTo(spriteBullet, x + R * cos(angle), y + R * sin(angle));
+	radianAngle = angleBullet / -57.2957795;
 
 	std::map<int, Animation*> animations;
-	Bullet* bullet = new Bullet(spriteBullet, angle, animations);
+	Bullet* bullet = new Bullet(spriteBullet, radianAngle, animations);
 	this->model->addBullet(bullet);
 }
 

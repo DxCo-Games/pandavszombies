@@ -5,6 +5,7 @@
 #include "dxco/JoystickController.h"
 #include "crimson/GameModel.h"
 #include "crimson/Mapa.h"
+#include "dxco/Container.h"
 
 class HelloWorld : public cocos2d::CCLayer
 {
@@ -39,6 +40,7 @@ public:
 private:
     void preloadTextures();
     dxco::Player* createPlayer();
+    dxco::Container* playerContainer;
     dxco::GameModel* model;
     dxco::JoystickController joystickController;
 

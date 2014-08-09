@@ -138,7 +138,10 @@ void HelloWorld::preloadTextures() {
 dxco::Player* HelloWorld::createPlayer() {
 
 	CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
+	this->playerContainer = new dxco::Container(this->mapa->getWidth() / 2,  this->mapa->getHeight() / 2, 80, 80);
     CCSprite* spriteGuy = dxco::SpriteUtil::create("panda/herida1_1_0000.png", this->mapa->getWidth() / 2,  this->mapa->getHeight() / 2, 80, 80);
+
+    //this->playerContainer->addChild(spriteGuy);
     this->mapa->addChild(spriteGuy, 2);
 
     std::map<int, dxco::Animation*> animations;
@@ -153,7 +156,7 @@ dxco::Player* HelloWorld::createPlayer() {
     	animations[dxco::Player::QUIETO * angles + i] = standingAnimation;
 
     	std::vector<cocos2d::CCTexture2D*> texturesWalking;
-    	for (int j = 0; j <= 13; j++){
+    	for (int j = 0; j <= 13; j++) {
     		std::string index = "00" + dxco::StringUtil::toString(j);
     		if (j < 10){
     			index = "0" + index;
