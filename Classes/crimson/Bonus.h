@@ -14,9 +14,9 @@ public:
 	Bonus(GameModel* model, cocos2d::CCSprite* sprite,
 			std::map<int, Animation*>& animations);
 
-	void update(float dt);
+	virtual void update(float dt);
 	virtual void applyBonus() = 0;
-	void removeBonus();
+	virtual void removeBonus();
 
 	GameModel* model;
 	float dt;
