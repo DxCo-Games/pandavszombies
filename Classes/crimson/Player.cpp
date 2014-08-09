@@ -13,6 +13,7 @@ namespace dxco {
 Player::Player(cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations) : TopDownItem(sprite, animations, PLAYER_ANGLE_POSITIONS) {
 	this->state = QUIETO;
 	this->life = PLAYER_LIFE;
+	this->movementSpeedBonus = 1;
 	this->score = 0;
 	this->moving = false;
 	this->moveRotation;
@@ -42,8 +43,8 @@ void Player::update(float dt) {
 		float x = position.x;
 		float y = position.y;
 
-		float deltaX = cos(this->moveRotation) * PLAYER_SPEED * dt;
-		float deltaY = sin(this->moveRotation) * PLAYER_SPEED * dt;
+		float deltaX = cos(this->moveRotation) * PLAYER_SPEED * this->movementSpeedBonus * dt;
+		float deltaY = sin(this->moveRotation) * PLAYER_SPEED * this->movementSpeedBonus * dt;
 
 		float finalX = x + deltaX;
 		float finalY = y + deltaY;

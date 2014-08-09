@@ -31,6 +31,7 @@ public:
 	void update(float dt);
 	float life;
 	int score;
+	float movementSpeedBonus;
 
 	bool moving;
 

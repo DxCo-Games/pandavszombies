@@ -25,6 +25,7 @@ public:
 	float life;
 	float strength;
 	bool burning;
+	bool dead;
 	bool dumb; //me cago en los patrones ;)
 
 	int score;
