@@ -92,6 +92,10 @@ void GameModel::update(float dt) {
 			if (enemy->isActive()) {
 				bool shooted = enemy->shoot(bullet);
 
+				if (!enemy->isActive()) {
+					player->score += enemy->score;
+				}
+
 				if (shooted) {
 					break;
 				}
@@ -101,16 +105,7 @@ void GameModel::update(float dt) {
 
 	for (int i = 0; i < this->enemies.size(); i++) {
 		Enemy* enemy = this->enemies[i];
-
-		if (enemy->isActive()) {
-			enemy->update(dt);
-
-			if (!enemy->isActive()) {
-				player->score += enemy->score;
-			}
-		} else {
-			enemy->update(dt);
-		}
+		enemy->update(dt);
 	}
 
 	for (int i = 0; i < this->bonuses.size(); i++) {
