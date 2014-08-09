@@ -101,10 +101,15 @@ void GameModel::update(float dt) {
 
 	for (int i = 0; i < this->enemies.size(); i++) {
 		Enemy* enemy = this->enemies[i];
-		enemy->update(dt);
 
-		if (!enemy->isActive()) {
-			player->score += enemy->score;
+		if (enemy->isActive()) {
+			enemy->update(dt);
+
+			if (!enemy->isActive()) {
+				player->score += enemy->score;
+			}
+		} else {
+			enemy->update(dt);
 		}
 	}
 

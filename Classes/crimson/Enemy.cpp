@@ -22,6 +22,7 @@ Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite,
 	this->burning = false;
 	this->state = ENEMY_STANDING;
 	this->action = NULL;
+	this->dead = false;
 	this->up = true;
 	this->upTime = 0;
 
@@ -124,21 +125,21 @@ void Enemy::update(float dt) {
 			}
 		}
 	} else {
-
-		this->model->bonusFactory->createBonus(this->model, this->getLocation());
-		//this removes the enemies. cpp, don't ask.
-		this->model->enemies.erase(std::remove(this->model->enemies.begin(), this->model->enemies.end(), this),
-		this->model->enemies.end());
-		this->model->items.erase(std::remove(this->model->items.begin(), this->model->items.end(), this),
-		this->model->items.end());
-
-		if (!this->action) {
+		if (!dead) { // First time only
+			dead = true;
 			this->getSprite()->stopAllActions(); // Stop fadeIn action
 			this->action = SpriteUtil::fadeOut(this->getSprite(), 0.25);
+			this->model->bonusFactory->createBonus(this->model, this->getLocation());
 		}
 
-		if (this->action->isDone()) {
+		if (this->action == NULL) { // FadeOut is over. IsDone doesn't work because action is already released
 			this->model->mapa->removeChild(this->getSprite());
+
+			//this removes the enemies. cpp, don't ask.
+			this->model->enemies.erase(std::remove(this->model->enemies.begin(), this->model->enemies.end(), this),
+			this->model->enemies.end());
+			this->model->items.erase(std::remove(this->model->items.begin(), this->model->items.end(), this),
+			this->model->items.end());
 		}
 	}
 }
