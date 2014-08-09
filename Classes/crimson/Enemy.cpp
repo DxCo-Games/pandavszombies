@@ -133,7 +133,8 @@ void Enemy::update(float dt) {
 		this->model->items.end());
 
 		if (!this->action) {
-			this->action = SpriteUtil::fadeOut(this->getSprite());
+			this->getSprite()->stopAllActions(); // Stop fadeIn action
+			this->action = SpriteUtil::fadeOut(this->getSprite(), 0.25);
 		}
 
 		if (this->action->isDone()) {
