@@ -111,28 +111,12 @@ void HelloWorld::realInit() {
 }
 
 void HelloWorld::preloadTextures() {
-
-
 	if (!this->preloaded) {
-
-		dxco::SpriteUtil::preloadTexture("zombies/campesino_" + dxco::StringUtil::toString(angulosCargados + 1) + "_0000.png");
-		dxco::SpriteUtil::preloadTexture("zombies/oficinista_" + dxco::StringUtil::toString(angulosCargados + 1) + "_0000.png");
-		dxco::SpriteUtil::preloadTexture("zombies/elvis_" + dxco::StringUtil::toString(angulosCargados + 1) + "_0000.png");
-
-		for (int j = 0; j < 20; j++){
-			std::string index = dxco::StringUtil::padLeft(j, 4);
-			dxco::SpriteUtil::preloadTexture("zombies/campesino_" + dxco::StringUtil::toString(angulosCargados + 1) + "_" + index + ".png");
-			dxco::SpriteUtil::preloadTexture("zombies/oficinista_" + dxco::StringUtil::toString(angulosCargados + 1) + "_" + index + ".png");
-			dxco::SpriteUtil::preloadTexture("zombies/elvis_" + dxco::StringUtil::toString(angulosCargados + 1) + "_" + index + ".png");
-		}
-
-		angulosCargados++;
-		this->preloaded = angulosCargados >= ENEMY_ANGLE_POSITIONS;
-
-		if (this->preloaded) {
-			this->realInit();
-		}
+		dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/zombies.plist");
+		this->preloaded = true;
+		this->realInit();
 	}
+
 }
 
 dxco::Player* HelloWorld::createPlayer() {
