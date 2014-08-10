@@ -14,6 +14,9 @@ EnemyFactory::EnemyFactory(){
 	this->enemyDt = 0;
 	this->bossDt = 0;
 	this->speedDt = 0;
+
+	//sprite sheet is created here but should be added as a map child outside
+	this->enemySpriteSheet = cocos2d::CCSpriteBatchNode::create("sprite_sheets/zombies.png");
 }
 
 void EnemyFactory::update(GameModel* model, float dt) {
@@ -69,7 +72,7 @@ void EnemyFactory::addEnemy(GameModel* model, Enemy* enemy) {
 
 	model->enemies.push_back(enemy);
 	model->items.push_back(enemy);
-	model->mapa->addChild(enemy->getSprite());
+	this->enemySpriteSheet->addChild(enemy->getSprite());
 }
 
 std::map<int, dxco::Animation*> EnemyFactory::loadAnimations(GameModel* model, std::string type, float frameTime) {

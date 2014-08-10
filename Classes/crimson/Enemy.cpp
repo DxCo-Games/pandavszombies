@@ -110,7 +110,7 @@ void Enemy::update(float dt) {
 		}
 
 		if (this->action == NULL) { // FadeOut is over. IsDone doesn't work because action is already released
-			this->model->mapa->removeChild(this->getSprite());
+			this->model->enemyFactory->enemySpriteSheet->removeChild(this->getSprite(), true);
 
 			//this removes the enemies. cpp, don't ask.
 			this->model->enemies.erase(std::remove(this->model->enemies.begin(), this->model->enemies.end(), this),
