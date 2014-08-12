@@ -128,7 +128,7 @@ dxco::Player* HelloWorld::createPlayer() {
     CCSprite* spriteGuy = dxco::SpriteUtil::create("herida1_1_0000.png", this->mapa->getWidth() / 2,  this->mapa->getHeight() / 2, 80, 80, true);
 
     //this->playerContainer->addChild(spriteGuy);
-    this->mapa->addChild(spriteGuy, 2);
+    this->mapa->addChild(spriteGuy);
 
     std::map<int, dxco::Animation*> animations;
 

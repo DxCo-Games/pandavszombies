@@ -24,12 +24,7 @@ Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite,
 	this->action = NULL;
 	this->dead = false;
 
-	if (rand() % 2) {
-		this->dumb = false;
-	} else {
-		this->dumb = true;
-		this->setDumbDestiny();
-	}
+	this->setDumbDestiny();
 }
 
 void Enemy::setDumbDestiny() {
@@ -43,13 +38,11 @@ void Enemy::update(float dt) {
 		cocos2d::CCPoint playerLocation = this->model->player->getLocation();
 		float distance = MathUtil::distance(this->getLocation(), playerLocation);
 
-		if (distance < this->model->player->getWidth() * 2){
-			//if close to player, start following him
-			this->dumb = false;
-		}
+		//FIXME make dumb zombies not that dumb :P
+		bool isDumb = false; //distance > this->model->player->getWidth() * 2;
 
 		cocos2d::CCPoint destiny;
-		if (this->dumb) {
+		if (isDumb) {
 			float destinyDistance = MathUtil::distance(this->getLocation(), *this->destiny);
 			if (destinyDistance < this->getWidth()) {
 				//if close to destiny, renew it
@@ -91,13 +84,9 @@ void Enemy::update(float dt) {
 
 			} else {
 				this->state = ENEMY_STANDING;
-				if (this->dumb) {
+				if (isDumb) {
 					//if it's dumb and got blocked, try a new direction
 					this->setDumbDestiny();
-					if (!this->canAdvance(*this->destiny, ENEMY_SPEED * dt, this->model->getItems())) {
-						//if still blocked just follow the player
-						this->dumb = false;
-					}
 				}
 			}
 		}

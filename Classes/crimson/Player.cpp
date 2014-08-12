@@ -79,8 +79,9 @@ void Player::update(float dt) {
 			SpriteUtil::move(this->sprite, deltaX, deltaY);
 
 			//update z order for isometric ordering of characters
-			int zorder = 100 - finalY * 100 / mapHeight;
-			this->model->mapa->reorderChild(this->sprite, zorder);
+//			int zorder = 100 - finalY * 100 / mapHeight;
+//			this->model->mapa->reorderChild(this->sprite, zorder);
+			this->sprite->setZOrder(0);
 
 			//put the emmiter where the player is
 			this->model->vista->fire->setPosition(finalX, finalY);
