@@ -36,6 +36,13 @@ void Player::hurt(float damage) {
 void Player::update(float dt) {
 	Item::update(dt);
 
+	//this->hurt is resetted on every update, check state to tell if its hurt
+	bool wasHurt = this->state == HERIDO;
+	float speed = PLAYER_SPEED;
+	if (wasHurt) {
+		speed = PLAYER_SPEED * 0.6;
+	}
+
 	if (this->moving) {
 		this->state = CAMINANDO;
 		cocos2d::CCPoint position = this->getLocation();
@@ -43,8 +50,8 @@ void Player::update(float dt) {
 		float x = position.x;
 		float y = position.y;
 
-		float deltaX = cos(this->moveRotation) * PLAYER_SPEED * this->movementSpeedBonus * dt;
-		float deltaY = sin(this->moveRotation) * PLAYER_SPEED * this->movementSpeedBonus * dt;
+		float deltaX = cos(this->moveRotation) * speed * this->movementSpeedBonus * dt;
+		float deltaY = sin(this->moveRotation) * speed * this->movementSpeedBonus * dt;
 
 		float finalX = x + deltaX;
 		float finalY = y + deltaY;
