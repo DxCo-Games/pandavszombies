@@ -60,7 +60,7 @@ GameModel::GameModel(HelloWorld* vista, Player* player) {
 
 	//batch node added to map
 	this->enemyFactory = new EnemyFactory();
-	this->mapa->addChild(this->enemyFactory->enemySpriteSheet);
+//	this->mapa->addChild(this->enemyFactory->enemySpriteSheet);
 }
 
 void GameModel::addBullet(Bullet* bullet) {
@@ -150,7 +150,7 @@ void GameModel::restartGame() {
 
 	for (int i = 0; i < this->items.size(); i++) {
 		//this covers both enemies and other items
-		this->enemyFactory->enemySpriteSheet->removeChild(this->items[i]->getSprite(), true);
+//		this->enemyFactory->enemySpriteSheet->removeChild(this->items[i]->getSprite(), true);
 		this->mapa->removeChild(this->items[i]->getSprite());
 	}
 	this->items.clear();
