@@ -139,7 +139,7 @@ void GameModel::restartGame() {
 	this->mapa->moveToAbsolute(mapCornerX, mapCornerY);
 	this->vista->clouds->moveToAbsolute(mapCornerX, mapCornerY);
 
-	Enemy::ENEMY_SPEED = 15;
+	Enemy::ENEMY_SPEED = 30;
 
 	this->player->restartPosition();
 	this->player->life = PLAYER_LIFE;

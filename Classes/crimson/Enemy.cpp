@@ -10,7 +10,7 @@
 namespace dxco {
 
 //initialize the default speed. can't do it in Enemy.h gotta love cpp
-int Enemy::ENEMY_SPEED = 15;
+int Enemy::ENEMY_SPEED = 30;
 
 Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite,
 		std::map<int, Animation*>& animations) :
@@ -170,7 +170,7 @@ void Enemy::burn(float dt, cocos2d::CCPoint playerLocation, float distance, floa
 }
 
 float Enemy::getColitionRatio() {
-	return this->getWidth() / 4;
+	return 0.1 * this->getWidth();
 }
 bool Enemy::isActive() {
 	return this->life > 0;
