@@ -11,6 +11,7 @@ class Player;
 class Boss: public dxco::Enemy {
 public:
 	Boss(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations);
+	virtual float getColitionRatio();
 };
 
 } /* namespace dxco */

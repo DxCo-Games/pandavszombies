@@ -79,7 +79,7 @@ void Player::update(float dt) {
 			SpriteUtil::move(this->sprite, deltaX, deltaY);
 
 			//update z order for isometric ordering of characters
-			int zorder = 100 - y * 100 / mapHeight;
+			int zorder = 100 - finalY * 100 / mapHeight;
 			this->model->mapa->reorderChild(this->sprite, zorder);
 
 			//put the emmiter where the player is

@@ -10,5 +10,9 @@ Boss::Boss(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*
 	this->dumb = false;
 }
 
+float Boss::getColitionRatio() {
+	return 0.5 * this->getWidth();
+}
+
 
 } /* namespace dxco */
