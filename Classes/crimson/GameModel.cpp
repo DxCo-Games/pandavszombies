@@ -55,9 +55,12 @@ GameModel::GameModel(HelloWorld* vista, Player* player) {
 	this->mapa = vista->mapa;
 
 	this->player->setWeapon(Player::PISTOL);
-	this->enemyFactory = new EnemyFactory();
 	this->bonusFactory = new BonusFactory();
 	this->playerHurt = false;
+
+	//batch node added to map
+	this->enemyFactory = new EnemyFactory();
+//	this->mapa->addChild(this->enemyFactory->enemySpriteSheet);
 }
 
 void GameModel::addBullet(Bullet* bullet) {
@@ -137,7 +140,7 @@ void GameModel::restartGame() {
 	this->mapa->moveToAbsolute(mapCornerX, mapCornerY);
 	this->vista->clouds->moveToAbsolute(mapCornerX, mapCornerY);
 
-	Enemy::ENEMY_SPEED = 15;
+	Enemy::ENEMY_SPEED = 30;
 
 	this->player->restartPosition();
 	this->player->life = PLAYER_LIFE;
@@ -147,6 +150,8 @@ void GameModel::restartGame() {
 	this->vista->timer = 0;
 
 	for (int i = 0; i < this->items.size(); i++) {
+		//this covers both enemies and other items
+//		this->enemyFactory->enemySpriteSheet->removeChild(this->items[i]->getSprite(), true);
 		this->mapa->removeChild(this->items[i]->getSprite());
 	}
 	this->items.clear();

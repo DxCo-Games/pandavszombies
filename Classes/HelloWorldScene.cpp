@@ -130,38 +130,24 @@ void HelloWorld::realInit() {
 }
 
 void HelloWorld::preloadTextures() {
-
-
 	if (!this->preloaded) {
-
-		dxco::SpriteUtil::preloadTexture("zombies/campesino_" + dxco::StringUtil::toString(angulosCargados + 1) + "_0000.png");
-		dxco::SpriteUtil::preloadTexture("zombies/oficinista_" + dxco::StringUtil::toString(angulosCargados + 1) + "_0000.png");
-		dxco::SpriteUtil::preloadTexture("zombies/elvis_" + dxco::StringUtil::toString(angulosCargados + 1) + "_0000.png");
-
-		for (int j = 0; j < 20; j++){
-			std::string index = dxco::StringUtil::padLeft(j, 4);
-			dxco::SpriteUtil::preloadTexture("zombies/campesino_" + dxco::StringUtil::toString(angulosCargados + 1) + "_" + index + ".png");
-			dxco::SpriteUtil::preloadTexture("zombies/oficinista_" + dxco::StringUtil::toString(angulosCargados + 1) + "_" + index + ".png");
-			dxco::SpriteUtil::preloadTexture("zombies/elvis_" + dxco::StringUtil::toString(angulosCargados + 1) + "_" + index + ".png");
-		}
-
-		angulosCargados++;
-		this->preloaded = angulosCargados >= ENEMY_ANGLE_POSITIONS;
-
-		if (this->preloaded) {
-			this->realInit();
-		}
+		dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/zombies.plist");
+		this->preloaded = true;
+		this->realInit();
 	}
+
 }
 
 dxco::Player* HelloWorld::createPlayer() {
 
+	dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/panda.plist");
+
 	CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
 	this->playerContainer = new dxco::Container(this->mapa->getWidth() / 2,  this->mapa->getHeight() / 2, 80, 80);
-    CCSprite* spriteGuy = dxco::SpriteUtil::create("panda/herida1_1_0000.png", this->mapa->getWidth() / 2,  this->mapa->getHeight() / 2, 80, 80);
+    CCSprite* spriteGuy = dxco::SpriteUtil::create("herida1_1_0000.png", this->mapa->getWidth() / 2,  this->mapa->getHeight() / 2, 80, 80, true);
 
     //this->playerContainer->addChild(spriteGuy);
-    this->mapa->addChild(spriteGuy, 2);
+    this->mapa->addChild(spriteGuy);
 
     std::map<int, dxco::Animation*> animations;
 
@@ -169,31 +155,31 @@ dxco::Player* HelloWorld::createPlayer() {
     int angles = 16;
 
     for (int i = 0; i < angles; i++) {
-    	std::vector<cocos2d::CCTexture2D*> texturesStanding;
-    	texturesStanding.push_back(dxco::SpriteUtil::createTexture("panda/herida1_" + dxco::StringUtil::toString(i + 1)  + "_0000.png"));
+    	std::vector<cocos2d::CCSpriteFrame*> texturesStanding;
+    	texturesStanding.push_back(dxco::SpriteUtil::createSpriteFrame("herida1_" + dxco::StringUtil::toString(i + 1)  + "_0000.png"));
     	dxco::Animation* standingAnimation = new dxco::Animation(texturesStanding, frameTime);
     	animations[dxco::Player::QUIETO * angles + i] = standingAnimation;
 
-    	std::vector<cocos2d::CCTexture2D*> texturesWalking;
+    	std::vector<cocos2d::CCSpriteFrame*> texturesWalking;
     	for (int j = 0; j <= 13; j++) {
     		std::string index = "00" + dxco::StringUtil::toString(j);
     		if (j < 10){
     			index = "0" + index;
     		}
-    		texturesWalking.push_back(dxco::SpriteUtil::createTexture("panda/caminata_" + dxco::StringUtil::toString(i + 1)  +
+    		texturesWalking.push_back(dxco::SpriteUtil::createSpriteFrame("caminata_" + dxco::StringUtil::toString(i + 1)  +
     				"_" + index + ".png"));
     	}
     	dxco::Animation* walkingAnimation = new dxco::Animation(texturesWalking, frameTime);
     	animations[dxco::Player::CAMINANDO * angles + i] = walkingAnimation;
 
-    	std::vector<cocos2d::CCTexture2D*> texturesHerida;
+    	std::vector<cocos2d::CCSpriteFrame*> texturesHerida;
     	for (int j = 0; j < 10; j++){
-    		texturesHerida.push_back(dxco::SpriteUtil::createTexture("panda/herida1_" + dxco::StringUtil::toString(i + 1)  +
+    		texturesHerida.push_back(dxco::SpriteUtil::createSpriteFrame("herida1_" + dxco::StringUtil::toString(i + 1)  +
 					"_000" + dxco::StringUtil::toString(j) +".png"));
 		}
     	//mix both sequences as one animation
     	for (int j = 0; j <= 9; j++){
-			texturesHerida.push_back(dxco::SpriteUtil::createTexture("panda/herida2_" + dxco::StringUtil::toString(i + 1)  +
+			texturesHerida.push_back(dxco::SpriteUtil::createSpriteFrame("herida2_" + dxco::StringUtil::toString(i + 1)  +
 					"_000" + dxco::StringUtil::toString(j) +".png"));
 		}
     	dxco::Animation* heridaAnimation = new dxco::Animation(texturesHerida, frameTime);
@@ -294,7 +280,7 @@ void HelloWorld::initFire(float x, float y) {
 	 * and not the emmiter. */
 	fire->setPositionType(cocos2d::kCCPositionTypeRelative);
 	fire->setPosition(x, y);
-	this->clouds->addChild(fire);
+	this->mapa->addChild(fire, 2);
 }
 
 

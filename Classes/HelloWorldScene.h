@@ -47,6 +47,8 @@ private:
     cocos2d::CCLabelTTF* playerHPLabel;
     cocos2d::CCLabelTTF* playerScoreLabel;
     cocos2d::CCLabelTTF* timerLabel;
+
+    //FIXME limpiar cosas del preload que no sirven mas
     bool preloaded;
     void realInit();
     int angulosCargados;

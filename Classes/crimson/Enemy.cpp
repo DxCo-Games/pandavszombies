@@ -10,7 +10,7 @@
 namespace dxco {
 
 //initialize the default speed. can't do it in Enemy.h gotta love cpp
-int Enemy::ENEMY_SPEED = 15;
+int Enemy::ENEMY_SPEED = 30;
 
 Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite,
 		std::map<int, Animation*>& animations) :
@@ -23,12 +23,7 @@ Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite,
 	this->state = ENEMY_STANDING;
 	this->action = NULL;
 
-	if (rand() % 2) {
-		this->dumb = false;
-	} else {
-		this->dumb = true;
-		this->setDumbDestiny();
-	}
+	this->setDumbDestiny();
 }
 
 void Enemy::setDumbDestiny() {
@@ -42,13 +37,11 @@ void Enemy::update(float dt) {
 		cocos2d::CCPoint playerLocation = this->model->player->getLocation();
 		float distance = MathUtil::distance(this->getLocation(), playerLocation);
 
-		if (distance < this->model->player->getWidth() * 2){
-			//if close to player, start following him
-			this->dumb = false;
-		}
+		//FIXME make dumb zombies not that dumb :P
+		bool isDumb = false; //distance > this->model->player->getWidth() * 2;
 
 		cocos2d::CCPoint destiny;
-		if (this->dumb) {
+		if (isDumb) {
 			float destinyDistance = MathUtil::distance(this->getLocation(), *this->destiny);
 			if (destinyDistance < this->getWidth()) {
 				//if close to destiny, renew it
@@ -90,13 +83,9 @@ void Enemy::update(float dt) {
 
 			} else {
 				this->state = ENEMY_STANDING;
-				if (this->dumb) {
+				if (isDumb) {
 					//if it's dumb and got blocked, try a new direction
 					this->setDumbDestiny();
-					if (!this->canAdvance(*this->destiny, ENEMY_SPEED * dt, this->model->getItems())) {
-						//if still blocked just follow the player
-						this->dumb = false;
-					}
 				}
 			}
 		}
@@ -114,8 +103,15 @@ void Enemy::update(float dt) {
 			this->action = SpriteUtil::fadeOut(this->getSprite(), 0.25);
 		}
 
-		if (this->action->isDone()) {
-			this->model->mapa->removeChild(this->getSprite());
+		if (this->action == NULL) { // FadeOut is over. IsDone doesn't work because action is already released
+			//			this->model->enemyFactory->enemySpriteSheet->removeChild(this->getSprite(), true);
+			this->model->mapa->removeChild(this->getSprite(), true);
+
+			//this removes the enemies. cpp, don't ask.
+			this->model->enemies.erase(std::remove(this->model->enemies.begin(), this->model->enemies.end(), this),
+			this->model->enemies.end());
+			this->model->items.erase(std::remove(this->model->items.begin(), this->model->items.end(), this),
+			this->model->items.end());
 		}
 	}
 }
@@ -124,7 +120,7 @@ void Enemy::beat(Player* player, float dt) {
 	//make damage
 	player->hurt(this->strength * dt);
 	cocos2d::CCAction* hurtAction = cocos2d::CCSequence::create(
-	        cocos2d::CCTintTo::create(0.01f, 255, 0, 0), cocos2d::CCTintTo::create(0.05f, 255, 255, 255), NULL);
+			cocos2d::CCTintTo::create(0.01f, 255, 0, 0), cocos2d::CCTintTo::create(0.01f, 255, 255, 255), NULL);
 
 	player->getSprite()->runAction(hurtAction);
 }
@@ -169,8 +165,9 @@ void Enemy::burn(float dt, cocos2d::CCPoint playerLocation, float distance, floa
 }
 
 float Enemy::getColitionRatio() {
-	return this->getWidth() / 4;
+	return 0.1 * this->getWidth();
 }
+
 bool Enemy::isActive() {
 	return this->life > 0;
 }

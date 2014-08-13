@@ -28,6 +28,8 @@ public:
 	float bossDt;
 	float speedDt;
 
+	cocos2d::CCSpriteBatchNode *enemySpriteSheet;
+
 	std::map<int, dxco::Animation*> loadAnimations(GameModel* model, std::string type, float frameTime);
 private:
 	void addEnemy(GameModel* model, Enemy* enemy);

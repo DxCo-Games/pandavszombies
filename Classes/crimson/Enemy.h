@@ -26,7 +26,6 @@ public:
 	float strength;
 	bool burning;
 	bool dead;
-	bool dumb; //me cago en los patrones ;)
 
 	int score;
 
@@ -38,9 +37,9 @@ public:
 	void hurt(float value);
 	void burn(float dt, cocos2d::CCPoint playerLocation, float distance, float angle);
 	virtual bool isActive();
+	virtual float getColitionRatio();
 	void setDumbDestiny();
 
-	virtual float getColitionRatio();
 	cocos2d::CCAction* action;
 };
 

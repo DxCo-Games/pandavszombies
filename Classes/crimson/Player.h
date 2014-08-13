@@ -40,6 +40,7 @@ public:
 	 * */
 	float moveRotation;
 
+	void updateFireLocation();
 };
 
 } /* namespace dxco */
