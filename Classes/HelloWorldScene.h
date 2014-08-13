@@ -52,6 +52,8 @@ private:
     int angulosCargados;
     cocos2d::CCLabelTTF* porcentajeCargado;
     cocos2d::CCSprite* loading;
+    cocos2d::CCSprite* joystickBotonIzq;
+    cocos2d::CCSprite* joystickBotonDrc;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

@@ -108,6 +108,25 @@ void HelloWorld::realInit() {
 	    this->addChild(playerHPLabel);
 	    this->addChild(playerScoreLabel);
 	    this->addChild(timerLabel);
+
+
+	    float x = 25;
+	    float y = visibleSize.height - visibleSize.width * 0.05 - 15;
+	    float width = visibleSize.width * 0.25;
+	    float height = visibleSize.width * 0.05;
+
+	    CCSprite* border = dxco::SpriteUtil::create("white.png", x, y, width, height);
+	    border->runAction(cocos2d::CCTintTo::create(0.01f, 238, 232, 170));
+
+	    CCSprite* background = dxco::SpriteUtil::create("white.png", x + 1, y + 1, width - 2, height - 2);
+	    background->runAction(cocos2d::CCTintTo::create(0.01f, 255, 0, 0));
+
+	    CCSprite* backgroundOn = dxco::SpriteUtil::create("white.png", x + 1, y + 1, (width - 2) * 0.75, height - 2);
+	    backgroundOn->runAction(cocos2d::CCTintTo::create(0.01f, 0, 0, 255));
+
+	    this->addChild(border, 50);
+	    this->addChild(background, 50);
+	    this->addChild(backgroundOn, 50);
 }
 
 void HelloWorld::preloadTextures() {
@@ -191,6 +210,23 @@ dxco::Player* HelloWorld::createPlayer() {
 }
 
 void HelloWorld::ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent) {
+
+	cocos2d::CCSetIterator it = pTouches->begin();
+	cocos2d::CCPoint location;
+	cocos2d::CCTouch * touch;
+	CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
+
+	for (int iTouchCount = 0; iTouchCount < pTouches->count(); iTouchCount++) {
+		touch = (cocos2d::CCTouch*) (*it);
+		location = touch->getLocationInView();
+		location = cocos2d::CCDirector::sharedDirector()->convertToGL(location);
+
+		if (location.x > visibleSize.width / 2) {
+
+		} else {
+
+		}
+	}
 	joystickController.ccTouchesBegan(pTouches, pEvent);
 }
 
