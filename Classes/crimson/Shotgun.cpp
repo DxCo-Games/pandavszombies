@@ -16,11 +16,11 @@ void Shotgun::shoot() {
 	float rotation = this->model->player->getRotation();
 	cocos2d::CCPoint location = this->model->player->getLocation();
 
-	this->createBullet(location.x, location.y, rotation);
-	this->createBullet(location.x, location.y, rotation + 10);
-	this->createBullet(location.x, location.y, rotation + 5);
-	this->createBullet(location.x, location.y, rotation - 10);
-	this->createBullet(location.x, location.y, rotation - 5);
+	this->createBullet(location.x, location.y, 0);
+	this->createBullet(location.x, location.y, 10);
+	this->createBullet(location.x, location.y, 5);
+	this->createBullet(location.x, location.y, -10);
+	this->createBullet(location.x, location.y, -5);
 
 	this->runFlash(location.x, location.y, rotation);
 }

@@ -50,6 +50,8 @@ void BonusFactory::createBonus(GameModel* model, cocos2d::CCPoint location) {
 			}
 		}
 
+		cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("sg.png", location.x, location.y, 50, 20);
+		bonus = new WeaponBonus(model, bonusSprite, animations, Player::SHOTGUN);
 		model->bonuses.push_back(bonus);
 		model->mapa->addChild(bonus->getSprite());
 	}
