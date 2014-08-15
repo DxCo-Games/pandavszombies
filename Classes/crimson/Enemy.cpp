@@ -150,7 +150,7 @@ bool Enemy::shoot(Bullet* bullet) {
 			bullet->use();
 			result = true;
 
-			this->life -= bullet->getDamage();
+			this->hurt(bullet->getDamage());
 			cocos2d::CCAction* hurtAction = cocos2d::CCSequence::create(
 			        cocos2d::CCTintTo::create(0.05f, 255, 0, 0), cocos2d::CCTintTo::create(0.05f, 255, 255, 255), NULL);
 
@@ -163,6 +163,9 @@ bool Enemy::shoot(Bullet* bullet) {
 
 void Enemy::hurt(float value) {
 	this->life -= value;
+	if (!this->isActive()) {
+		this->model->enemyKilled(this);
+	}
 }
 
 void Enemy::burn(float dt, cocos2d::CCPoint playerLocation, float distance, float angle) {

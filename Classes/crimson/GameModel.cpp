@@ -74,6 +74,10 @@ std::vector<Item*>& GameModel::getItems() {
 	return items;
 }
 
+void GameModel::enemyKilled(Enemy* enemy) {
+	this->player->score += enemy->score;
+}
+
 void GameModel::update(float dt) {
 	this->playerHurt = false;
 
@@ -96,10 +100,6 @@ void GameModel::update(float dt) {
 
 			if (enemy->isActive()) {
 				bool shooted = enemy->shoot(bullet);
-
-				if (!enemy->isActive()) {
-					player->score += enemy->score;
-				}
 
 				if (shooted) {
 					break;
