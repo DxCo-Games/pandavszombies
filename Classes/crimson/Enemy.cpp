@@ -73,9 +73,6 @@ void Enemy::update(float dt) {
 				//before putting it to walk, make sure it will be able to keep moving
 				if (this->canAdvance(destiny, ENEMY_SPEED * dt, this->model->getItems())) {
 					this->state = ENEMY_WALKING;
-					//update z order for isometric ordering of characters
-					int zorder = 100 - this->getLocation().y * 100 / this->model->mapa->getHeight();
-					this->model->enemyFactory->enemySpriteSheet->reorderChild(this->sprite, zorder);
 				} else {
 					//if it can't move further, undo this movement.
 					this->goTo(destiny, - ENEMY_SPEED * dt);
@@ -89,6 +86,9 @@ void Enemy::update(float dt) {
 				}
 			}
 		}
+
+		//after updating, if it's alive fix position
+		this->fixZOrder(playerLocation.y);
 	} else {
 
 		this->model->bonusFactory->createBonus(this->model, this->getLocation());
@@ -104,8 +104,7 @@ void Enemy::update(float dt) {
 		}
 
 		if (this->action == NULL) { // FadeOut is over. IsDone doesn't work because action is already released
-			this->model->enemyFactory->enemySpriteSheet->removeChild(this->getSprite(), true);
-//			this->model->mapa->removeChild(this->getSprite(), true);
+			this->sprite->removeFromParent();
 
 			//this removes the enemies. cpp, don't ask.
 			this->model->enemies.erase(std::remove(this->model->enemies.begin(), this->model->enemies.end(), this),
@@ -114,6 +113,20 @@ void Enemy::update(float dt) {
 			this->model->items.end());
 		}
 	}
+}
+
+void Enemy::fixZOrder(float playerY) {
+	//update z order for isometric ordering of characters
+	int zorder = 100 - this->getLocation().y * 100 / this->model->mapa->getHeight();
+
+	this->sprite->retain();
+	this->sprite->removeFromParentAndCleanup(false);
+	if (this->getLocation().y > playerY) {
+		this->model->enemyFactory->enemySpriteSheetBack->addChild(this->sprite, zorder);
+	} else {
+		this->model->enemyFactory->enemySpriteSheetFront->addChild(this->sprite, zorder);
+	}
+	this->sprite->release();
 }
 
 void Enemy::beat(Player* player, float dt) {

@@ -79,13 +79,6 @@ void Player::update(float dt) {
 
 			//undo map movement so player stays in the middle
 			SpriteUtil::move(this->sprite, deltaX, deltaY);
-
-			//update z order for isometric ordering of characters
-			int zorder = 100 - finalY * 100 / mapHeight;
-			this->model->mapa->reorderChild(this->sprite, zorder);
-
-			//put the emmiter where the player is
-			//TODO remove this this->model->vista->fire->setPosition(finalX, finalY);
 		}
 	} else {
 		this->state = QUIETO;

@@ -28,7 +28,10 @@ public:
 	float bossDt;
 	float speedDt;
 
-	cocos2d::CCSpriteBatchNode *enemySpriteSheet;
+	/* We use two batch nodes with different z orders in the map, so we can move the enemies to place them
+	 * in front or behind the player based on their y position. */
+	cocos2d::CCSpriteBatchNode *enemySpriteSheetFront;
+	cocos2d::CCSpriteBatchNode *enemySpriteSheetBack;
 
 	std::map<int, dxco::Animation*> loadAnimations(GameModel* model, std::string type, float frameTime);
 private:

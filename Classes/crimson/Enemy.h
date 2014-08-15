@@ -39,6 +39,7 @@ public:
 	virtual bool isActive();
 	virtual float getColitionRatio();
 	void setDumbDestiny();
+	void fixZOrder(float playerY);
 
 	cocos2d::CCAction* action;
 };
