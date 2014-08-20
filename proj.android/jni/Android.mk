@@ -39,11 +39,11 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/dxco/JoystickController.cpp \
                    ../../Classes/dxco/Joystick.cpp \
                    ../../Classes/dxco/MathUtil.cpp \
+                   ../../Classes/dxco/TopDownItem.cpp \
                    ../../Classes/crimson/JoystickMira.cpp \
                    ../../Classes/crimson/JoystickMovimiento.cpp \
                    ../../Classes/crimson/GameModel.cpp \
                    ../../Classes/crimson/Player.cpp \
-                   ../../Classes/crimson/TopDownItem.cpp \
                    ../../Classes/crimson/Bullet.cpp \
                    ../../Classes/crimson/Enemy.cpp \
                    ../../Classes/crimson/Boss.cpp \

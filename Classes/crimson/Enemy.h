@@ -4,7 +4,7 @@
 #define ENEMY_ANGLE_POSITIONS 8
 
 #include "cocos2d.h"
-#include "TopDownItem.h"
+#include "../dxco/TopDownItem.h"
 #include "Bullet.h"
 #include "../dxco/Action.h"
 

@@ -5,7 +5,7 @@
 #define PLAYER_SPEED 75
 #define PLAYER_ANGLE_POSITIONS 16
 
-#include "TopDownItem.h"
+#include "../dxco/TopDownItem.h"
 
 namespace dxco {
 
