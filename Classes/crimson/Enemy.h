@@ -5,6 +5,7 @@
 
 #include "cocos2d.h"
 #include "../dxco/TopDownItem.h"
+#include "../dxco/SteeringBehaviorItem.h"
 #include "Bullet.h"
 #include "../dxco/Action.h"
 
@@ -13,7 +14,7 @@ namespace dxco {
 class GameModel;
 class Player;
 
-class Enemy : public TopDownItem {
+class Enemy : public TopDownItem, public SteeringBehaviorItem {
 public:
 	Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations);
 	void update(float dt);
@@ -29,8 +30,6 @@ public:
 
 	int score;
 
-	cocos2d::CCPoint* destiny;
-
 	enum estados { ENEMY_STANDING, ENEMY_WALKING };
 
 	void beat(Player* player, float dt);
@@ -38,8 +37,11 @@ public:
 	void burn(float dt, cocos2d::CCPoint playerLocation, float distance, float angle);
 	virtual bool isActive();
 	virtual float getColitionRatio();
-	void setDumbDestiny();
+	void setNewWanderTarget();
+	virtual cocos2d::CCPoint getTarget();
 	void fixZOrder(float playerY);
+
+	virtual cocos2d::CCPoint stand(float dt);
 
 	cocos2d::CCAction* action;
 };

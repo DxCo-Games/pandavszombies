@@ -12,9 +12,9 @@ namespace dxco {
 //initialize the default speed. can't do it in Enemy.h gotta love cpp
 int Enemy::ENEMY_SPEED = 30;
 
-Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite,
-		std::map<int, Animation*>& animations) :
-		TopDownItem(sprite, animations, ENEMY_ANGLE_POSITIONS) {
+Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations) :
+		TopDownItem(ENEMY_ANGLE_POSITIONS), SteeringBehaviorItem(120, 80, 50, Enemy::ENEMY_SPEED),
+		Item(sprite, animations){
 	this->model = model;
 	this->life = 20;
 	this->score = 10;
@@ -22,73 +22,57 @@ Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite,
 	this->burning = false;
 	this->state = ENEMY_STANDING;
 	this->action = NULL;
-
-	this->setDumbDestiny();
+	this->dead = false;
 }
 
-void Enemy::setDumbDestiny() {
-	this->destiny = new cocos2d::CCPoint(rand() % (int)this->model->mapa->getWidth(),
-					rand() % (int)this->model->mapa->getHeight());
+void Enemy::setNewWanderTarget() {
+	this->wanderTarget = cocos2d::CCPoint(rand() % (int)this->model->mapa->getWidth(),
+			rand() % (int)this->model->mapa->getHeight());
+}
+
+cocos2d::CCPoint Enemy::getTarget() {
+	return this->model->player->getLocation();
 }
 
 void Enemy::update(float dt) {
 	Item::update(dt);
 	if (this->isActive()) {
-		cocos2d::CCPoint playerLocation = this->model->player->getLocation();
-		float distance = MathUtil::distance(this->getLocation(), playerLocation);
-
-		//FIXME make dumb zombies not that dumb :P
-		bool isDumb = false; //distance > this->model->player->getWidth() * 2;
-
-		cocos2d::CCPoint destiny;
-		if (isDumb) {
-			float destinyDistance = MathUtil::distance(this->getLocation(), *this->destiny);
-			if (destinyDistance < this->getWidth()) {
-				//if close to destiny, renew it
-				this->setDumbDestiny();
-			}
-			destiny = *this->destiny;
-		} else {
-			destiny = playerLocation;
-		}
+		this->state = ENEMY_WALKING;
+		SteeringBehaviorItem::update(dt);
 
 		//look at destiny
-		float radian_angle = MathUtil::angle(this->getLocation(), destiny);
-		float angle = radian_angle * -57.2957795;
+		float angle = MathUtil::angle(cocos2d::CCPointZero, this->currentVelocity) * -57.2957795;
 		this->setRotation(angle);
 
+		//TODO see if this can be avoided (already done in steering beh)
+		cocos2d::CCPoint playerLocation = this->model->player->getLocation();
+		float distance = MathUtil::distance(this->getLocation(), playerLocation);
 		this->burn(dt, playerLocation, distance, angle);
 
-		if (distance < this->getWidth() / 4 + this->model->player->getWidth() / 4) {
-			//if close to the player, attacl
-			this->state = ENEMY_STANDING;
-			this->beat(this->model->player, dt);
-		} else {
-
-			if (this->canAdvance(destiny, ENEMY_SPEED * dt, this->model->getItems())) {
-				//walk to destiny
-				cocos2d::CCPoint oldPosition = this->getLocation();
-				this->goTo(destiny, ENEMY_SPEED * dt);
-
-				//before putting it to walk, make sure it will be able to keep moving
-				if (this->canAdvance(destiny, ENEMY_SPEED * dt, this->model->getItems())) {
-					this->state = ENEMY_WALKING;
-				} else {
-					//if it can't move further, undo this movement.
-					this->goTo(destiny, - ENEMY_SPEED * dt);
-				}
-
-			} else {
-				this->state = ENEMY_STANDING;
-				if (isDumb) {
-					//if it's dumb and got blocked, try a new direction
-					this->setDumbDestiny();
-				}
-			}
-		}
+		//TODO mind obstacles?
 
 		//after updating, if it's alive fix position
 		this->fixZOrder(playerLocation.y);
+
+
+//			if (this->canAdvance(destiny, ENEMY_SPEED * dt, this->model->getItems())) {
+//				//walk to destiny
+//				cocos2d::CCPoint oldPosition = this->getLocation();
+//				this->goTo(destiny, ENEMY_SPEED * dt);
+//
+//				//before putting it to walk, make sure it will be able to keep moving
+//				if (this->canAdvance(destiny, ENEMY_SPEED * dt, this->model->getItems())) {
+//					this->state = ENEMY_WALKING;
+//				} else {
+//					//if it can't move further, undo this movement.
+//					this->goTo(destiny, - ENEMY_SPEED * dt);
+//				}
+//
+//			} else {
+//				this->state = ENEMY_STANDING;
+//			}
+//		}
+
 	} else {
 
 		this->model->bonusFactory->createBonus(this->model, this->getLocation());
@@ -113,6 +97,13 @@ void Enemy::update(float dt) {
 			this->model->items.end());
 		}
 	}
+}
+
+cocos2d::CCPoint Enemy::stand(float dt) {
+	//close to the enemy -> attack
+	this->state = ENEMY_STANDING;
+	this->beat(this->model->player, dt);
+	return SteeringBehaviorItem::stand(dt);
 }
 
 void Enemy::fixZOrder(float playerY) {

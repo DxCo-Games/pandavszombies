@@ -12,7 +12,7 @@ namespace dxco {
 
 
 EnemyFactory::EnemyFactory(){
-	this->enemyDt = 0;
+	this->enemyDt = 100;
 	this->bossDt = 0;
 	this->speedDt = 0;
 
