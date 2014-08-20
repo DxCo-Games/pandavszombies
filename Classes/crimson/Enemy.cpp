@@ -13,7 +13,7 @@ namespace dxco {
 int Enemy::ENEMY_SPEED = 30;
 
 Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations) :
-		TopDownItem(ENEMY_ANGLE_POSITIONS), SteeringBehaviorItem(120, 80, 50, Enemy::ENEMY_SPEED),
+		TopDownItem(ENEMY_ANGLE_POSITIONS), SteeringBehaviorItem(170, 80, 30, Enemy::ENEMY_SPEED),
 		Item(sprite, animations){
 	this->model = model;
 	this->life = 20;
@@ -44,7 +44,6 @@ void Enemy::update(float dt) {
 		float angle = MathUtil::angle(cocos2d::CCPointZero, this->currentVelocity) * -57.2957795;
 		this->setRotation(angle);
 
-		//TODO see if this can be avoided (already done in steering beh)
 		cocos2d::CCPoint playerLocation = this->model->player->getLocation();
 		float distance = MathUtil::distance(this->getLocation(), playerLocation);
 		this->burn(dt, playerLocation, distance, angle);
@@ -99,11 +98,11 @@ void Enemy::update(float dt) {
 	}
 }
 
-cocos2d::CCPoint Enemy::stand(float dt) {
+void Enemy::stand(float dt, cocos2d::CCPoint target) {
 	//close to the enemy -> attack
 	this->state = ENEMY_STANDING;
 	this->beat(this->model->player, dt);
-	return SteeringBehaviorItem::stand(dt);
+	SteeringBehaviorItem::stand(dt, target);
 }
 
 void Enemy::fixZOrder(float playerY) {

@@ -1,7 +1,7 @@
 #ifndef PLAYER_H_
 #define PLAYER_H_
 
-#define PLAYER_LIFE 100
+#define PLAYER_LIFE 400
 #define PLAYER_SPEED 75
 #define PLAYER_ANGLE_POSITIONS 16
 

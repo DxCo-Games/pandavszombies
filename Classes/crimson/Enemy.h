@@ -41,7 +41,7 @@ public:
 	virtual cocos2d::CCPoint getTarget();
 	void fixZOrder(float playerY);
 
-	virtual cocos2d::CCPoint stand(float dt);
+	virtual void stand(float dt, cocos2d::CCPoint target);
 
 	cocos2d::CCAction* action;
 };
