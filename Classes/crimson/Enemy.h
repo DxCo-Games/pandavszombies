@@ -2,6 +2,8 @@
 #define ENEMY_H_
 
 #define ENEMY_ANGLE_POSITIONS 8
+#define ENEMY_DEFAULT_SPEED 30
+#define ENEMY_WANDER_SPEED 20
 
 #include "cocos2d.h"
 #include "../dxco/TopDownItem.h"
@@ -38,6 +40,7 @@ public:
 	virtual bool isActive();
 	virtual float getColitionRatio();
 	void setNewWanderTarget();
+	float getWanderSpeed();
 	virtual cocos2d::CCPoint getTarget();
 	void fixZOrder(float playerY);
 

@@ -10,7 +10,7 @@
 namespace dxco {
 
 //initialize the default speed. can't do it in Enemy.h gotta love cpp
-int Enemy::ENEMY_SPEED = 30;
+int Enemy::ENEMY_SPEED = ENEMY_DEFAULT_SPEED;
 
 Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations) :
 		TopDownItem(ENEMY_ANGLE_POSITIONS), SteeringBehaviorItem(170, 80, 30, Enemy::ENEMY_SPEED, 0.5),
@@ -176,6 +176,10 @@ float Enemy::getColitionRatio() {
 
 bool Enemy::isActive() {
 	return this->life > 0;
+}
+
+float Enemy::getWanderSpeed() {
+	return ENEMY_WANDER_SPEED;
 }
 
 } /* namespace dxco */
