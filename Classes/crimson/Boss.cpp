@@ -8,6 +8,7 @@ Boss::Boss(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*
 	this->life = 120;
 	this->score = 50;
 	this->strength = 50;
+	this->mass = 1.5;
 }
 
 float Boss::getColitionRatio() {

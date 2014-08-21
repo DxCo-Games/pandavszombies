@@ -13,7 +13,7 @@ namespace dxco {
 int Enemy::ENEMY_SPEED = 30;
 
 Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations) :
-		TopDownItem(ENEMY_ANGLE_POSITIONS), SteeringBehaviorItem(170, 80, 30, Enemy::ENEMY_SPEED),
+		TopDownItem(ENEMY_ANGLE_POSITIONS), SteeringBehaviorItem(170, 80, 30, Enemy::ENEMY_SPEED, 0.5),
 		Item(sprite, animations){
 	this->model = model;
 	this->life = 20;
