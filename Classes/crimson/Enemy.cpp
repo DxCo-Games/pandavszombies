@@ -13,7 +13,7 @@ namespace dxco {
 int Enemy::ENEMY_SPEED = ENEMY_DEFAULT_SPEED;
 
 Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations) :
-		TopDownItem(ENEMY_ANGLE_POSITIONS), SteeringBehaviorItem(170, 80, 30, Enemy::ENEMY_SPEED, 0.5),
+		TopDownItem(ENEMY_ANGLE_POSITIONS), SteeringBehaviorItem(Enemy::ENEMY_SPEED, 0.5),
 		Item(sprite, animations){
 	this->model = model;
 	this->life = 20;
@@ -30,25 +30,34 @@ void Enemy::setNewWanderTarget() {
 			rand() % (int)this->model->mapa->getHeight());
 }
 
-cocos2d::CCPoint Enemy::getTarget() {
-	return this->model->player->getLocation();
-}
-
 void Enemy::update(float dt) {
 	Item::update(dt);
 	if (this->isActive()) {
 		this->state = ENEMY_WALKING;
-		SteeringBehaviorItem::update(dt);
+
+		cocos2d::CCPoint playerLocation = this->model->player->getLocation();
+		float dist = MathUtil::distance(this->getLocation(), playerLocation);
+
+		//TODO is seek really needed? zombies probably shouldn't slow down when reaching the player
+		//Enable behaviors according to distance from target
+		int behaviors;
+		if (dist > ENEMY_WANDER_RANGE) {
+			behaviors = USE_WANDER;
+		} else if (dist > ENEMY_SEEK_RANGE) {
+			behaviors = USE_SEEK;
+		} else if (dist > ENEMY_ARRIVE_RANGE) {
+			behaviors = USE_ARRIVE;
+		} else {
+			behaviors = USE_STAND;
+		}
+		this->updateBehaviors(dt, behaviors, playerLocation, dist,
+				ENEMY_SEEK_RANGE - ENEMY_ARRIVE_RANGE, ENEMY_ARRIVE_RANGE);
 
 		//look at destiny
 		float angle = MathUtil::angle(cocos2d::CCPointZero, this->currentVelocity) * -57.2957795;
 		this->setRotation(angle);
 
-		cocos2d::CCPoint playerLocation = this->model->player->getLocation();
-		float distance = MathUtil::distance(this->getLocation(), playerLocation);
-		this->burn(dt, playerLocation, distance, angle);
-
-		//TODO mind obstacles?
+		this->burn(dt, playerLocation, dist, angle);
 
 		//after updating, if it's alive fix position
 		this->fixZOrder(playerLocation.y);
