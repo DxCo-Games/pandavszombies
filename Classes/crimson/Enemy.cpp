@@ -50,8 +50,9 @@ void Enemy::update(float dt) {
 		} else {
 			behaviors = USE_STAND;
 		}
+		behaviors = behaviors | USE_SEPARATION;
 		this->updateBehaviors(dt, behaviors, playerLocation, dist,
-				ENEMY_SEEK_RANGE - ENEMY_ARRIVE_RANGE, ENEMY_ARRIVE_RANGE);
+				this->model->items, ENEMY_SEEK_RANGE - ENEMY_ARRIVE_RANGE, ENEMY_ARRIVE_RANGE);
 
 		//look at destiny
 		float angle = MathUtil::angle(cocos2d::CCPointZero, this->currentVelocity) * -57.2957795;
