@@ -66,7 +66,7 @@ void HelloWorld::realInit() {
 
 	    this->mapa = new dxco::Mapa(mapCornerX, mapCornerY, mapWidth, mapHeight);
 
-	    CCSprite* pSprite = dxco::SpriteUtil::create("piso_sin_bordes_2.png", 0, 0, mapWidth, mapHeight);
+	    CCSprite* pSprite = dxco::SpriteUtil::create("piso_sin_bordes_sized.png", 0, 0, mapWidth, mapHeight);
 	    this->mapa->addChild(pSprite, -10);
 
 	    this->setTouchEnabled(true);
