@@ -66,12 +66,16 @@ void HelloWorld::realInit() {
 
 	    this->mapa = new dxco::Mapa(mapCornerX, mapCornerY, mapWidth, mapHeight);
 
-	    CCSprite* pSprite = dxco::SpriteUtil::create("piso_sin_bordes_sized.png", 0, 0, mapWidth, mapHeight);
+	    CCSprite* pSprite = dxco::SpriteUtil::create("ciudad_fondo.png", -mapWidth/4, -mapHeight/4, mapWidth*1.5, mapHeight*1.5);
 	    this->mapa->addChild(pSprite, -10);
 
 	    this->setTouchEnabled(true);
 
 	    this->clouds = new dxco::Container(mapCornerX, mapCornerY, mapWidth, mapHeight);
+	    CCSprite* rejas = dxco::SpriteUtil::create("ciudad_rejas.png", -mapWidth/4, -mapHeight/4, mapWidth*1.5, mapHeight*1.5);
+	    this->clouds->addChild(rejas);
+	    CCSprite* tanque = dxco::SpriteUtil::create("ciudad_tanque.png", -mapWidth/4, -mapHeight/4, mapWidth*1.5, mapHeight*1.5);
+		this->clouds->addChild(tanque);
 	    this->addChild(this->clouds, 4);
 
 	    CCSprite* joystickFondo = dxco::SpriteUtil::create("circulo.png", visibleSize.width *  0.85 - 80, 20, 80, 80);
@@ -105,9 +109,9 @@ void HelloWorld::realInit() {
 	    this->playerScoreLabel = dxco::LabelUtil::create("0", 18, 10, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::RIGHT);
 	    this->timerLabel = dxco::LabelUtil::create("00:00", 18, visibleSize.width / 2, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT);
 
-	    this->addChild(playerHPLabel);
-	    this->addChild(playerScoreLabel);
-	    this->addChild(timerLabel);
+	    this->addChild(playerHPLabel, 10);
+	    this->addChild(playerScoreLabel, 10);
+	    this->addChild(timerLabel, 10);
 
 
 	    float x = 25;
