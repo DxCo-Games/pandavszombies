@@ -38,7 +38,6 @@ void Enemy::update(float dt) {
 		cocos2d::CCPoint playerLocation = this->model->player->getLocation();
 		float dist = MathUtil::distance(this->getLocation(), playerLocation);
 
-		//TODO is seek really needed? zombies probably shouldn't slow down when reaching the player
 		//Enable behaviors according to distance from target
 		int behaviors;
 		if (dist > ENEMY_WANDER_RANGE) {
