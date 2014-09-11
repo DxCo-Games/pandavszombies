@@ -116,7 +116,7 @@ void Enemy::stand(float dt, cocos2d::CCPoint target) {
 
 void Enemy::fixZOrder(float playerY) {
 	//update z order for isometric ordering of characters
-	int zorder = 100 - this->getLocation().y * 100 / this->model->mapa->getHeight();
+	int zorder = 1000 - this->getLocation().y * 1000 / this->model->mapa->getHeight();
 
 	this->sprite->retain();
 	this->sprite->removeFromParentAndCleanup(false);

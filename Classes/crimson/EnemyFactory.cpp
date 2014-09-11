@@ -140,7 +140,7 @@ cocos2d::CCSprite* EnemyFactory::createSpriteInRandomPosition(GameModel* model, 
 		}
 
 		float distance = MathUtil::distance(cocos2d::CCPoint(x, y), model->player->getLocation());
-		selected = distance > model->player->getWidth() * 2;
+		selected = distance > width / 2 + model->player->getWidth() / 2;
 	}
 	return dxco::SpriteUtil::create(texture, x, y, width, height, true);
 }
