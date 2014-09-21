@@ -4,6 +4,7 @@
 #include "Weapon.h"
 #include "Shotgun.h"
 #include "FireWeapon.h"
+#include "Bazooka.h"
 #include "SMG.h"
 #include "../HelloWorldScene.h"
 #include "../dxco/SpriteUtil.h"
@@ -15,6 +16,7 @@ Player::Player(cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations)
 	this->state = QUIETO;
 	this->life = PLAYER_LIFE;
 	this->movementSpeedBonus = 1;
+	this->bulletSpeedBonus = 1;
 	this->score = 0;
 	this->moving = false;
 	this->moveRotation;
@@ -41,7 +43,7 @@ void Player::update(float dt) {
 	bool wasHurt = this->state == HERIDO;
 	float speed = PLAYER_SPEED;
 	if (wasHurt) {
-		speed = PLAYER_SPEED * 0.6;
+		speed = PLAYER_SPEED * 0.7;
 	}
 
 	this->updateFireLocation();
@@ -258,6 +260,10 @@ void Player::setWeapon(weapons type) {
 	case FIRE: {
 		model->vista->fire->setVisible(true);
 		this->weapon = new FireWeapon(this->model);
+		break;
+	}
+	case BAZOOKA: {
+		this->weapon = new Bazooka(this->model);
 		break;
 	}
 	default:{

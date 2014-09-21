@@ -19,7 +19,7 @@ public:
 
 	GameModel* model;
 	enum estados { QUIETO, CAMINANDO, HERIDO };
-	enum weapons { PISTOL, SHOTGUN, SMG_, MACHINE_GUN, FIRE};
+	enum weapons { PISTOL, SHOTGUN, SMG_, MACHINE_GUN, FIRE, BAZOOKA};
 	Weapon* weapon;
 	weapons weaponType;
 
@@ -32,6 +32,7 @@ public:
 	float life;
 	int score;
 	float movementSpeedBonus;
+	int bulletSpeedBonus;
 
 	bool moving;
 

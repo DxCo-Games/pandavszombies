@@ -46,12 +46,14 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/crimson/GameModel.cpp \
                    ../../Classes/crimson/Player.cpp \
                    ../../Classes/crimson/Bullet.cpp \
+                   ../../Classes/crimson/bonus/TimeBonus.cpp \
                    ../../Classes/crimson/Enemy.cpp \
                    ../../Classes/crimson/Boss.cpp \
                    ../../Classes/crimson/bonus/BonusFactory.cpp \
                    ../../Classes/crimson/bonus/Bonus.cpp \
                    ../../Classes/crimson/bonus/HealthBonus.cpp \
                    ../../Classes/crimson/bonus/WeaponBonus.cpp \
+                   ../../Classes/crimson/bonus/WeaponSpeedBonus.cpp \
                    ../../Classes/crimson/Weapon.cpp \
                    ../../Classes/crimson/FireWeapon.cpp \
                    ../../Classes/crimson/SMG.cpp \
@@ -62,7 +64,9 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/crimson/bonus/PuntosBonus.cpp \
                    ../../Classes/crimson/Mapa.cpp \
                    ../../Classes/crimson/daos/UserDAO.cpp \
-                   ../../Classes/crimson/NativeMethods.cpp
+                   ../../Classes/crimson/NativeMethods.cpp \
+                   ../../Classes/crimson/Bazooka.cpp \
+                   ../../Classes/crimson/BazookaBullet.cpp
                    
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
