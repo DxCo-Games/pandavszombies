@@ -44,10 +44,12 @@ void EnemyFactory::createEnemy(GameModel* model) {
 
 	//random sprite type
 	std::string type;
-	if (rand() % 2) {
-		type = "campesino";
-	} else {
-		type = "oficinista";
+	switch(rand() % 5) {
+	case 0: type = "campesino"; break;
+	case 1: type = "oficinista"; break;
+	case 2: type = "basquet"; break;
+	case 3: type = "cirujano"; break;
+	case 4: type = "cura"; break;
 	}
 
 	std::map<int, dxco::Animation*> animations = loadAnimations(model, type, 0.02);
