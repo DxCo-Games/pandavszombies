@@ -4,6 +4,7 @@
 #define LIFE_AMOUNT 25
 
 #include "Bonus.h"
+#include "../GameModel.h"
 
 namespace dxco {
 

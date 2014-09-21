@@ -54,7 +54,7 @@ GameModel::GameModel(HelloWorld* vista, Player* player) {
 	this->vista = vista;
 	this->mapa = vista->mapa;
 
-	this->player->setWeapon(Player::PISTOL);
+	this->player->setWeapon(Player::SHOTGUN);
 	this->bonusFactory = new BonusFactory();
 	this->playerHurt = false;
 

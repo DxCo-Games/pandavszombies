@@ -1,5 +1,5 @@
 #include "WeaponBonus.h"
-#include "GameModel.h"
+#include "../GameModel.h"
 
 namespace dxco {
 

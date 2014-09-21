@@ -1,6 +1,6 @@
 #include "MovementSpeedBonus.h"
-#include "GameModel.h"
-#include "../dxco/MathUtil.h"
+#include "../GameModel.h"
+#include "../../dxco/MathUtil.h"
 
 namespace dxco {
 

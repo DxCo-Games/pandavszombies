@@ -4,9 +4,9 @@
 #include "cocos2d.h"
 #include "Player.h"
 #include "Enemy.h"
-#include "Bonus.h"
+#include "bonus/Bonus.h"
 #include "EnemyFactory.h"
-#include "BonusFactory.h"
+#include "bonus/BonusFactory.h"
 #include "Bullet.h"
 #include "Mapa.h"
 #include <vector>
