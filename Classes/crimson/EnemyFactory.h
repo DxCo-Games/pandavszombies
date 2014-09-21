@@ -1,7 +1,7 @@
 #ifndef ENEMYFACTORY_H_
 #define ENEMYFACTORY_H_
 
-#define ENEMY_DT 0.3
+#define ENEMY_DT 555550.3
 #define BOSS_DT 15
 #define SPEED_DT 30
 

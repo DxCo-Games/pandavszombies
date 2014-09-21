@@ -16,10 +16,10 @@ class ShouldDeleteBullet
 public:
     ShouldDeleteBullet( GameModel* model ) : model( model ) {
     	cocos2d::CCPoint origin = cocos2d::CCDirector::sharedDirector()->getVisibleOrigin();
-    	maxX = this->model->mapa->getWidth() + origin.x;
-    	maxY = this->model->mapa->getHeight() + origin.y;
-    	minX = origin.x;
-    	minY = origin.y;
+    	maxX = this->model->mapa->getWidth() + origin.x + 200;
+    	maxY = this->model->mapa->getHeight() + origin.y + 200;
+    	minX = origin.x - 200;
+    	minY = origin.y - 200;
     }
 
     float maxX;
