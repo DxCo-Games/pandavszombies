@@ -57,6 +57,7 @@ GameModel::GameModel(HelloWorld* vista, Player* player) {
 	this->player->setWeapon(Player::PISTOL);
 	this->bonusFactory = new BonusFactory();
 	this->playerHurt = false;
+	this->freezeBonusActivated = false;
 
 	//batch node added to map
 	this->enemyFactory = new EnemyFactory();
@@ -81,15 +82,16 @@ void GameModel::enemyKilled(Enemy* enemy) {
 void GameModel::update(float dt) {
 	this->playerHurt = false;
 
-	if (this->player->weapon->bullets <= 0 &&
-			this->player->weaponType != Player::PISTOL){
+	if (this->player->weapon->bullets <= 0 && this->player->weaponType != Player::PISTOL) {
 		this->player->setWeapon(Player::PISTOL);
 	}
 
 	this->player->update(dt);
 	this->player->weapon->update(dt);
 
-	this->enemyFactory->update(this, dt);
+	if (!this->freezeBonusActivated) {
+		this->enemyFactory->update(this, dt);
+	}
 
 	for (int i = 0; i < this->bullets.size(); i++) {
 		Bullet* bullet = this->bullets[i];
