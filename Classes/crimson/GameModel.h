@@ -37,6 +37,7 @@ public:
 	void enemyKilled(Enemy* enemy);
 	bool shouldDeleteBullet(Bullet* bullet);
 	bool playerHurt;
+	bool freezeBonusActivated;
 };
 
 } /* namespace dxco */
