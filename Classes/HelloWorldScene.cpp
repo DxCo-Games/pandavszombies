@@ -116,25 +116,6 @@ void HelloWorld::realInit() {
 	    this->addChild(playerHPLabel, 10);
 	    this->addChild(playerScoreLabel, 10);
 	    this->addChild(timerLabel, 10);
-
-
-	    float x = 25;
-	    float y = visibleSize.height - visibleSize.width * 0.05 - 15;
-	    float width = visibleSize.width * 0.25;
-	    float height = visibleSize.width * 0.05;
-
-	    CCSprite* border = dxco::SpriteUtil::create("white.png", x, y, width, height);
-	    border->runAction(cocos2d::CCTintTo::create(0.01f, 238, 232, 170));
-
-	    CCSprite* background = dxco::SpriteUtil::create("white.png", x + 1, y + 1, width - 2, height - 2);
-	    background->runAction(cocos2d::CCTintTo::create(0.01f, 255, 0, 0));
-
-	    CCSprite* backgroundOn = dxco::SpriteUtil::create("white.png", x + 1, y + 1, (width - 2) * 0.75, height - 2);
-	    backgroundOn->runAction(cocos2d::CCTintTo::create(0.01f, 0, 0, 255));
-
-	    this->addChild(border, 50);
-	    this->addChild(background, 50);
-	    this->addChild(backgroundOn, 50);
 }
 
 void HelloWorld::preloadTextures() {
