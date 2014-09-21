@@ -42,7 +42,7 @@ void Enemy::unfreeze() {
 
 void Enemy::update(float dt) {
 
-	if (!this->model->freezeBonusActivated) {
+	if (!this->model->freezeBonusActivated || !this->isActive()) {
 		Item::update(dt);
 	}
 
