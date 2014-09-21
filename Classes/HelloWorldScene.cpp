@@ -65,18 +65,22 @@ void HelloWorld::realInit() {
 	    this->timer = 0.0;
 
 	    this->mapa = new dxco::Mapa(mapCornerX, mapCornerY, mapWidth, mapHeight);
+	    this->clouds = new dxco::Container(mapCornerX, mapCornerY, mapWidth, mapHeight);
+	    this->addChild(this->clouds, 4);
 
-	    CCSprite* pSprite = dxco::SpriteUtil::create("ciudad_fondo.png", -mapWidth/4, -mapHeight * 0.2, mapWidth*1.5, mapHeight*1.4);
-	    this->mapa->addChild(pSprite, -10);
+//	    CCSprite* pSprite = dxco::SpriteUtil::create("ciudad_fondo.png", -mapWidth/4, -mapHeight * 0.2, mapWidth*1.5, mapHeight*1.4);
+//	    this->mapa->addChild(pSprite, -10);
+//	    CCSprite* tanque = dxco::SpriteUtil::create("ciudad_tanque.png", -mapWidth/4, -mapHeight  * 0.2, mapWidth*1.5, mapHeight*1.4);
+//		this->clouds->addChild(tanque);
+//	    CCSprite* rejas = dxco::SpriteUtil::create("ciudad_rejas.png", -mapWidth/4, -mapHeight  * 0.2, mapWidth*1.5, mapHeight*1.4);
+//	    this->clouds->addChild(rejas);
+
+	    CCSprite* pSprite = dxco::SpriteUtil::create("campo004_fondo.jpg", -mapWidth/4, -mapHeight * 0.2, mapWidth*1.5, mapHeight*1.4);
+		this->mapa->addChild(pSprite, -10);
+		CCSprite* tanque = dxco::SpriteUtil::create("campo004_rejas.png", -mapWidth/4, -mapHeight  * 0.2, mapWidth*1.5, mapHeight*1.4);
+		this->clouds->addChild(tanque);
 
 	    this->setTouchEnabled(true);
-
-	    this->clouds = new dxco::Container(mapCornerX, mapCornerY, mapWidth, mapHeight);
-	    CCSprite* tanque = dxco::SpriteUtil::create("ciudad_tanque.png", -mapWidth/4, -mapHeight  * 0.2, mapWidth*1.5, mapHeight*1.4);
-		this->clouds->addChild(tanque);
-	    CCSprite* rejas = dxco::SpriteUtil::create("ciudad_rejas.png", -mapWidth/4, -mapHeight  * 0.2, mapWidth*1.5, mapHeight*1.4);
-	    this->clouds->addChild(rejas);
-	    this->addChild(this->clouds, 4);
 
 	    CCSprite* joystickFondo = dxco::SpriteUtil::create("circulo.png", visibleSize.width *  0.85 - 80, 20, 80, 80);
 	    this->addChild(joystickFondo, 10);
