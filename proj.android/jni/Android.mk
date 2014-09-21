@@ -62,7 +62,9 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/crimson/bonus/PuntosBonus.cpp \
                    ../../Classes/crimson/Mapa.cpp \
                    ../../Classes/crimson/daos/UserDAO.cpp \
-                   ../../Classes/crimson/NativeMethods.cpp
+                   ../../Classes/crimson/NativeMethods.cpp \
+                   ../../Classes/crimson/Bazooka.cpp \
+                   ../../Classes/crimson/BazookaBullet.cpp
                    
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes

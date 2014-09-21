@@ -4,6 +4,7 @@
 #include "Weapon.h"
 #include "Shotgun.h"
 #include "FireWeapon.h"
+#include "Bazooka.h"
 #include "SMG.h"
 #include "../HelloWorldScene.h"
 #include "../dxco/SpriteUtil.h"
@@ -258,6 +259,10 @@ void Player::setWeapon(weapons type) {
 	case FIRE: {
 		model->vista->fire->setVisible(true);
 		this->weapon = new FireWeapon(this->model);
+		break;
+	}
+	case BAZOOKA: {
+		this->weapon = new Bazooka(this->model);
 		break;
 	}
 	default:{
