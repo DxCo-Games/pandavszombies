@@ -8,8 +8,8 @@
 namespace dxco {
 
 Shotgun::Shotgun(GameModel* model): Weapon(model) {
-	this->bulletFrequency = 0.75;
-	this->bullets = 80;
+	this->bulletFrequency = 0.5;
+	this->bullets = 240;
 }
 
 void Shotgun::shoot() {
@@ -17,10 +17,12 @@ void Shotgun::shoot() {
 	cocos2d::CCPoint location = this->model->player->getLocation();
 
 	this->createBullet(location.x, location.y, 0);
-	this->createBullet(location.x, location.y, 10);
+	this->createBullet(location.x, location.y, 2.5);
 	this->createBullet(location.x, location.y, 5);
-	this->createBullet(location.x, location.y, -10);
+	this->createBullet(location.x, location.y, 7.5);
+	this->createBullet(location.x, location.y, -2.5);
 	this->createBullet(location.x, location.y, -5);
+	this->createBullet(location.x, location.y, -7.5);
 
 	this->runFlash(location.x, location.y, rotation);
 }
