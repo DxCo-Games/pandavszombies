@@ -57,8 +57,8 @@ bool HelloWorld::init()
 
 void HelloWorld::realInit() {
 		CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-	    float mapWidth = visibleSize.width * 1.2;
-	    float mapHeight = visibleSize.height * 1.4;
+	    float mapWidth = 623; //visibleSize.width * 1.2;
+	    float mapHeight = 516; //visibleSize.height * 1.4;
 	    float mapCornerX = - (mapWidth - visibleSize.width) / 2;
 	    float mapCornerY = - (mapHeight - visibleSize.height) / 2;
 
