@@ -7,7 +7,7 @@
 
 namespace dxco {
 
-class FreezeBombBonus: public dxco::TimeBonus {
+class FreezeBombBonus: public TimeBonus {
 public:
 	FreezeBombBonus(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations);
 

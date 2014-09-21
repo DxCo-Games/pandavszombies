@@ -31,56 +31,61 @@ void Enemy::setNewWanderTarget() {
 }
 
 void Enemy::update(float dt) {
-	Item::update(dt);
+
+	if (!this->model->freezeBonusActivated) {
+		Item::update(dt);
+	}
+
 	if (this->isActive()) {
-		this->state = ENEMY_WALKING;
+		if (!this->model->freezeBonusActivated) {
+			this->state = ENEMY_WALKING;
 
-		cocos2d::CCPoint playerLocation = this->model->player->getLocation();
-		float dist = MathUtil::distance(this->getLocation(), playerLocation);
+			cocos2d::CCPoint playerLocation = this->model->player->getLocation();
+			float dist = MathUtil::distance(this->getLocation(), playerLocation);
 
-		//Enable behaviors according to distance from target
-		int behaviors;
-		if (dist > ENEMY_WANDER_RANGE) {
-			behaviors = USE_WANDER;
-		} else if (dist > ENEMY_SEEK_RANGE) {
-			behaviors = USE_SEEK;
-		} else if (dist > ENEMY_ARRIVE_RANGE) {
-			behaviors = USE_ARRIVE;
-		} else {
-			behaviors = USE_STAND;
+			//Enable behaviors according to distance from target
+			int behaviors;
+			if (dist > ENEMY_WANDER_RANGE) {
+				behaviors = USE_WANDER;
+			} else if (dist > ENEMY_SEEK_RANGE) {
+				behaviors = USE_SEEK;
+			} else if (dist > ENEMY_ARRIVE_RANGE) {
+				behaviors = USE_ARRIVE;
+			} else {
+				behaviors = USE_STAND;
+			}
+			behaviors = behaviors | USE_SEPARATION;
+			this->updateBehaviors(dt, behaviors, playerLocation, dist,
+					this->model->items, ENEMY_SEEK_RANGE - ENEMY_ARRIVE_RANGE, ENEMY_ARRIVE_RANGE);
+
+			//look at destiny
+			float angle = MathUtil::angle(cocos2d::CCPointZero, this->currentVelocity) * -57.2957795;
+			this->setRotation(angle);
+
+			this->burn(dt, playerLocation, dist, angle);
+
+			//after updating, if it's alive fix position
+			this->fixZOrder(playerLocation.y);
+
+
+	//			if (this->canAdvance(destiny, ENEMY_SPEED * dt, this->model->getItems())) {
+	//				//walk to destiny
+	//				cocos2d::CCPoint oldPosition = this->getLocation();
+	//				this->goTo(destiny, ENEMY_SPEED * dt);
+	//
+	//				//before putting it to walk, make sure it will be able to keep moving
+	//				if (this->canAdvance(destiny, ENEMY_SPEED * dt, this->model->getItems())) {
+	//					this->state = ENEMY_WALKING;
+	//				} else {
+	//					//if it can't move further, undo this movement.
+	//					this->goTo(destiny, - ENEMY_SPEED * dt);
+	//				}
+	//
+	//			} else {
+	//				this->state = ENEMY_STANDING;
+	//			}
+	//		}
 		}
-		behaviors = behaviors | USE_SEPARATION;
-		this->updateBehaviors(dt, behaviors, playerLocation, dist,
-				this->model->items, ENEMY_SEEK_RANGE - ENEMY_ARRIVE_RANGE, ENEMY_ARRIVE_RANGE);
-
-		//look at destiny
-		float angle = MathUtil::angle(cocos2d::CCPointZero, this->currentVelocity) * -57.2957795;
-		this->setRotation(angle);
-
-		this->burn(dt, playerLocation, dist, angle);
-
-		//after updating, if it's alive fix position
-		this->fixZOrder(playerLocation.y);
-
-
-//			if (this->canAdvance(destiny, ENEMY_SPEED * dt, this->model->getItems())) {
-//				//walk to destiny
-//				cocos2d::CCPoint oldPosition = this->getLocation();
-//				this->goTo(destiny, ENEMY_SPEED * dt);
-//
-//				//before putting it to walk, make sure it will be able to keep moving
-//				if (this->canAdvance(destiny, ENEMY_SPEED * dt, this->model->getItems())) {
-//					this->state = ENEMY_WALKING;
-//				} else {
-//					//if it can't move further, undo this movement.
-//					this->goTo(destiny, - ENEMY_SPEED * dt);
-//				}
-//
-//			} else {
-//				this->state = ENEMY_STANDING;
-//			}
-//		}
-
 	} else {
 
 		this->model->bonusFactory->createBonus(this->model, this->getLocation());

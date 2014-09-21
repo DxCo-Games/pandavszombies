@@ -110,11 +110,9 @@ void GameModel::update(float dt) {
 		}
 	}
 
-	if (!this->freezeBonusActivated) {
-		for (int i = 0; i < this->enemies.size(); i++) {
-			Enemy* enemy = this->enemies[i];
-			enemy->update(dt);
-		}
+	for (int i = 0; i < this->enemies.size(); i++) {
+		Enemy* enemy = this->enemies[i];
+		enemy->update(dt);
 	}
 
 	for (int i = 0; i < this->bonuses.size(); i++) {
