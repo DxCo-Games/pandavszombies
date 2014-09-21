@@ -7,6 +7,7 @@
 #define ENEMY_WANDER_RANGE 200
 #define ENEMY_SEEK_RANGE 80
 #define ENEMY_ARRIVE_RANGE 30
+#define ENEMY_BLOOD_DURATION 5
 
 #include "cocos2d.h"
 #include "../dxco/TopDownItem.h"
@@ -32,10 +33,11 @@ public:
 	float strength;
 	bool burning;
 	bool dead;
+	float bloodDt;
 
 	int score;
 
-	enum estados { ENEMY_STANDING, ENEMY_WALKING };
+	enum estados { ENEMY_STANDING, ENEMY_WALKING, ENEMY_DEAD };
 
 	void beat(Player* player, float dt);
 	void hurt(float value);
@@ -44,7 +46,7 @@ public:
 	virtual float getColitionRatio();
 	void setNewWanderTarget();
 	float getWanderSpeed();
-	void fixZOrder(float playerY);
+	void fixZOrder(float playerY, bool floor = false);
 
 	virtual void stand(float dt, cocos2d::CCPoint target);
 

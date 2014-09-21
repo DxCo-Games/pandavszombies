@@ -62,47 +62,33 @@ void Enemy::update(float dt) {
 		//after updating, if it's alive fix position
 		this->fixZOrder(playerLocation.y);
 
-
-//			if (this->canAdvance(destiny, ENEMY_SPEED * dt, this->model->getItems())) {
-//				//walk to destiny
-//				cocos2d::CCPoint oldPosition = this->getLocation();
-//				this->goTo(destiny, ENEMY_SPEED * dt);
-//
-//				//before putting it to walk, make sure it will be able to keep moving
-//				if (this->canAdvance(destiny, ENEMY_SPEED * dt, this->model->getItems())) {
-//					this->state = ENEMY_WALKING;
-//				} else {
-//					//if it can't move further, undo this movement.
-//					this->goTo(destiny, - ENEMY_SPEED * dt);
-//				}
-//
-//			} else {
-//				this->state = ENEMY_STANDING;
-//			}
-//		}
-
 	} else {
-
-		this->model->bonusFactory->createBonus(this->model, this->getLocation());
-		//this removes the enemies. cpp, don't ask.
-		this->model->enemies.erase(std::remove(this->model->enemies.begin(), this->model->enemies.end(), this),
-		this->model->enemies.end());
-		this->model->items.erase(std::remove(this->model->items.begin(), this->model->items.end(), this),
-		this->model->items.end());
-
-		if (!this->action) {
-			this->getSprite()->stopAllActions(); // Stop fadeIn action
-			this->action = SpriteUtil::fadeOut(this->getSprite(), 0.25);
+		if (this->state != ENEMY_DEAD) {
+			this->fixZOrder(0, true);
+			this->state = ENEMY_DEAD;
+			this->model->bonusFactory->createBonus(this->model, this->getLocation());
+			this->bloodDt = 0;
+		} else {
+			this->bloodDt += dt;
 		}
 
-		if (this->action == NULL) { // FadeOut is over. IsDone doesn't work because action is already released
-			this->sprite->removeFromParent();
+		Animation *animation = this->animations.find(this->getState())->second;
+		if (animation->finished && this->bloodDt > ENEMY_BLOOD_DURATION) {
+			if (!this->action) {
+				this->getSprite()->stopAllActions(); // Stop fadeIn action
+				this->action = SpriteUtil::fadeOut(this->getSprite(), 0.75);
+			}
 
-			//this removes the enemies. cpp, don't ask.
-			this->model->enemies.erase(std::remove(this->model->enemies.begin(), this->model->enemies.end(), this),
-			this->model->enemies.end());
-			this->model->items.erase(std::remove(this->model->items.begin(), this->model->items.end(), this),
-			this->model->items.end());
+			if (this->bloodDt > ENEMY_BLOOD_DURATION + 1) {
+				// FadeOut is over. IsDone doesn't work because action is already released
+				this->sprite->removeFromParent();
+
+				//this removes the enemies. cpp, don't ask.
+				this->model->enemies.erase(std::remove(this->model->enemies.begin(), this->model->enemies.end(), this),
+				this->model->enemies.end());
+				this->model->items.erase(std::remove(this->model->items.begin(), this->model->items.end(), this),
+				this->model->items.end());
+			}
 		}
 	}
 }
@@ -114,13 +100,19 @@ void Enemy::stand(float dt, cocos2d::CCPoint target) {
 	SteeringBehaviorItem::stand(dt, target);
 }
 
-void Enemy::fixZOrder(float playerY) {
-	//update z order for isometric ordering of characters
-	int zorder = 1000 - this->getLocation().y * 1000 / this->model->mapa->getHeight();
+void Enemy::fixZOrder(float playerY, bool floor) {
+	//update z order for isometric ordering of characters. if floor put at the bottom
+	int zorder;
+
+	if (floor) {
+		zorder = 0;
+	} else {
+		zorder = 1000 - this->getLocation().y * 1000 / this->model->mapa->getHeight();
+	}
 
 	this->sprite->retain();
 	this->sprite->removeFromParentAndCleanup(false);
-	if (this->getLocation().y > playerY) {
+	if (this->getLocation().y > playerY || floor) {
 		this->model->enemyFactory->enemySpriteSheetBack->addChild(this->sprite, zorder);
 	} else {
 		this->model->enemyFactory->enemySpriteSheetFront->addChild(this->sprite, zorder);

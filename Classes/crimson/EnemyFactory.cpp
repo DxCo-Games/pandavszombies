@@ -100,6 +100,15 @@ std::map<int, dxco::Animation*> EnemyFactory::loadAnimations(GameModel* model, s
 
 		animation = new Animation(texturesWalking, frameTime);
 		animations[Enemy::ENEMY_WALKING * ENEMY_ANGLE_POSITIONS + i] = animation;
+
+		std::vector<cocos2d::CCSpriteFrame*> texturesBlood;
+		std::string bloodType = "sangre" + dxco::StringUtil::toString(rand() % 2 + 1) + "_";
+		for (int j = 0; j < 31; j++) {
+			std::string index = dxco::StringUtil::padLeft(j, 4);
+			texturesBlood.push_back(dxco::SpriteUtil::createSpriteFrame(bloodType + index +".png"));
+		}
+		animation = new Animation(texturesBlood, frameTime, false); //don't repeat
+		animations[Enemy::ENEMY_DEAD * ENEMY_ANGLE_POSITIONS + i] = animation;
 	}
 
 	return animations;
