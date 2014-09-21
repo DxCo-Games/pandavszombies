@@ -1,5 +1,4 @@
 #include "HealthBonus.h"
-#include "GameModel.h"
 
 namespace dxco {
 

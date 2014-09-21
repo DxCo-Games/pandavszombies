@@ -2,7 +2,7 @@
 #define WEAPONBONUS_H_
 
 #include "Bonus.h"
-#include "Player.h"
+#include "../Player.h"
 
 namespace dxco {
 

@@ -1,9 +1,9 @@
 #include "ExplosionBonus.h"
-#include "GameModel.h"
-#include "Enemy.h"
-#include "../dxco/SpriteUtil.h"
-#include "../HelloWorldScene.h"
-#include "../dxco/MathUtil.h"
+#include "../GameModel.h"
+#include "../Enemy.h"
+#include "../../dxco/SpriteUtil.h"
+#include "../../HelloWorldScene.h"
+#include "../../dxco/MathUtil.h"
 
 namespace dxco {
 

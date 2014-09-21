@@ -1,11 +1,11 @@
 #include "HelloWorldScene.h"
 #include "BonusFactory.h"
-#include "GameModel.h"
+#include "../GameModel.h"
 #include "HealthBonus.h"
 #include "WeaponBonus.h"
 #include "ExplosionBonus.h"
 #include "MovementSpeedBonus.h"
-#include "../dxco/SpriteUtil.h"
+#include "../../dxco/SpriteUtil.h"
 #include <cstdlib>
 
 namespace dxco {

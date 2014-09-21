@@ -6,8 +6,8 @@
  */
 
 #include "Bonus.h"
-#include "GameModel.h"
-#include "../dxco/MathUtil.h"
+#include "../GameModel.h"
+#include "../../dxco/MathUtil.h"
 #include <algorithm>
 
 namespace dxco {

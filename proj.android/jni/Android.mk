@@ -48,17 +48,17 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/crimson/Bullet.cpp \
                    ../../Classes/crimson/Enemy.cpp \
                    ../../Classes/crimson/Boss.cpp \
-                   ../../Classes/crimson/BonusFactory.cpp \
-                   ../../Classes/crimson/Bonus.cpp \
-                   ../../Classes/crimson/HealthBonus.cpp \
-                   ../../Classes/crimson/WeaponBonus.cpp \
+                   ../../Classes/crimson/bonus/BonusFactory.cpp \
+                   ../../Classes/crimson/bonus/Bonus.cpp \
+                   ../../Classes/crimson/bonus/HealthBonus.cpp \
+                   ../../Classes/crimson/bonus/WeaponBonus.cpp \
                    ../../Classes/crimson/Weapon.cpp \
                    ../../Classes/crimson/FireWeapon.cpp \
                    ../../Classes/crimson/SMG.cpp \
                    ../../Classes/crimson/Shotgun.cpp \
                    ../../Classes/crimson/EnemyFactory.cpp \
-                   ../../Classes/crimson/ExplosionBonus.cpp \
-                   ../../Classes/crimson/MovementSpeedBonus.cpp \
+                   ../../Classes/crimson/bonus/ExplosionBonus.cpp \
+                   ../../Classes/crimson/bonus/MovementSpeedBonus.cpp \
                    ../../Classes/crimson/Mapa.cpp \
                    ../../Classes/crimson/daos/UserDAO.cpp \
                    ../../Classes/crimson/NativeMethods.cpp

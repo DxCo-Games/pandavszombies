@@ -1,7 +1,7 @@
 #ifndef EXPLOSIONBONUS_H_
 #define EXPLOSIONBONUS_H_
 
-#include "crimson/Bonus.h"
+#include "Bonus.h"
 
 namespace dxco {
 
