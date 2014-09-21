@@ -67,7 +67,7 @@ void BonusFactory::createBonus(GameModel* model, cocos2d::CCPoint location) {
 				break;
 			}
 			case 9: {
-				cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/bazooka.png", location.x, location.y, 120, 30);
+				cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/bazooka.png", location.x, location.y, 35, 12);
 				bonus = new WeaponBonus(model, bonusSprite, animations, Player::BAZOOKA);
 				break;
 			}
