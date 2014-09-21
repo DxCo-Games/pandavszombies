@@ -11,6 +11,8 @@
 #include "Mapa.h"
 #include <vector>
 
+#define COIN_VALUE 100
+
 class HelloWorld;
 
 namespace dxco {
@@ -38,6 +40,8 @@ public:
 	bool shouldDeleteBullet(Bullet* bullet);
 	bool playerHurt;
 	bool freezeBonusActivated;
+private:
+	void updateCoins();
 };
 
 } /* namespace dxco */
