@@ -14,9 +14,6 @@ ExplosionBonus::ExplosionBonus(GameModel* model, cocos2d::CCSprite* sprite,
 void ExplosionBonus::applyBonus(){
 	cocos2d::CCParticleSystemQuad* firework = cocos2d::CCParticleSystemQuad::create("ball.plist");
 
-	cocos2d::CCSize visibleSize =
-				cocos2d::CCDirector::sharedDirector()->getVisibleSize();
-
 	firework->setPosition(this->getLocation());
 	firework->setPositionType(cocos2d::kCCPositionTypeRelative);
 	this->model->vista->clouds->addChild(firework);
@@ -24,7 +21,7 @@ void ExplosionBonus::applyBonus(){
 	for (int i = 0; i < this->model->enemies.size(); i++) {
 		Enemy* enemy = this->model->enemies[i];
 
-		if (MathUtil::distance(firework->getPosition(), enemy->getLocation()) < visibleSize.width * 0.3) {
+		if (MathUtil::distance(firework->getPosition(), enemy->getLocation()) < 180) {
 			enemy->hurt(50);
 		}
 	}

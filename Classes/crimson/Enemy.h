@@ -48,6 +48,9 @@ public:
 	float getWanderSpeed();
 	void fixZOrder(float playerY, bool floor = false);
 
+	void freeze();
+	void unfreeze();
+
 	virtual void stand(float dt, cocos2d::CCPoint target);
 
 	cocos2d::CCAction* action;

@@ -11,6 +11,9 @@
 #include "dxco/Container.h"
 #include "dxco/StringUtil.h"
 #include "dxco/LabelUtil.h"
+
+#include "crimson/daos/UserDAO.h"
+
 #include <map>
 
 USING_NS_CC;
@@ -110,8 +113,9 @@ void HelloWorld::realInit() {
 	    this->joystickController.addJoystick(joystick);
 
 	    this->playerHPLabel = dxco::LabelUtil::create("HP: " +  dxco::StringUtil::toString(player->life), 18, 10, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT);
-	    this->playerScoreLabel = dxco::LabelUtil::create("0", 18, 10, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::RIGHT);
+	    this->playerScoreLabel = dxco::LabelUtil::create("0 (" + dxco::StringUtil::toString(dxco::UserDAO::getCoins()) + ")", 18, 10, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::RIGHT);
 	    this->timerLabel = dxco::LabelUtil::create("00:00", 18, visibleSize.width / 2, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT);
+
 
 	    this->addChild(playerHPLabel, 10);
 	    this->addChild(playerScoreLabel, 10);
@@ -257,7 +261,7 @@ void HelloWorld::updatePlayerLifeLabel() {
 }
 
 void HelloWorld::updateScoreLabel() {
-	std::string playerScoreText = "Score: " + dxco::StringUtil::toString(this->model->player->score);
+	std::string playerScoreText = "Score: " + dxco::StringUtil::toString(this->model->player->score) + " (" + dxco::StringUtil::toString(dxco::UserDAO::getCoins()) + ")";
 
 	this->playerScoreLabel->setString(playerScoreText.c_str());
 }

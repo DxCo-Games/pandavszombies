@@ -79,6 +79,15 @@ void UserDAO::doSaveFacebookUser() {
 	}
 }
 
+void UserDAO::addCoins(int coinsToAdd) {
+	int coins = DB::getInteger(COINS_KEY);
+	DB::putInteger(COINS_KEY, coins + coinsToAdd);
+}
+
+int UserDAO::getCoins() {
+	return DB::getInteger(COINS_KEY);
+}
+
 void UserDAO::updateBestScore(int score) {
 
 	int currentScore = UserDAO::getBestScore();

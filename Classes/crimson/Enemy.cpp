@@ -30,38 +30,53 @@ void Enemy::setNewWanderTarget() {
 			rand() % (int)this->model->mapa->getHeight());
 }
 
+void Enemy::freeze() {
+	cocos2d::CCAction* freezeAction = cocos2d::CCSequence::create(cocos2d::CCTintTo::create(0.05f, 98, 253, 253), NULL);
+	this->getSprite()->runAction(freezeAction);
+}
+
+void Enemy::unfreeze() {
+	cocos2d::CCAction* unfreezeAction = cocos2d::CCSequence::create(cocos2d::CCTintTo::create(0.05f, 255, 255, 255), NULL);
+	this->getSprite()->runAction(unfreezeAction);
+}
+
 void Enemy::update(float dt) {
-	Item::update(dt);
+
+	if (!this->model->freezeBonusActivated) {
+		Item::update(dt);
+	}
+
 	if (this->isActive()) {
-		this->state = ENEMY_WALKING;
+		if (!this->model->freezeBonusActivated) {
+			this->state = ENEMY_WALKING;
 
-		cocos2d::CCPoint playerLocation = this->model->player->getLocation();
-		float dist = MathUtil::distance(this->getLocation(), playerLocation);
+			cocos2d::CCPoint playerLocation = this->model->player->getLocation();
+			float dist = MathUtil::distance(this->getLocation(), playerLocation);
 
-		//Enable behaviors according to distance from target
-		int behaviors;
-		if (dist > ENEMY_WANDER_RANGE) {
-			behaviors = USE_WANDER;
-		} else if (dist > ENEMY_SEEK_RANGE) {
-			behaviors = USE_SEEK;
-		} else if (dist > ENEMY_ARRIVE_RANGE) {
-			behaviors = USE_ARRIVE;
-		} else {
-			behaviors = USE_STAND;
+			//Enable behaviors according to distance from target
+			int behaviors;
+			if (dist > ENEMY_WANDER_RANGE) {
+				behaviors = USE_WANDER;
+			} else if (dist > ENEMY_SEEK_RANGE) {
+				behaviors = USE_SEEK;
+			} else if (dist > ENEMY_ARRIVE_RANGE) {
+				behaviors = USE_ARRIVE;
+			} else {
+				behaviors = USE_STAND;
+			}
+			behaviors = behaviors | USE_SEPARATION;
+			this->updateBehaviors(dt, behaviors, playerLocation, dist,
+					this->model->items, ENEMY_SEEK_RANGE - ENEMY_ARRIVE_RANGE, ENEMY_ARRIVE_RANGE);
+
+			//look at destiny
+			float angle = MathUtil::angle(cocos2d::CCPointZero, this->currentVelocity) * -57.2957795;
+			this->setRotation(angle);
+
+			this->burn(dt, playerLocation, dist, angle);
+
+			//after updating, if it's alive fix position
+			this->fixZOrder(playerLocation.y);
 		}
-		behaviors = behaviors | USE_SEPARATION;
-		this->updateBehaviors(dt, behaviors, playerLocation, dist,
-				this->model->items, ENEMY_SEEK_RANGE - ENEMY_ARRIVE_RANGE, ENEMY_ARRIVE_RANGE);
-
-		//look at destiny
-		float angle = MathUtil::angle(cocos2d::CCPointZero, this->currentVelocity) * -57.2957795;
-		this->setRotation(angle);
-
-		this->burn(dt, playerLocation, dist, angle);
-
-		//after updating, if it's alive fix position
-		this->fixZOrder(playerLocation.y);
-
 	} else {
 		if (this->state != ENEMY_DEAD) {
 			this->fixZOrder(0, true);
@@ -123,9 +138,8 @@ void Enemy::fixZOrder(float playerY, bool floor) {
 void Enemy::beat(Player* player, float dt) {
 	//make damage
 	player->hurt(this->strength * dt);
-	cocos2d::CCAction* hurtAction = cocos2d::CCSequence::create(
-			cocos2d::CCTintTo::create(0.01f, 255, 0, 0), cocos2d::CCTintTo::create(0.01f, 255, 255, 255), NULL);
 
+	cocos2d::CCAction* hurtAction = cocos2d::CCSequence::create(cocos2d::CCTintTo::create(0.01f, 255, 0, 0), cocos2d::CCTintTo::create(0.01f, 255, 255, 255), NULL);
 	player->getSprite()->runAction(hurtAction);
 }
 
@@ -142,10 +156,12 @@ bool Enemy::shoot(Bullet* bullet) {
 			result = true;
 
 			this->hurt(bullet->getDamage());
-			cocos2d::CCAction* hurtAction = cocos2d::CCSequence::create(
-			        cocos2d::CCTintTo::create(0.05f, 255, 0, 0), cocos2d::CCTintTo::create(0.05f, 255, 255, 255), NULL);
 
-			this->getSprite()->runAction(hurtAction);
+			if (!this->model->freezeBonusActivated) {
+				cocos2d::CCAction* hurtAction = cocos2d::CCSequence::create(cocos2d::CCTintTo::create(0.05f, 255, 0, 0), cocos2d::CCTintTo::create(0.05f, 255, 255, 255), NULL);
+
+				this->getSprite()->runAction(hurtAction);
+			}
 		}
 	}
 

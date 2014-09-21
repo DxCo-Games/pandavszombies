@@ -5,6 +5,7 @@
 #include "EnemyFactory.h"
 #include "Weapon.h"
 #include "Player.h"
+#include "daos/UserDAO.h"
 #include <algorithm>
 
 namespace dxco {
@@ -16,10 +17,10 @@ class ShouldDeleteBullet
 public:
     ShouldDeleteBullet( GameModel* model ) : model( model ) {
     	cocos2d::CCPoint origin = cocos2d::CCDirector::sharedDirector()->getVisibleOrigin();
-    	maxX = this->model->mapa->getWidth() + origin.x;
-    	maxY = this->model->mapa->getHeight() + origin.y;
-    	minX = origin.x;
-    	minY = origin.y;
+    	maxX = this->model->mapa->getWidth() + origin.x + 200;
+    	maxY = this->model->mapa->getHeight() + origin.y + 200;
+    	minX = origin.x - 200;
+    	minY = origin.y - 200;
     }
 
     float maxX;
@@ -54,9 +55,10 @@ GameModel::GameModel(HelloWorld* vista, Player* player) {
 	this->vista = vista;
 	this->mapa = vista->mapa;
 
-	this->player->setWeapon(Player::BAZOOKA);
+	this->player->setWeapon(Player::PISTOL);
 	this->bonusFactory = new BonusFactory();
 	this->playerHurt = false;
+	this->freezeBonusActivated = false;
 
 	//batch node added to map
 	this->enemyFactory = new EnemyFactory();
@@ -81,15 +83,16 @@ void GameModel::enemyKilled(Enemy* enemy) {
 void GameModel::update(float dt) {
 	this->playerHurt = false;
 
-	if (this->player->weapon->bullets <= 0 &&
-			this->player->weaponType != Player::PISTOL){
+	if (this->player->weapon->bullets <= 0 && this->player->weaponType != Player::PISTOL) {
 		this->player->setWeapon(Player::PISTOL);
 	}
 
 	this->player->update(dt);
 	this->player->weapon->update(dt);
 
-	this->enemyFactory->update(this, dt);
+	if (!this->freezeBonusActivated) {
+		this->enemyFactory->update(this, dt);
+	}
 
 	for (int i = 0; i < this->bullets.size(); i++) {
 		Bullet* bullet = this->bullets[i];
@@ -132,6 +135,8 @@ void GameModel::update(float dt) {
 
 void GameModel::restartGame() {
 
+	updateCoins();
+
 	//reset positions
 	cocos2d::CCSize visibleSize = cocos2d::CCDirector::sharedDirector()->getVisibleSize();
 	float mapWidth = visibleSize.width * 1.5;
@@ -146,6 +151,11 @@ void GameModel::restartGame() {
 	this->player->restartPosition();
 	this->player->life = PLAYER_LIFE;
 	this->player->score = 0;
+
+	this->player->shieldActivated = false;
+	this->player->movementSpeedBonus = 1;
+	this->player->bulletSpeedBonus = 1;
+
 	this->player->setWeapon(Player::PISTOL);
 
 	this->vista->timer = 0;
@@ -170,6 +180,12 @@ void GameModel::restartGame() {
 
 	this->enemyFactory->bossDt = 0;
 	this->enemyFactory->enemyDt = 0;
+}
+
+void GameModel::updateCoins() {
+	int coins = this->player->score / COIN_VALUE;
+
+	UserDAO::addCoins(coins);
 }
 
 
