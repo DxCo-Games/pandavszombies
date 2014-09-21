@@ -39,7 +39,7 @@ void Weapon::update(float dt) {
 
 	this->bulletDt += dt;
 
-	if (this->bulletDt > this->bulletFrequency) {
+	if (this->bulletDt > (this->bulletFrequency / this->model->player->bulletSpeedBonus)) {
 		this->shoot();
 		this->bulletDt = 0;
 	}

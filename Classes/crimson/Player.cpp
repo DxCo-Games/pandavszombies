@@ -16,6 +16,7 @@ Player::Player(cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations)
 	this->state = QUIETO;
 	this->life = PLAYER_LIFE;
 	this->movementSpeedBonus = 1;
+	this->bulletSpeedBonus = 1;
 	this->score = 0;
 	this->moving = false;
 	this->moveRotation;
