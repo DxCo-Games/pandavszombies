@@ -5,6 +5,7 @@
 #include "EnemyFactory.h"
 #include "Weapon.h"
 #include "Player.h"
+#include "daos/UserDAO.h"
 #include <algorithm>
 
 namespace dxco {
@@ -134,6 +135,8 @@ void GameModel::update(float dt) {
 
 void GameModel::restartGame() {
 
+	updateCoins();
+
 	//reset positions
 	cocos2d::CCSize visibleSize = cocos2d::CCDirector::sharedDirector()->getVisibleSize();
 	float mapWidth = visibleSize.width * 1.5;
@@ -177,6 +180,12 @@ void GameModel::restartGame() {
 
 	this->enemyFactory->bossDt = 0;
 	this->enemyFactory->enemyDt = 0;
+}
+
+void GameModel::updateCoins() {
+	int coins = this->player->score / COIN_VALUE;
+
+	UserDAO::addCoins(coins);
 }
 
 

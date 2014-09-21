@@ -9,6 +9,7 @@
 #define FACEBOOK_LASTNAME_KEY "facebook_lastname"
 #define FACEBOOK_USERNAME_KEY "facebook_username"
 #define BEST_SCORE_KEY "best_store"
+#define COINS_KEY "coins"
 
 namespace dxco {
 
@@ -29,6 +30,9 @@ public:
 
 	static void updateBestScore(int score);
 	static int getBestScore();
+
+	static void addCoins(int coinsToAdd);
+	static int getCoins();
 private:
 	static void doSaveFacebookUser();
 	static void deleteAllScores();
