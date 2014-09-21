@@ -41,7 +41,7 @@ void Player::update(float dt) {
 	bool wasHurt = this->state == HERIDO;
 	float speed = PLAYER_SPEED;
 	if (wasHurt) {
-		speed = PLAYER_SPEED * 0.6;
+		speed = PLAYER_SPEED * 0.7;
 	}
 
 	this->updateFireLocation();
