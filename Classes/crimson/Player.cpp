@@ -17,6 +17,7 @@ Player::Player(cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations)
 	this->life = PLAYER_LIFE;
 	this->movementSpeedBonus = 1;
 	this->bulletSpeedBonus = 1;
+	this->shieldActivated = false;
 	this->score = 0;
 	this->moving = false;
 	this->moveRotation;
@@ -24,14 +25,17 @@ Player::Player(cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations)
 }
 
 void Player::hurt(float damage) {
-	this->life -= damage;
-	if(damage > 0) {
-		this->model->playerHurt = true;
-		this->state = HERIDO;
-	}
 
-	if (this->life > PLAYER_LIFE) {
-		this->life = PLAYER_LIFE;
+	if (!shieldActivated) {
+		this->life -= damage;
+		if(damage > 0) {
+			this->model->playerHurt = true;
+			this->state = HERIDO;
+		}
+
+		if (this->life > PLAYER_LIFE) {
+			this->life = PLAYER_LIFE;
+		}
 	}
 }
 

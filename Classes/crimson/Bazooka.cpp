@@ -1,6 +1,7 @@
 #include "Bazooka.h"
 #include "GameModel.h"
 #include "../dxco/SpriteUtil.h"
+#include "BazookaBullet.h"
 
 namespace dxco {
 
@@ -27,7 +28,7 @@ void Bazooka::createBulletSprite(float xBulletPosition, float yBulletPosition, f
 	float radianAngle = (angleBullet + rotation) / -57.2957795;
 
 	std::map<int, Animation*> animations;
-	Bullet* bullet = new Bullet(spriteBullet, radianAngle, animations);
+	Bullet* bullet = new BazookaBullet(this->model, spriteBullet, radianAngle, animations);
 	this->model->addBullet(bullet);
 }
 

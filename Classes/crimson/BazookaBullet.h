@@ -12,10 +12,15 @@
 
 namespace dxco {
 
-class BazookaBullet: public dxco::Bullet {
+class GameModel;
 
-	BazookaBullet(cocos2d::CCSprite* sprite, float angle, std::map<int, Animation*>& animations);
+class BazookaBullet: public dxco::Bullet {
+public:
+	GameModel* model;
+	BazookaBullet(GameModel* model, cocos2d::CCSprite* sprite, float angle, std::map<int, Animation*>& animations);
+
 	void update(float dt);
+	void use();
 };
 
 } /* namespace dxco */
