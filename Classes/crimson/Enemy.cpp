@@ -30,6 +30,16 @@ void Enemy::setNewWanderTarget() {
 			rand() % (int)this->model->mapa->getHeight());
 }
 
+void Enemy::freeze() {
+	cocos2d::CCAction* freezeAction = cocos2d::CCSequence::create(cocos2d::CCTintTo::create(0.05f, 98, 253, 253), NULL);
+	this->getSprite()->runAction(freezeAction);
+}
+
+void Enemy::unfreeze() {
+	cocos2d::CCAction* unfreezeAction = cocos2d::CCSequence::create(cocos2d::CCTintTo::create(0.05f, 255, 255, 255), NULL);
+	this->getSprite()->runAction(unfreezeAction);
+}
+
 void Enemy::update(float dt) {
 
 	if (!this->model->freezeBonusActivated) {
@@ -136,9 +146,8 @@ void Enemy::fixZOrder(float playerY) {
 void Enemy::beat(Player* player, float dt) {
 	//make damage
 	player->hurt(this->strength * dt);
-	cocos2d::CCAction* hurtAction = cocos2d::CCSequence::create(
-			cocos2d::CCTintTo::create(0.01f, 255, 0, 0), cocos2d::CCTintTo::create(0.01f, 255, 255, 255), NULL);
 
+	cocos2d::CCAction* hurtAction = cocos2d::CCSequence::create(cocos2d::CCTintTo::create(0.01f, 255, 0, 0), cocos2d::CCTintTo::create(0.01f, 255, 255, 255), NULL);
 	player->getSprite()->runAction(hurtAction);
 }
 
@@ -155,10 +164,12 @@ bool Enemy::shoot(Bullet* bullet) {
 			result = true;
 
 			this->hurt(bullet->getDamage());
-			cocos2d::CCAction* hurtAction = cocos2d::CCSequence::create(
-			        cocos2d::CCTintTo::create(0.05f, 255, 0, 0), cocos2d::CCTintTo::create(0.05f, 255, 255, 255), NULL);
 
-			this->getSprite()->runAction(hurtAction);
+			if (!this->model->freezeBonusActivated) {
+				cocos2d::CCAction* hurtAction = cocos2d::CCSequence::create(cocos2d::CCTintTo::create(0.05f, 255, 0, 0), cocos2d::CCTintTo::create(0.05f, 255, 255, 255), NULL);
+
+				this->getSprite()->runAction(hurtAction);
+			}
 		}
 	}
 
