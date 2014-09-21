@@ -146,6 +146,11 @@ void GameModel::restartGame() {
 	this->player->restartPosition();
 	this->player->life = PLAYER_LIFE;
 	this->player->score = 0;
+
+	this->player->shieldActivated = false;
+	this->player->movementSpeedBonus = 1;
+	this->player->bulletSpeedBonus = 1;
+
 	this->player->setWeapon(Player::PISTOL);
 
 	this->vista->timer = 0;
