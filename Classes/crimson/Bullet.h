@@ -13,7 +13,7 @@ class Enemy;
 class Bullet : public Item {
 public:
 	Bullet(cocos2d::CCSprite* sprite, float angle, std::map<int, Animation*>& animations);
-	void update(float dt);
+	virtual void update(float dt);
 
 	virtual void use();
 	virtual float getDamage();
