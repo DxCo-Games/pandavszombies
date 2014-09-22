@@ -83,10 +83,6 @@ void GameModel::enemyKilled(Enemy* enemy) {
 void GameModel::update(float dt) {
 	this->playerHurt = false;
 
-	if (this->player->weapon->bullets <= 0 && this->player->weaponType != Player::PISTOL) {
-		this->player->setWeapon(Player::PISTOL);
-	}
-
 	this->player->update(dt);
 	this->player->weapon->update(dt);
 

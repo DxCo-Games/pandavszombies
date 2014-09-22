@@ -9,7 +9,6 @@ Weapon::Weapon(GameModel* model) {
 	this->model = model;
 	this->bulletDt = 0;
 	this->bulletFrequency = 0.25;
-	this->bullets = -1; //infinite bullets by default
 
 	cocos2d::CCPoint location = model->player->getLocation();
 	this->flashSprite = SpriteUtil::create("disparo/disparo01.png", 10, 10, 40, 40);
@@ -377,8 +376,6 @@ void Weapon::runFlash(float x, float y, float rotation) {
 }
 
 void Weapon::createBullet(float x, float y, float rotation) {
-	this->bullets -= 1;
-
 	int angleState = this->model->player->getAngleState();
 
 	int screenCenterX = x - 40;

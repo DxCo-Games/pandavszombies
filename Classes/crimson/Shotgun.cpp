@@ -9,7 +9,6 @@ namespace dxco {
 
 Shotgun::Shotgun(GameModel* model): Weapon(model) {
 	this->bulletFrequency = 0.5;
-	this->bullets = 240;
 }
 
 void Shotgun::shoot() {

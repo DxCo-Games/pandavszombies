@@ -20,7 +20,6 @@ public:
 	void createBullet(float x, float y, float rotation);
 
 	virtual void createBulletSprite(float x, float y, float angleBullet, float rotation);
-	int bullets;
 	GameModel* model;
 	float bulletDt;
 	float bulletFrequency;
