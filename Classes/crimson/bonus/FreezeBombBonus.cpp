@@ -10,7 +10,10 @@ void FreezeBombBonus::applyBonus() {
 
 	for (int i = 0; i < this->model->enemies.size(); i++) {
 		Enemy* enemy = this->model->enemies[i];
-		enemy->freeze();
+		
+		if (enemy->isActive()) { // Only freeze enemies that are not dead
+			enemy->freeze();
+		}
 	}
 }
 
@@ -19,7 +22,10 @@ void FreezeBombBonus::removeBonus() {
 
 	for (int i = 0; i < this->model->enemies.size(); i++) {
 		Enemy* enemy = this->model->enemies[i];
-		enemy->unfreeze();
+		
+		if (enemy->isActive()) {
+			enemy->unfreeze();
+		}
 	}
 }
 

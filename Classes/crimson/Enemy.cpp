@@ -47,11 +47,12 @@ void Enemy::update(float dt) {
 	}
 
 	if (this->isActive()) {
+
+		cocos2d::CCPoint playerLocation = this->model->player->getLocation();
+		float dist = MathUtil::distance(this->getLocation(), playerLocation);
+
 		if (!this->model->freezeBonusActivated) {
 			this->state = ENEMY_WALKING;
-
-			cocos2d::CCPoint playerLocation = this->model->player->getLocation();
-			float dist = MathUtil::distance(this->getLocation(), playerLocation);
 
 			//Enable behaviors according to distance from target
 			int behaviors;
@@ -76,6 +77,9 @@ void Enemy::update(float dt) {
 
 			//after updating, if it's alive fix position
 			this->fixZOrder(playerLocation.y);
+		} else {
+			float angle = MathUtil::angle(cocos2d::CCPointZero, this->currentVelocity) * -57.2957795;
+			this->burn(dt, playerLocation, dist, angle);
 		}
 	} else {
 		if (this->state != ENEMY_DEAD) {
@@ -171,6 +175,11 @@ bool Enemy::shoot(Bullet* bullet) {
 void Enemy::hurt(float value) {
 	this->life -= value;
 	if (!this->isActive()) {
+
+		if (this->model->freezeBonusActivated) {
+			this->unfreeze();
+		}
+
 		this->model->enemyKilled(this);
 	}
 }
