@@ -21,7 +21,6 @@ public:
 
 	//TODO ver bien este nombre
 	virtual void createBulletSprite(float x, float y, float angleBullet, float rotation);
-	int bullets;
 	GameModel* model;
 	float bulletDt;
 	float bulletFrequency;

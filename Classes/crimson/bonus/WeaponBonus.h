@@ -1,17 +1,21 @@
 #ifndef WEAPONBONUS_H_
 #define WEAPONBONUS_H_
 
-#include "Bonus.h"
+#include "TimeBonus.h"
 #include "../Player.h"
+
+#define WEAPON_BONUS_DURATION 15
 
 namespace dxco {
 
-class WeaponBonus: public Bonus {
+class WeaponBonus: public TimeBonus {
 public:
-	WeaponBonus(GameModel* model, cocos2d::CCSprite* sprite,
-			std::map<int, Animation*>& animations, Player::weapons type);
+	WeaponBonus(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations, Player::weapons type);
 
 	void applyBonus();
+	
+	void removeBonus();
+	
 	Player::weapons type;
 };
 
