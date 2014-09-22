@@ -3,9 +3,10 @@
 
 namespace dxco {
 
-Bullet::Bullet(cocos2d::CCSprite* sprite, float angle, std::map<int, Animation*>& animations) : Item(sprite, animations) {
+Bullet::Bullet(cocos2d::CCSprite* sprite, float angle, std::map<int, Animation*>& animations, bool persistent) : Item(sprite, animations) {
 	this->angle = angle;
 	this->used = false;
+	this->persistent = persistent;
 }
 
 void Bullet::update(float dt) {
@@ -17,8 +18,10 @@ void Bullet::update(float dt) {
 
 
 void Bullet::use() {
-	this->getSprite()->removeFromParent();
-	this->used = true;
+	if (! this->persistent) {
+		this->getSprite()->removeFromParent();
+		this->used = true;
+	}
 }
 
 float Bullet::getDamage() {

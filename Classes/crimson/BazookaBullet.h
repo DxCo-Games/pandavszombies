@@ -1,10 +1,3 @@
-/*
- * BazookaBullet.h
- *
- *  Created on: Sep 21, 2014
- *      Author: gsosarolon
- */
-
 #ifndef BAZOOKABULLET_H_
 #define BAZOOKABULLET_H_
 

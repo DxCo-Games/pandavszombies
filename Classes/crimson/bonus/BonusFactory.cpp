@@ -21,7 +21,7 @@ void BonusFactory::createBonus(GameModel* model, cocos2d::CCPoint location) {
 	if (rand() % 100 < BONUS_PROBABILITY) {
 		std::map<int, dxco::Animation*> animations;
 		Bonus* bonus;
-		switch (rand() % 11) {
+		switch (rand() % 12) {
 			case 0: {	//Health bonus
 				cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/health.png", location.x, location.y, 30, 20);
 				bonus = new HealthBonus(model, bonusSprite, animations);
@@ -75,6 +75,11 @@ void BonusFactory::createBonus(GameModel* model, cocos2d::CCPoint location) {
 			case 10: {
 				cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/freezeicon.png", location.x, location.y, 30, 30);
 				bonus = new FreezeBombBonus(model, bonusSprite, animations);
+				break;
+			}
+			case 11: {
+				cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/bon_firebullets.jpg", location.x, location.y, 30, 30);
+				bonus = new WeaponBonus(model, bonusSprite, animations, Player::FIREBULLET);
 				break;
 			}
 		}

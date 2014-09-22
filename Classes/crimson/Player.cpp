@@ -4,6 +4,7 @@
 #include "Weapon.h"
 #include "Shotgun.h"
 #include "FireWeapon.h"
+#include "FireBulletWeapon.h"
 #include "Bazooka.h"
 #include "SMG.h"
 #include "../HelloWorldScene.h"
@@ -268,6 +269,10 @@ void Player::setWeapon(weapons type) {
 	}
 	case BAZOOKA: {
 		this->weapon = new Bazooka(this->model);
+		break;
+	}
+	case FIREBULLET: {
+		this->weapon = new FireBulletWeapon(this->model);
 		break;
 	}
 	default:{

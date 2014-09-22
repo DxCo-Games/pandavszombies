@@ -19,7 +19,7 @@ public:
 
 	GameModel* model;
 	enum estados { QUIETO, CAMINANDO, HERIDO };
-	enum weapons { PISTOL, SHOTGUN, SMG_, MACHINE_GUN, FIRE, BAZOOKA};
+	enum weapons { PISTOL, SHOTGUN, SMG_, MACHINE_GUN, FIRE, BAZOOKA, FIREBULLET};
 	Weapon* weapon;
 	weapons weaponType;
 

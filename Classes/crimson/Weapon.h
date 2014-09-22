@@ -19,7 +19,6 @@ public:
 	void updateFlash(float x, float y, float rotation);
 	void createBullet(float x, float y, float rotation);
 
-	//TODO ver bien este nombre
 	virtual void createBulletSprite(float x, float y, float angleBullet, float rotation);
 	int bullets;
 	GameModel* model;

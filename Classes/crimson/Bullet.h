@@ -12,13 +12,14 @@ class Enemy;
 
 class Bullet : public Item {
 public:
-	Bullet(cocos2d::CCSprite* sprite, float angle, std::map<int, Animation*>& animations);
+	Bullet(cocos2d::CCSprite* sprite, float angle, std::map<int, Animation*>& animations, bool persistent = false);
 	virtual void update(float dt);
 
 	virtual void use();
 	virtual float getDamage();
 	float angle;
 	bool used;
+	bool persistent;
 };
 
 } /* namespace dxco */

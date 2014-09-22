@@ -67,6 +67,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/crimson/Mapa.cpp \
                    ../../Classes/crimson/daos/UserDAO.cpp \
                    ../../Classes/crimson/NativeMethods.cpp \
+                   ../../Classes/crimson/FireBulletWeapon.cpp \
                    ../../Classes/crimson/Bazooka.cpp \
                    ../../Classes/crimson/BazookaBullet.cpp
                    

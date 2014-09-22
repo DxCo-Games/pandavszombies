@@ -68,7 +68,7 @@ GameModel::GameModel(HelloWorld* vista, Player* player) {
 
 void GameModel::addBullet(Bullet* bullet) {
 	this->bullets.push_back(bullet);
-	this->mapa->addChild(bullet->getSprite(), 2);
+	this->mapa->addChild(bullet->getSprite(), 10001);
 }
 
 

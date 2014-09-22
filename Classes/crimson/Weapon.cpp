@@ -501,13 +501,13 @@ void Weapon::createBulletSprite(float xBulletPosition, float yBulletPosition, fl
 	//need to tweak the coordinates as the location of the panda is not exactly its center.
 	cocos2d::CCSprite* spriteBullet = SpriteUtil::create("bullet.png", xBulletPosition - 2.5 - 20, yBulletPosition - 2.5 - 20, 5, 5);
 
-	spriteBullet->setRotation(angleBullet + rotation);
 
 	/** degrees to radians */
 	float radianAngle = (angleBullet + rotation) / -57.2957795;
 
 	std::map<int, Animation*> animations;
 	Bullet* bullet = new Bullet(spriteBullet, radianAngle, animations);
+	spriteBullet->setRotation(angleBullet + rotation);
 	this->model->addBullet(bullet);
 }
 
