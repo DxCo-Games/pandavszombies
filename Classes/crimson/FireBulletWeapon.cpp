@@ -6,7 +6,6 @@
 namespace dxco {
 
 FireBulletWeapon::FireBulletWeapon(GameModel* model): Weapon(model) {
-	this->bullets = 50;
 	this->bulletFrequency = 0.4;
 }
 
