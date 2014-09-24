@@ -28,7 +28,7 @@ void BonusFactory::createBonus(GameModel* model, cocos2d::CCPoint location) {
 				break;
 			}
 			case 1:{ // Shotgun
-				cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/sg.png", location.x, location.y, 50, 20);
+				cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/shotgun.png", location.x, location.y, 50, 20);
 				bonus = new WeaponBonus(model, bonusSprite, animations, Player::SHOTGUN);
 				break;
 			}
@@ -38,7 +38,7 @@ void BonusFactory::createBonus(GameModel* model, cocos2d::CCPoint location) {
 				break;
 			}
 			case 3: {
-				cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/fireicon.png", location.x, location.y, 30, 30);
+				cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/flame_thrower.png", location.x, location.y, 30, 30);
 				bonus = new WeaponBonus(model, bonusSprite, animations, Player::FIRE);
 				break;
 			}
@@ -48,22 +48,22 @@ void BonusFactory::createBonus(GameModel* model, cocos2d::CCPoint location) {
 				break;
 			}
 			case 5: {
-				cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/speedicon.png", location.x, location.y, 30, 30);
+				cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/speed.png", location.x, location.y, 30, 30);
 				bonus = new MovementSpeedBonus(model, bonusSprite, animations);
 				break;
 			}
 			case 6: {
-				cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/puntosicon.png", location.x, location.y, 30, 30);
+				cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/bonus_points.png", location.x, location.y, 30, 30);
 				bonus = new PuntosBonus(model, bonusSprite, animations);
 				break;
 			}
 			case 7: {
-				cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/weaponspeedicon.png", location.x, location.y, 30, 30);
+				cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/weapon_speed.png", location.x, location.y, 30, 30);
 				bonus = new WeaponSpeedBonus(model, bonusSprite, animations);
 				break;
 			}
 			case 8: {
-				cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/shieldicon.png", location.x, location.y, 30, 30);
+				cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/shield.png", location.x, location.y, 30, 30);
 				bonus = new ShieldBonus(model, bonusSprite, animations);
 				break;
 			}
@@ -73,12 +73,12 @@ void BonusFactory::createBonus(GameModel* model, cocos2d::CCPoint location) {
 				break;
 			}
 			case 10: {
-				cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/freezeicon.png", location.x, location.y, 30, 30);
+				cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/freeze.png", location.x, location.y, 30, 30);
 				bonus = new FreezeBombBonus(model, bonusSprite, animations);
 				break;
 			}
 			case 11: {
-				cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/bon_firebullets.jpg", location.x, location.y, 30, 30);
+				cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/fire.png", location.x, location.y, 30, 30);
 				bonus = new WeaponBonus(model, bonusSprite, animations, Player::FIREBULLET);
 				break;
 			}
