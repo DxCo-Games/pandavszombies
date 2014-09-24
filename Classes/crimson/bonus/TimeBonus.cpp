@@ -26,7 +26,7 @@ void TimeBonus::update(float dt) {
 			this->dtBonusAcquired = 0;
 		} else {
 			if (this->dt > BONUS_DT) {
-				this->removeBonus();
+				Bonus::removeBonus();
 			}
 		}
 	}
