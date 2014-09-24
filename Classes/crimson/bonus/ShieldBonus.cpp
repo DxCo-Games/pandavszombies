@@ -1,4 +1,5 @@
 #include "ShieldBonus.h"
+#include "HelloWorldScene.h"
 
 namespace dxco {
 
