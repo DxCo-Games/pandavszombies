@@ -12,6 +12,8 @@
 #include <vector>
 
 #define COIN_VALUE 100
+#define MAP_WIDTH 623
+#define MAP_HEIGHT 516
 
 class HelloWorld;
 

@@ -135,8 +135,8 @@ void GameModel::restartGame() {
 
 	//reset positions
 	cocos2d::CCSize visibleSize = cocos2d::CCDirector::sharedDirector()->getVisibleSize();
-	float mapWidth = visibleSize.width * 1.5;
-	float mapHeight = visibleSize.height * 1.5;
+	float mapWidth = MAP_WIDTH;
+	float mapHeight = MAP_HEIGHT;
 	float mapCornerX = - (mapWidth - visibleSize.width) / 2;
 	float mapCornerY = - (mapHeight - visibleSize.height) / 2;
 	this->mapa->moveToAbsolute(mapCornerX, mapCornerY);

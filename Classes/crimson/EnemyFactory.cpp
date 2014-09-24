@@ -107,7 +107,7 @@ std::map<int, dxco::Animation*> EnemyFactory::loadAnimations(GameModel* model, s
 			std::string index = dxco::StringUtil::padLeft(j, 4);
 			texturesBlood.push_back(dxco::SpriteUtil::createSpriteFrame(bloodType + index +".png"));
 		}
-		animation = new Animation(texturesBlood, frameTime, false); //don't repeat
+		animation = new Animation(texturesBlood, 0.015, false); //don't repeat
 		animations[Enemy::ENEMY_DEAD * ENEMY_ANGLE_POSITIONS + i] = animation;
 	}
 
