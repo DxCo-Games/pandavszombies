@@ -7,10 +7,12 @@ ShieldBonus::ShieldBonus(GameModel* model, cocos2d::CCSprite* sprite, std::map<i
 
 void ShieldBonus::applyBonus() {
 	this->model->player->shieldActivated = true;
+	this->model->vista->bubble->setVisible(true);
 }
 
 void ShieldBonus::removeBonus() {
 	this->model->player->shieldActivated = false;
+	this->model->vista->bubble->setVisible(false);
 }
 
 } /* namespace dxco */

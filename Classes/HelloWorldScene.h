@@ -28,6 +28,7 @@ public:
     virtual void update(float dt);
     dxco::Mapa* mapa;
     dxco::Container* clouds;
+    cocos2d::CCSprite* bubble;
 
     virtual void initFire(float x, float y);
     cocos2d::CCParticleSystemQuad* fire;

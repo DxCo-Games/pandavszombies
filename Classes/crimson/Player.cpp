@@ -84,6 +84,7 @@ void Player::update(float dt) {
 		if (deltaX != 0 || deltaY != 0) {
 			this->model->mapa->move(-deltaX, -deltaY);
 			this->model->vista->clouds->move(-deltaX, -deltaY);
+			this->model->vista->bubble->setPosition(cocos2d::CCPoint(finalX, finalY - 5));
 
 			//undo map movement so player stays in the middle
 			SpriteUtil::move(this->sprite, deltaX, deltaY);

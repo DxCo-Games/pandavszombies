@@ -83,6 +83,11 @@ void HelloWorld::realInit() {
 		CCSprite* tanque = dxco::SpriteUtil::create("campo004_rejas.png", -mapWidth/4, -mapHeight  * 0.2, mapWidth*1.5, mapHeight*1.4);
 		this->clouds->addChild(tanque);
 
+		this->bubble = dxco::SpriteUtil::create("bubble.png", 0, 0, 93, 93);
+		this->bubble->setVisible(false);
+		this->bubble->setOpacity(128);
+		this->clouds->addChild(this->bubble);
+
 	    this->setTouchEnabled(true);
 
 	    CCSprite* joystickFondo = dxco::SpriteUtil::create("circulo.png", visibleSize.width *  0.85 - 80, 20, 80, 80);
