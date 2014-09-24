@@ -4,6 +4,7 @@
 #include "TimeBonus.h"
 
 #define WEAPON_SPEED_BONUS_DURATION 10
+#define WEAPON_SPEED_BONUS_RATIO 0.4
 
 namespace dxco {
 

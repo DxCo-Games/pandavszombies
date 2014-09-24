@@ -32,7 +32,7 @@ public:
 	float life;
 	int score;
 	float movementSpeedBonus;
-	int bulletSpeedBonus;
+	float weaponSpeedBonus;
 	bool shieldActivated;
 
 	bool moving;

@@ -150,7 +150,7 @@ void GameModel::restartGame() {
 
 	this->player->shieldActivated = false;
 	this->player->movementSpeedBonus = 1;
-	this->player->bulletSpeedBonus = 1;
+	this->player->weaponSpeedBonus = 1;
 
 	this->player->setWeapon(Player::PISTOL);
 

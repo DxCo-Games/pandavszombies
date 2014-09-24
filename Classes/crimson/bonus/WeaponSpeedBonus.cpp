@@ -7,11 +7,13 @@ WeaponSpeedBonus::WeaponSpeedBonus(GameModel* model, cocos2d::CCSprite* sprite, 
 }
 
 void WeaponSpeedBonus::applyBonus() {
-	this->model->player->bulletSpeedBonus += 1;
+	this->model->player->weaponSpeedBonus += WEAPON_SPEED_BONUS_RATIO;
 }
 
 void WeaponSpeedBonus::removeBonus() {
-	this->model->player->bulletSpeedBonus -= 1;
+	if (this->model->player->weaponSpeedBonus != 1) {
+		this->model->player->weaponSpeedBonus -= WEAPON_SPEED_BONUS_RATIO;
+	}
 }
 
 } /* namespace dxco */
