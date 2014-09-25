@@ -28,13 +28,17 @@ public class MainMenuActivity extends Activity {
 
 	private ImageButton botonLoginFacebook;
 	private ImageButton botonLogoutFacebook;
+	
+	static {
+		System.loadLibrary("hellocpp");
+	}
 
 	private Session.StatusCallback statusCallback = new SessionStatusCallback();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		// printKeyHash();
 		
 		setContentView(R.layout.main_menu_activity);
