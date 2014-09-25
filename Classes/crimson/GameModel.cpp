@@ -55,7 +55,7 @@ GameModel::GameModel(HelloWorld* vista, Player* player) {
 	this->vista = vista;
 	this->mapa = vista->mapa;
 
-	this->player->setWeapon(Player::PISTOL);
+	this->player->setWeapon(Player::BAZOOKA);
 	this->bonusFactory = new BonusFactory();
 	this->playerHurt = false;
 	this->freezeBonusActivated = false;

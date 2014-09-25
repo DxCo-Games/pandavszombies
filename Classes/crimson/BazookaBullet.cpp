@@ -40,6 +40,9 @@ void BazookaBullet::use() {
 			enemy->hurt(30);
 		}
 	}
+
+	this->used = true;
+	this->getSprite()->removeFromParent();
 }
 
 
