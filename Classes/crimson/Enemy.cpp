@@ -83,7 +83,12 @@ void Enemy::update(float dt) {
 		}
 	} else {
 		if (this->state != ENEMY_DEAD) {
-			this->fixZOrder(0, true);
+			//fix zorder of blood splat to be on the floor
+			this->sprite->retain();
+			this->sprite->removeFromParentAndCleanup(false);
+			this->model->mapa->addChild(this->sprite, -1);
+			this->sprite->release();
+
 			this->state = ENEMY_DEAD;
 			this->model->bonusFactory->createBonus(this->model, this->getLocation());
 			this->bloodDt = 0;
@@ -119,19 +124,13 @@ void Enemy::stand(float dt, cocos2d::CCPoint target) {
 	SteeringBehaviorItem::stand(dt, target);
 }
 
-void Enemy::fixZOrder(float playerY, bool floor) {
+void Enemy::fixZOrder(float playerY) {
 	//update z order for isometric ordering of characters. if floor put at the bottom
-	int zorder;
-
-	if (floor) {
-		zorder = 0;
-	} else {
-		zorder = 1000 - this->getLocation().y * 1000 / this->model->mapa->getHeight();
-	}
+	int zorder = 1000 - this->getLocation().y * 1000 / this->model->mapa->getHeight();
 
 	this->sprite->retain();
 	this->sprite->removeFromParentAndCleanup(false);
-	if (this->getLocation().y > playerY || floor) {
+	if (this->getLocation().y > playerY) {
 		this->model->enemyFactory->enemySpriteSheetBack->addChild(this->sprite, zorder);
 	} else {
 		this->model->enemyFactory->enemySpriteSheetFront->addChild(this->sprite, zorder);
