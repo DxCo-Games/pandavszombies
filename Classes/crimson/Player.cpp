@@ -27,7 +27,7 @@ Player::Player(cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations)
 
 void Player::hurt(float damage) {
 
-	if (!shieldActivated) {
+	if (!shieldActivated || damage < 0) {
 		this->life -= damage;
 		if(damage > 0) {
 			this->model->playerHurt = true;

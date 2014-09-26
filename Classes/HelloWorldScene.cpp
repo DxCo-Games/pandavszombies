@@ -117,9 +117,9 @@ void HelloWorld::realInit() {
 	    joystick = new dxco::JoystickMovimiento(model, joystickBotonMovimiento, 65);
 	    this->joystickController.addJoystick(joystick);
 
-	    this->playerHPLabel = dxco::LabelUtil::create("HP: " +  dxco::StringUtil::toString(player->life), 18, 10, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT);
-	    this->playerScoreLabel = dxco::LabelUtil::create("0 (" + dxco::StringUtil::toString(dxco::UserDAO::getCoins()) + ")", 18, 10, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::RIGHT);
-	    this->timerLabel = dxco::LabelUtil::create("00:00", 18, visibleSize.width / 2, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT);
+	    this->playerHPLabel = dxco::LabelUtil::create("HP: " +  dxco::StringUtil::toString(player->life), 18, 10, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT, "fonts/KBStickToThePlan.ttf");
+	    this->playerScoreLabel = dxco::LabelUtil::create("0 (" + dxco::StringUtil::toString(dxco::UserDAO::getCoins()) + ")", 18, 10, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::RIGHT, "fonts/KBStickToThePlan.ttf");
+	    this->timerLabel = dxco::LabelUtil::create("00:00", 18, visibleSize.width / 2, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT, "fonts/KBStickToThePlan.ttf");
 
 
 	    this->addChild(playerHPLabel, 10);

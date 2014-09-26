@@ -10,7 +10,7 @@
         android:orientation="vertical"
         android:paddingLeft="0dp"
 		android:paddingRight="0dp"
-		android:background="@drawable/fondo_menu_principal">
+		android:background="@drawable/fondo_ciudad">
 
         <ImageButton
             android:id="@+id/botonPlay"
