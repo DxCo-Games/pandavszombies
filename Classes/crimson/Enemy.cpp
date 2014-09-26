@@ -90,7 +90,9 @@ void Enemy::update(float dt) {
 			this->sprite->release();
 
 			this->state = ENEMY_DEAD;
-			this->model->bonusFactory->createBonus(this->model, this->getLocation());
+			cocos2d::CCPoint location = this->getLocation();
+			this->model->bonusFactory->createBonus(this->model, cocos2d::CCPoint(location.x,
+					location.y - this->getHeight() / 2));
 			this->bloodDt = 0;
 		} else {
 			this->bloodDt += dt;

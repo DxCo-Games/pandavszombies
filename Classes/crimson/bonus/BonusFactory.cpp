@@ -21,6 +21,7 @@ void BonusFactory::createBonus(GameModel* model, cocos2d::CCPoint location) {
 	if (rand() % 100 < BONUS_PROBABILITY) {
 		std::map<int, dxco::Animation*> animations;
 		Bonus* bonus;
+
 		switch (rand() % 12) {
 			case 0: {	//Health bonus
 				cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/health.png", location.x, location.y, 45, 45);
@@ -85,6 +86,7 @@ void BonusFactory::createBonus(GameModel* model, cocos2d::CCPoint location) {
 		}
 
 		model->bonuses.push_back(bonus);
+		model->mapa->putInside(bonus); //make sure it's reachable in the map
 		model->mapa->addChild(bonus->getSprite());
 	}
 }
