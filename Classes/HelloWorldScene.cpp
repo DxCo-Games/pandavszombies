@@ -111,7 +111,7 @@ void HelloWorld::realInit() {
 
 	    dxco::Player* player = this->createPlayer();
 
-	    model = new dxco::GameModel(this, player);
+	    model = new dxco::GameModel(this, player, true); //true=survival, false=story
 	    dxco::Joystick* joystick = new dxco::JoystickMira(model, joystickBoton, 65);
 	    this->joystickController.addJoystick(joystick);
 

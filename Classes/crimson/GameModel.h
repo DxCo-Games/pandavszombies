@@ -23,7 +23,7 @@ class Level;
 
 class GameModel {
 public:
-	GameModel(HelloWorld* vista, Player* player);
+	GameModel(HelloWorld* vista, Player* player, bool survival);
 	Player* player;
 	EnemyFactory* enemyFactory;
 	BonusFactory* bonusFactory;

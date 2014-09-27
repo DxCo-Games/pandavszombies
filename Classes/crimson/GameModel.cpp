@@ -1,5 +1,6 @@
 #include "GameModel.h"
 #include "levels/Level.h"
+#include "levels/SurvivalLevel.h"
 #include "levels/EnemyWave.h"
 #include "../HelloWorldScene.h"
 #include "dxco/SpriteUtil.h"
@@ -49,7 +50,7 @@ public:
     }
 };
 
-GameModel::GameModel(HelloWorld* vista, Player* player) {
+GameModel::GameModel(HelloWorld* vista, Player* player, bool survival) {
 
 	//not very nice
 	this->player = player;
@@ -57,13 +58,18 @@ GameModel::GameModel(HelloWorld* vista, Player* player) {
 	this->vista = vista;
 	this->mapa = vista->mapa;
 
-	//TODO create level and waves from file. decide story/survival based on parameter
-	EnemyWave *w1 = new EnemyWave(this, 10, 0.3, ENEMY_DEFAULT_SPEED);
-	EnemyWave *w2 = new EnemyWave(this, 2, 5, ENEMY_DEFAULT_SPEED, true);
-	std::vector<EnemyWave*> waves;
-	waves.push_back(w1);
-	waves.push_back(w2);
-	this->level = new Level(this, waves);
+	if (survival) {
+		this->level = new SurvivalLevel(this);
+	} else {
+		//TODO create level and waves from file. decide story/survival based on parameter
+		EnemyWave *w1 = new EnemyWave(this, 10, 0.3, ENEMY_DEFAULT_SPEED);
+		EnemyWave *w2 = new EnemyWave(this, 2, 5, ENEMY_DEFAULT_SPEED, true);
+		std::vector<EnemyWave*> waves;
+		waves.push_back(w1);
+		waves.push_back(w2);
+		this->level = new Level(this, waves);
+	}
+
 
 	this->player->setWeapon(Player::PISTOL);
 	this->bonusFactory = new BonusFactory();
