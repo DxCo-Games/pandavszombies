@@ -120,17 +120,17 @@ void HelloWorld::realInit() {
 	    joystick = new dxco::JoystickMovimiento(model, joystickBotonMovimiento, 65);
 	    this->joystickController.addJoystick(joystick);
 
-	    CCSprite* pandaHead = dxco::SpriteUtil::create("gameplay/PANDA_head.png", 5, visibleSize.height - 35 , dxco::SpriteUtil::UNDEFINED, 0.1 * visibleSize.height);
-	    CCSprite* lifeBack = dxco::SpriteUtil::create("gameplay/PANDA_energia_fin.png", 30, visibleSize.height - 35 , 0.3 * visibleSize.width , 0.1 * visibleSize.height);
-		CCSprite* lifeFront = dxco::SpriteUtil::create("gameplay/PANDA_energia.png", 30, visibleSize.height - 35 , dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+	    //Life bar
+	    CCSprite* lifeBack = dxco::SpriteUtil::create("gameplay/PANDA_energia_fin.png", 5, visibleSize.height - 40 , 0.35 * visibleSize.width , 0.11 * visibleSize.height);
+		CCSprite* lifeFront = dxco::SpriteUtil::create("gameplay/PANDA_energia.png", 5, visibleSize.height - 40 , dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
 		lifeBar = CCProgressTimer::create(lifeFront);
-		lifeBar->setPosition(lifeBack->getPosition()); //positions don't match by defeault
-		lifeBar->setScale(lifeBack->getScale());
+		lifeBar->setPosition(lifeBack->getPosition()); //positions don't match by default
+		lifeBar->setScaleX(lifeBack->getScaleX());
+		lifeBar->setScaleY(lifeBack->getScaleY());
 		lifeBar->setType(kCCProgressTimerTypeBar);
-		lifeBar->setMidpoint(ccp(0,0));
+		lifeBar->setMidpoint(ccp(0.16,0)); // the x coord tells the bar to put the 0% after the panda head
 		lifeBar->setBarChangeRate(ccp(1,0));
 		lifeBar->setPercentage(100);
-		this->addChild(pandaHead, 10);
 		this->addChild(lifeBack, 10);
 	    this->addChild(lifeBar, 11);
 
