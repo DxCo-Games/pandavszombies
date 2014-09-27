@@ -9,11 +9,9 @@ class GameModel;
 
 class EnemyWave {
 public:
+	//TODO take the parameters from another place rather than constructor
+	//TODO add parameters: allowed characters (cura, basquet, etc.), strength, life, wave duration
 	EnemyWave(GameModel *model, int total, float freq, float speed, bool isBoss=false);
-
-	//get property values for the wave. TODO better a string to be casted?
-//	float get(std::string propertyName);
-//	float get(std::string propertyName, float defaultValue);
 
 	bool isFinished();
 	void update(float dt);

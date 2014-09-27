@@ -4,7 +4,7 @@
 
 namespace dxco {
 
-SurvivalLevel::SurvivalLevel(GameModel* model): Level(model, *new std::vector<EnemyWave*>) { //apuesto a que esto pincha :P
+SurvivalLevel::SurvivalLevel(GameModel* model): Level(model, *new std::vector<EnemyWave*>) {
 	this->enemyDt = 0;
 	this->bossDt = 0;
 	this->speedDt = 0;
