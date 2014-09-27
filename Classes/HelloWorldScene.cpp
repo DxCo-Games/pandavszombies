@@ -11,6 +11,7 @@
 #include "dxco/Container.h"
 #include "dxco/StringUtil.h"
 #include "dxco/LabelUtil.h"
+#include "crimson/levels/Level.h"
 
 #include "crimson/daos/UserDAO.h"
 

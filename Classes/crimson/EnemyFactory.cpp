@@ -12,32 +12,9 @@ namespace dxco {
 
 
 EnemyFactory::EnemyFactory(){
-	this->enemyDt = 100;
-	this->bossDt = 0;
-	this->speedDt = 0;
-
 	//sprite sheet is created here but should be added as a map child outside
 	this->enemySpriteSheetFront = cocos2d::CCSpriteBatchNode::create("sprite_sheets/zombies.png");
 	this->enemySpriteSheetBack = cocos2d::CCSpriteBatchNode::create("sprite_sheets/zombies.png");
-}
-
-void EnemyFactory::update(GameModel* model, float dt) {
-	this->enemyDt += dt;
-	if (this->enemyDt > ENEMY_DT){
-		this->createEnemy(model);
-		this->enemyDt = 0;
-	}
-
-	this->bossDt += dt;
-	if (this->bossDt > BOSS_DT){
-		this->createBoss(model);
-		this->bossDt = 0;
-	}
-	this->speedDt += dt;
-	if (this->speedDt > SPEED_DT){
-		Enemy::ENEMY_SPEED = 1.1 * Enemy::ENEMY_SPEED;
-		this->speedDt = 0;
-	}
 }
 
 void EnemyFactory::createEnemy(GameModel* model) {

@@ -19,12 +19,15 @@ class HelloWorld;
 
 namespace dxco {
 
+class Level;
+
 class GameModel {
 public:
 	GameModel(HelloWorld* vista, Player* player);
 	Player* player;
 	EnemyFactory* enemyFactory;
 	BonusFactory* bonusFactory;
+	Level *level;
 
 	void addBullet(Bullet* bullet);
 	std::vector<Bullet*> bullets;

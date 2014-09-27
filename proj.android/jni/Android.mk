@@ -64,6 +64,9 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/crimson/bonus/MovementSpeedBonus.cpp \
                    ../../Classes/crimson/bonus/PuntosBonus.cpp \
                    ../../Classes/crimson/bonus/ShieldBonus.cpp \
+                   ../../Classes/crimson/levels/Level.cpp \
+                   ../../Classes/crimson/levels/SurvivalLevel.cpp \
+                   ../../Classes/crimson/levels/EnemyWave.cpp \
                    ../../Classes/crimson/Mapa.cpp \
                    ../../Classes/crimson/daos/UserDAO.cpp \
                    ../../Classes/crimson/NativeMethods.cpp \

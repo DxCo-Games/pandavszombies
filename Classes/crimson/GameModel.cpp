@@ -1,4 +1,6 @@
 #include "GameModel.h"
+#include "levels/Level.h"
+#include "levels/EnemyWave.h"
 #include "../HelloWorldScene.h"
 #include "dxco/SpriteUtil.h"
 #include <cstdlib>
@@ -55,6 +57,14 @@ GameModel::GameModel(HelloWorld* vista, Player* player) {
 	this->vista = vista;
 	this->mapa = vista->mapa;
 
+	//TODO create level and waves from file. decide story/survival based on parameter
+	EnemyWave *w1 = new EnemyWave(this, 10, 0.3, ENEMY_DEFAULT_SPEED);
+	EnemyWave *w2 = new EnemyWave(this, 2, 5, ENEMY_DEFAULT_SPEED, true);
+	std::vector<EnemyWave*> waves;
+	waves.push_back(w1);
+	waves.push_back(w2);
+	this->level = new Level(this, waves);
+
 	this->player->setWeapon(Player::PISTOL);
 	this->bonusFactory = new BonusFactory();
 	this->playerHurt = false;
@@ -87,7 +97,7 @@ void GameModel::update(float dt) {
 	this->player->weapon->update(dt);
 
 	if (!this->freezeBonusActivated) {
-		this->enemyFactory->update(this, dt);
+		this->level->update(dt);
 	}
 
 	for (int i = 0; i < this->bullets.size(); i++) {
@@ -116,7 +126,7 @@ void GameModel::update(float dt) {
 		this->bonuses[i]->update(dt);
 	}
 
-	if (!this->player->isActive()){
+	if (!this->player->isActive() || this->level->isFinished()){
 		this->restartGame();
 	}
 
@@ -173,9 +183,7 @@ void GameModel::restartGame() {
 		this->mapa->removeChild(this->bonuses[i]->getSprite());
 	}
 	this->bonuses.clear();
-
-	this->enemyFactory->bossDt = 0;
-	this->enemyFactory->enemyDt = 0;
+	this->level->restartLevel();
 }
 
 void GameModel::updateCoins() {
