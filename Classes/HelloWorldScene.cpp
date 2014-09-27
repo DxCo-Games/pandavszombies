@@ -120,15 +120,17 @@ void HelloWorld::realInit() {
 	    joystick = new dxco::JoystickMovimiento(model, joystickBotonMovimiento, 65);
 	    this->joystickController.addJoystick(joystick);
 
-		CCSprite* lifeBack = dxco::SpriteUtil::create("gameplay/PANDA_energia_fin.png", 5, visibleSize.height - 35 , dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
-		CCSprite* lifeFront = dxco::SpriteUtil::create("gameplay/PANDA_energia.png", 5, visibleSize.height - 35 , dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+	    CCSprite* pandaHead = dxco::SpriteUtil::create("gameplay/PANDA_head.png", 5, visibleSize.height - 35 , dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+	    CCSprite* lifeBack = dxco::SpriteUtil::create("gameplay/PANDA_energia_fin.png", 30, visibleSize.height - 35 , dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+		CCSprite* lifeFront = dxco::SpriteUtil::create("gameplay/PANDA_energia.png", 30, visibleSize.height - 35 , dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
 		lifeBar = CCProgressTimer::create(lifeFront);
 		lifeBar->setPosition(lifeBack->getPosition()); //positions don't match by defeault
 		lifeBar->setType(kCCProgressTimerTypeBar);
 		lifeBar->setMidpoint(ccp(0,0));
 		lifeBar->setBarChangeRate(ccp(1,0));
 		lifeBar->setPercentage(100);
-	    this->addChild(lifeBack, 10);
+		this->addChild(pandaHead, 10);
+		this->addChild(lifeBack, 10);
 	    this->addChild(lifeBar, 11);
 
 
