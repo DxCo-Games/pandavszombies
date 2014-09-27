@@ -72,17 +72,19 @@ void HelloWorld::realInit() {
 	    this->clouds = new dxco::Container(mapCornerX, mapCornerY, mapWidth, mapHeight);
 	    this->addChild(this->clouds, 4);
 
-//	    CCSprite* pSprite = dxco::SpriteUtil::create("ciudad_fondo.png", -mapWidth/4, -mapHeight * 0.2, mapWidth*1.5, mapHeight*1.4);
-//	    this->mapa->addChild(pSprite, -10);
-//	    CCSprite* tanque = dxco::SpriteUtil::create("ciudad_tanque.png", -mapWidth/4, -mapHeight  * 0.2, mapWidth*1.5, mapHeight*1.4);
-//		this->clouds->addChild(tanque);
-//	    CCSprite* rejas = dxco::SpriteUtil::create("ciudad_rejas.png", -mapWidth/4, -mapHeight  * 0.2, mapWidth*1.5, mapHeight*1.4);
-//	    this->clouds->addChild(rejas);
-
-	    CCSprite* pSprite = dxco::SpriteUtil::create("campo004_fondo.jpg", -mapWidth/4, -mapHeight * 0.2, mapWidth*1.5, mapHeight*1.4);
-		this->mapa->addChild(pSprite, -10);
-		CCSprite* tanque = dxco::SpriteUtil::create("campo004_rejas.png", -mapWidth/4, -mapHeight  * 0.2, mapWidth*1.5, mapHeight*1.4);
-		this->clouds->addChild(tanque);
+	    if(false) { //TODO select background
+			CCSprite* pSprite = dxco::SpriteUtil::create("ciudad_fondo.png", -mapWidth/4, -mapHeight * 0.2, mapWidth*1.5, mapHeight*1.4);
+			this->mapa->addChild(pSprite, -10);
+			CCSprite* tanque = dxco::SpriteUtil::create("ciudad_tanque.png", -mapWidth/4, -mapHeight  * 0.2, mapWidth*1.5, mapHeight*1.4);
+			this->clouds->addChild(tanque);
+			CCSprite* rejas = dxco::SpriteUtil::create("ciudad_rejas.png", -mapWidth/4, -mapHeight  * 0.2, mapWidth*1.5, mapHeight*1.4);
+			this->clouds->addChild(rejas);
+	    } else {
+			CCSprite* pSprite = dxco::SpriteUtil::create("campo004_fondo.jpg", -mapWidth/4, -mapHeight * 0.2, mapWidth*1.5, mapHeight*1.4);
+			this->mapa->addChild(pSprite, -10);
+			CCSprite* tanque = dxco::SpriteUtil::create("campo004_rejas.png", -mapWidth/4, -mapHeight  * 0.2, mapWidth*1.5, mapHeight*1.4);
+			this->clouds->addChild(tanque);
+	    }
 
 		this->bubble = dxco::SpriteUtil::create("bubble.png", 0, 0, 93, 93);
 		this->bubble->setVisible(false);
@@ -118,12 +120,22 @@ void HelloWorld::realInit() {
 	    joystick = new dxco::JoystickMovimiento(model, joystickBotonMovimiento, 65);
 	    this->joystickController.addJoystick(joystick);
 
-	    this->playerHPLabel = dxco::LabelUtil::create("HP: " +  dxco::StringUtil::toString(player->life), 18, 10, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT, "fonts/KBStickToThePlan.ttf");
+		CCSprite* lifeBack = dxco::SpriteUtil::create("gameplay/PANDA_energia_fin.png", 5, visibleSize.height - 35 , dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+		CCSprite* lifeFront = dxco::SpriteUtil::create("gameplay/PANDA_energia.png", 5, visibleSize.height - 35 , dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+		lifeBar = CCProgressTimer::create(lifeFront);
+		lifeBar->setPosition(lifeBack->getPosition()); //positions don't match by defeault
+		lifeBar->setType(kCCProgressTimerTypeBar);
+		lifeBar->setMidpoint(ccp(0,0));
+		lifeBar->setBarChangeRate(ccp(1,0));
+		lifeBar->setPercentage(100);
+	    this->addChild(lifeBack, 10);
+	    this->addChild(lifeBar, 11);
+
+
 	    this->playerScoreLabel = dxco::LabelUtil::create("0 (" + dxco::StringUtil::toString(dxco::UserDAO::getCoins()) + ")", 18, 10, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::RIGHT, "fonts/KBStickToThePlan.ttf");
 	    this->timerLabel = dxco::LabelUtil::create("00:00", 18, visibleSize.width / 2, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT, "fonts/KBStickToThePlan.ttf");
 
 
-	    this->addChild(playerHPLabel, 10);
 	    this->addChild(playerScoreLabel, 10);
 	    this->addChild(timerLabel, 10);
 }
@@ -262,8 +274,7 @@ void HelloWorld::updateTimerLabel() {
 
 void HelloWorld::updatePlayerLifeLabel() {
 	std::string playerLifeText = "HP: " + dxco::StringUtil::toString((float)round(this->model->player->life));
-
-	this->playerHPLabel->setString(playerLifeText.c_str());
+	this->lifeBar->setPercentage(this->model->player->life * 100 / PLAYER_LIFE);
 }
 
 void HelloWorld::updateScoreLabel() {

@@ -45,7 +45,6 @@ private:
     dxco::GameModel* model;
     dxco::JoystickController joystickController;
 
-    cocos2d::CCLabelTTF* playerHPLabel;
     cocos2d::CCLabelTTF* playerScoreLabel;
     cocos2d::CCLabelTTF* timerLabel;
 
@@ -54,6 +53,7 @@ private:
     void realInit();
     int angulosCargados;
     cocos2d::CCLabelTTF* porcentajeCargado;
+    cocos2d::CCProgressTimer* lifeBar;
     cocos2d::CCSprite* loading;
     cocos2d::CCSprite* joystickBotonIzq;
     cocos2d::CCSprite* joystickBotonDrc;
