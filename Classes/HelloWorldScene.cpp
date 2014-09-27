@@ -121,8 +121,8 @@ void HelloWorld::realInit() {
 	    this->joystickController.addJoystick(joystick);
 
 	    //Life bar
-	    CCSprite* lifeBack = dxco::SpriteUtil::create("gameplay/PANDA_energia_fin.png", 5, visibleSize.height - 40 , 0.35 * visibleSize.width , 0.11 * visibleSize.height);
-		CCSprite* lifeFront = dxco::SpriteUtil::create("gameplay/PANDA_energia.png", 5, visibleSize.height - 40 , dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+	    CCSprite* lifeBack = dxco::SpriteUtil::create("gameplay/PANDA_energia_fin.png", 5, 0.87 * visibleSize.height, 0.35 * visibleSize.width , 0.11 * visibleSize.height);
+		CCSprite* lifeFront = dxco::SpriteUtil::create("gameplay/PANDA_energia.png", 5, 0.87 * visibleSize.height, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
 		lifeBar = CCProgressTimer::create(lifeFront);
 		lifeBar->setPosition(lifeBack->getPosition()); //positions don't match by default
 		lifeBar->setScaleX(lifeBack->getScaleX());
@@ -134,6 +134,18 @@ void HelloWorld::realInit() {
 		this->addChild(lifeBack, 10);
 	    this->addChild(lifeBar, 11);
 
+	    //weapon bar
+	    CCSprite* weaponBack = dxco::SpriteUtil::create("gameplay/BALAS_barra_fin.png", 5, 0.78 * visibleSize.height, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+	    weaponBack->setScaleX(lifeBack->getScaleX());
+	    weaponBack->setScaleY(lifeBack->getScaleY());
+	    dxco::SpriteUtil::leftAlign(lifeBack, weaponBack);
+	    CCSprite* weaponIcon = dxco::SpriteUtil::create("bonus/PISTOLA.png", 5, 0.78 * visibleSize.height, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+	    weaponIcon->setScaleX(lifeBack->getScaleX());
+		weaponIcon->setScaleY(lifeBack->getScaleY());
+		weaponIcon->setPositionY(weaponBack->getPositionY());
+		dxco::SpriteUtil::leftAlign(lifeBack, weaponIcon);
+	    this->addChild(weaponBack, 10);
+	    this->addChild(weaponIcon, 11);
 
 	    this->playerScoreLabel = dxco::LabelUtil::create("0 (" + dxco::StringUtil::toString(dxco::UserDAO::getCoins()) + ")", 18, 10, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::RIGHT, "fonts/KBStickToThePlan.ttf");
 	    this->timerLabel = dxco::LabelUtil::create("00:00", 18, visibleSize.width / 2, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT, "fonts/KBStickToThePlan.ttf");
@@ -158,7 +170,7 @@ dxco::Player* HelloWorld::createPlayer() {
 
 	CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
 	this->playerContainer = new dxco::Container(this->mapa->getWidth() / 2,  this->mapa->getHeight() / 2, 80, 80);
-    CCSprite* spriteGuy = dxco::SpriteUtil::create("herida1_1_0000.png", this->mapa->getWidth() / 2,  this->mapa->getHeight() / 2, 80, 80, true);
+    CCSprite* spriteGuy = dxco::SpriteUtil::create("herida1_1_0000.png", 0.45 * this->mapa->getWidth(),  0.45 * this->mapa->getHeight(), 80, 80, true);
 
     //this->playerContainer->addChild(spriteGuy);
     this->mapa->addChild(spriteGuy, 2);
