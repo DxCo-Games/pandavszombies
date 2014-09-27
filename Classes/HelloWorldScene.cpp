@@ -139,7 +139,7 @@ void HelloWorld::realInit() {
 	    weaponBack->setScaleX(lifeBack->getScaleX());
 	    weaponBack->setScaleY(lifeBack->getScaleY());
 	    dxco::SpriteUtil::leftAlign(lifeBack, weaponBack);
-	    CCSprite* weaponIcon = dxco::SpriteUtil::create("bonus/PISTOLA.png", 5, 0.78 * visibleSize.height, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+	    weaponIcon = dxco::SpriteUtil::create("bonus/PISTOLA.png", 5, 0.78 * visibleSize.height, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
 	    weaponIcon->setScaleX(lifeBack->getScaleX());
 		weaponIcon->setScaleY(lifeBack->getScaleY());
 		weaponIcon->setPositionY(weaponBack->getPositionY());

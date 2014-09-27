@@ -257,27 +257,34 @@ void Player::setWeapon(weapons type) {
 	switch(type) {
 	case SHOTGUN: {
 		this->weapon = new Shotgun(this->model);
+		SpriteUtil::setTexture(model->vista->weaponIcon, "bonus/shotgun.png");
 		break;
 	}
 	case SMG_: {
 		this->weapon = new SMG(this->model);
+		SpriteUtil::setTexture(model->vista->weaponIcon, "bonus/smg.png");
 		break;
 	}
 	case FIRE: {
 		model->vista->fire->setVisible(true);
 		this->weapon = new FireWeapon(this->model);
+		SpriteUtil::setTexture(model->vista->weaponIcon, "bonus/flame_thrower.png");
 		break;
 	}
 	case BAZOOKA: {
 		this->weapon = new Bazooka(this->model);
+		SpriteUtil::setTexture(model->vista->weaponIcon, "bonus/bazooka.png");
 		break;
 	}
 	case FIREBULLET: {
 		this->weapon = new FireBulletWeapon(this->model);
+		//FIXME need icon
+		SpriteUtil::setTexture(model->vista->weaponIcon, "bonus/PISTOLA.png");
 		break;
 	}
 	default:{
 		this->weapon = new Weapon(this->model);
+		SpriteUtil::setTexture(model->vista->weaponIcon, "bonus/PISTOLA.png");
 		break;
 	}
 	}
