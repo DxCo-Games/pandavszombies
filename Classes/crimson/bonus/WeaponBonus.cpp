@@ -1,5 +1,6 @@
 #include "WeaponBonus.h"
 #include "../GameModel.h"
+#include "../../HelloWorldScene.h"
 
 namespace dxco {
 
@@ -14,6 +15,14 @@ void WeaponBonus::applyBonus(){
 void WeaponBonus::removeBonus() {
 	if (this->model->player->weaponType == this->type) {
 		this->model->player->setWeapon(Player::PISTOL);
+		this->model->vista->weaponBar->setPercentage(100);
+	}
+}
+
+void WeaponBonus::update(float dt) {
+	TimeBonus::update(dt);
+	if (this->bonusAcquired && this->dtBonusAcquired < this->bonusDuration) {
+		this->model->vista->weaponBar->setPercentage(100 - this->dtBonusAcquired * 100 / this->bonusDuration);
 	}
 }
 

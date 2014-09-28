@@ -30,6 +30,7 @@ public:
     dxco::Container* clouds;
     cocos2d::CCSprite* bubble;
     cocos2d::CCSprite* weaponIcon;
+    cocos2d::CCProgressTimer* weaponBar;
 
     virtual void initFire(float x, float y);
     cocos2d::CCParticleSystemQuad* fire;

@@ -11,8 +11,7 @@ class TimeBonus : public Bonus {
 public:
 	TimeBonus(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations, float bonusDuration);
 
-	void update(float dt);
-private:
+	virtual void update(float dt);
 	float dtBonusAcquired;
 	float bonusDuration;
 	bool bonusAcquired;

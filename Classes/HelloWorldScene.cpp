@@ -139,12 +139,22 @@ void HelloWorld::realInit() {
 	    weaponBack->setScaleX(lifeBack->getScaleX());
 	    weaponBack->setScaleY(lifeBack->getScaleY());
 	    dxco::SpriteUtil::leftAlign(lifeBack, weaponBack);
+	    CCSprite* weaponFront = dxco::SpriteUtil::create("gameplay/BALAS_barra.png", 5, 0.78 * visibleSize.height, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+		weaponBar = CCProgressTimer::create(weaponFront);
+		weaponBar->setPosition(weaponBack->getPosition()); //positions don't match by default
+		weaponBar->setScaleX(weaponBack->getScaleX());
+		weaponBar->setScaleY(weaponBack->getScaleY());
+		weaponBar->setType(kCCProgressTimerTypeBar);
+		weaponBar->setMidpoint(ccp(0.25,0)); // the x coord tells the bar to put the 0% after the panda head
+		weaponBar->setBarChangeRate(ccp(1,0));
+		weaponBar->setPercentage(100);
 	    weaponIcon = dxco::SpriteUtil::create("bonus/PISTOLA.png", 5, 0.78 * visibleSize.height, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
 	    weaponIcon->setScaleX(lifeBack->getScaleX());
 		weaponIcon->setScaleY(lifeBack->getScaleY());
 		weaponIcon->setPositionY(weaponBack->getPositionY());
 		dxco::SpriteUtil::leftAlign(lifeBack, weaponIcon);
 	    this->addChild(weaponBack, 10);
+	    this->addChild(weaponBar, 11);
 	    this->addChild(weaponIcon, 11);
 
 	    this->playerScoreLabel = dxco::LabelUtil::create("0 (" + dxco::StringUtil::toString(dxco::UserDAO::getCoins()) + ")", 18, 10, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::RIGHT, "fonts/KBStickToThePlan.ttf");

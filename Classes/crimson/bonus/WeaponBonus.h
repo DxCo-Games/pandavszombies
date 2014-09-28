@@ -12,8 +12,8 @@ class WeaponBonus: public TimeBonus {
 public:
 	WeaponBonus(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations, Player::weapons type);
 
+	virtual void update(float dt);
 	void applyBonus();
-	
 	void removeBonus();
 	
 	Player::weapons type;
