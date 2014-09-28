@@ -7,6 +7,7 @@ ShieldBonus::ShieldBonus(GameModel* model, cocos2d::CCSprite* sprite, std::map<i
 }
 
 void ShieldBonus::applyBonus() {
+	this->model->vista->updateBonus("bonus/ESCUDO_activado.png", this->bonusDuration);
 	this->model->player->shieldActivated = true;
 	this->model->vista->bubble->setVisible(true);
 }

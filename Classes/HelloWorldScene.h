@@ -31,11 +31,14 @@ public:
     cocos2d::CCSprite* bubble;
     cocos2d::CCSprite* weaponIcon;
     cocos2d::CCProgressTimer* weaponBar;
+    cocos2d::CCSprite* bonus1;
+    cocos2d::CCSprite* bonus2;
 
     virtual void initFire(float x, float y);
     cocos2d::CCParticleSystemQuad* fire;
 
     void updatePlayerLifeLabel();
+    void updateBonus(std::string texture, float duration);
     void updateScoreLabel();
     void updateTimerLabel();
 

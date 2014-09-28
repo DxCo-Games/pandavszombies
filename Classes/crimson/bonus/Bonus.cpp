@@ -1,10 +1,3 @@
-/*
- * Bonus.cpp
- *
- *  Created on: May 16, 2014
- *      Author: facundo
- */
-
 #include "Bonus.h"
 #include "../GameModel.h"
 #include "../../dxco/MathUtil.h"

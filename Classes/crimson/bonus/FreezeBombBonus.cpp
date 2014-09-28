@@ -1,4 +1,5 @@
 #include "FreezeBombBonus.h"
+#include "../../HelloWorldScene.h"
 
 namespace dxco {
 
@@ -7,6 +8,7 @@ FreezeBombBonus::FreezeBombBonus(GameModel* model, cocos2d::CCSprite* sprite, st
 
 void FreezeBombBonus::applyBonus() {
 	this->model->freezeBonusActivated = true;
+	this->model->vista->updateBonus("bonus/CONGELAR_activado.png", this->bonusDuration);
 
 	for (int i = 0; i < this->model->enemies.size(); i++) {
 		Enemy* enemy = this->model->enemies[i];

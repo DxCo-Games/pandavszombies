@@ -157,10 +157,27 @@ void HelloWorld::realInit() {
 	    this->addChild(weaponBar, 11);
 	    this->addChild(weaponIcon, 11);
 
+	    //bonus icons
+	    bonus1 = dxco::SpriteUtil::create("bonus/BALAV_activada.png", 5, 0.78 * visibleSize.height, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+	    bonus1->setScaleX(lifeBack->getScaleX());
+	    bonus1->setScaleY(lifeBack->getScaleY());
+	    this->addChild(bonus1, 11);
+	    bonus1->setOpacity(0);
+	    bonus2 = dxco::SpriteUtil::create("bonus/BALAV_activada.png", 5, 0.78 * visibleSize.height, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+		bonus2->setScaleX(lifeBack->getScaleX());
+		bonus2->setScaleY(lifeBack->getScaleY());
+		this->addChild(bonus2, 11);
+		bonus2->setOpacity(0);
+		//spread the bonus icons between the life and weapon bars
+		float x0 = weaponBack->getPositionX() + dxco::SpriteUtil::getWidth(weaponBack) / 2;
+		float xf = lifeBack->getPositionX() + dxco::SpriteUtil::getWidth(lifeBack) / 2;
+		float iconWidth = dxco::SpriteUtil::getWidth(bonus1);
+		float padding = (xf - x0 - 2 * iconWidth) / 3;
+		bonus1->setPositionX(x0 + padding + iconWidth / 2);
+		bonus2->setPositionX(xf - padding - iconWidth / 2);
+
 	    this->playerScoreLabel = dxco::LabelUtil::create("0 (" + dxco::StringUtil::toString(dxco::UserDAO::getCoins()) + ")", 18, 10, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::RIGHT, "fonts/KBStickToThePlan.ttf");
 	    this->timerLabel = dxco::LabelUtil::create("00:00", 18, visibleSize.width / 2, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT, "fonts/KBStickToThePlan.ttf");
-
-
 	    this->addChild(playerScoreLabel, 10);
 	    this->addChild(timerLabel, 10);
 }
@@ -300,6 +317,28 @@ void HelloWorld::updateTimerLabel() {
 void HelloWorld::updatePlayerLifeLabel() {
 	std::string playerLifeText = "HP: " + dxco::StringUtil::toString((float)round(this->model->player->life));
 	this->lifeBar->setPercentage(this->model->player->life * 100 / PLAYER_LIFE);
+}
+
+void HelloWorld::updateBonus(std::string texture, float duration) {
+	//decide which one is first
+	CCSprite *b1, *b2;
+	if (this->bonus1->getPositionX() < this->bonus2->getPositionX()) {
+		b1 = this->bonus1;
+		b2 = this->bonus2;
+	} else {
+		b1 = this->bonus2;
+		b2 = this->bonus1;
+	}
+
+	//swap icons
+	CCPoint p1 = b1->getPosition();
+	b1->setPosition(b2->getPosition());
+	b2->setPosition(p1);
+
+	//set texture and begin fade
+	dxco::SpriteUtil::setTexture(b2, texture);
+	b2->setOpacity(255);
+	dxco::SpriteUtil::fadeOut(b2, duration);
 }
 
 void HelloWorld::updateScoreLabel() {

@@ -1,4 +1,5 @@
 #include "MovementSpeedBonus.h"
+#include "../../HelloWorldScene.h"
 
 namespace dxco {
 
@@ -7,6 +8,7 @@ MovementSpeedBonus::MovementSpeedBonus(GameModel* model, cocos2d::CCSprite* spri
 
 void MovementSpeedBonus::applyBonus() {
 	this->model->player->movementSpeedBonus = MOVEMENT_BONUS_RATE;
+	this->model->vista->updateBonus("bonus/VELOCIDAD_activado.png", this->bonusDuration);
 }
 
 void MovementSpeedBonus::removeBonus() {

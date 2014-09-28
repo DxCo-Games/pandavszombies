@@ -1,4 +1,5 @@
 #include "WeaponSpeedBonus.h"
+#include "../../HelloWorldScene.h"
 
 namespace dxco {
 
@@ -7,6 +8,7 @@ WeaponSpeedBonus::WeaponSpeedBonus(GameModel* model, cocos2d::CCSprite* sprite, 
 }
 
 void WeaponSpeedBonus::applyBonus() {
+	this->model->vista->updateBonus("bonus/BALAV_activada.png", this->bonusDuration);
 	this->model->player->weaponSpeedBonus += WEAPON_SPEED_BONUS_RATIO;
 }
 
