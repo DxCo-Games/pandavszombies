@@ -93,20 +93,6 @@ void HelloWorld::realInit() {
 
 	    this->setTouchEnabled(true);
 
-	    CCSprite* joystickFondo = dxco::SpriteUtil::create("circulo.png", visibleSize.width *  0.85 - 80, 20, 80, 80);
-	    this->addChild(joystickFondo, 10);
-	    joystickFondo->setOpacity(128);
-
-	    CCSprite* joystickBoton = dxco::SpriteUtil::create("boton.png", visibleSize.width * 0.85 - 60,  40, 40, 40);
-	    this->addChild(joystickBoton, 12);
-
-	    joystickFondo = dxco::SpriteUtil::create("circulo.png", visibleSize.width *  0.15, 20, 80, 80);
-	    this->addChild(joystickFondo, 12);
-	    joystickFondo->setOpacity(128);
-
-	    CCSprite* joystickBotonMovimiento = dxco::SpriteUtil::create("boton.png", visibleSize.width * 0.15 + 20,  40, 40, 40);
-	    this->addChild(joystickBotonMovimiento, 12);
-
 	    this->initFire(visibleSize.width / 2,  visibleSize.height / 2);
 
 	    this->addChild(mapa);
@@ -114,72 +100,8 @@ void HelloWorld::realInit() {
 	    dxco::Player* player = this->createPlayer();
 
 	    model = new dxco::GameModel(this, player, true); //true=survival, false=story
-	    dxco::Joystick* joystick = new dxco::JoystickMira(model, joystickBoton, 65);
-	    this->joystickController.addJoystick(joystick);
 
-	    joystick = new dxco::JoystickMovimiento(model, joystickBotonMovimiento, 65);
-	    this->joystickController.addJoystick(joystick);
-
-	    //Life bar
-	    CCSprite* lifeBack = dxco::SpriteUtil::create("gameplay/PANDA_energia_fin.png", 5, 0.87 * visibleSize.height, 0.35 * visibleSize.width , 0.11 * visibleSize.height);
-		CCSprite* lifeFront = dxco::SpriteUtil::create("gameplay/PANDA_energia.png", 5, 0.87 * visibleSize.height, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
-		lifeBar = CCProgressTimer::create(lifeFront);
-		lifeBar->setPosition(lifeBack->getPosition()); //positions don't match by default
-		lifeBar->setScaleX(lifeBack->getScaleX());
-		lifeBar->setScaleY(lifeBack->getScaleY());
-		lifeBar->setType(kCCProgressTimerTypeBar);
-		lifeBar->setMidpoint(ccp(0.16,0)); // the x coord tells the bar to put the 0% after the panda head
-		lifeBar->setBarChangeRate(ccp(1,0));
-		lifeBar->setPercentage(100);
-		this->addChild(lifeBack, 10);
-	    this->addChild(lifeBar, 11);
-
-	    //weapon bar
-	    CCSprite* weaponBack = dxco::SpriteUtil::create("gameplay/BALAS_barra_fin.png", 5, 0.78 * visibleSize.height, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
-	    weaponBack->setScaleX(lifeBack->getScaleX());
-	    weaponBack->setScaleY(lifeBack->getScaleY());
-	    dxco::SpriteUtil::leftAlign(lifeBack, weaponBack);
-	    CCSprite* weaponFront = dxco::SpriteUtil::create("gameplay/BALAS_barra.png", 5, 0.78 * visibleSize.height, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
-		weaponBar = CCProgressTimer::create(weaponFront);
-		weaponBar->setPosition(weaponBack->getPosition()); //positions don't match by default
-		weaponBar->setScaleX(weaponBack->getScaleX());
-		weaponBar->setScaleY(weaponBack->getScaleY());
-		weaponBar->setType(kCCProgressTimerTypeBar);
-		weaponBar->setMidpoint(ccp(0.25,0)); // the x coord tells the bar to put the 0% after the panda head
-		weaponBar->setBarChangeRate(ccp(1,0));
-		weaponBar->setPercentage(100);
-	    weaponIcon = dxco::SpriteUtil::create("bonus/PISTOLA.png", 5, 0.78 * visibleSize.height, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
-	    weaponIcon->setScaleX(lifeBack->getScaleX());
-		weaponIcon->setScaleY(lifeBack->getScaleY());
-		weaponIcon->setPositionY(weaponBack->getPositionY());
-		dxco::SpriteUtil::leftAlign(lifeBack, weaponIcon);
-	    this->addChild(weaponBack, 10);
-	    this->addChild(weaponBar, 11);
-	    this->addChild(weaponIcon, 11);
-
-	    //bonus icons
-	    bonus1 = dxco::SpriteUtil::create("bonus/BALAV_activada.png", 5, 0.78 * visibleSize.height, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
-	    bonus1->setScaleX(lifeBack->getScaleX());
-	    bonus1->setScaleY(lifeBack->getScaleY());
-	    this->addChild(bonus1, 11);
-	    bonus1->setOpacity(0);
-	    bonus2 = dxco::SpriteUtil::create("bonus/BALAV_activada.png", 5, 0.78 * visibleSize.height, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
-		bonus2->setScaleX(lifeBack->getScaleX());
-		bonus2->setScaleY(lifeBack->getScaleY());
-		this->addChild(bonus2, 11);
-		bonus2->setOpacity(0);
-		//spread the bonus icons between the life and weapon bars
-		float x0 = weaponBack->getPositionX() + dxco::SpriteUtil::getWidth(weaponBack) / 2;
-		float xf = lifeBack->getPositionX() + dxco::SpriteUtil::getWidth(lifeBack) / 2;
-		float iconWidth = dxco::SpriteUtil::getWidth(bonus1);
-		float padding = (xf - x0 - 2 * iconWidth) / 3;
-		bonus1->setPositionX(x0 + padding + iconWidth / 2);
-		bonus2->setPositionX(xf - padding - iconWidth / 2);
-
-	    this->playerScoreLabel = dxco::LabelUtil::create("0 (" + dxco::StringUtil::toString(dxco::UserDAO::getCoins()) + ")", 18, 10, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::RIGHT, "fonts/KBStickToThePlan.ttf");
-	    this->timerLabel = dxco::LabelUtil::create("00:00", 18, visibleSize.width / 2, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT, "fonts/KBStickToThePlan.ttf");
-	    this->addChild(playerScoreLabel, 10);
-	    this->addChild(timerLabel, 10);
+	    this->createInterface();
 }
 
 void HelloWorld::preloadTextures() {
@@ -246,6 +168,92 @@ dxco::Player* HelloWorld::createPlayer() {
 	this->fire->setAngle(-90);
 
     return player;
+}
+
+void HelloWorld::createInterface() {
+	CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
+
+	//joysticks
+	CCSprite* joystickFondo = dxco::SpriteUtil::create("circulo.png", visibleSize.width *  0.85 - 80, 20, 80, 80);
+	this->addChild(joystickFondo, 10);
+	joystickFondo->setOpacity(128);
+
+	CCSprite* joystickBoton = dxco::SpriteUtil::create("boton.png", visibleSize.width * 0.85 - 60,  40, 40, 40);
+	this->addChild(joystickBoton, 12);
+
+	joystickFondo = dxco::SpriteUtil::create("circulo.png", visibleSize.width *  0.15, 20, 80, 80);
+	this->addChild(joystickFondo, 12);
+	joystickFondo->setOpacity(128);
+
+	CCSprite* joystickBotonMovimiento = dxco::SpriteUtil::create("boton.png", visibleSize.width * 0.15 + 20,  40, 40, 40);
+	this->addChild(joystickBotonMovimiento, 12);
+
+	dxco::Joystick* joystick = new dxco::JoystickMira(model, joystickBoton, 65);
+	this->joystickController.addJoystick(joystick);
+
+	joystick = new dxco::JoystickMovimiento(model, joystickBotonMovimiento, 65);
+	this->joystickController.addJoystick(joystick);
+
+	//Life bar
+	CCSprite* lifeBack = dxco::SpriteUtil::create("gameplay/PANDA_energia_fin.png", 5, 0.87 * visibleSize.height, 0.35 * visibleSize.width , 0.11 * visibleSize.height);
+	CCSprite* lifeFront = dxco::SpriteUtil::create("gameplay/PANDA_energia.png", 5, 0.87 * visibleSize.height, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+	lifeBar = CCProgressTimer::create(lifeFront);
+	lifeBar->setPosition(lifeBack->getPosition()); //positions don't match by default
+	lifeBar->setScaleX(lifeBack->getScaleX());
+	lifeBar->setScaleY(lifeBack->getScaleY());
+	lifeBar->setType(kCCProgressTimerTypeBar);
+	lifeBar->setMidpoint(ccp(0.16,0)); // the x coord tells the bar to put the 0% after the panda head
+	lifeBar->setBarChangeRate(ccp(1,0));
+	lifeBar->setPercentage(100);
+	this->addChild(lifeBack, 10);
+	this->addChild(lifeBar, 11);
+
+	//weapon bar
+	CCSprite* weaponBack = dxco::SpriteUtil::create("gameplay/BALAS_barra_fin.png", 5, 0.78 * visibleSize.height, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+	weaponBack->setScaleX(lifeBack->getScaleX());
+	weaponBack->setScaleY(lifeBack->getScaleY());
+	dxco::SpriteUtil::leftAlign(lifeBack, weaponBack);
+	CCSprite* weaponFront = dxco::SpriteUtil::create("gameplay/BALAS_barra.png", 5, 0.78 * visibleSize.height, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+	weaponBar = CCProgressTimer::create(weaponFront);
+	weaponBar->setPosition(weaponBack->getPosition()); //positions don't match by default
+	weaponBar->setScaleX(weaponBack->getScaleX());
+	weaponBar->setScaleY(weaponBack->getScaleY());
+	weaponBar->setType(kCCProgressTimerTypeBar);
+	weaponBar->setMidpoint(ccp(0.25,0)); // the x coord tells the bar to put the 0% after the panda head
+	weaponBar->setBarChangeRate(ccp(1,0));
+	weaponBar->setPercentage(100);
+	weaponIcon = dxco::SpriteUtil::create("bonus/PISTOLA.png", 5, 0.78 * visibleSize.height, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+	weaponIcon->setScaleX(lifeBack->getScaleX());
+	weaponIcon->setScaleY(lifeBack->getScaleY());
+	weaponIcon->setPositionY(weaponBack->getPositionY());
+	dxco::SpriteUtil::leftAlign(lifeBack, weaponIcon);
+	this->addChild(weaponBack, 10);
+	this->addChild(weaponBar, 11);
+	this->addChild(weaponIcon, 11);
+
+	//bonus icons
+	bonus1 = dxco::SpriteUtil::create("bonus/BALAV_activada.png", 5, 0.78 * visibleSize.height, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+	bonus1->setScaleX(lifeBack->getScaleX());
+	bonus1->setScaleY(lifeBack->getScaleY());
+	this->addChild(bonus1, 11);
+	bonus1->setOpacity(0);
+	bonus2 = dxco::SpriteUtil::create("bonus/BALAV_activada.png", 5, 0.78 * visibleSize.height, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+	bonus2->setScaleX(lifeBack->getScaleX());
+	bonus2->setScaleY(lifeBack->getScaleY());
+	this->addChild(bonus2, 11);
+	bonus2->setOpacity(0);
+	//spread the bonus icons between the life and weapon bars
+	float x0 = weaponBack->getPositionX() + dxco::SpriteUtil::getWidth(weaponBack) / 2;
+	float xf = lifeBack->getPositionX() + dxco::SpriteUtil::getWidth(lifeBack) / 2;
+	float iconWidth = dxco::SpriteUtil::getWidth(bonus1);
+	float padding = (xf - x0 - 2 * iconWidth) / 3;
+	bonus1->setPositionX(x0 + padding + iconWidth / 2);
+	bonus2->setPositionX(xf - padding - iconWidth / 2);
+
+	this->playerScoreLabel = dxco::LabelUtil::create("0 (" + dxco::StringUtil::toString(dxco::UserDAO::getCoins()) + ")", 18, 10, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::RIGHT, "fonts/KBStickToThePlan.ttf");
+	this->timerLabel = dxco::LabelUtil::create("00:00", 18, visibleSize.width / 2, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT, "fonts/KBStickToThePlan.ttf");
+	this->addChild(playerScoreLabel, 10);
+	this->addChild(timerLabel, 10);
 }
 
 void HelloWorld::ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent) {

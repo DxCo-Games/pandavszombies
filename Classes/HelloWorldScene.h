@@ -46,6 +46,7 @@ public:
 private:
     void preloadTextures();
     dxco::Player* createPlayer();
+    void createInterface();
     dxco::Container* playerContainer;
     dxco::GameModel* model;
     dxco::JoystickController joystickController;
