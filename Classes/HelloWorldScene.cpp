@@ -250,10 +250,35 @@ void HelloWorld::createInterface() {
 	bonus1->setPositionX(x0 + padding + iconWidth / 2);
 	bonus2->setPositionX(xf - padding - iconWidth / 2);
 
-	this->playerScoreLabel = dxco::LabelUtil::create("0 (" + dxco::StringUtil::toString(dxco::UserDAO::getCoins()) + ")", 18, 10, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::RIGHT, "fonts/KBStickToThePlan.ttf");
-	this->timerLabel = dxco::LabelUtil::create("00:00", 18, visibleSize.width / 2, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT, "fonts/KBStickToThePlan.ttf");
-	this->addChild(playerScoreLabel, 10);
+	//score
+	CCSprite* score = dxco::SpriteUtil::create("gameplay/SCORE.png", visibleSize.width / 2, 0, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+	score->setScaleX(lifeBack->getScaleX());
+	score->setScaleY(lifeBack->getScaleY());
+	score->setPositionY(lifeBack->getPositionY());
+	//set the right margin equal to the left one
+	float sideMargin = lifeBack->getPositionX() - dxco::SpriteUtil::getWidth(lifeBack);
+	score->setPositionX(visibleSize.width - sideMargin - dxco::SpriteUtil::getWidth(score));
+	this->addChild(score, 10);
+
+	//timer
+	CCSprite* timer = dxco::SpriteUtil::create("gameplay/TIMER.png", visibleSize.width / 2, 0, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+	timer->setScaleX(lifeBack->getScaleX());
+	timer->setScaleY(lifeBack->getScaleY());
+	timer->setPositionY(lifeBack->getPositionY());
+	//put timer in between score and life
+	x0 = lifeBack->getPositionX() + dxco::SpriteUtil::getWidth(lifeBack) / 2;
+	xf = score->getPositionX() - dxco::SpriteUtil::getWidth(score) / 2;
+	timer->setPositionX(x0 + (xf - x0) / 2);
+	this->addChild(timer, 10);
+
+	this->timerLabel = dxco::LabelUtil::create("00:00", 14, visibleSize.width / 2, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT, "fonts/KBStickToThePlan.ttf");
+	this->timerLabel->setPositionX(timer->getPositionX() - 0.35 * dxco::SpriteUtil::getWidth(timer));
+	this->timerLabel->setPositionY(timer->getPositionY() + 0.22 * dxco::SpriteUtil::getHeight(timer));
 	this->addChild(timerLabel, 10);
+	this->playerScoreLabel = dxco::LabelUtil::create("0", 14, 10, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::RIGHT, "fonts/KBStickToThePlan.ttf");
+	this->playerScoreLabel->setPositionX(score->getPositionX() + 0.32 * dxco::SpriteUtil::getWidth(score));
+	this->playerScoreLabel->setPositionY(this->timerLabel->getPositionY());
+	this->addChild(playerScoreLabel, 10);
 }
 
 void HelloWorld::ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent) {
@@ -323,7 +348,6 @@ void HelloWorld::updateTimerLabel() {
 }
 
 void HelloWorld::updatePlayerLifeLabel() {
-	std::string playerLifeText = "HP: " + dxco::StringUtil::toString((float)round(this->model->player->life));
 	this->lifeBar->setPercentage(this->model->player->life * 100 / PLAYER_LIFE);
 }
 
@@ -350,8 +374,7 @@ void HelloWorld::updateBonus(std::string texture, float duration) {
 }
 
 void HelloWorld::updateScoreLabel() {
-	std::string playerScoreText = "Score: " + dxco::StringUtil::toString(this->model->player->score) + " (" + dxco::StringUtil::toString(dxco::UserDAO::getCoins()) + ")";
-
+	std::string playerScoreText = dxco::StringUtil::toString(this->model->player->score);
 	this->playerScoreLabel->setString(playerScoreText.c_str());
 }
 
