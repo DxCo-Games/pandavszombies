@@ -174,18 +174,20 @@ void HelloWorld::createInterface() {
 	CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
 
 	//joysticks
-	CCSprite* joystickFondo = dxco::SpriteUtil::create("circulo.png", visibleSize.width *  0.85 - 80, 20, 80, 80);
+	CCSprite* joystickFondo = dxco::SpriteUtil::create("gameplay/JOYSTICK_arma.png", visibleSize.width *  0.92 - 80, 20, 100, 100);
 	this->addChild(joystickFondo, 10);
 	joystickFondo->setOpacity(128);
 
-	CCSprite* joystickBoton = dxco::SpriteUtil::create("boton.png", visibleSize.width * 0.85 - 60,  40, 40, 40);
+	CCSprite* joystickBoton = dxco::SpriteUtil::create("boton.png", visibleSize.width * 0.92 - 60,  40, 40, 40);
+	joystickBoton->setVisible(false);
 	this->addChild(joystickBoton, 12);
 
-	joystickFondo = dxco::SpriteUtil::create("circulo.png", visibleSize.width *  0.15, 20, 80, 80);
+	joystickFondo = dxco::SpriteUtil::create("gameplay/JOYSTICK_panda.png", visibleSize.width *  0.05, 20, 100, 100);
 	this->addChild(joystickFondo, 12);
 	joystickFondo->setOpacity(128);
 
-	CCSprite* joystickBotonMovimiento = dxco::SpriteUtil::create("boton.png", visibleSize.width * 0.15 + 20,  40, 40, 40);
+	CCSprite* joystickBotonMovimiento = dxco::SpriteUtil::create("boton.png", visibleSize.width * 0.05 + 20,  40, 40, 40);
+	joystickBotonMovimiento->setVisible(false);
 	this->addChild(joystickBotonMovimiento, 12);
 
 	dxco::Joystick* joystick = new dxco::JoystickMira(model, joystickBoton, 65);
