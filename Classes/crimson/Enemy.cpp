@@ -93,6 +93,7 @@ void Enemy::update(float dt) {
 			cocos2d::CCPoint location = this->getLocation();
 			this->model->bonusFactory->createBonus(this->model, cocos2d::CCPoint(location.x,
 					location.y - this->getHeight() / 2));
+			this->model->kills += 1;
 			this->bloodDt = 0;
 		} else {
 			this->bloodDt += dt;

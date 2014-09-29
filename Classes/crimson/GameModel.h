@@ -45,6 +45,7 @@ public:
 	bool shouldDeleteBullet(Bullet* bullet);
 	bool playerHurt;
 	bool freezeBonusActivated;
+	int kills;
 private:
 	void updateCoins();
 };

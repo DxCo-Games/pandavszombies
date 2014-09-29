@@ -37,10 +37,8 @@ public:
     virtual void initFire(float x, float y);
     cocos2d::CCParticleSystemQuad* fire;
 
-    void updatePlayerLifeLabel();
     void updateBonus(std::string texture, float duration);
-    void updateScoreLabel();
-    void updateTimerLabel();
+    void updateLabels();
 
     double timer;
 private:
@@ -53,6 +51,7 @@ private:
 
     cocos2d::CCLabelTTF* playerScoreLabel;
     cocos2d::CCLabelTTF* timerLabel;
+    cocos2d::CCLabelTTF* killsLabel;
 
     //FIXME limpiar cosas del preload que no sirven mas
     bool preloaded;

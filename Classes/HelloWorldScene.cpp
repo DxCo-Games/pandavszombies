@@ -271,6 +271,14 @@ void HelloWorld::createInterface() {
 	timer->setPositionX(x0 + (xf - x0) / 2);
 	this->addChild(timer, 10);
 
+	//zombie bar
+	CCSprite* zombie = dxco::SpriteUtil::create("gameplay/ZOMBIE_contador.png", 0, 0, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+	zombie->setScaleX(lifeBack->getScaleX());
+	zombie->setScaleY(lifeBack->getScaleY());
+	zombie->setPositionY(weaponBack->getPositionY());
+	dxco::SpriteUtil::rightAlign(score, zombie);
+	this->addChild(zombie, 10);
+
 	this->timerLabel = dxco::LabelUtil::create("00:00", 14, visibleSize.width / 2, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT, "fonts/KBStickToThePlan.ttf");
 	this->timerLabel->setPositionX(timer->getPositionX() - 0.35 * dxco::SpriteUtil::getWidth(timer));
 	this->timerLabel->setPositionY(timer->getPositionY() + 0.22 * dxco::SpriteUtil::getHeight(timer));
@@ -279,6 +287,11 @@ void HelloWorld::createInterface() {
 	this->playerScoreLabel->setPositionX(score->getPositionX() + 0.32 * dxco::SpriteUtil::getWidth(score));
 	this->playerScoreLabel->setPositionY(this->timerLabel->getPositionY());
 	this->addChild(playerScoreLabel, 10);
+
+	this->killsLabel = dxco::LabelUtil::create("0", 14, visibleSize.width / 2, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::RIGHT, "fonts/KBStickToThePlan.ttf");
+	this->killsLabel->setPositionX(zombie->getPositionX() + 0.20 * dxco::SpriteUtil::getWidth(zombie));
+	this->killsLabel->setPositionY(zombie->getPositionY() + 0.22 * dxco::SpriteUtil::getHeight(zombie));
+	this->addChild(killsLabel, 10);
 }
 
 void HelloWorld::ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent) {
@@ -319,9 +332,7 @@ void HelloWorld::update(float dt) {
 		this->model->update(dt);
 		this->timer += dt;
 
-		updateTimerLabel();
-		updateScoreLabel();
-		updatePlayerLifeLabel();
+		updateLabels();
 	} else {
 		this->preloadTextures();
 		float angulosCargados = this->angulosCargados;
@@ -333,21 +344,22 @@ void HelloWorld::update(float dt) {
 	}
 }
 
-void HelloWorld::updateTimerLabel() {
+void HelloWorld::updateLabels() {
 	int totalTime = round(this->timer);
-
 	int minutes = ceil(totalTime / 60);
 	int seconds = totalTime % 60;
 
 	std::string stringMinutes =  dxco::StringUtil::padLeft(minutes, 2);
 	std::string stringSeconds = dxco::StringUtil::padLeft(seconds, 2);
-
 	std::string timerText = stringMinutes + ":" + stringSeconds;
-
 	this->timerLabel->setString(timerText.c_str());
-}
 
-void HelloWorld::updatePlayerLifeLabel() {
+	std::string playerScoreText = dxco::StringUtil::toString(this->model->player->score);
+	this->playerScoreLabel->setString(playerScoreText.c_str());
+
+	std::string playerKillsText = dxco::StringUtil::toString(this->model->kills);
+	this->killsLabel->setString(playerKillsText.c_str());
+
 	this->lifeBar->setPercentage(this->model->player->life * 100 / PLAYER_LIFE);
 }
 
@@ -371,11 +383,6 @@ void HelloWorld::updateBonus(std::string texture, float duration) {
 	dxco::SpriteUtil::setTexture(b2, texture);
 	b2->setOpacity(255);
 	dxco::SpriteUtil::fadeOut(b2, duration);
-}
-
-void HelloWorld::updateScoreLabel() {
-	std::string playerScoreText = dxco::StringUtil::toString(this->model->player->score);
-	this->playerScoreLabel->setString(playerScoreText.c_str());
 }
 
 void HelloWorld::initFire(float x, float y) {
