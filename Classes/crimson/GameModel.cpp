@@ -74,7 +74,7 @@ GameModel::GameModel(HelloWorld* vista, Player* player, bool survival) {
 	this->player->setWeapon(Player::PISTOL);
 	this->bonusFactory = new BonusFactory();
 	this->playerHurt = false;
-	this->freezeBonusActivated = false;
+	this->freezeBonusActivated = 0;
 	this->kills = 0;
 
 	//batch node added to map
@@ -169,8 +169,9 @@ void GameModel::restartGame() {
 	this->vista->bonus2->stopAllActions();
 	this->vista->bonus2->setOpacity(0);
 	this->player->score = 0;
+	this->player->weaponBonus = 0;
 
-	this->player->shieldActivated = false;
+	this->player->shieldActivated = 0;
 	this->player->movementSpeedBonus = 1;
 	this->player->weaponSpeedBonus = 1;
 	this->kills = 0;

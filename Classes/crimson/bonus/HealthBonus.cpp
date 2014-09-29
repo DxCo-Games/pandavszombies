@@ -7,7 +7,8 @@ HealthBonus::HealthBonus(GameModel* model, cocos2d::CCSprite* sprite,
 }
 
 void HealthBonus::applyBonus(){
-	this->model->player->hurt(-LIFE_AMOUNT);
+	double healAmount = LIFE_AMOUNT_PERCENTAGE * PLAYER_LIFE;
+	this->model->player->hurt(-healAmount);
 }
 
 } /* namespace dxco */

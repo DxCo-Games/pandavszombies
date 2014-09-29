@@ -7,26 +7,30 @@ FreezeBombBonus::FreezeBombBonus(GameModel* model, cocos2d::CCSprite* sprite, st
 }
 
 void FreezeBombBonus::applyBonus() {
-	this->model->freezeBonusActivated = true;
+	this->model->freezeBonusActivated += 1;
 	this->model->vista->updateBonus("bonus/CONGELAR_activado.png", this->bonusDuration);
 
-	for (int i = 0; i < this->model->enemies.size(); i++) {
-		Enemy* enemy = this->model->enemies[i];
-		
-		if (enemy->isActive()) { // Only freeze enemies that are not dead
-			enemy->freeze();
+	if (this->model->freezeBonusActivated == 1) {
+		for (int i = 0; i < this->model->enemies.size(); i++) {
+			Enemy* enemy = this->model->enemies[i];
+
+			if (enemy->isActive()) { // Only freeze enemies that are not dead
+				enemy->freeze();
+			}
 		}
 	}
 }
 
 void FreezeBombBonus::removeBonus() {
-	this->model->freezeBonusActivated = false;
+	this->model->freezeBonusActivated -= 1;
 
-	for (int i = 0; i < this->model->enemies.size(); i++) {
-		Enemy* enemy = this->model->enemies[i];
-		
-		if (enemy->isActive()) {
-			enemy->unfreeze();
+	if (this->model->freezeBonusActivated == 0) {
+		for (int i = 0; i < this->model->enemies.size(); i++) {
+			Enemy* enemy = this->model->enemies[i];
+
+			if (enemy->isActive()) {
+				enemy->unfreeze();
+			}
 		}
 	}
 }

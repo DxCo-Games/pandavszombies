@@ -11,6 +11,7 @@ namespace dxco {
 
 class GameModel;
 class Weapon;
+class WeaponBonus;
 
 class Player : public TopDownItem {
 public:
@@ -33,7 +34,8 @@ public:
 	int score;
 	float movementSpeedBonus;
 	float weaponSpeedBonus;
-	bool shieldActivated;
+	int shieldActivated;
+	WeaponBonus* weaponBonus;
 
 	bool moving;
 

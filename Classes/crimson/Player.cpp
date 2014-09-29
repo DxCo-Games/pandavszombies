@@ -18,16 +18,17 @@ Player::Player(cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations)
 	this->life = PLAYER_LIFE;
 	this->movementSpeedBonus = 1;
 	this->weaponSpeedBonus = 1;
-	this->shieldActivated = false;
+	this->shieldActivated = 0;
 	this->score = 0;
 	this->moving = false;
 	this->moveRotation;
 	this->weapon = NULL;
+	this->weaponBonus = NULL;
 }
 
 void Player::hurt(float damage) {
 
-	if (!shieldActivated || damage < 0) {
+	if (shieldActivated == 0 || damage < 0) {
 		this->life -= damage;
 		if(damage > 0) {
 			this->model->playerHurt = true;

@@ -15,7 +15,7 @@ public:
 	virtual void update(float dt);
 	void applyBonus();
 	void removeBonus();
-	
+
 	Player::weapons type;
 };
 
