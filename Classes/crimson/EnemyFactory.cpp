@@ -21,6 +21,7 @@ void EnemyFactory::createEnemy(GameModel* model) {
 
 	//random sprite type
 	std::string type;
+
 	switch(rand() % 5) {
 	case 0: type = "campesino"; break;
 	case 1: type = "oficinista"; break;
@@ -29,10 +30,23 @@ void EnemyFactory::createEnemy(GameModel* model) {
 	case 4: type = "cura"; break;
 	}
 
-	std::map<int, dxco::Animation*> animations = loadAnimations(model, type, 0.02);
-	cocos2d::CCSprite* enemySprite = createSpriteInRandomPosition(model, type + "_1_0000.png", 75, 75);
+	int delta = (rand() % 10);
 
-	Enemy* enemy = new Enemy(model, enemySprite, animations);
+	if (type == "basquet") {
+		delta += 10;
+	}
+
+	std::map<int, dxco::Animation*> animations = loadAnimations(model, type, 0.02);
+	cocos2d::CCSprite* enemySprite = createSpriteInRandomPosition(model, type + "_1_0000.png", 75 + delta, 75 + delta);
+
+	Enemy* enemy;
+
+	if (type == "basquet") {
+		enemy = new Enemy(model, enemySprite, animations, 50);
+	} else {
+		enemy = new Enemy(model, enemySprite, animations);
+	}
+
 	addEnemy(model, enemy);
 
 	SpriteUtil::fadeIn(enemy->getSprite());

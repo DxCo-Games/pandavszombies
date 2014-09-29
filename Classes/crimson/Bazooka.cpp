@@ -6,7 +6,7 @@
 namespace dxco {
 
 Bazooka::Bazooka(GameModel* model) : Weapon(model){
-	this->bulletFrequency = 1;
+	this->bulletFrequency = 0.75;
 }
 
 void Bazooka::shoot() {
