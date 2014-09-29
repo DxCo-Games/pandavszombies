@@ -163,7 +163,9 @@ void GameModel::restartGame() {
 	this->player->restartPosition();
 	this->player->life = PLAYER_LIFE;
 	this->vista->weaponBar->setPercentage(100);
+	this->vista->bonus1->stopAllActions();
 	this->vista->bonus1->setOpacity(0);
+	this->vista->bonus2->stopAllActions();
 	this->vista->bonus2->setOpacity(0);
 	this->player->score = 0;
 
