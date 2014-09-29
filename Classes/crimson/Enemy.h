@@ -2,7 +2,7 @@
 #define ENEMY_H_
 
 #define ENEMY_ANGLE_POSITIONS 8
-#define ENEMY_DEFAULT_SPEED 30
+#define ENEMY_DEFAULT_SPEED 30.0
 #define ENEMY_WANDER_SPEED 20
 #define ENEMY_WANDER_RANGE 200
 #define ENEMY_SEEK_RANGE 80
@@ -22,10 +22,10 @@ class Player;
 
 class Enemy : public TopDownItem, public SteeringBehaviorItem {
 public:
-	Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations);
+	Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations, float speed=ENEMY_DEFAULT_SPEED);
 	void update(float dt);
 
-	static int ENEMY_SPEED;
+	static float ENEMY_SPEED;
 
 	bool shoot(Bullet* bullet);
 	GameModel* model;

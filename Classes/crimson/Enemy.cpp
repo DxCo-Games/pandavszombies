@@ -10,10 +10,10 @@
 namespace dxco {
 
 //initialize the default speed. can't do it in Enemy.h gotta love cpp
-int Enemy::ENEMY_SPEED = ENEMY_DEFAULT_SPEED;
+float Enemy::ENEMY_SPEED = ENEMY_DEFAULT_SPEED;
 
-Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations) :
-		TopDownItem(ENEMY_ANGLE_POSITIONS), SteeringBehaviorItem(Enemy::ENEMY_SPEED, 0.5),
+Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations, float speed) :
+		TopDownItem(ENEMY_ANGLE_POSITIONS), SteeringBehaviorItem(speed, 0.5),
 		Item(sprite, animations){
 	this->model = model;
 	this->life = 20;
