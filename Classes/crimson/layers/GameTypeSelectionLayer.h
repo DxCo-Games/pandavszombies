@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 
 #include "../buttons/SurvivalButton.h"
+#include "../buttons/StoryButton.h"
 
 namespace dxco {
 
@@ -20,6 +21,7 @@ public:
 	void ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
 private:
 	SurvivalButton* survivalButton;
+	StoryButton* storyButton;
 };
 
 } /* namespace dxco */

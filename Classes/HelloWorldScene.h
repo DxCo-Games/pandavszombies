@@ -14,7 +14,7 @@ public:
     virtual bool init();  
 
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
-    static cocos2d::CCScene* scene();
+    static cocos2d::CCScene* scene(bool survivalMode);
     
     // a selector callback
     void menuCloseCallback(CCObject* pSender);
@@ -41,6 +41,7 @@ public:
     void updateLabels();
 
     double timer;
+    bool survivalMode;
 private:
     void preloadTextures();
     dxco::Player* createPlayer();
