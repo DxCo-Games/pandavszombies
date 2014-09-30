@@ -39,8 +39,8 @@ public:
 
     void updateBonus(std::string texture, float duration);
     void updateLabels();
+    void updateChainedKills();
 
-    double timer;
 private:
     void preloadTextures();
     dxco::Player* createPlayer();
@@ -52,6 +52,9 @@ private:
     cocos2d::CCLabelTTF* playerScoreLabel;
     cocos2d::CCLabelTTF* timerLabel;
     cocos2d::CCLabelTTF* killsLabel;
+    cocos2d::CCLabelTTF* killsChainLabel;
+    void setChainMessage();
+    int lastChain;
 
     //FIXME limpiar cosas del preload que no sirven mas
     bool preloaded;

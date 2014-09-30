@@ -66,8 +66,6 @@ void HelloWorld::realInit() {
 	    float mapCornerX = - (mapWidth - visibleSize.width) / 2;
 	    float mapCornerY = - (mapHeight - visibleSize.height) / 2;
 
-	    this->timer = 0.0;
-
 	    this->mapa = new dxco::Mapa(mapCornerX, mapCornerY, mapWidth, mapHeight);
 	    this->clouds = new dxco::Container(mapCornerX, mapCornerY, mapWidth, mapHeight);
 	    this->addChild(this->clouds, 4);
@@ -174,15 +172,15 @@ void HelloWorld::createInterface() {
 	CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
 
 	//joysticks
-	CCSprite* joystickFondo = dxco::SpriteUtil::create("gameplay/JOYSTICK_arma.png", visibleSize.width *  0.92 - 80, 20, 100, 100);
-	this->addChild(joystickFondo, 10);
-	joystickFondo->setOpacity(128);
+	CCSprite* joystickFondo2 = dxco::SpriteUtil::create("gameplay/JOYSTICK_arma.png", visibleSize.width *  0.92 - 80, 20, 100, 100);
+	this->addChild(joystickFondo2, 10);
+	joystickFondo2->setOpacity(128);
 
 	CCSprite* joystickBoton = dxco::SpriteUtil::create("boton.png", visibleSize.width * 0.92 - 60,  40, 40, 40);
 	joystickBoton->setVisible(false);
 	this->addChild(joystickBoton, 12);
 
-	joystickFondo = dxco::SpriteUtil::create("gameplay/JOYSTICK_panda.png", visibleSize.width *  0.05, 20, 100, 100);
+	CCSprite* joystickFondo = dxco::SpriteUtil::create("gameplay/JOYSTICK_panda.png", visibleSize.width *  0.05, 20, 100, 100);
 	this->addChild(joystickFondo, 12);
 	joystickFondo->setOpacity(128);
 
@@ -294,6 +292,13 @@ void HelloWorld::createInterface() {
 	this->killsLabel->setPositionX(zombie->getPositionX() + 0.20 * dxco::SpriteUtil::getWidth(zombie));
 	this->killsLabel->setPositionY(zombie->getPositionY() + 0.22 * dxco::SpriteUtil::getHeight(zombie));
 	this->addChild(killsLabel, 10);
+
+	this->killsChainLabel = dxco::LabelUtil::create("0 kills", 20, visibleSize.width / 2, 10, dxco::LabelUtil::BOTTOM, dxco::LabelUtil::LEFT, "fonts/KBStickToThePlan.ttf");
+	dxco::LabelUtil::setColor(this->killsChainLabel, dxco::LabelUtil::RED);
+	this->killsChainLabel->setPositionY(joystickFondo->getPositionY());
+	this->addChild(killsChainLabel, 10);
+	this->killsChainLabel->setOpacity(0);
+	//FIXME better center
 }
 
 void HelloWorld::ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent) {
@@ -332,9 +337,9 @@ void HelloWorld::update(float dt) {
 		this->removeChild(loading);
 
 		this->model->update(dt);
-		this->timer += dt;
 
 		updateLabels();
+		updateChainedKills();
 	} else {
 		this->preloadTextures();
 		float angulosCargados = this->angulosCargados;
@@ -347,7 +352,7 @@ void HelloWorld::update(float dt) {
 }
 
 void HelloWorld::updateLabels() {
-	int totalTime = round(this->timer);
+	int totalTime = this->model->timer;
 	int minutes = ceil(totalTime / 60);
 	int seconds = totalTime % 60;
 
@@ -363,6 +368,41 @@ void HelloWorld::updateLabels() {
 	this->killsLabel->setString(playerKillsText.c_str());
 
 	this->lifeBar->setPercentage(this->model->player->life * 100 / PLAYER_LIFE);
+}
+
+void HelloWorld::updateChainedKills() {
+
+	if (this->model->chainedKills > 2 && this->model->timer - this->model->lastKill < 1) {
+		std::string playerKillsText = dxco::StringUtil::toString(this->model->chainedKills) + " Kills";
+		this->killsChainLabel->setString(playerKillsText.c_str());
+		this->killsChainLabel->setPositionX(this->timerLabel->getPositionX());
+		this->lastChain = this->model->chainedKills;
+		CCSequence *seq = CCSequence::create(CCDelayTime::create(1), CCFadeOut::create(0.15),
+				CCCallFuncN::create(this, callfuncN_selector(HelloWorld::setChainMessage)),
+				CCFadeIn::create(0.15), CCDelayTime::create(1), CCFadeOut::create(0.3),
+				NULL);
+
+		if (this->killsChainLabel->getOpacity() == 0 && this->killsChainLabel->numberOfRunningActions() == 0) {
+			this->killsChainLabel->runAction(CCSequence::create(CCFadeIn::create(0.3), seq, NULL));
+		} else if (this->killsChainLabel->getOpacity() == 255) {
+			this->killsChainLabel->stopAllActions();
+			this->killsChainLabel->runAction(seq);
+		}
+	}
+}
+
+void HelloWorld::setChainMessage(){
+	int kills = this->lastChain;
+	if (kills < 10) {
+		this->killsChainLabel->setString("Good");
+	} else if (kills < 20) {
+		this->killsChainLabel->setString("Excellent");
+	} else if (kills < 30) {
+		this->killsChainLabel->setString("Outstanding");
+	} else {
+		this->killsChainLabel->setString("Toasty!");
+	}
+	this->killsChainLabel->setPositionX(this->timerLabel->getPositionX());
 }
 
 void HelloWorld::updateBonus(std::string texture, float duration) {

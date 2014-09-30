@@ -38,6 +38,7 @@ public:
 	std::vector<Bonus*> bonuses;
 
 	void update(float dt);
+	float timer;
 	HelloWorld* vista;
 	Mapa* mapa;
 	void restartGame();
@@ -46,6 +47,10 @@ public:
 	bool playerHurt;
 	int freezeBonusActivated;
 	int kills;
+
+	int chainedKills;
+	float lastKill;
+
 private:
 	void updateCoins();
 };

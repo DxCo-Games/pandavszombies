@@ -76,6 +76,9 @@ GameModel::GameModel(HelloWorld* vista, Player* player, bool survival) {
 	this->playerHurt = false;
 	this->freezeBonusActivated = 0;
 	this->kills = 0;
+	this->chainedKills = 0;
+	this->lastKill = -10;
+	this->timer = 0;
 
 	//batch node added to map
 	this->enemyFactory = new EnemyFactory();
@@ -98,6 +101,7 @@ void GameModel::enemyKilled(Enemy* enemy) {
 }
 
 void GameModel::update(float dt) {
+	this->timer += dt;
 	this->playerHurt = false;
 
 	this->player->update(dt);
@@ -175,10 +179,12 @@ void GameModel::restartGame() {
 	this->player->movementSpeedBonus = 1;
 	this->player->weaponSpeedBonus = 1;
 	this->kills = 0;
+	this->chainedKills = 0;
+	this->lastKill = -10;
+	this->timer = 0;
 
 	this->player->setWeapon(Player::PISTOL);
 
-	this->vista->timer = 0;
 
 	this->enemyFactory->enemySpriteSheetBack->removeAllChildren();
 	this->enemyFactory->enemySpriteSheetFront->removeAllChildren();

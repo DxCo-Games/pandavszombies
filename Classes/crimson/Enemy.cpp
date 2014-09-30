@@ -83,17 +83,7 @@ void Enemy::update(float dt) {
 		}
 	} else {
 		if (this->state != ENEMY_DEAD) {
-			//fix zorder of blood splat to be on the floor
-			this->sprite->retain();
-			this->sprite->removeFromParentAndCleanup(false);
-			this->model->mapa->addChild(this->sprite, -1);
-			this->sprite->release();
-
-			this->state = ENEMY_DEAD;
-			cocos2d::CCPoint location = this->getLocation();
-			this->model->bonusFactory->createBonus(this->model, cocos2d::CCPoint(location.x,
-					location.y - this->getHeight() / 2));
-			this->model->kills += 1;
+			this->kill();
 			this->bloodDt = 0;
 		} else {
 			this->bloodDt += dt;
@@ -125,6 +115,28 @@ void Enemy::stand(float dt, cocos2d::CCPoint target) {
 	this->state = ENEMY_STANDING;
 	this->beat(this->model->player, dt);
 	SteeringBehaviorItem::stand(dt, target);
+}
+
+void Enemy::kill() {
+	//fix zorder of blood splat to be on the floor
+	this->sprite->retain();
+	this->sprite->removeFromParentAndCleanup(false);
+	this->model->mapa->addChild(this->sprite, -1);
+	this->sprite->release();
+
+	this->state = ENEMY_DEAD;
+	cocos2d::CCPoint location = this->getLocation();
+	this->model->bonusFactory->createBonus(this->model, cocos2d::CCPoint(location.x,
+			location.y - this->getHeight() / 2));
+
+	//update kills counters
+	this->model->kills += 1;
+	if (this->model->timer - this->model->lastKill < 1) {
+		this->model->chainedKills +=1;
+	} else {
+		this->model->chainedKills = 1;
+	}
+	this->model->lastKill = this->model->timer;
 }
 
 void Enemy::fixZOrder(float playerY) {
