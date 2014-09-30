@@ -29,7 +29,6 @@ void ChainedKillsManager::updateView() {
 	if (this->shouldUpdateLabel()) {
 		std::string playerKillsText = StringUtil::toString(this->currentChainLength) + " Kills";
 		label->setString(playerKillsText.c_str());
-		label->setPositionX(this->model->vista->timerLabel->getPositionX());
 		this->lastChainLength = this->currentChainLength;
 		cocos2d::CCSequence *seq = cocos2d::CCSequence::create(cocos2d::CCDelayTime::create(1), cocos2d::CCFadeOut::create(0.15),
 				cocos2d::CCCallFuncN::create(this, cocos2d::SEL_CallFuncN(&ChainedKillsManager::setChainMessage)),
@@ -66,7 +65,6 @@ void ChainedKillsManager::setChainMessage(){
 	} else {
 		label->setString("Toasty!");
 	}
-	label->setPositionX(this->model->vista->timerLabel->getPositionX());
 }
 
 void ChainedKillsManager::restart() {

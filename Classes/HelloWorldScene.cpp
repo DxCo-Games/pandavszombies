@@ -293,9 +293,10 @@ void HelloWorld::createInterface() {
 	this->killsLabel->setPositionY(zombie->getPositionY() + 0.22 * dxco::SpriteUtil::getHeight(zombie));
 	this->addChild(killsLabel, 10);
 
-	this->killsChainLabel = dxco::LabelUtil::create("0 kills", 20, visibleSize.width / 2, 10, dxco::LabelUtil::BOTTOM, dxco::LabelUtil::LEFT, "fonts/KBStickToThePlan.ttf");
+	this->killsChainLabel = dxco::LabelUtil::create("0 kills", 16, visibleSize.width / 2, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::RIGHT, "fonts/KBStickToThePlan.ttf");
 	dxco::LabelUtil::setColor(this->killsChainLabel, dxco::LabelUtil::RED);
-	this->killsChainLabel->setPositionY(joystickFondo->getPositionY());
+	this->killsChainLabel->setPositionX(this->killsLabel->getPositionX());
+	this->killsChainLabel->setPositionY(visibleSize.height * 0.79);
 	this->addChild(killsChainLabel, 10);
 	this->killsChainLabel->setOpacity(0);
 }
