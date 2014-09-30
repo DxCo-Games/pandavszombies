@@ -15,7 +15,7 @@ ChainedKillsManager::ChainedKillsManager(GameModel *model): cocos2d::CCObject() 
 
 void ChainedKillsManager::addKill() {
 	//update kills counters
-	if (this->model->timer - this->lastKillTime < 1) {
+	if (this->model->timer - this->lastKillTime < CHAIN_DURATION) {
 		this->currentChainLength +=1;
 	} else {
 		this->currentChainLength = 1;
@@ -24,12 +24,9 @@ void ChainedKillsManager::addKill() {
 }
 
 
-//TODO add update and move timer
-//TODO 1 should be a constant here
-//TODO not that much logic in update view
 void ChainedKillsManager::updateView() {
 	cocos2d::CCLabelTTF *label = this->model->vista->killsChainLabel;
-	if (this->currentChainLength > 2 && this->model->timer - this->lastKillTime < 1) {
+	if (this->shouldUpdateLabel()) {
 		std::string playerKillsText = StringUtil::toString(this->currentChainLength) + " Kills";
 		label->setString(playerKillsText.c_str());
 		label->setPositionX(this->model->vista->timerLabel->getPositionX());
@@ -48,14 +45,23 @@ void ChainedKillsManager::updateView() {
 	}
 }
 
+bool ChainedKillsManager::shouldUpdateLabel() {
+	//at least 3 chained kills, chain time not finished
+	//or a greater chain is still being shown
+	return (this->currentChainLength > 4
+			&& this->model->timer - this->lastKillTime < CHAIN_DURATION
+			&& this->currentChainLength > this->lastChainLength);
+}
+
 void ChainedKillsManager::setChainMessage(){
 	int kills = this->lastChainLength;
+	this->lastChainLength = 0;
 	cocos2d::CCLabelTTF *label = this->model->vista->killsChainLabel;
-	if (kills < 10) {
+	if (kills < 15) {
 		label->setString("Good");
-	} else if (kills < 20) {
-		label->setString("Excellent");
 	} else if (kills < 30) {
+		label->setString("Excellent");
+	} else if (kills < 50) {
 		label->setString("Outstanding");
 	} else {
 		label->setString("Toasty!");

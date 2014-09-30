@@ -1,6 +1,8 @@
 #ifndef CHAINEDKILLSMANAGER_H_
 #define CHAINEDKILLSMANAGER_H_
 
+#define CHAIN_DURATION 0.75
+
 #include "cocos2d.h"
 
 namespace dxco {
@@ -15,6 +17,8 @@ public:
 	void updateView();
 	void setChainMessage();
 	void restart();
+
+	bool shouldUpdateLabel();
 
 	GameModel *model;
 	int currentChainLength;
