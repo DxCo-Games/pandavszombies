@@ -10,7 +10,7 @@ SurvivalButton::SurvivalButton(cocos2d::CCSprite* sprite) : ButtonDxCo(sprite) {
 
 void SurvivalButton::execute() {
 	cocos2d::CCDirector* pDirector = cocos2d::CCDirector::sharedDirector();
-	pDirector->runWithScene(HelloWorld::scene());
+	pDirector->runWithScene(HelloWorld::scene(true));
 }
 
 } /* namespace dxco */

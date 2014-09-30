@@ -29,11 +29,17 @@ bool GameTypeSelectionLayer::init() {
 	cocos2d::CCSprite* spriteBackground = SpriteUtil::create("ciudad_fondo.png", 0, 0, visibleSize.width, visibleSize.height);
 	this->addChild(spriteBackground);
 
-	cocos2d::CCSprite* survivalButtonSprite = SpriteUtil::create("buttons/button_survival.png", visibleSize.width * 0.4, visibleSize.height * 0.5,
+	cocos2d::CCSprite* survivalButtonSprite = SpriteUtil::create("buttons/survival_button.png", visibleSize.width * 0.2, visibleSize.height * 0.5,
 																  visibleSize.width * 0.3, visibleSize.height * 0.15);
 
 	this->addChild(survivalButtonSprite);
 	this->survivalButton = new SurvivalButton(survivalButtonSprite);
+
+	cocos2d::CCSprite* storyButtonSprite = SpriteUtil::create("buttons/story_button.png", visibleSize.width * 0.5, visibleSize.height * 0.5,
+																  visibleSize.width * 0.3, visibleSize.height * 0.15);
+
+	this->addChild(storyButtonSprite);
+	this->storyButton = new StoryButton(storyButtonSprite);
 
 	this->setTouchEnabled(true);
 
@@ -47,6 +53,7 @@ void GameTypeSelectionLayer::ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::C
 	location = cocos2d::CCDirector::sharedDirector()->convertToGL(location);
 
 	this->survivalButton->touch(location);
+	this->storyButton->touch(location);
 }
 
 
