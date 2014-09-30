@@ -298,7 +298,6 @@ void HelloWorld::createInterface() {
 	this->killsChainLabel->setPositionY(joystickFondo->getPositionY());
 	this->addChild(killsChainLabel, 10);
 	this->killsChainLabel->setOpacity(0);
-	//FIXME better center
 }
 
 void HelloWorld::ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent) {
@@ -339,7 +338,6 @@ void HelloWorld::update(float dt) {
 		this->model->update(dt);
 
 		updateLabels();
-		updateChainedKills();
 	} else {
 		this->preloadTextures();
 		float angulosCargados = this->angulosCargados;
@@ -368,41 +366,6 @@ void HelloWorld::updateLabels() {
 	this->killsLabel->setString(playerKillsText.c_str());
 
 	this->lifeBar->setPercentage(this->model->player->life * 100 / PLAYER_LIFE);
-}
-
-void HelloWorld::updateChainedKills() {
-
-	if (this->model->chainedKills > 2 && this->model->timer - this->model->lastKill < 1) {
-		std::string playerKillsText = dxco::StringUtil::toString(this->model->chainedKills) + " Kills";
-		this->killsChainLabel->setString(playerKillsText.c_str());
-		this->killsChainLabel->setPositionX(this->timerLabel->getPositionX());
-		this->lastChain = this->model->chainedKills;
-		CCSequence *seq = CCSequence::create(CCDelayTime::create(1), CCFadeOut::create(0.15),
-				CCCallFuncN::create(this, callfuncN_selector(HelloWorld::setChainMessage)),
-				CCFadeIn::create(0.15), CCDelayTime::create(1), CCFadeOut::create(0.3),
-				NULL);
-
-		if (this->killsChainLabel->getOpacity() == 0 && this->killsChainLabel->numberOfRunningActions() == 0) {
-			this->killsChainLabel->runAction(CCSequence::create(CCFadeIn::create(0.3), seq, NULL));
-		} else if (this->killsChainLabel->getOpacity() == 255) {
-			this->killsChainLabel->stopAllActions();
-			this->killsChainLabel->runAction(seq);
-		}
-	}
-}
-
-void HelloWorld::setChainMessage(){
-	int kills = this->lastChain;
-	if (kills < 10) {
-		this->killsChainLabel->setString("Good");
-	} else if (kills < 20) {
-		this->killsChainLabel->setString("Excellent");
-	} else if (kills < 30) {
-		this->killsChainLabel->setString("Outstanding");
-	} else {
-		this->killsChainLabel->setString("Toasty!");
-	}
-	this->killsChainLabel->setPositionX(this->timerLabel->getPositionX());
 }
 
 void HelloWorld::updateBonus(std::string texture, float duration) {

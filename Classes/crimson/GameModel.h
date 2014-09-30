@@ -20,6 +20,7 @@ class HelloWorld;
 namespace dxco {
 
 class Level;
+class ChainedKillsManager;
 
 class GameModel {
 public:
@@ -28,6 +29,7 @@ public:
 	EnemyFactory* enemyFactory;
 	BonusFactory* bonusFactory;
 	Level *level;
+	ChainedKillsManager *chains;
 
 	void addBullet(Bullet* bullet);
 	std::vector<Bullet*> bullets;
@@ -47,9 +49,6 @@ public:
 	bool playerHurt;
 	int freezeBonusActivated;
 	int kills;
-
-	int chainedKills;
-	float lastKill;
 
 private:
 	void updateCoins();

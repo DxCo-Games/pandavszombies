@@ -1,5 +1,6 @@
 #include "Enemy.h"
 #include "GameModel.h"
+#include "ChainedKillsManager.h"
 #include "../dxco/SpriteUtil.h"
 #include "../dxco/MathUtil.h"
 #include "cocos2d.h"
@@ -129,14 +130,9 @@ void Enemy::kill() {
 	this->model->bonusFactory->createBonus(this->model, cocos2d::CCPoint(location.x,
 			location.y - this->getHeight() / 2));
 
-	//update kills counters
 	this->model->kills += 1;
-	if (this->model->timer - this->model->lastKill < 1) {
-		this->model->chainedKills +=1;
-	} else {
-		this->model->chainedKills = 1;
-	}
-	this->model->lastKill = this->model->timer;
+	this->model->chains->addKill();
+
 }
 
 void Enemy::fixZOrder(float playerY) {

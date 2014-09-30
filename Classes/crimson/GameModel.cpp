@@ -6,6 +6,7 @@
 #include "dxco/SpriteUtil.h"
 #include <cstdlib>
 #include "EnemyFactory.h"
+#include "ChainedKillsManager.h"
 #include "Weapon.h"
 #include "Player.h"
 #include "daos/UserDAO.h"
@@ -76,8 +77,7 @@ GameModel::GameModel(HelloWorld* vista, Player* player, bool survival) {
 	this->playerHurt = false;
 	this->freezeBonusActivated = 0;
 	this->kills = 0;
-	this->chainedKills = 0;
-	this->lastKill = -10;
+	this->chains = new ChainedKillsManager(this);
 	this->timer = 0;
 
 	//batch node added to map
@@ -146,8 +146,7 @@ void GameModel::update(float dt) {
 	    std::remove_if(this->bullets.begin(), this->bullets.end(), ShouldDeleteBullet(this)),
 	    				this->bullets.end());
 
-	//if used, remove
-	//if out of screen, remove
+	this->chains->updateView();
 }
 
 void GameModel::restartGame() {
@@ -179,8 +178,7 @@ void GameModel::restartGame() {
 	this->player->movementSpeedBonus = 1;
 	this->player->weaponSpeedBonus = 1;
 	this->kills = 0;
-	this->chainedKills = 0;
-	this->lastKill = -10;
+	this->chains->restart();
 	this->timer = 0;
 
 	this->player->setWeapon(Player::PISTOL);
