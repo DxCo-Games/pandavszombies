@@ -42,9 +42,9 @@ void EnemyFactory::createEnemy(GameModel* model) {
 	Enemy* enemy;
 
 	if (type == "basquet") {
-		enemy = new Enemy(model, enemySprite, animations, 50);
+		enemy = new Enemy(model, enemySprite, animations, Enemy::ENEMY_SPEED * 1.8);
 	} else {
-		enemy = new Enemy(model, enemySprite, animations);
+		enemy = new Enemy(model, enemySprite, animations, Enemy::ENEMY_SPEED);
 	}
 
 	addEnemy(model, enemy);
@@ -57,7 +57,7 @@ void EnemyFactory::createBoss(GameModel* model) {
 	std::map<int, dxco::Animation*> animations = loadAnimations(model, "elvis", 0.03);
 
 	cocos2d::CCSprite* enemySprite = createSpriteInRandomPosition(model, "elvis_1_0000.png", 150, 150);
-	Enemy* enemy = new Boss(model, enemySprite, animations);
+	Enemy* enemy = new Boss(model, enemySprite, animations, Enemy::ENEMY_SPEED);
 	addEnemy(model, enemy);
 
 	SpriteUtil::fadeIn(enemy->getSprite());

@@ -22,7 +22,7 @@ class Player;
 
 class Enemy : public TopDownItem, public SteeringBehaviorItem {
 public:
-	Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations, float speed=ENEMY_DEFAULT_SPEED);
+	Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations, float speed);
 	void update(float dt);
 
 	static float ENEMY_SPEED;
