@@ -1,10 +1,3 @@
-/*
- * BazookaBullet.cpp
- *
- *  Created on: Sep 21, 2014
- *      Author: gsosarolon
- */
-
 #include "BazookaBullet.h"
 #include "GameModel.h"
 #include "cocos2d.h"
@@ -37,7 +30,7 @@ void BazookaBullet::use() {
 
 		if (MathUtil::distance(firework->getPosition(), enemy->getLocation())
 				< 70) {
-			enemy->hurt(30);
+			enemy->hurt(50);
 		}
 	}
 
