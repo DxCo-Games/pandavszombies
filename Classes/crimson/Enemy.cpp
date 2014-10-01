@@ -193,7 +193,7 @@ void Enemy::burn(float dt, cocos2d::CCPoint playerLocation, float distance, floa
 	float wasBurning = this->burning;
 	/*If has fire weapon and close to the player and in front of the player */
 	this->burning =(this->model->player->weaponType == Player::FIRE &&
-			distance < this->model->player->getWidth() &&
+			distance < this->model->player->getWidth() * 1.5 &&
 			abs(abs(this->model->player->getRotation() - angle) - 180) < 60);
 
 	if (this->burning && wasBurning){

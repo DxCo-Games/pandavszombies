@@ -37,7 +37,7 @@
 <key>gravityy</key>
 <real>0</real>
 <key>maxParticles</key>
-<real>37</real>
+<real>50</real>
 <key>maxRadius</key>
 <real>0</real>
 <key>maxRadiusVariance</key>
@@ -45,7 +45,7 @@
 <key>minRadius</key>
 <real>0</real>
 <key>particleLifespan</key>
-<real>0.6</real>
+<real>0.8</real>
 <key>particleLifespanVariance</key>
 <real>0.2</real>
 <key>radialAccelVariance</key>
