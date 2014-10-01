@@ -133,11 +133,13 @@ void Enemy::kill() {
 
 void Enemy::fixZOrder(float playerY) {
 	//update z order for isometric ordering of characters. if floor put at the bottom
-	int zorder = 1000 - this->getLocation().y * 1000 / this->model->mapa->getHeight();
+	float playerBottom = playerY - this->model->player->getHeight() / 2;
+	float enemyBottom = this->getBottomPosition();
+	int zorder = 1000 - enemyBottom * 1000 / this->model->mapa->getHeight();
 
 	this->sprite->retain();
 	this->sprite->removeFromParentAndCleanup(false);
-	if (this->getLocation().y > playerY) {
+	if (enemyBottom > playerBottom) {
 		this->model->enemyFactory->enemySpriteSheetBack->addChild(this->sprite, zorder);
 	} else {
 		this->model->enemyFactory->enemySpriteSheetFront->addChild(this->sprite, zorder);
