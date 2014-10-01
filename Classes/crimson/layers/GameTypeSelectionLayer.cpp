@@ -26,7 +26,7 @@ bool GameTypeSelectionLayer::init() {
 
 	cocos2d::CCSize visibleSize = cocos2d::CCDirector::sharedDirector()->getVisibleSize();
 
-	cocos2d::CCSprite* spriteBackground = SpriteUtil::create("ciudad_fondo.png", 0, 0, visibleSize.width, visibleSize.height);
+	cocos2d::CCSprite* spriteBackground = SpriteUtil::create("fondo_ciudad.jpg", 0, 0, visibleSize.width, visibleSize.height);
 	this->addChild(spriteBackground);
 
 	cocos2d::CCSprite* survivalButtonSprite = SpriteUtil::create("buttons/survival_button.png", visibleSize.width * 0.2, visibleSize.height * 0.5,
