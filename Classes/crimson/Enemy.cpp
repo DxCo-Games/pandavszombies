@@ -168,12 +168,6 @@ bool Enemy::shoot(Bullet* bullet) {
 			result = true;
 
 			this->hurt(bullet->getDamage());
-
-			if (!this->model->freezeBonusActivated) {
-				cocos2d::CCAction* hurtAction = cocos2d::CCSequence::create(cocos2d::CCTintTo::create(0.05f, 255, 0, 0), cocos2d::CCTintTo::create(0.05f, 255, 255, 255), NULL);
-
-				this->getSprite()->runAction(hurtAction);
-			}
 		}
 	}
 
@@ -189,6 +183,9 @@ void Enemy::hurt(float value) {
 		}
 
 		this->model->enemyKilled(this);
+	} else if (!this->model->freezeBonusActivated) {
+		cocos2d::CCAction* hurtAction = cocos2d::CCSequence::create(cocos2d::CCTintTo::create(0.05f, 255, 0, 0), cocos2d::CCTintTo::create(0.05f, 255, 255, 255), NULL);
+		this->getSprite()->runAction(hurtAction);
 	}
 }
 
