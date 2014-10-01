@@ -51,6 +51,7 @@ void Enemy::update(float dt) {
 
 		cocos2d::CCPoint playerLocation = this->model->player->getLocation();
 		float dist = MathUtil::distance(this->getLocation(), playerLocation);
+		float angle = MathUtil::angle(cocos2d::CCPointZero, this->currentVelocity) * -57.2957795;
 
 		if (!this->model->freezeBonusActivated) {
 			this->state = ENEMY_WALKING;
@@ -71,17 +72,12 @@ void Enemy::update(float dt) {
 					this->model->items, ENEMY_SEEK_RANGE - ENEMY_ARRIVE_RANGE, ENEMY_ARRIVE_RANGE);
 
 			//look at destiny
-			float angle = MathUtil::angle(cocos2d::CCPointZero, this->currentVelocity) * -57.2957795;
 			this->setRotation(angle);
-
-			this->burn(dt, playerLocation, dist, angle);
-
-			//after updating, if it's alive fix position
-			this->fixZOrder(playerLocation.y);
-		} else {
-			float angle = MathUtil::angle(cocos2d::CCPointZero, this->currentVelocity) * -57.2957795;
-			this->burn(dt, playerLocation, dist, angle);
 		}
+
+		this->burn(dt, playerLocation, dist, angle);
+		//after updating, if it's alive fix position
+		this->fixZOrder(playerLocation.y);
 	} else {
 		if (this->state != ENEMY_DEAD) {
 			this->kill();
