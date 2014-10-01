@@ -113,10 +113,10 @@ void Player::updateFireLocation() {
 	if (angleState < 8) {
 		//put the flash below the panda
 		this->model->vista->fire->setZOrder(
-				this->model->player->getSprite()->getZOrder() - 2);
+				this->model->player->getSprite()->getZOrder() - 1);
 	} else {
 		this->model->vista->fire->setZOrder(
-				this->model->player->getSprite()->getZOrder() + 2);
+				this->model->player->getSprite()->getZOrder() + 1);
 	}
 
 	float rotationAngle = angleState * -22.5;
