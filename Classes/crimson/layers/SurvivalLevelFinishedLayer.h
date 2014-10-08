@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 
 #include "../buttons/GameTypeSelectionButton.h"
+#include "../buttons/SurvivalButton.h"
 
 namespace dxco {
 
