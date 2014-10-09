@@ -5,7 +5,8 @@
 namespace dxco {
 
 GameTypeSelectionLayer::GameTypeSelectionLayer() {
-
+	this->storyButton = NULL;
+	this->survivalButton = NULL;
 }
 
 cocos2d::CCScene* GameTypeSelectionLayer::scene() {
