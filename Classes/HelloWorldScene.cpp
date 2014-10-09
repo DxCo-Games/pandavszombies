@@ -1,5 +1,7 @@
 #include "HelloWorldScene.h"
 #include "AppMacros.h"
+#include "SimpleAudioEngine.h"
+
 #include "dxco/SpriteUtil.h"
 #include "dxco/Joystick.h"
 #include "dxco/Animation.h"
@@ -402,6 +404,9 @@ void HelloWorld::initFire(float x, float y) {
 	this->mapa->addChild(fire, 2);
 }
 
+void HelloWorld::playEffect(std::string effect) {
+	//CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(effect.c_str());
+}
 
 void HelloWorld::menuCloseCallback(CCObject* pSender)
 {

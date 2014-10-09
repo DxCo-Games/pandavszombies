@@ -30,6 +30,7 @@ THE SOFTWARE.
 #include "HelloWorldScene.h"
 #include "crimson/layers/GameTypeSelectionLayer.h"
 #include "AppMacros.h"
+#include "SimpleAudioEngine.h"
 
 USING_NS_CC;
 using namespace std;

@@ -6,6 +6,7 @@
 #include "crimson/GameModel.h"
 #include "crimson/Mapa.h"
 #include "dxco/Container.h"
+#include <string>
 
 class HelloWorld : public cocos2d::CCLayer
 {
@@ -46,7 +47,7 @@ public:
     cocos2d::CCLabelTTF* killsLabel;
     cocos2d::CCLabelTTF* killsChainLabel;
     bool survivalMode;
-
+    void playEffect(std::string effect);
 private:
     void preloadTextures();
     dxco::Player* createPlayer();

@@ -40,6 +40,7 @@ void Weapon::update(float dt) {
 
 	if (this->bulletDt > (this->bulletFrequency / this->model->player->weaponSpeedBonus)) {
 		this->shoot();
+		this->model->vista->playEffect("sounds/normal_gun.wav");
 		this->bulletDt = 0;
 	}
 

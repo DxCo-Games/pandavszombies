@@ -81,12 +81,18 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
 
-LOCAL_WHOLE_STATIC_LIBRARIES := cocos_extension_static cocosdenshion_static
-LOCAL_WHOLE_STATIC_LIBRARIES += cocos2dx_static
+LOCAL_WHOLE_STATIC_LIBRARIES := cocos2dx_static cocos_extension_static cocosdenshion_static
 
 include $(BUILD_SHARED_LIBRARY)
+
+$(call import-add-path, /Users/gsosarolon/Documents/workspace/cocos2d-x/cocos2dx/platform/third_party/android/prebuilt)
+$(call import-add-path, /Users/gsosarolon/Documents/workspace/cocos2d-x/)
+$(call import-add-path, cocos2dx)
+$(call import-add-path, extensions)
+$(call import-add-path, CocosDenshion/android)
 
 $(call import-module,CocosDenshion/android)
 $(call import-module,cocos2dx)
 $(call import-module,extensions)
+
 
