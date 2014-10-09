@@ -11,6 +11,7 @@
 #include "Player.h"
 #include "daos/UserDAO.h"
 #include <algorithm>
+#include "levels/LevelParser.h"
 
 namespace dxco {
 
@@ -63,11 +64,12 @@ GameModel::GameModel(HelloWorld* vista, Player* player, bool survival) {
 		this->level = new SurvivalLevel(this);
 	} else {
 		//TODO create level and waves from file. decide story/survival based on parameter
-		EnemyWave *w1 = new EnemyWave(this, 10, 0.3, ENEMY_DEFAULT_SPEED);
+		/*EnemyWave *w1 = new EnemyWave(this, 10, 0.3, ENEMY_DEFAULT_SPEED);
 		EnemyWave *w2 = new EnemyWave(this, 2, 5, ENEMY_DEFAULT_SPEED, true);
 		std::vector<EnemyWave*> waves;
 		waves.push_back(w1);
-		waves.push_back(w2);
+		waves.push_back(w2);*/
+		std::vector<EnemyWave*> waves = LevelParser::parse(this, "levels/level1.json");
 		this->level = new Level(this, waves);
 	}
 

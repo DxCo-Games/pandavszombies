@@ -67,6 +67,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/crimson/levels/Level.cpp \
                    ../../Classes/crimson/levels/SurvivalLevel.cpp \
                    ../../Classes/crimson/levels/EnemyWave.cpp \
+                   ../../Classes/crimson/levels/LevelParser.cpp \
                    ../../Classes/crimson/Mapa.cpp \
                    ../../Classes/crimson/daos/UserDAO.cpp \
                    ../../Classes/crimson/NativeMethods.cpp \
