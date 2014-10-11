@@ -3,7 +3,7 @@
 #include "Bullet.h"
 #include "../dxco/SpriteUtil.h"
 #include "GameModel.h"
-
+#include "../HelloWorldScene.h"
 
 namespace dxco {
 
@@ -14,6 +14,8 @@ Shotgun::Shotgun(GameModel* model): Weapon(model) {
 void Shotgun::shoot() {
 	float rotation = this->model->player->getRotation();
 	cocos2d::CCPoint location = this->model->player->getLocation();
+
+	this->model->vista->playEffect("sounds/shotgun.wav");
 
 	this->createBullet(location.x, location.y, 0);
 	this->createBullet(location.x, location.y, 2.5);

@@ -405,7 +405,7 @@ void HelloWorld::initFire(float x, float y) {
 }
 
 void HelloWorld::playEffect(std::string effect) {
-	//CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(effect.c_str());
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(effect.c_str());
 }
 
 void HelloWorld::menuCloseCallback(CCObject* pSender)
