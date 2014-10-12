@@ -12,15 +12,12 @@ namespace dxco {
 
 
 EnemyFactory::EnemyFactory(){
-	//sprite sheet is created here but should be added as a map child outside
-	this->enemySpriteSheetFront = cocos2d::CCSpriteBatchNode::create("sprite_sheets/zombies.png");
-	this->enemySpriteSheetBack = cocos2d::CCSpriteBatchNode::create("sprite_sheets/zombies.png");
 }
 
 void EnemyFactory::createEnemy(GameModel* model) {
 
 	//random sprite type
-	std::string type;
+	std::string type = "cura";
 
 	switch(rand() % 5) {
 	case 0: type = "campesino"; break;
@@ -67,7 +64,7 @@ void EnemyFactory::addEnemy(GameModel* model, Enemy* enemy) {
 
 	model->enemies.push_back(enemy);
 	model->items.push_back(enemy);
-	this->enemySpriteSheetBack->addChild(enemy->getSprite());
+	model->mapa->addChild(enemy->getSprite());
 }
 
 std::map<int, dxco::Animation*> EnemyFactory::loadAnimations(GameModel* model, std::string type, float frameTime) {

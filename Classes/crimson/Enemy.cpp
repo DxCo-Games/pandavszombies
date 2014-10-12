@@ -116,10 +116,7 @@ void Enemy::stand(float dt, cocos2d::CCPoint target) {
 
 void Enemy::kill() {
 	//fix zorder of blood splat to be on the floor
-	this->sprite->retain();
-	this->sprite->removeFromParentAndCleanup(false);
-	this->model->mapa->addChild(this->sprite, -1);
-	this->sprite->release();
+	this->sprite->setZOrder(-1);
 
 	this->state = ENEMY_DEAD;
 	cocos2d::CCPoint location = this->getLocation();
@@ -132,19 +129,12 @@ void Enemy::kill() {
 }
 
 void Enemy::fixZOrder(float playerY) {
+	//FIXME elvis
+	//FIXME ice
 	//update z order for isometric ordering of characters. if floor put at the bottom
-	float playerBottom = playerY - this->model->player->getHeight() / 2;
 	float enemyBottom = this->getBottomPosition();
 	int zorder = 1000 - enemyBottom * 1000 / this->model->mapa->getHeight();
-
-	this->sprite->retain();
-	this->sprite->removeFromParentAndCleanup(false);
-	if (enemyBottom > playerBottom) {
-		this->model->enemyFactory->enemySpriteSheetBack->addChild(this->sprite, zorder);
-	} else {
-		this->model->enemyFactory->enemySpriteSheetFront->addChild(this->sprite, zorder);
-	}
-	this->sprite->release();
+	this->model->mapa->reorderChild(this->sprite, zorder);
 }
 
 void Enemy::beat(Player* player, float dt) {

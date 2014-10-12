@@ -110,7 +110,13 @@ void HelloWorld::realInit() {
 
 void HelloWorld::preloadTextures() {
 	if (!this->preloaded) {
-		dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/zombies.plist");
+		dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/basquet.plist");
+		dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/campesino.plist");
+		dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/cirujano.plist");
+		dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/cura.plist");
+		dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/elvis.plist");
+		dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/oficinista.plist");
+		dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/sangre.plist");
 		this->preloaded = true;
 		this->realInit();
 	}
@@ -119,7 +125,9 @@ void HelloWorld::preloadTextures() {
 
 dxco::Player* HelloWorld::createPlayer() {
 
-	dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/panda.plist");
+	dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/panda1.plist");
+	dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/panda2.plist");
+	dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/panda3.plist");
 
 	CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
 	this->playerContainer = new dxco::Container(this->mapa->getWidth() / 2,  this->mapa->getHeight() / 2, 80, 80);
