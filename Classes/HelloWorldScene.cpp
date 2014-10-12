@@ -214,9 +214,8 @@ void HelloWorld::createInterface() {
 
 	//weapon bar
 	CCSprite* weaponBack = dxco::SpriteUtil::create("gameplay/BALAS_barra_fin.png", 5, 0.78 * visibleSize.height, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
-	weaponBack->setScaleX(lifeBack->getScaleX());
-	weaponBack->setScaleY(lifeBack->getScaleY());
 	dxco::SpriteUtil::leftAlign(lifeBack, weaponBack);
+
 	CCSprite* weaponFront = dxco::SpriteUtil::create("gameplay/BALAS_barra.png", 5, 0.78 * visibleSize.height, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
 	weaponBar = CCProgressTimer::create(weaponFront);
 	weaponBar->setPosition(weaponBack->getPosition()); //positions don't match by default
@@ -227,8 +226,6 @@ void HelloWorld::createInterface() {
 	weaponBar->setBarChangeRate(ccp(1,0));
 	weaponBar->setPercentage(100);
 	weaponIcon = dxco::SpriteUtil::create("bonus/PISTOLA.png", 5, 0.78 * visibleSize.height, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
-	weaponIcon->setScaleX(lifeBack->getScaleX());
-	weaponIcon->setScaleY(lifeBack->getScaleY());
 	weaponIcon->setPositionY(weaponBack->getPositionY());
 	dxco::SpriteUtil::leftAlign(lifeBack, weaponIcon);
 	this->addChild(weaponBack, 10);
@@ -237,13 +234,11 @@ void HelloWorld::createInterface() {
 
 	//bonus icons
 	bonus1 = dxco::SpriteUtil::create("bonus/BALAV_activada.png", 5, 0.78 * visibleSize.height, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
-	bonus1->setScaleX(lifeBack->getScaleX());
-	bonus1->setScaleY(lifeBack->getScaleY());
+	dxco::SpriteUtil::copyScale(lifeBack, bonus1);
 	this->addChild(bonus1, 11);
 	bonus1->setOpacity(0);
 	bonus2 = dxco::SpriteUtil::create("bonus/BALAV_activada.png", 5, 0.78 * visibleSize.height, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
-	bonus2->setScaleX(lifeBack->getScaleX());
-	bonus2->setScaleY(lifeBack->getScaleY());
+	dxco::SpriteUtil::copyScale(lifeBack, bonus2);
 	this->addChild(bonus2, 11);
 	bonus2->setOpacity(0);
 	//spread the bonus icons between the life and weapon bars
@@ -256,8 +251,6 @@ void HelloWorld::createInterface() {
 
 	//score
 	CCSprite* score = dxco::SpriteUtil::create("gameplay/SCORE.png", visibleSize.width / 2, 0, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
-	score->setScaleX(lifeBack->getScaleX());
-	score->setScaleY(lifeBack->getScaleY());
 	score->setPositionY(lifeBack->getPositionY());
 	//set the right margin equal to the left one
 	float sideMargin = lifeBack->getPositionX() - dxco::SpriteUtil::getWidth(lifeBack);
@@ -277,8 +270,6 @@ void HelloWorld::createInterface() {
 
 	//zombie bar
 	CCSprite* zombie = dxco::SpriteUtil::create("gameplay/ZOMBIE_contador.png", 0, 0, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
-	zombie->setScaleX(lifeBack->getScaleX());
-	zombie->setScaleY(lifeBack->getScaleY());
 	zombie->setPositionY(weaponBack->getPositionY());
 	dxco::SpriteUtil::rightAlign(score, zombie);
 	this->addChild(zombie, 10);
