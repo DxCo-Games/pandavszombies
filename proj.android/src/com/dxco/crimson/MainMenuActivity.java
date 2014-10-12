@@ -29,6 +29,9 @@ public class MainMenuActivity extends Activity {
 	private ImageButton botonLoginFacebook;
 	//private ImageButton botonLogoutFacebook;
 	
+	private static final String APP_ID = "com.dxco";
+	private static final String GAME_URL = "https://play.google.com/store/apps/details?id=" + APP_ID;
+	
 	static {
 		System.loadLibrary("hellocpp");
 	}
@@ -56,6 +59,7 @@ public class MainMenuActivity extends Activity {
 
 		this.botonLoginFacebook = (ImageButton) findViewById(R.id.botonLoginFacebook);
 		
+		SocialUtil.addRateAppListener(this, findViewById(R.id.botonRate), APP_ID, GAME_URL);
 
 		this.botonLoginFacebook.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
