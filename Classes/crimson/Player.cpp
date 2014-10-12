@@ -89,6 +89,8 @@ void Player::update(float dt) {
 
 			//undo map movement so player stays in the middle
 			SpriteUtil::move(this->sprite, deltaX, deltaY);
+			int zorder = 1000 - this->getBottomPosition() * 1000 / mapHeight;
+			this->model->mapa->reorderChild(this->sprite, zorder);
 		}
 	} else {
 		this->state = QUIETO;
