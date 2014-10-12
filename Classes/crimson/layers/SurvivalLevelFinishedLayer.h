@@ -14,7 +14,7 @@ public:
 
 	virtual bool init();
 
-	static cocos2d::CCScene* scene();
+	static cocos2d::CCScene* scene(int points, int kills, int coins);
 
 	CREATE_FUNC(SurvivalLevelFinishedLayer);
 
@@ -22,6 +22,9 @@ public:
 private:
 	GameTypeSelectionButton* menuButton;
 	SurvivalButton* tryAgainButton;
+	int points;
+	int kills;
+	int coins;
 };
 
 } /* namespace dxco */

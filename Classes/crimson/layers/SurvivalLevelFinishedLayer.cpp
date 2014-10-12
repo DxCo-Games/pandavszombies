@@ -1,12 +1,17 @@
 #include "SurvivalLevelFinishedLayer.h"
 
 #include "../../dxco/SpriteUtil.h"
+#include "../../dxco/LabelUtil.h"
+#include "../../dxco/StringUtil.h"
 
 namespace dxco {
 
 SurvivalLevelFinishedLayer::SurvivalLevelFinishedLayer() {
 	this->menuButton = NULL;
 	this->tryAgainButton = NULL;
+	this->points = 0;
+	this->kills = 0;
+	this->coins = 0;
 }
 
 bool SurvivalLevelFinishedLayer::init() {
@@ -44,15 +49,55 @@ bool SurvivalLevelFinishedLayer::init() {
 	this->addChild(tryAgainButtonSprite);
 	this->tryAgainButton = new SurvivalButton(tryAgainButtonSprite);
 
+	cocos2d::CCLabelTTF* pointsLabel = dxco::LabelUtil::create(StringUtil::toString(this->points), 14, visibleSize.width / 2, 10, dxco::LabelUtil::BOTTOM, dxco::LabelUtil::LEFT, "fonts/KBStickToThePlan.ttf");
+
+	pointsLabel->setPositionX(placaGameOver->getPositionX() - 0.37 * dxco::SpriteUtil::getWidth(placaGameOver));
+	pointsLabel->setPositionY(placaGameOver->getPositionY() - 0.20 * dxco::SpriteUtil::getHeight(placaGameOver));
+	this->addChild(pointsLabel, 10);
+
+	cocos2d::CCSprite* trophy = SpriteUtil::create("trophy.png", visibleSize.width * 0.2, visibleSize.height * 0.7, dxco::SpriteUtil::getWidth(placaGameOver) * 0.13, dxco::SpriteUtil::getHeight(placaGameOver) * 0.3);
+	trophy->setPositionX(pointsLabel->getPositionX() + 0.11 * dxco::SpriteUtil::getWidth(placaGameOver));
+	trophy->setPositionY(pointsLabel->getPositionY() + 0.08 * dxco::SpriteUtil::getHeight(placaGameOver));
+
+	this->addChild(trophy, 10);
+
+	cocos2d::CCLabelTTF* killsLabel = dxco::LabelUtil::create(StringUtil::toString(this->kills), 14, visibleSize.width / 2, 10, dxco::LabelUtil::BOTTOM, dxco::LabelUtil::LEFT, "fonts/KBStickToThePlan.ttf");
+	killsLabel->setPositionX(trophy->getPositionX() + 0.17 * dxco::SpriteUtil::getWidth(placaGameOver));
+	killsLabel->setPositionY(pointsLabel->getPositionY());
+
+	this->addChild(killsLabel, 10);
+
+	cocos2d::CCSprite* cross = SpriteUtil::create("cross.png", visibleSize.width * 0.2, visibleSize.height * 0.7, dxco::SpriteUtil::getWidth(placaGameOver) * 0.13, dxco::SpriteUtil::getHeight(placaGameOver) * 0.3);
+	cross->setPositionX(killsLabel->getPositionX() + 0.13 * dxco::SpriteUtil::getWidth(placaGameOver));
+	cross->setPositionY(trophy->getPositionY());
+
+	this->addChild(cross, 10);
+
+	cocos2d::CCLabelTTF* coinsLabel = dxco::LabelUtil::create(StringUtil::toString(this->coins), 14, visibleSize.width / 2, 10, dxco::LabelUtil::BOTTOM, dxco::LabelUtil::LEFT, "fonts/KBStickToThePlan.ttf");
+	coinsLabel->setPositionX(cross->getPositionX() + 0.17 * dxco::SpriteUtil::getWidth(placaGameOver));
+	coinsLabel->setPositionY(pointsLabel->getPositionY());
+
+	this->addChild(coinsLabel, 10);
+
+	cocos2d::CCSprite* coin = SpriteUtil::create("coin.png", visibleSize.width * 0.2, visibleSize.height * 0.7, dxco::SpriteUtil::getWidth(placaGameOver) * 0.13, dxco::SpriteUtil::getHeight(placaGameOver) * 0.3);
+	coin->setPositionX(coinsLabel->getPositionX() + 0.13 * dxco::SpriteUtil::getWidth(placaGameOver));
+	coin->setPositionY(trophy->getPositionY());
+
+	this->addChild(coin, 10);
+
 	this->setTouchEnabled(true);
 
 	return true;
 }
 
-cocos2d::CCScene* SurvivalLevelFinishedLayer::scene() {
+cocos2d::CCScene* SurvivalLevelFinishedLayer::scene(int points, int kills, int coins) {
 
 	cocos2d::CCScene *scene = cocos2d::CCScene::create();
 	SurvivalLevelFinishedLayer* layer = new SurvivalLevelFinishedLayer();
+
+	layer->points = points;
+	layer->kills = kills;
+	layer->coins = coins;
 
 	layer->init();
 	scene->addChild(layer);
@@ -67,6 +112,7 @@ void SurvivalLevelFinishedLayer::ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2
 	location = cocos2d::CCDirector::sharedDirector()->convertToGL(location);
 
 	this->menuButton->touch(location);
+	this->tryAgainButton->touch(location);
 }
 
 } /* namespace dxco */
