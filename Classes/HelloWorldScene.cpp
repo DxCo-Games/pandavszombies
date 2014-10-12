@@ -59,6 +59,9 @@ bool HelloWorld::init()
     this->angulosCargados = 0;
     this->scheduleUpdate();
 
+    this->juegoPausado = false;
+
+    this->setKeypadEnabled(true);
     return true;
 }
 
@@ -328,9 +331,10 @@ void HelloWorld::update(float dt) {
 		this->removeChild(porcentajeCargado);
 		this->removeChild(loading);
 
-		this->model->update(dt);
-
-		updateLabels();
+		if (!this->juegoPausado) {
+			this->model->update(dt);
+			updateLabels();
+		}
 	} else {
 		this->preloadTextures();
 		float angulosCargados = this->angulosCargados;
@@ -342,6 +346,40 @@ void HelloWorld::update(float dt) {
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("sounds/background.wav", true);
 	}
 }
+
+void HelloWorld::keyBackClicked() {
+
+	if (true) {
+		if (this->juegoPausado) {
+			cocos2d::CCDirector* pDirector = cocos2d::CCDirector::sharedDirector();
+			//pDirector->runWithScene(dxco::MenuParallax::scene());
+			// TODO go to menu
+		}
+
+		this->juegoPausado = !this->juegoPausado;
+
+		if (!this->juegoPausado) {
+			this->playMusic();
+		} else {
+			this->stopMusic();
+		}
+	} else {
+		this->stopMusic();
+		cocos2d::CCDirector* pDirector = cocos2d::CCDirector::sharedDirector();
+		//pDirector->runWithScene(dxco::MenuParallax::scene());
+		// TODO go to menu
+	}
+}
+
+void HelloWorld::playMusic() {
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("sounds/background.wav", true);
+}
+
+void HelloWorld::stopMusic() {
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
+}
+
 
 void HelloWorld::updateLabels() {
 	int totalTime = this->model->timer;

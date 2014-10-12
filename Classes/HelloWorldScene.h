@@ -48,7 +48,13 @@ public:
     cocos2d::CCLabelTTF* killsChainLabel;
     bool survivalMode;
     void playEffect(std::string effect);
+
+    virtual void keyBackClicked();
+    void stopMusic();
+    void playMusic();
+    bool juegoPausado;
 private:
+
     void preloadTextures();
     dxco::Player* createPlayer();
     void createInterface();
