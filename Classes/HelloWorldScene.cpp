@@ -107,12 +107,13 @@ void HelloWorld::realInit() {
 
 void HelloWorld::preloadTextures() {
 	if (!this->preloaded) {
-//		dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/basquet.plist");
-//		dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/campesino.plist");
-//		dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/cirujano.plist");
+		dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/basquet.plist");
+		dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/campesino.plist");
+		dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/cirujano.plist");
 		dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/cura.plist");
 		dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/elvis.plist");
 		dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/oficinista.plist");
+		dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/sangre.plist");
 		this->preloaded = true;
 		this->realInit();
 	}

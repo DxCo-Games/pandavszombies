@@ -19,13 +19,13 @@ void EnemyFactory::createEnemy(GameModel* model) {
 	//random sprite type
 	std::string type = "cura";
 
-//	switch(rand() % 5) {
-//	case 0: type = "campesino"; break;
-//	case 1: type = "oficinista"; break;
-//	case 2: type = "basquet"; break;
-//	case 3: type = "cirujano"; break;
-//	case 4: type = "cura"; break;
-//	}
+	switch(rand() % 5) {
+	case 0: type = "campesino"; break;
+	case 1: type = "oficinista"; break;
+	case 2: type = "basquet"; break;
+	case 3: type = "cirujano"; break;
+	case 4: type = "cura"; break;
+	}
 
 	int delta = (rand() % 10);
 
@@ -51,9 +51,9 @@ void EnemyFactory::createEnemy(GameModel* model) {
 
 void EnemyFactory::createBoss(GameModel* model) {
 
-	std::map<int, dxco::Animation*> animations = loadAnimations(model, "cura", 0.03);
+	std::map<int, dxco::Animation*> animations = loadAnimations(model, "elvis", 0.03);
 
-	cocos2d::CCSprite* enemySprite = createSpriteInRandomPosition(model, "cura_1_0000.png", 150, 150);
+	cocos2d::CCSprite* enemySprite = createSpriteInRandomPosition(model, "elvis_1_0000.png", 150, 150);
 	Enemy* enemy = new Boss(model, enemySprite, animations, Enemy::ENEMY_SPEED);
 	addEnemy(model, enemy);
 
