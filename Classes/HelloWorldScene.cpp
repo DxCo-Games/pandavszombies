@@ -140,18 +140,38 @@ dxco::Player* HelloWorld::createPlayer() {
     	animations[dxco::Player::QUIETO * angles + i] = standingAnimation;
 
     	std::vector<cocos2d::CCSpriteFrame*> texturesWalking;
+    	std::vector<cocos2d::CCSpriteFrame*> texturesWalkingInverted;
+
     	for (int j = 0; j <= 13; j++) {
     		std::string index = "00" + dxco::StringUtil::toString(j);
-    		if (j < 10){
+
+    		if (j < 10) {
     			index = "0" + index;
     		}
+
     		texturesWalking.push_back(dxco::SpriteUtil::createSpriteFrame("caminata_" + dxco::StringUtil::toString(i + 1)  +
     				"_" + index + ".png"));
     	}
+
     	dxco::Animation* walkingAnimation = new dxco::Animation(texturesWalking, frameTime);
     	animations[dxco::Player::CAMINANDO * angles + i] = walkingAnimation;
 
+    	for (int j = 13; j >= 0; j--) {
+    		std::string index = "00" + dxco::StringUtil::toString(j);
+
+    		if (j < 10) {
+    			index = "0" + index;
+    		}
+
+    		texturesWalkingInverted.push_back(dxco::SpriteUtil::createSpriteFrame("caminata_" + dxco::StringUtil::toString(i + 1)  +
+    				"_" + index + ".png"));
+    	}
+
+    	dxco::Animation* walkingAnimationInverted = new dxco::Animation(texturesWalkingInverted, frameTime);
+    	animations[dxco::Player::CAMINANDO_INVERTIDO * angles + i] = walkingAnimationInverted;
+
     	std::vector<cocos2d::CCSpriteFrame*> texturesHerida;
+
     	for (int j = 0; j < 10; j++){
     		texturesHerida.push_back(dxco::SpriteUtil::createSpriteFrame("herida1_" + dxco::StringUtil::toString(i + 1)  +
 					"_000" + dxco::StringUtil::toString(j) +".png"));

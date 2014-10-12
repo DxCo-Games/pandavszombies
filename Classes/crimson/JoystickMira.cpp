@@ -14,7 +14,19 @@ void JoystickMira::onMoved(cocos2d::CCPoint location, float angle,
 		float intensity) {
 	Joystick::onMoved(location, angle, intensity);
 
-	this->game->player->rotation = -angle * 57.2957795;
+	float rotation = -angle * 57.2957795;
+	float moveAngle = this->game->player->moveRotation * -57.2957795;
+	bool invertido;
+
+	if ((-rotation < 90 && -moveAngle > 270) || (-moveAngle < 90 && -rotation > 270)) {
+		invertido = false;
+	} else {
+		int diff = abs(rotation - moveAngle);
+		invertido = diff > 120;
+	}
+
+	this->game->player->invertido = invertido;
+	this->game->player->rotation = rotation;
 	this->game->vista->fire->setAngle(angle * 57.2957795);
 }
 

@@ -24,6 +24,7 @@ Player::Player(cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations)
 	this->moveRotation;
 	this->weapon = NULL;
 	this->weaponBonus = NULL;
+	this->invertido = false;
 }
 
 void Player::hurt(float damage) {
@@ -55,7 +56,12 @@ void Player::update(float dt) {
 	this->updateFireLocation();
 
 	if (this->moving) {
-		this->state = CAMINANDO;
+		if (this->invertido) {
+			this->state = CAMINANDO_INVERTIDO;
+		} else {
+			this->state = CAMINANDO;
+		}
+
 		cocos2d::CCPoint position = this->getLocation();
 
 		float x = position.x;

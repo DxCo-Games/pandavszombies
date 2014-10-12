@@ -19,7 +19,7 @@ public:
 	void disparar();
 
 	GameModel* model;
-	enum estados { QUIETO, CAMINANDO, HERIDO };
+	enum estados { QUIETO, CAMINANDO, CAMINANDO_INVERTIDO, HERIDO };
 	enum weapons { PISTOL, SHOTGUN, SMG_, MACHINE_GUN, FIRE, BAZOOKA, FIREBULLET};
 	Weapon* weapon;
 	weapons weaponType;
@@ -38,6 +38,7 @@ public:
 	WeaponBonus* weaponBonus;
 
 	bool moving;
+	bool invertido;
 
 	/* Since the player can move and look in different directions
 	 * we use a specific angle to track movement direction.
