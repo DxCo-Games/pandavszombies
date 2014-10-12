@@ -27,7 +27,7 @@ import com.facebook.SessionState;
 public class MainMenuActivity extends Activity {
 
 	private ImageButton botonLoginFacebook;
-	private ImageButton botonLogoutFacebook;
+	//private ImageButton botonLogoutFacebook;
 	
 	static {
 		System.loadLibrary("hellocpp");
@@ -55,19 +55,19 @@ public class MainMenuActivity extends Activity {
 		});
 
 		this.botonLoginFacebook = (ImageButton) findViewById(R.id.botonLoginFacebook);
-		this.botonLogoutFacebook = (ImageButton) findViewById(R.id.botonLogoutFacebook);
+		
 
 		this.botonLoginFacebook.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
 				onClickLogin();
 			}
-		});
-
+		});/*
+this.botonLogoutFacebook = (ImageButton) findViewById(R.id.botonLogoutFacebook);
 		this.botonLogoutFacebook.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
 				onClickLogout();
 			}
-		});
+		});*/
 
 		/* Facebook Configuration */
 		Session session = Session.getActiveSession();
@@ -116,7 +116,7 @@ public class MainMenuActivity extends Activity {
 		if (session.isOpened()) {
 			this.botonLoginFacebook.setVisibility(ImageButton.GONE);
 		} else {
-			this.botonLogoutFacebook.setVisibility(ImageButton.GONE);
+			//this.botonLogoutFacebook.setVisibility(ImageButton.GONE);
 		}
 	}
 	
