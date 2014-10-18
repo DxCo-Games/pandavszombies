@@ -87,6 +87,7 @@ GameModel::GameModel(HelloWorld* vista, Player* player, bool survival) {
 }
 
 void GameModel::addBullet(Bullet* bullet) {
+	//FIXME shouldn't this be in the weapon?
 	this->bullets.push_back(bullet);
 	this->mapa->addChild(bullet->getSprite(), 10001);
 }
@@ -98,6 +99,13 @@ std::vector<Item*>& GameModel::getItems() {
 
 void GameModel::enemyKilled(Enemy* enemy) {
 	this->player->score += enemy->score;
+
+	cocos2d::CCPoint location = enemy->getLocation();
+	this->bonusFactory->createBonus(this, cocos2d::CCPoint(location.x,
+			location.y - enemy->getHeight() / 2));
+
+	this->kills += 1;
+	this->chains->addKill();
 }
 
 void GameModel::update(float dt) {

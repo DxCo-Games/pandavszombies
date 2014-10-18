@@ -79,12 +79,7 @@ void Enemy::update(float dt) {
 		//after updating, if it's alive fix position
 		this->fixZOrder(playerLocation.y);
 	} else {
-		if (this->state != ENEMY_DEAD) {
-			this->kill();
-			this->bloodDt = 0;
-		} else {
-			this->bloodDt += dt;
-		}
+		this->bloodDt += dt;
 
 		Animation *animation = this->animations.find(this->getState())->second;
 		if (animation->finished && this->bloodDt > ENEMY_BLOOD_DURATION) {
@@ -115,22 +110,17 @@ void Enemy::stand(float dt, cocos2d::CCPoint target) {
 }
 
 void Enemy::kill() {
+	if (this->model->freezeBonusActivated) {
+		this->unfreeze();
+	}
 	//fix zorder of blood splat to be on the floor
 	this->sprite->setZOrder(-1);
-
 	this->state = ENEMY_DEAD;
-	cocos2d::CCPoint location = this->getLocation();
-	this->model->bonusFactory->createBonus(this->model, cocos2d::CCPoint(location.x,
-			location.y - this->getHeight() / 2));
-
-	this->model->kills += 1;
-	this->model->chains->addKill();
-
+	this->bloodDt = 0;
+	this->model->enemyKilled(this);
 }
 
 void Enemy::fixZOrder(float playerY) {
-	//FIXME elvis
-	//FIXME ice
 	//update z order for isometric ordering of characters. if floor put at the bottom
 	float enemyBottom = this->getBottomPosition();
 	int zorder = 1000 - enemyBottom * 1000 / this->model->mapa->getHeight();
@@ -167,12 +157,7 @@ bool Enemy::shoot(Bullet* bullet) {
 void Enemy::hurt(float value) {
 	this->life -= value;
 	if (!this->isActive()) {
-
-		if (this->model->freezeBonusActivated) {
-			this->unfreeze();
-		}
-
-		this->model->enemyKilled(this);
+		this->kill();
 	} else if (!this->model->freezeBonusActivated) {
 		cocos2d::CCAction* hurtAction = cocos2d::CCSequence::create(cocos2d::CCTintTo::create(0.05f, 255, 0, 0), cocos2d::CCTintTo::create(0.05f, 255, 255, 255), NULL);
 		this->getSprite()->runAction(hurtAction);
