@@ -1,6 +1,8 @@
 #ifndef BAZOOKA_H_
 #define BAZOOKA_H_
 
+#define BAZOOKA_FREQUENCY 0.5
+
 #include "Weapon.h"
 
 namespace dxco {

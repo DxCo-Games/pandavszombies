@@ -29,8 +29,8 @@ void BazookaBullet::use() {
 		Enemy* enemy = this->model->enemies[i];
 
 		if (MathUtil::distance(firework->getPosition(), enemy->getLocation())
-				< 70) {
-			enemy->hurt(50);
+				< BAZOOKA_RANGE) {
+			enemy->hurt(BAZOOKA_DAMAGE);
 		}
 	}
 

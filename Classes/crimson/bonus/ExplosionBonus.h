@@ -1,6 +1,9 @@
 #ifndef EXPLOSIONBONUS_H_
 #define EXPLOSIONBONUS_H_
 
+#define EXPLOSION_RANGE 180
+#define EXPLOSION_DAMAGE 80
+
 #include "Bonus.h"
 
 namespace dxco {

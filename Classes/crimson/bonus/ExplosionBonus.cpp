@@ -21,8 +21,8 @@ void ExplosionBonus::applyBonus(){
 	for (int i = 0; i < this->model->enemies.size(); i++) {
 		Enemy* enemy = this->model->enemies[i];
 
-		if (MathUtil::distance(firework->getPosition(), enemy->getLocation()) < 180) {
-			enemy->hurt(80);
+		if (MathUtil::distance(firework->getPosition(), enemy->getLocation()) < EXPLOSION_RANGE) {
+			enemy->hurt(EXPLOSION_DAMAGE);
 		}
 	}
 }
