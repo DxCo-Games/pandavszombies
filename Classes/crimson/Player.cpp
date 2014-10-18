@@ -288,7 +288,7 @@ void Player::setWeapon(weapons type) {
 	case FIREBULLET: {
 		this->weapon = new FireBulletWeapon(this->model);
 		//FIXME need icon
-		SpriteUtil::setTexture(model->vista->weaponIcon, "bonus/PISTOLA.png");
+		SpriteUtil::setTexture(model->vista->weaponIcon, "bonus/fire.png");
 		break;
 	}
 	default:{

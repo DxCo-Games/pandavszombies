@@ -1,8 +1,8 @@
 #ifndef PLAYER_H_
 #define PLAYER_H_
 
-#define PLAYER_LIFE 400
-#define PLAYER_SPEED 75
+#define PLAYER_LIFE 200
+#define PLAYER_SPEED 90
 #define PLAYER_ANGLE_POSITIONS 16
 
 #include "../dxco/TopDownItem.h"
