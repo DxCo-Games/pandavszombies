@@ -2,6 +2,7 @@
 #include "GameModel.h"
 #include "../dxco/SpriteUtil.h"
 #include "BazookaBullet.h"
+#include "HelloWorldScene.h"
 
 namespace dxco {
 
