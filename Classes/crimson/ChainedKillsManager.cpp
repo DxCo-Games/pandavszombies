@@ -64,6 +64,7 @@ void ChainedKillsManager::setChainMessage(){
 		label->setString("Outstanding");
 	} else {
 		label->setString("Toasty!");
+		this->model->vista->playEffect("sounds/toasty.ogg");
 	}
 }
 

@@ -378,6 +378,7 @@ void HelloWorld::update(float dt) {
 		std::string porcentaje = dxco::StringUtil::toString((angulosCargados / cantAngulos) * 100);
 		porcentaje += "%";
 		porcentajeCargado->setString(porcentaje.c_str());
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(0.5);
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("sounds/background.wav", true);
 	}
 }
