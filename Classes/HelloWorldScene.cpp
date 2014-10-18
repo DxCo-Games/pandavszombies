@@ -286,7 +286,14 @@ void HelloWorld::createInterface() {
 	this->addChild(score, 10);
 
 	//timer
-	CCSprite* timer = dxco::SpriteUtil::create("gameplay/TIMER.png", visibleSize.width / 2, 0, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+	CCSprite* timer;
+	if (this->survivalMode) {
+		timer = dxco::SpriteUtil::create("gameplay/TIMER.png", visibleSize.width / 2, 0, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+		this->timerLabel = dxco::LabelUtil::create("00:00", 14, visibleSize.width / 2, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT, "fonts/KBStickToThePlan.ttf");
+	} else {
+		timer = dxco::SpriteUtil::create("gameplay/LEVEL.png", visibleSize.width / 2, 0, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+		this->timerLabel = dxco::LabelUtil::create("LEVEL 1", 14, visibleSize.width / 2, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT, "fonts/KBStickToThePlan.ttf");
+	}
 	timer->setScaleX(lifeBack->getScaleX());
 	timer->setScaleY(lifeBack->getScaleY());
 	timer->setPositionY(lifeBack->getPositionY());
@@ -296,16 +303,16 @@ void HelloWorld::createInterface() {
 	timer->setPositionX(x0 + (xf - x0) / 2);
 	this->addChild(timer, 10);
 
+	this->timerLabel->setPositionX(timer->getPositionX() - 0.35 * dxco::SpriteUtil::getWidth(timer));
+	this->timerLabel->setPositionY(timer->getPositionY() + 0.22 * dxco::SpriteUtil::getHeight(timer));
+	this->addChild(timerLabel, 10);
+
 	//zombie bar
 	CCSprite* zombie = dxco::SpriteUtil::create("gameplay/ZOMBIE_contador.png", 0, 0, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
 	zombie->setPositionY(weaponBack->getPositionY());
 	dxco::SpriteUtil::rightAlign(score, zombie);
 	this->addChild(zombie, 10);
 
-	this->timerLabel = dxco::LabelUtil::create("00:00", 14, visibleSize.width / 2, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT, "fonts/KBStickToThePlan.ttf");
-	this->timerLabel->setPositionX(timer->getPositionX() - 0.35 * dxco::SpriteUtil::getWidth(timer));
-	this->timerLabel->setPositionY(timer->getPositionY() + 0.22 * dxco::SpriteUtil::getHeight(timer));
-	this->addChild(timerLabel, 10);
 	this->playerScoreLabel = dxco::LabelUtil::create("0", 14, 10, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::RIGHT, "fonts/KBStickToThePlan.ttf");
 	this->playerScoreLabel->setPositionX(score->getPositionX() + 0.32 * dxco::SpriteUtil::getWidth(score));
 	this->playerScoreLabel->setPositionY(this->timerLabel->getPositionY());
@@ -410,14 +417,16 @@ void HelloWorld::stopMusic() {
 
 
 void HelloWorld::updateLabels() {
-	int totalTime = this->model->timer;
-	int minutes = ceil(totalTime / 60);
-	int seconds = totalTime % 60;
+	if (this->survivalMode) {
+		int totalTime = this->model->timer;
+		int minutes = ceil(totalTime / 60);
+		int seconds = totalTime % 60;
 
-	std::string stringMinutes =  dxco::StringUtil::padLeft(minutes, 2);
-	std::string stringSeconds = dxco::StringUtil::padLeft(seconds, 2);
-	std::string timerText = stringMinutes + ":" + stringSeconds;
-	this->timerLabel->setString(timerText.c_str());
+		std::string stringMinutes =  dxco::StringUtil::padLeft(minutes, 2);
+		std::string stringSeconds = dxco::StringUtil::padLeft(seconds, 2);
+		std::string timerText = stringMinutes + ":" + stringSeconds;
+		this->timerLabel->setString(timerText.c_str());
+	}
 
 	std::string playerScoreText = dxco::StringUtil::toString(this->model->player->score);
 	this->playerScoreLabel->setString(playerScoreText.c_str());
