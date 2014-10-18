@@ -13,6 +13,7 @@ void WeaponBonus::applyBonus() {
 	this->model->player->weaponBonus = this;
 
 	this->model->player->setWeapon(this->type);
+	this->model->vista->playEffect("sounds/loadgun.ogg");
 	this->model->vista->weaponBar->setPercentage(100);
 }
 

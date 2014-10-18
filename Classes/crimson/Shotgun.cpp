@@ -8,14 +8,14 @@
 namespace dxco {
 
 Shotgun::Shotgun(GameModel* model): Weapon(model) {
-	this->bulletFrequency = 0.5;
+	this->bulletFrequency = 0.8;
 }
 
 void Shotgun::shoot() {
 	float rotation = this->model->player->getRotation();
 	cocos2d::CCPoint location = this->model->player->getLocation();
 
-	this->model->vista->playEffect("sounds/shotgun.wav");
+	this->model->vista->playEffect("sounds/shotgun2.ogg");
 
 	this->createBullet(location.x, location.y, 0);
 	this->createBullet(location.x, location.y, 2.5);
