@@ -143,7 +143,7 @@ bool Enemy::shoot(Bullet* bullet) {
 		float distance = MathUtil::distance(this->getLocation(),
 				bullet->getLocation());
 
-		if (distance < this->getWidth() / 2) {
+		if (distance < this->getWidth() / 4) {
 			bullet->use();
 			result = true;
 
