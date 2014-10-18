@@ -122,9 +122,11 @@ void Enemy::kill() {
 
 void Enemy::fixZOrder(float playerY) {
 	//update z order for isometric ordering of characters. if floor put at the bottom
-	float enemyBottom = this->getBottomPosition();
-	int zorder = 1000 - enemyBottom * 1000 / this->model->mapa->getHeight();
-	this->model->mapa->reorderChild(this->sprite, zorder);
+	if(this->isActive()){
+		float enemyBottom = this->getBottomPosition();
+		int zorder = 1000 - enemyBottom * 1000 / this->model->mapa->getHeight();
+		this->model->mapa->reorderChild(this->sprite, zorder);
+	}
 }
 
 void Enemy::beat(Player* player, float dt) {
