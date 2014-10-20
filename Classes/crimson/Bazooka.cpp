@@ -8,6 +8,7 @@ namespace dxco {
 
 Bazooka::Bazooka(GameModel* model) : Weapon(model){
 	this->bulletFrequency = BAZOOKA_FREQUENCY;
+	this->sound = "sounds/cannon.ogg";
 }
 
 void Bazooka::shoot() {

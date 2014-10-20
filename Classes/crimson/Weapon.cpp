@@ -9,6 +9,7 @@ Weapon::Weapon(GameModel* model) {
 	this->model = model;
 	this->bulletDt = 0;
 	this->bulletFrequency = 0.25;
+	this->sound = "sounds/gun1.ogg";
 
 	cocos2d::CCPoint location = model->player->getLocation();
 	this->flashSprite = SpriteUtil::create("disparo/disparo01.png", 10, 10, 40, 40);
@@ -40,6 +41,7 @@ void Weapon::update(float dt) {
 
 	if (this->bulletDt > (this->bulletFrequency / this->model->player->weaponSpeedBonus)) {
 		this->shoot();
+		this->model->vista->playEffect(this->sound);
 		this->bulletDt = 0;
 	}
 
@@ -51,7 +53,7 @@ void Weapon::shoot() {
 
 	this->createBullet(location.x, location.y, 0);
 	this->runFlash(location.x, location.y, rotation);
-	this->model->vista->playEffect("sounds/gun1.ogg");
+
 }
 
 void Weapon::updateFlash(float x, float y, float rotation) {

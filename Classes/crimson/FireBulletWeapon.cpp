@@ -7,6 +7,7 @@ namespace dxco {
 
 FireBulletWeapon::FireBulletWeapon(GameModel* model): Weapon(model) {
 	this->bulletFrequency = 0.4;
+	this->sound = "sounds/cannon.ogg";
 }
 
 void FireBulletWeapon::createBulletSprite(float xBulletPosition, float yBulletPosition, float angleBullet, float rotation) {

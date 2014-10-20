@@ -23,6 +23,7 @@ public:
 	GameModel* model;
 	float bulletDt;
 	float bulletFrequency;
+	std::string sound;
 
 	cocos2d::CCSprite *flashSprite;
 	Animation *flashAnimation;
