@@ -3,7 +3,7 @@
 
 #include "TimeBonus.h"
 
-#define FREEZE_BOMB_BONUS_DURATION 10
+#define FREEZE_BOMB_BONUS_DURATION 6
 
 namespace dxco {
 
