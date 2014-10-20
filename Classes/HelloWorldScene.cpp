@@ -461,6 +461,7 @@ void HelloWorld::updateBonus(std::string texture, float duration) {
 }
 
 void HelloWorld::initFire(float x, float y) {
+	this->fireSoundId = -1;
 	this->fire = cocos2d::CCParticleSystemQuad::create("fire.plist");
 
 	/* The position is relative to the map, so emmited particles move with the map
@@ -468,6 +469,21 @@ void HelloWorld::initFire(float x, float y) {
 	fire->setPositionType(cocos2d::kCCPositionTypeRelative);
 	fire->setPosition(x, y);
 	this->mapa->addChild(fire, 2);
+}
+
+void HelloWorld::showFire() {
+	if (this->fireSoundId != -1) {
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->stopEffect(this->fireSoundId);
+	}
+	this->fire->setVisible(true);
+	this->fireSoundId = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("sounds/flame2.ogg", true);
+}
+
+void HelloWorld::hideFire() {
+	if (this->fireSoundId != -1) {
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->stopEffect(this->fireSoundId);
+	}
+	this->fire->setVisible(false);
 }
 
 void HelloWorld::playEffect(std::string effect) {

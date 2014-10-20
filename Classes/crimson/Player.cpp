@@ -257,7 +257,7 @@ bool Player::isActive() {
 
 void Player::setWeapon(weapons type) {
 	this->weaponType = type;
-	model->vista->fire->setVisible(false);
+	model->vista->hideFire();
 
 	if (this->weapon != NULL) {
 		this->model->vista->mapa->removeChild(this->weapon->flashSprite, true);
@@ -275,7 +275,7 @@ void Player::setWeapon(weapons type) {
 		break;
 	}
 	case FIRE: {
-		model->vista->fire->setVisible(true);
+		model->vista->showFire();
 		this->weapon = new FireWeapon(this->model);
 		SpriteUtil::setTexture(model->vista->weaponIcon, "bonus/flame_thrower.png");
 		break;

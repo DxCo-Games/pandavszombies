@@ -37,6 +37,9 @@ public:
 
     virtual void initFire(float x, float y);
     cocos2d::CCParticleSystemQuad* fire;
+    int fireSoundId;
+    void showFire();
+    void hideFire();
 
     void updateBonus(std::string texture, float duration);
     void updateLabels();
