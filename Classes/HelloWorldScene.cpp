@@ -76,7 +76,7 @@ void HelloWorld::realInit() {
 	    this->clouds = new dxco::Container(mapCornerX, mapCornerY, mapWidth, mapHeight);
 	    this->addChild(this->clouds, 4);
 
-	    if(false) { //TODO select background
+	    if(random() % 2) { //TODO select background
 			CCSprite* pSprite = dxco::SpriteUtil::create("ciudad_fondo.png", -mapWidth/4, -mapHeight * 0.2, mapWidth*1.5, mapHeight*1.4);
 			this->mapa->addChild(pSprite, -10);
 			CCSprite* tanque = dxco::SpriteUtil::create("ciudad_tanque.png", -mapWidth/4, -mapHeight  * 0.2, mapWidth*1.5, mapHeight*1.4);
