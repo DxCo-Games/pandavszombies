@@ -9,11 +9,11 @@ namespace dxco {
 
 ExplosionBonus::ExplosionBonus(GameModel* model, cocos2d::CCSprite* sprite,
 		std::map<int, Animation*>& animations): Bonus(model, sprite, animations) {
+	this->sound = "sounds/bomb.ogg";
 }
 
 void ExplosionBonus::applyBonus(){
 	cocos2d::CCParticleSystemQuad* firework = cocos2d::CCParticleSystemQuad::create("ball.plist");
-	this->model->vista->playEffect("sounds/bomb.ogg");
 
 	firework->setPosition(this->getLocation());
 	firework->setPositionType(cocos2d::kCCPositionTypeRelative);

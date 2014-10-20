@@ -1,5 +1,6 @@
 #include "Bonus.h"
 #include "../GameModel.h"
+#include "../../HelloWorldScene.h"
 #include "../../dxco/MathUtil.h"
 #include <algorithm>
 
@@ -10,12 +11,14 @@ Bonus::Bonus(GameModel* model, cocos2d::CCSprite* sprite,
 		Item(sprite, animations) {
 	this->model = model;
 	this->dt = 0;
+	this->sound = "sounds/bonus.ogg";
 }
 
 void Bonus::update(float dt) {
 	float distance = MathUtil::distance(this->getLocation(), this->model->player->getLocation());
 	if (distance < this->getWidth()) {
 		this->applyBonus();
+		this->model->vista->playEffect(this->sound);
 		this->removeBonus();
 	} else {
 		this->dt += dt;

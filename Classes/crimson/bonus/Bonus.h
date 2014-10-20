@@ -20,6 +20,7 @@ public:
 
 	GameModel* model;
 	float dt;
+	std::string sound;
 };
 
 } /* namespace dxco */

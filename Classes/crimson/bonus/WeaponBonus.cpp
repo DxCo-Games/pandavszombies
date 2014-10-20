@@ -6,6 +6,7 @@ namespace dxco {
 
 WeaponBonus::WeaponBonus(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations, Player::weapons type) : TimeBonus(model, sprite, animations, WEAPON_BONUS_DURATION) {
 	this->type = type;
+	this->sound = "sounds/loadgun.ogg";
 }
 
 void WeaponBonus::applyBonus() {
@@ -13,7 +14,6 @@ void WeaponBonus::applyBonus() {
 	this->model->player->weaponBonus = this;
 
 	this->model->player->setWeapon(this->type);
-	this->model->vista->playEffect("sounds/loadgun.ogg");
 	this->model->vista->weaponBar->setPercentage(100);
 }
 
