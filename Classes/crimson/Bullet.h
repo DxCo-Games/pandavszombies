@@ -1,7 +1,7 @@
 #ifndef BULLET_H_
 #define BULLET_H_
 
-#define BULLET_SPEED 300
+#define BULLET_SPEED 450
 
 #include "cocos2d.h"
 #include "../dxco/Item.h"
