@@ -51,7 +51,7 @@ void Weapon::shoot() {
 
 	this->createBullet(location.x, location.y, 0);
 	this->runFlash(location.x, location.y, rotation);
-//	this->model->vista->playEffect("sounds/gun2.ogg");
+	this->model->vista->playEffect("sounds/gun1.ogg");
 }
 
 void Weapon::updateFlash(float x, float y, float rotation) {
