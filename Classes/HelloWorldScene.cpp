@@ -559,10 +559,8 @@ void HelloWorld::hideFire() {
 	this->fire->setVisible(false);
 }
 
-void HelloWorld::playEffect(std::string effect, int probability) {
-	if (random() % 100 < probability) {
-		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(effect.c_str());
-	}
+void HelloWorld::playEffect(std::string effect) {
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(effect.c_str());
 }
 
 void HelloWorld::menuCloseCallback(CCObject* pSender)

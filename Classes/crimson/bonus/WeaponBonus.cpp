@@ -1,6 +1,7 @@
 #include "WeaponBonus.h"
 #include "../GameModel.h"
 #include "../../HelloWorldScene.h"
+#include "../../dxco/VoiceManager.h"
 
 namespace dxco {
 
@@ -17,7 +18,7 @@ void WeaponBonus::applyBonus() {
 	this->model->vista->weaponBar->setPercentage(100);
 
 	if (this->type == Player::BAZOOKA) {
-		this->model->vista->playEffect("voices/friend.ogg", 50);
+		this->model->voice->play("voices/friend.ogg", 0.5);
 	}
 }
 

@@ -2,6 +2,7 @@
 #include "../GameModel.h"
 #include "../../HelloWorldScene.h"
 #include "../../dxco/MathUtil.h"
+#include "../../dxco/VoiceManager.h"
 #include <algorithm>
 
 namespace dxco {
@@ -19,7 +20,7 @@ void Bonus::update(float dt) {
 	if (distance < this->getWidth()) {
 		this->applyBonus();
 		this->model->vista->playEffect(this->sound);
-		this->model->vista->playEffect("voices/groovy.ogg", 10);
+		this->model->voice->play("voices/groovy.ogg", 0.1);
 		this->removeBonus();
 	} else {
 		this->dt += dt;
