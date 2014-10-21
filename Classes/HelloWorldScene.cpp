@@ -385,10 +385,11 @@ void HelloWorld::createInterface() {
 	this->killsLabel->setPositionY(zombie->getPositionY() + 0.22 * dxco::SpriteUtil::getHeight(zombie));
 	this->addChild(killsLabel, 10);
 
-	this->killsChainLabel = dxco::LabelUtil::create("0 kills", 16, visibleSize.width / 2, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::RIGHT, "fonts/KBStickToThePlan.ttf");
+	this->killsChainLabel = CCLabelTTF::create("0 kills", "fonts/KBStickToThePlan.ttf", 18);
 	dxco::LabelUtil::setColor(this->killsChainLabel, dxco::LabelUtil::RED);
-	this->killsChainLabel->setPositionX(this->killsLabel->getPositionX());
-	this->killsChainLabel->setPositionY(visibleSize.height * 0.79);
+	this->killsChainLabel->enableStroke(cocos2d::ccc3(220, 0, 0), 2, true);
+	this->killsChainLabel->setPositionX(timer->getPositionX());
+	this->killsChainLabel->setPositionY(zombie->getPositionY());
 	this->addChild(killsChainLabel, 10);
 	this->killsChainLabel->setOpacity(0);
 }
