@@ -379,7 +379,11 @@ void HelloWorld::update(float dt) {
 		porcentaje += "%";
 		porcentajeCargado->setString(porcentaje.c_str());
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(0.5);
-		CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("sounds/background.wav", true);
+		if (random() % 2) {
+			CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("sounds/bg1.mp3", true);
+		} else {
+			CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("sounds/bg2.mp3", true);
+		}
 	}
 }
 
