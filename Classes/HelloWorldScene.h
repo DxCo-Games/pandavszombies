@@ -6,6 +6,7 @@
 #include "crimson/GameModel.h"
 #include "crimson/Mapa.h"
 #include "dxco/Container.h"
+#include "dxco/Item.h"
 #include <string>
 
 class HelloWorld : public cocos2d::CCLayer
@@ -56,6 +57,8 @@ public:
     void stopMusic();
     void playMusic();
     bool juegoPausado;
+    dxco::Item* loadingItem;
+
 private:
 
     void preloadTextures();
@@ -74,6 +77,7 @@ private:
     cocos2d::CCSprite* loading;
     cocos2d::CCSprite* joystickBotonIzq;
     cocos2d::CCSprite* joystickBotonDrc;
+    int spriteSheetCargada;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

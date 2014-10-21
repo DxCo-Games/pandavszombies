@@ -49,11 +49,24 @@ bool HelloWorld::init()
     }
     
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-    this->loading = dxco::SpriteUtil::create("loading.png", 0, 0, visibleSize.width, visibleSize.height);
+    this->loading = dxco::SpriteUtil::create("ciudad_fondo.png", 0, 0, visibleSize.width, visibleSize.height);
     this->addChild(loading);
-    this->porcentajeCargado = dxco::LabelUtil::create("0%", 32, visibleSize.width / 2, visibleSize.height / 2,
-    																			dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT);
-    this->addChild(porcentajeCargado);
+
+    CCSprite* loadingSprite = dxco::SpriteUtil::create("LOADING-1.png", visibleSize.width * 0.25, visibleSize.height / 2 - visibleSize.width * 0.075, visibleSize.width * 0.5, visibleSize.width * 0.15);
+    this->addChild(loadingSprite);
+
+    std::vector<cocos2d::CCTexture2D*> texturesLoading;
+
+    texturesLoading.push_back(dxco::SpriteUtil::createTexture("LOADING-1.png"));
+    texturesLoading.push_back(dxco::SpriteUtil::createTexture("LOADING-2.png"));
+    texturesLoading.push_back(dxco::SpriteUtil::createTexture("LOADING-3.png"));
+
+    dxco::Animation* animationLoading = new dxco::Animation(texturesLoading, 0.25);
+
+    std::map<int, dxco::Animation*> animationLoadingMap;
+    animationLoadingMap[0] = animationLoading;
+    this->loadingItem = new dxco::Item(loadingSprite, animationLoadingMap);
+    spriteSheetCargada = 0;
 
     this->preloaded = false;
     this->angulosCargados = 0;
@@ -110,24 +123,73 @@ void HelloWorld::realInit() {
 
 void HelloWorld::preloadTextures() {
 	if (!this->preloaded) {
-		dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/basquet.plist");
-		dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/campesino.plist");
-		dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/cirujano.plist");
-		dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/cura.plist");
-		dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/elvis.plist");
-		dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/oficinista.plist");
-		dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/sangre.plist");
-		this->preloaded = true;
-		this->realInit();
+		switch (spriteSheetCargada) {
+
+		case 0: {
+			dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/basquet.plist");
+			spriteSheetCargada++;
+			break;
+		}
+		case 1: {
+			dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/basquet.plist");
+			spriteSheetCargada++;
+			break;
+		}
+		case 2: {
+			dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/campesino.plist");
+			spriteSheetCargada++;
+			break;
+		}
+		case 3: {
+			dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/cirujano.plist");
+			spriteSheetCargada++;
+			break;
+		}
+		case 4: {
+			dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/cura.plist");
+			spriteSheetCargada++;
+			break;
+		}
+		case 5: {
+			dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/elvis.plist");
+			spriteSheetCargada++;
+			break;
+		}
+		case 6: {
+			dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/oficinista.plist");
+			spriteSheetCargada++;
+			break;
+		}
+		case 7: {
+			dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/sangre.plist");
+			spriteSheetCargada++;
+			break;
+		}
+		case 8: {
+			dxco::SpriteUtil::preloadTextureWithFile(
+					"sprite_sheets/panda1.plist");
+			spriteSheetCargada++;
+			break;
+		}
+		case 9: {
+			dxco::SpriteUtil::preloadTextureWithFile(
+					"sprite_sheets/panda2.plist");
+			spriteSheetCargada++;
+			break;
+		}
+		case 10: {
+			dxco::SpriteUtil::preloadTextureWithFile(
+					"sprite_sheets/panda3.plist");
+			spriteSheetCargada++;
+			break;
+		}
+		}
+
 	}
 
 }
 
 dxco::Player* HelloWorld::createPlayer() {
-
-	dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/panda1.plist");
-	dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/panda2.plist");
-	dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/panda3.plist");
 
 	CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
 	this->playerContainer = new dxco::Container(this->mapa->getWidth() / 2,  this->mapa->getHeight() / 2, 80, 80);
@@ -363,23 +425,28 @@ void HelloWorld::ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEve
 void HelloWorld::update(float dt) {
 
 	if (this->preloaded) {
-		this->removeChild(porcentajeCargado);
 		this->removeChild(loading);
+		this->removeChild(loadingItem->getSprite());
 
 		if (!this->juegoPausado) {
 			this->model->update(dt);
 			updateLabels();
 		}
 	} else {
+		this->loadingItem->update(dt);
 		this->preloadTextures();
-		float angulosCargados = this->angulosCargados;
-		float cantAngulos = ENEMY_ANGLE_POSITIONS;
 
-		std::string porcentaje = dxco::StringUtil::toString((angulosCargados / cantAngulos) * 100);
-		porcentaje += "%";
-		porcentajeCargado->setString(porcentaje.c_str());
-		CocosDenshion::SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(0.5);
-		CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("sounds/background.wav", true);
+		if (this->spriteSheetCargada > 10) {
+			float angulosCargados = this->angulosCargados;
+			float cantAngulos = ENEMY_ANGLE_POSITIONS;
+
+			std::string porcentaje = dxco::StringUtil::toString((angulosCargados / cantAngulos) * 100);
+			porcentaje += "%";
+			CocosDenshion::SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(0.5);
+			CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("sounds/background.wav", true);
+			this->preloaded = true;
+			this->realInit();
+		}
 	}
 }
 
