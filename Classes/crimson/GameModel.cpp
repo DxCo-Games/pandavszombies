@@ -4,6 +4,7 @@
 #include "levels/EnemyWave.h"
 #include "../HelloWorldScene.h"
 #include "dxco/SpriteUtil.h"
+#include "dxco/VoiceManager.h"
 #include <cstdlib>
 #include "EnemyFactory.h"
 #include "ChainedKillsManager.h"
@@ -76,6 +77,7 @@ GameModel::GameModel(HelloWorld* vista, Player* player, bool survival) {
 
 	this->player->setWeapon(Player::PISTOL);
 	this->bonusFactory = new BonusFactory();
+	this->voice = new VoiceManager();
 	this->playerHurt = false;
 	this->freezeBonusActivated = 0;
 	this->kills = 0;
@@ -114,6 +116,7 @@ void GameModel::update(float dt) {
 
 	this->player->update(dt);
 	this->player->weapon->update(dt);
+	this->voice->update(dt);
 
 	if (!this->freezeBonusActivated) {
 		this->level->update(dt);

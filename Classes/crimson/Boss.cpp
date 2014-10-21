@@ -1,5 +1,6 @@
 #include "Boss.h"
 #include "../HelloWorldScene.h"
+#include "../dxco/VoiceManager.h"
 
 namespace dxco {
 
@@ -18,11 +19,7 @@ float Boss::getColitionRatio() {
 
 void Boss::kill() {
 	Enemy::kill();
-	if (random() % 2) {
-		this->model->vista->playEffect("voices/rock.ogg");
-	} else {
-		this->model->vista->playEffect("voices/cake.ogg");
-	}
+	this->model->voice->play("voices/rock.ogg", "voices/cake.ogg");
 }
 
 

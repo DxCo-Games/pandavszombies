@@ -51,7 +51,7 @@ public:
     cocos2d::CCLabelTTF* killsLabel;
     cocos2d::CCLabelTTF* killsChainLabel;
     bool survivalMode;
-    void playEffect(std::string effect, int probability=100);
+    void playEffect(std::string effect);
 
     virtual void keyBackClicked();
     void stopMusic();
