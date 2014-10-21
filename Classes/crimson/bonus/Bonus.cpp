@@ -19,6 +19,7 @@ void Bonus::update(float dt) {
 	if (distance < this->getWidth()) {
 		this->applyBonus();
 		this->model->vista->playEffect(this->sound);
+		this->model->vista->playEffect("voices/groovy.ogg", 10);
 		this->removeBonus();
 	} else {
 		this->dt += dt;

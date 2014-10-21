@@ -24,6 +24,7 @@ void TimeBonus::update(float dt) {
 		if (distance < this->getWidth()) {
 			this->applyBonus();
 			this->model->vista->playEffect(this->sound);
+			this->model->vista->playEffect("voices/groovy.ogg", 10);
 			this->getSprite()->setVisible(false);
 			this->bonusAcquired = true;
 			this->dtBonusAcquired = 0;

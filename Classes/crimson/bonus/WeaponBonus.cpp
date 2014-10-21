@@ -15,6 +15,10 @@ void WeaponBonus::applyBonus() {
 
 	this->model->player->setWeapon(this->type);
 	this->model->vista->weaponBar->setPercentage(100);
+
+	if (this->type == Player::BAZOOKA) {
+		this->model->vista->playEffect("voices/friend.ogg", 50);
+	}
 }
 
 void WeaponBonus::removeBonus() {

@@ -1,4 +1,5 @@
 #include "Boss.h"
+#include "../HelloWorldScene.h"
 
 namespace dxco {
 
@@ -13,6 +14,15 @@ Boss::Boss(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*
 
 float Boss::getColitionRatio() {
 	return 0.2 * this->getWidth();
+}
+
+void Boss::kill() {
+	Enemy::kill();
+	if (random() % 2) {
+		this->model->vista->playEffect("voices/rock.ogg");
+	} else {
+		this->model->vista->playEffect("voices/cake.ogg");
+	}
 }
 
 
