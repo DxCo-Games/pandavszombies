@@ -446,6 +446,12 @@ void HelloWorld::update(float dt) {
 			CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("sounds/background.wav", true);
 			this->preloaded = true;
 			this->realInit();
+
+			if (random() % 2) {
+						CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("sounds/bg1.mp3", true);
+					} else {
+						CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("sounds/bg2.mp3", true);
+					}
 		}
 	}
 }
