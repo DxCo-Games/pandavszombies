@@ -29,19 +29,21 @@ void EnemyFactory::createEnemy(GameModel* model) {
 
 	int delta = (rand() % 10);
 
+	float speed = Enemy::ENEMY_SPEED;
 	if (type == "basquet") {
 		delta += 10;
+		speed = Enemy::ENEMY_SPEED * 1.8;
 	}
 
-	std::map<int, dxco::Animation*> animations = loadAnimations(model, type, 0.02);
+	std::map<int, dxco::Animation*> animations = loadAnimations(model, type, speed);
 	cocos2d::CCSprite* enemySprite = createSpriteInRandomPosition(model, type + "_1_0000.png", 75 + delta, 75 + delta);
 
 	Enemy* enemy;
 
 	if (type == "basquet") {
-		enemy = new Enemy(model, enemySprite, animations, Enemy::ENEMY_SPEED * 1.8);
+		enemy = new Enemy(model, enemySprite, animations, speed);
 	} else {
-		enemy = new Enemy(model, enemySprite, animations, Enemy::ENEMY_SPEED);
+		enemy = new Enemy(model, enemySprite, animations, speed);
 	}
 
 	addEnemy(model, enemy);
@@ -50,8 +52,7 @@ void EnemyFactory::createEnemy(GameModel* model) {
 }
 
 void EnemyFactory::createBoss(GameModel* model) {
-
-	std::map<int, dxco::Animation*> animations = loadAnimations(model, "elvis", 0.03);
+	std::map<int, dxco::Animation*> animations = loadAnimations(model, "elvis", Enemy::ENEMY_SPEED);
 
 	cocos2d::CCSprite* enemySprite = createSpriteInRandomPosition(model, "elvis_1_0000.png", 150, 150);
 	Enemy* enemy = new Boss(model, enemySprite, animations, Enemy::ENEMY_SPEED);
@@ -67,7 +68,10 @@ void EnemyFactory::addEnemy(GameModel* model, Enemy* enemy) {
 	model->mapa->addChild(enemy->getSprite());
 }
 
-std::map<int, dxco::Animation*> EnemyFactory::loadAnimations(GameModel* model, std::string type, float frameTime) {
+std::map<int, dxco::Animation*> EnemyFactory::loadAnimations(GameModel* model, std::string type, float speed) {
+	float speedFactor = speed / ENEMY_DEFAULT_SPEED;
+//	float frameTime = ENEMY_DEFAULT_SPEED / (1000 * speedFactor);
+	float frameTime = 30 / (1000 * speedFactor);
 
 	std::map<int, dxco::Animation*> animations;
 

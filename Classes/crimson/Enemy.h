@@ -46,7 +46,6 @@ public:
 	virtual bool isActive();
 	virtual float getColitionRatio();
 	void setNewWanderTarget();
-	float getWanderSpeed();
 	void fixZOrder(float playerY);
 
 	void freeze();

@@ -14,7 +14,7 @@ namespace dxco {
 float Enemy::ENEMY_SPEED = ENEMY_DEFAULT_SPEED;
 
 Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations, float speed) :
-		TopDownItem(ENEMY_ANGLE_POSITIONS), SteeringBehaviorItem(speed, 0.5),
+		TopDownItem(ENEMY_ANGLE_POSITIONS), SteeringBehaviorItem(speed, 0.25 * ENEMY_DEFAULT_SPEED / speed),
 		Item(sprite, animations){
 	this->model = model;
 	this->life = 20;
@@ -184,10 +184,6 @@ float Enemy::getColitionRatio() {
 
 bool Enemy::isActive() {
 	return this->life > 0;
-}
-
-float Enemy::getWanderSpeed() {
-	return ENEMY_WANDER_SPEED;
 }
 
 } /* namespace dxco */

@@ -19,7 +19,7 @@ public:
 
 	cocos2d::CCSprite* createSpriteInRandomPosition(GameModel* model, std::string texture, int width, int height);
 
-	std::map<int, dxco::Animation*> loadAnimations(GameModel* model, std::string type, float frameTime);
+	std::map<int, dxco::Animation*> loadAnimations(GameModel* model, std::string type, float speed);
 private:
 	void addEnemy(GameModel* model, Enemy* enemy);
 };
