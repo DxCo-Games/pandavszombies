@@ -7,12 +7,14 @@ MovementSpeedBonus::MovementSpeedBonus(GameModel* model, cocos2d::CCSprite* spri
 }
 
 void MovementSpeedBonus::applyBonus() {
-	this->model->player->movementSpeedBonus = MOVEMENT_BONUS_RATE;
+	this->model->player->movementSpeedBonus += MOVEMENT_BONUS_RATE;
 	this->model->vista->updateBonus("bonus/VELOCIDAD_activado.png", this->bonusDuration);
 }
 
 void MovementSpeedBonus::removeBonus() {
-	this->model->player->movementSpeedBonus = 1;
+	if (this->model->player->movementSpeedBonus != 1) {
+		this->model->player->movementSpeedBonus -= MOVEMENT_BONUS_RATE;
+	}
 }
 
 } /* namespace dxco */
