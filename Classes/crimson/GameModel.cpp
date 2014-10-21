@@ -78,6 +78,8 @@ GameModel::GameModel(HelloWorld* vista, Player* player, bool survival) {
 	this->player->setWeapon(Player::PISTOL);
 	this->bonusFactory = new BonusFactory();
 	this->voice = new VoiceManager();
+	this->voice->loadRandom("voices/dead.ogg");
+	this->voice->loadRandom("voices/talkin.ogg");
 	this->playerHurt = false;
 	this->freezeBonusActivated = 0;
 	this->kills = 0;
