@@ -1,6 +1,7 @@
 #include "Weapon.h"
 #include "GameModel.h"
 #include "../dxco/SpriteUtil.h"
+#include "../dxco/VoiceManager.h"
 #include "HelloWorldScene.h"
 
 namespace dxco {
@@ -41,7 +42,11 @@ void Weapon::update(float dt) {
 
 	if (this->bulletDt > (this->bulletFrequency / this->model->player->weaponSpeedBonus)) {
 		this->shoot();
-		this->model->vista->playEffect(this->sound);
+
+		//patch avoid cutting the voice
+		if (!this->model->voice->isPlaying()) {
+			this->model->vista->playEffect(this->sound);
+		}
 		this->bulletDt = 0;
 	}
 
