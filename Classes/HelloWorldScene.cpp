@@ -291,7 +291,7 @@ void HelloWorld::createInterface() {
 	this->joystickController.addJoystick(joystick);
 
 	//Life bar
-	CCSprite* lifeBack = dxco::SpriteUtil::create("gameplay/PANDA_energia_fin.png", 5, 0.87 * visibleSize.height, 0.35 * visibleSize.width , 0.11 * visibleSize.height);
+	CCSprite* lifeBack = dxco::SpriteUtil::create("gameplay/PANDA_energia_fin.png", 5, 0.87 * visibleSize.height, 0.35 * visibleSize.width , 0.102 * visibleSize.height);
 	CCSprite* lifeFront = dxco::SpriteUtil::create("gameplay/PANDA_energia.png", 5, 0.87 * visibleSize.height, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
 	lifeBar = CCProgressTimer::create(lifeFront);
 	lifeBar->setPosition(lifeBack->getPosition()); //positions don't match by default
@@ -343,6 +343,7 @@ void HelloWorld::createInterface() {
 
 	//score
 	CCSprite* score = dxco::SpriteUtil::create("gameplay/SCORE.png", visibleSize.width / 2, 0, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+	dxco::SpriteUtil::copyScale(lifeBack, score);
 	score->setPositionY(lifeBack->getPositionY());
 	//set the right margin equal to the left one
 	float sideMargin = lifeBack->getPositionX() - dxco::SpriteUtil::getWidth(lifeBack);
@@ -358,8 +359,7 @@ void HelloWorld::createInterface() {
 		timer = dxco::SpriteUtil::create("gameplay/LEVEL.png", visibleSize.width / 2, 0, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
 		this->timerLabel = dxco::LabelUtil::create("LEVEL 1", 14, visibleSize.width / 2, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT, "fonts/KBStickToThePlan.ttf");
 	}
-	timer->setScaleX(lifeBack->getScaleX());
-	timer->setScaleY(lifeBack->getScaleY());
+	dxco::SpriteUtil::copyScale(lifeBack, timer);
 	timer->setPositionY(lifeBack->getPositionY());
 	//put timer in between score and life
 	x0 = lifeBack->getPositionX() + dxco::SpriteUtil::getWidth(lifeBack) / 2;
@@ -373,6 +373,7 @@ void HelloWorld::createInterface() {
 
 	//zombie bar
 	CCSprite* zombie = dxco::SpriteUtil::create("gameplay/ZOMBIE_contador.png", 0, 0, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+	dxco::SpriteUtil::copyScale(lifeBack, zombie);
 	zombie->setPositionY(weaponBack->getPositionY());
 	dxco::SpriteUtil::rightAlign(score, zombie);
 	this->addChild(zombie, 10);
