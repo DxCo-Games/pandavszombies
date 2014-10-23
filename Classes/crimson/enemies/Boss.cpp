@@ -1,6 +1,6 @@
 #include "Boss.h"
-#include "../HelloWorldScene.h"
-#include "../dxco/VoiceManager.h"
+#include "../../HelloWorldScene.h"
+#include "../../dxco/VoiceManager.h"
 
 namespace dxco {
 

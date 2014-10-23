@@ -3,7 +3,7 @@
 
 #include "cocos2d.h"
 
-#include "../dxco/Animation.h"
+#include "../../dxco/Animation.h"
 #include "Enemy.h"
 
 namespace dxco {

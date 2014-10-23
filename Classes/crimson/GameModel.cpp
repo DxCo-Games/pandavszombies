@@ -6,7 +6,7 @@
 #include "dxco/SpriteUtil.h"
 #include "dxco/VoiceManager.h"
 #include <cstdlib>
-#include "EnemyFactory.h"
+#include "enemies/EnemyFactory.h"
 #include "ChainedKillsManager.h"
 #include "Weapon.h"
 #include "Player.h"

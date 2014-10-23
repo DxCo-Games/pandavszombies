@@ -1,11 +1,11 @@
 #include "Enemy.h"
-#include "GameModel.h"
-#include "ChainedKillsManager.h"
-#include "../dxco/SpriteUtil.h"
-#include "../dxco/MathUtil.h"
+#include "../GameModel.h"
+#include "../ChainedKillsManager.h"
+#include "../../dxco/SpriteUtil.h"
+#include "../../dxco/MathUtil.h"
 #include "cocos2d.h"
-#include "Player.h"
-#include "FireWeapon.h"
+#include "../Player.h"
+#include "../FireWeapon.h"
 #include <algorithm>
 
 namespace dxco {

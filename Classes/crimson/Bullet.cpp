@@ -1,5 +1,5 @@
 #include "Bullet.h"
-#include "Enemy.h"
+#include "enemies/Enemy.h"
 
 namespace dxco {
 

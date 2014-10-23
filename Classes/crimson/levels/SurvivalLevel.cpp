@@ -1,5 +1,5 @@
 #include "SurvivalLevel.h"
-#include "../Enemy.h"
+#include "../enemies/Enemy.h"
 #include "../GameModel.h"
 
 namespace dxco {

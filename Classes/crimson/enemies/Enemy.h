@@ -10,10 +10,10 @@
 #define ENEMY_BLOOD_DURATION 5
 
 #include "cocos2d.h"
-#include "../dxco/TopDownItem.h"
-#include "../dxco/SteeringBehaviorItem.h"
-#include "Bullet.h"
-#include "../dxco/Action.h"
+#include "../../dxco/TopDownItem.h"
+#include "../../dxco/SteeringBehaviorItem.h"
+#include "../../dxco/Action.h"
+#include "../Bullet.h"
 
 namespace dxco {
 

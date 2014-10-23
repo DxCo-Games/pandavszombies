@@ -1,12 +1,12 @@
 #include "EnemyFactory.h"
-#include "../dxco/SpriteUtil.h"
-#include "../dxco/StringUtil.h"
-#include "../dxco/Animation.h"
-#include "../dxco/MathUtil.h"
+#include "../../dxco/SpriteUtil.h"
+#include "../../dxco/StringUtil.h"
+#include "../../dxco/Animation.h"
+#include "../../dxco/MathUtil.h"
 #include "Enemy.h"
 #include "Boss.h"
-#include "GameModel.h"
-#include "HelloWorldScene.h"
+#include "../GameModel.h"
+#include "../../HelloWorldScene.h"
 
 namespace dxco {
 
@@ -38,16 +38,8 @@ void EnemyFactory::createEnemy(GameModel* model) {
 	std::map<int, dxco::Animation*> animations = loadAnimations(model, type, speed);
 	cocos2d::CCSprite* enemySprite = createSpriteInRandomPosition(model, type + "_1_0000.png", 75 + delta, 75 + delta);
 
-	Enemy* enemy;
-
-	if (type == "basquet") {
-		enemy = new Enemy(model, enemySprite, animations, speed);
-	} else {
-		enemy = new Enemy(model, enemySprite, animations, speed);
-	}
-
+	Enemy* enemy = new Enemy(model, enemySprite, animations, speed);
 	addEnemy(model, enemy);
-
 	SpriteUtil::fadeIn(enemy->getSprite());
 }
 
