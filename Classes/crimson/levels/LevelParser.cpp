@@ -21,11 +21,11 @@ std::vector<EnemyWave*> LevelParser::parse(GameModel* model, std::string levelPa
 
 			int total = waveConfig["total"].GetInt();
 			float freq = waveConfig["freq"].GetDouble();
-			float speed = waveConfig["speed"].GetDouble();
+			float level = waveConfig["level"].GetInt();
 			int isBoss = waveConfig["isBoss"].GetInt();
 
-			CCLOG("Wave leida %i %f %f %i", total, freq, speed, isBoss);
-			resultado.push_back(new EnemyWave(model, total, freq, speed, isBoss));
+			CCLOG("Wave leida %i %f %i %i", total, freq, level, isBoss);
+			resultado.push_back(new EnemyWave(model, total, freq, level, isBoss));
 	}
 
 	return resultado;

@@ -7,7 +7,7 @@ namespace dxco {
 SurvivalLevel::SurvivalLevel(GameModel* model): Level(model, *new std::vector<EnemyWave*>) {
 	this->enemyDt = 0;
 	this->bossDt = 0;
-	this->speedDt = 0;
+	this->enemyLevelDt = 0;
 }
 
 bool SurvivalLevel::isFinished() {
@@ -25,10 +25,10 @@ void SurvivalLevel::update(float dt) {
 		this->model->enemyFactory->createBoss(this->model);
 		this->bossDt = 0;
 	}
-	this->speedDt += dt;
-	if (this->speedDt > SURVIVAL_SPEED_DT){
-		Enemy::ENEMY_SPEED = 1.1 * Enemy::ENEMY_SPEED;
-		this->speedDt = 0;
+	this->enemyLevelDt += dt;
+	if (this->enemyLevelDt > SURVIVAL_ENEMY_LEVEL_DT){
+		Enemy::ENEMY_LEVEL++;
+		this->enemyLevelDt = 0;
 	}
 }
 

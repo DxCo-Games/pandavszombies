@@ -10,16 +10,20 @@
 
 namespace dxco {
 
-//initialize the default speed. can't do it in Enemy.h gotta love cpp
-float Enemy::ENEMY_SPEED = ENEMY_DEFAULT_SPEED;
+//initialize the default level. can't do it in Enemy.h gotta love cpp
+int Enemy::ENEMY_LEVEL = 1;
 
-Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations, float speed) :
-		TopDownItem(ENEMY_ANGLE_POSITIONS), SteeringBehaviorItem(speed, 0.25 * ENEMY_DEFAULT_SPEED / speed),
+float Enemy::getSpeed() {
+	return 20 + 5* Enemy::ENEMY_LEVEL;
+}
+
+Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations, int level) :
+		TopDownItem(ENEMY_ANGLE_POSITIONS), SteeringBehaviorItem(Enemy::getSpeed(), 0.25 * ENEMY_DEFAULT_SPEED / Enemy::getSpeed()),
 		Item(sprite, animations){
 	this->model = model;
-	this->life = 20;
-	this->score = 10;
-	this->strength = 10;
+	this->life = 10 * (level + 1);
+	this->score = 10 * (level + 1);
+	this->strength = 5 * (level + 1);
 	this->burning = false;
 	this->state = ENEMY_STANDING;
 	this->action = NULL;

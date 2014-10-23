@@ -3,10 +3,10 @@
 
 namespace dxco {
 
-EnemyWave::EnemyWave(GameModel *model, int total, float freq, float speed, bool isBoss) {
+EnemyWave::EnemyWave(GameModel *model, int total, float freq, int level, bool isBoss) {
 	this->dt = 100;
 	this->freq = freq;
-	this->speed = speed;
+	this->level = level;
 	this->model = model;
 	this->isBoss = isBoss;
 	this->count = 0;
@@ -18,7 +18,7 @@ bool EnemyWave::isFinished() {
 	return this->count == this->total;
 }
 void EnemyWave::update(float dt) {
-	Enemy::ENEMY_SPEED = this->speed; //FIXME pass speed to the factory as parameter
+	Enemy::ENEMY_LEVEL = this->level; //FIXME pass speed to the factory as parameter
 	this->dt += dt;
 	if (this->dt > this->freq){
 		if (this->isBoss) {

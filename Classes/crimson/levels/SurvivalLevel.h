@@ -3,7 +3,7 @@
 
 #define SURVIVAL_ENEMY_DT 0.3
 #define SURVIVAL_BOSS_DT 15
-#define SURVIVAL_SPEED_DT 30
+#define SURVIVAL_ENEMY_LEVEL_DT 60
 
 #include "Level.h"
 
@@ -19,7 +19,7 @@ public:
 
 	float enemyDt;
 	float bossDt;
-	float speedDt;
+	float enemyLevelDt;
 };
 
 } /* namespace dxco */

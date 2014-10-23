@@ -22,10 +22,12 @@ class Player;
 
 class Enemy : public TopDownItem, public SteeringBehaviorItem {
 public:
-	Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations, float speed);
+	Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations, int level);
 	void update(float dt);
 
-	static float ENEMY_SPEED;
+	//FIXME make this a game property
+	static int ENEMY_LEVEL; //zero based, 1 by default
+	static float getSpeed();
 
 	bool shoot(Bullet* bullet);
 	GameModel* model;
