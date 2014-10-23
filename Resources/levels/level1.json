@@ -1,13 +1,17 @@
-[{
-"total" : 10,
-"freq" : 0.3,
-"speed" : 30.0,
-"isBoss" : 0
-},
 {
-"total" : 2,
-"freq" : 5,
-"speed" : 30.0,
-"isBoss" : 1
+"config": {
+	"background": "ciudad"
+},
+"waves": [{
+	"total" : 10,
+	"freq" : 0.3,
+	"speed" : 30.0,
+	"isBoss" : 0
+	},
+	{
+	"total" : 2,
+	"freq" : 5,
+	"speed" : 30.0,
+	"isBoss" : 1}
+	]
 }
-]

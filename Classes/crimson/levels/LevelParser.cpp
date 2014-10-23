@@ -14,10 +14,10 @@ std::vector<EnemyWave*> LevelParser::parse(GameModel* model, std::string levelPa
 
 	std::vector<EnemyWave*> resultado;
 	rapidjson::Document* document = JsonParser::parseJsonFile(levelPath);
-
-	for (rapidjson::SizeType i = 0; i < (*document).Size(); i++) {
-
-			const rapidjson::Value& waveConfig = (*document)[i];
+	CCLOG("h1");
+	for (rapidjson::SizeType i = 0; i < ((*document)["waves"]).Size(); i++) {
+			CCLOG("h3");
+			const rapidjson::Value& waveConfig = ((*document)["waves"])[i];
 
 			int total = waveConfig["total"].GetInt();
 			float freq = waveConfig["freq"].GetDouble();
