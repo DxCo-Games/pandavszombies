@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "Bullet.h"
 #include "GameModel.h"
+#include "GameProperties.h"
 #include "Weapon.h"
 #include "Shotgun.h"
 #include "FireWeapon.h"
@@ -15,7 +16,7 @@ namespace dxco {
 Player::Player(cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations) :
 		TopDownItem(PLAYER_ANGLE_POSITIONS), Item(sprite, animations){
 	this->state = QUIETO;
-	this->life = PLAYER_LIFE;
+	this->life = 0; //set outside
 	this->movementSpeedBonus = 1;
 	this->weaponSpeedBonus = 1;
 	this->shieldActivated = 0;
@@ -36,8 +37,9 @@ void Player::hurt(float damage) {
 			this->state = HERIDO;
 		}
 
-		if (this->life > PLAYER_LIFE) {
-			this->life = PLAYER_LIFE;
+		float playerLife = this->model->prop->get("player.life");
+		if (this->life > playerLife) {
+			this->life = playerLife;
 		}
 	}
 }
@@ -48,9 +50,9 @@ void Player::update(float dt) {
 
 	//this->hurt is resetted on every update, check state to tell if its hurt
 	bool wasHurt = this->state == HERIDO;
-	float speed = PLAYER_SPEED;
+	float speed = this->model->prop->get("player.speed");
 	if (wasHurt) {
-		speed = PLAYER_SPEED * 0.7;
+		speed *= 0.7;
 	}
 
 	this->updateFireLocation();

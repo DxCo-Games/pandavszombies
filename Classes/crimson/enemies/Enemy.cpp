@@ -1,5 +1,6 @@
 #include "Enemy.h"
 #include "../GameModel.h"
+#include "../GameProperties.h"
 #include "../ChainedKillsManager.h"
 #include "../../dxco/SpriteUtil.h"
 #include "../../dxco/MathUtil.h"
@@ -10,15 +11,12 @@
 
 namespace dxco {
 
-//initialize the default level. can't do it in Enemy.h gotta love cpp
-int Enemy::ENEMY_LEVEL = 1;
-
-float Enemy::getSpeed() {
-	return 20 + 5* Enemy::ENEMY_LEVEL;
+float Enemy::getSpeed(int level) {
+	return 20 + 5* level;
 }
 
 Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations, int level) :
-		TopDownItem(ENEMY_ANGLE_POSITIONS), SteeringBehaviorItem(Enemy::getSpeed(), 0.25 * ENEMY_DEFAULT_SPEED / Enemy::getSpeed()),
+		TopDownItem(ENEMY_ANGLE_POSITIONS), SteeringBehaviorItem(Enemy::getSpeed(level), 0.25 * Enemy::getSpeed(1) / Enemy::getSpeed(level)),
 		Item(sprite, animations){
 	this->model = model;
 	this->life = 10 * (level + 1);
@@ -155,7 +153,7 @@ bool Enemy::shoot(Bullet* bullet) {
 			bullet->use();
 			result = true;
 
-			this->hurt(bullet->getDamage());
+			this->hurt(this->model->prop->get("bullet.damage"));
 		}
 	}
 

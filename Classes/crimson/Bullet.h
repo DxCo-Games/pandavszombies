@@ -16,7 +16,6 @@ public:
 	virtual void update(float dt);
 
 	virtual void use();
-	virtual float getDamage();
 	float angle;
 	bool used;
 	bool persistent;

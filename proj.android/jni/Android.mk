@@ -45,6 +45,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/crimson/JoystickMira.cpp \
                    ../../Classes/crimson/JoystickMovimiento.cpp \
                    ../../Classes/crimson/GameModel.cpp \
+                   ../../Classes/crimson/GameProperties.cpp \
                    ../../Classes/crimson/Player.cpp \
                    ../../Classes/crimson/Bullet.cpp \
                    ../../Classes/crimson/enemies/Enemy.cpp \

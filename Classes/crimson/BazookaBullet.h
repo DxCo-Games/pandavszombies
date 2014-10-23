@@ -2,7 +2,6 @@
 #define BAZOOKABULLET_H_
 
 #define BAZOOKA_RANGE 90
-#define BAZOOKA_DAMAGE 80
 
 #include "Bullet.h"
 

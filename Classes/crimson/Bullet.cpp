@@ -24,8 +24,4 @@ void Bullet::use() {
 	}
 }
 
-float Bullet::getDamage() {
-	return 10;
-}
-
 } /* namespace dxco */

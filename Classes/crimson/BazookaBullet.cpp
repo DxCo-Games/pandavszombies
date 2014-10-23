@@ -1,5 +1,6 @@
 #include "BazookaBullet.h"
 #include "GameModel.h"
+#include "GameProperties.h"
 #include "cocos2d.h"
 #include "../dxco/MathUtil.h"
 #include "HelloWorldScene.h"
@@ -31,7 +32,7 @@ void BazookaBullet::use() {
 
 		if (MathUtil::distance(firework->getPosition(), enemy->getLocation())
 				< BAZOOKA_RANGE) {
-			enemy->hurt(BAZOOKA_DAMAGE);
+			enemy->hurt(this->model->prop->get("bazooka.damage"));
 		}
 	}
 

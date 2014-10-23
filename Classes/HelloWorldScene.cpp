@@ -8,6 +8,7 @@
 #include "crimson/JoystickMira.h"
 #include "crimson/JoystickMovimiento.h"
 #include "crimson/GameModel.h"
+#include "crimson/GameProperties.h"
 #include "crimson/Player.h"
 #include "dxco/Animation.h"
 #include "dxco/Container.h"
@@ -510,8 +511,8 @@ void HelloWorld::updateLabels() {
 
 	std::string playerKillsText = dxco::StringUtil::toString(this->model->kills);
 	this->killsLabel->setString(playerKillsText.c_str());
-
-	this->lifeBar->setPercentage(this->model->player->life * 100 / PLAYER_LIFE);
+	float playerLife = this->model->prop->get("player.life");
+	this->lifeBar->setPercentage(this->model->player->life * 100 / playerLife);
 }
 
 void HelloWorld::updateBonus(std::string texture, float duration) {

@@ -1,5 +1,6 @@
 #include "ExplosionBonus.h"
 #include "../GameModel.h"
+#include "../GameProperties.h"
 #include "../enemies/Enemy.h"
 #include "../../dxco/SpriteUtil.h"
 #include "../../HelloWorldScene.h"
@@ -23,7 +24,7 @@ void ExplosionBonus::applyBonus(){
 		Enemy* enemy = this->model->enemies[i];
 
 		if (MathUtil::distance(firework->getPosition(), enemy->getLocation()) < EXPLOSION_RANGE) {
-			enemy->hurt(EXPLOSION_DAMAGE);
+			enemy->hurt(this->model->prop->get("explosion.damage"));
 		}
 	}
 }

@@ -2,8 +2,6 @@
 #define ENEMY_H_
 
 #define ENEMY_ANGLE_POSITIONS 8
-#define ENEMY_DEFAULT_SPEED 30.0
-#define ENEMY_WANDER_SPEED 20
 #define ENEMY_WANDER_RANGE 200
 #define ENEMY_SEEK_RANGE 80
 #define ENEMY_ARRIVE_RANGE 30
@@ -25,9 +23,7 @@ public:
 	Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations, int level);
 	void update(float dt);
 
-	//FIXME make this a game property
-	static int ENEMY_LEVEL; //zero based, 1 by default
-	static float getSpeed();
+	static float getSpeed(int level);
 
 	bool shoot(Bullet* bullet);
 	GameModel* model;

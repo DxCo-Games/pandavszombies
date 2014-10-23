@@ -1,5 +1,6 @@
 #include "EnemyWave.h"
 #include "../GameModel.h"
+#include "../GameProperties.h"
 
 namespace dxco {
 
@@ -18,7 +19,7 @@ bool EnemyWave::isFinished() {
 	return this->count == this->total;
 }
 void EnemyWave::update(float dt) {
-	Enemy::ENEMY_LEVEL = this->level; //FIXME pass speed to the factory as parameter
+	this->model->prop->set("enemy.level", this->level);
 	this->dt += dt;
 	if (this->dt > this->freq){
 		if (this->isBoss) {

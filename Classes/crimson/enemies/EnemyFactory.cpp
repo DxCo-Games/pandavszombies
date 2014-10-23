@@ -6,6 +6,7 @@
 #include "Enemy.h"
 #include "Boss.h"
 #include "../GameModel.h"
+#include "../GameProperties.h"
 #include "../../HelloWorldScene.h"
 
 namespace dxco {
@@ -28,8 +29,8 @@ void EnemyFactory::createEnemy(GameModel* model) {
 	}
 
 	int delta = (rand() % 10);
-
-	float speed = Enemy::getSpeed();
+	int enemyLevel = model->prop->get("enemy.level");
+	float speed = Enemy::getSpeed(enemyLevel);
 	if (type == "basquet") {
 		delta += 10;
 		speed = speed * 1.8;
@@ -38,7 +39,7 @@ void EnemyFactory::createEnemy(GameModel* model) {
 	std::map<int, dxco::Animation*> animations = loadAnimations(model, type, speed);
 	cocos2d::CCSprite* enemySprite = createSpriteInRandomPosition(model, type + "_1_0000.png", 75 + delta, 75 + delta);
 
-	Enemy* enemy = new Enemy(model, enemySprite, animations, Enemy::ENEMY_LEVEL);
+	Enemy* enemy = new Enemy(model, enemySprite, animations, enemyLevel);
 	//FIXME add SpeedEnemy
 	if (type == "basquet") {
 		enemy->speed = speed;
@@ -48,10 +49,11 @@ void EnemyFactory::createEnemy(GameModel* model) {
 }
 
 void EnemyFactory::createBoss(GameModel* model) {
-	std::map<int, dxco::Animation*> animations = loadAnimations(model, "elvis", Enemy::getSpeed());
+	int enemyLevel = model->prop->get("enemy.level");
+	std::map<int, dxco::Animation*> animations = loadAnimations(model, "elvis", Enemy::getSpeed(enemyLevel));
 
 	cocos2d::CCSprite* enemySprite = createSpriteInRandomPosition(model, "elvis_1_0000.png", 150, 150);
-	Enemy* enemy = new Boss(model, enemySprite, animations, Enemy::ENEMY_LEVEL);
+	Enemy* enemy = new Boss(model, enemySprite, animations, enemyLevel);
 	addEnemy(model, enemy);
 
 	SpriteUtil::fadeIn(enemy->getSprite());
@@ -65,7 +67,7 @@ void EnemyFactory::addEnemy(GameModel* model, Enemy* enemy) {
 }
 
 std::map<int, dxco::Animation*> EnemyFactory::loadAnimations(GameModel* model, std::string type, float speed) {
-	float speedFactor = speed / ENEMY_DEFAULT_SPEED;
+	float speedFactor = speed / Enemy::getSpeed(1);
 //	float frameTime = ENEMY_DEFAULT_SPEED / (1000 * speedFactor);
 	float frameTime = 30 / (1000 * speedFactor);
 
