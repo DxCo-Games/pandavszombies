@@ -14,7 +14,6 @@
 #include "dxco/StringUtil.h"
 #include "dxco/LabelUtil.h"
 #include "crimson/levels/Level.h"
-
 #include "crimson/daos/UserDAO.h"
 
 #include <map>
@@ -54,6 +53,9 @@ bool HelloWorld::init()
 
     CCSprite* loadingSprite = dxco::SpriteUtil::create("LOADING-1.png", visibleSize.width * 0.25, visibleSize.height / 2 - visibleSize.width * 0.075, visibleSize.width * 0.5, visibleSize.width * 0.15);
     this->addChild(loadingSprite);
+
+    this->levelFinishedLayer = new dxco::SurvivalLevelFinishedLayer(0, 0, visibleSize.width, visibleSize.height);
+    this->addChild(levelFinishedLayer, 50);
 
     std::vector<cocos2d::CCTexture2D*> texturesLoading;
 

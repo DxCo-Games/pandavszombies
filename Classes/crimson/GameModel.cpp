@@ -151,7 +151,8 @@ void GameModel::update(float dt) {
 	}
 
 	if (!this->player->isActive() || this->level->isFinished()){
-		this->restartGame();
+		this->vista->levelFinishedLayer->show(this->player->score, this->kills, this->player->score / COIN_VALUE);
+		this->vista->juegoPausado = true; // TODO: Improve
 	}
 
 	//Bullet cleanup

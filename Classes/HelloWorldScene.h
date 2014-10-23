@@ -7,6 +7,8 @@
 #include "crimson/Mapa.h"
 #include "dxco/Container.h"
 #include "dxco/Item.h"
+#include "crimson/layers/SurvivalLevelFinishedLayer.h"
+
 #include <string>
 
 class HelloWorld : public cocos2d::CCLayer
@@ -59,6 +61,7 @@ public:
     bool juegoPausado;
     dxco::Item* loadingItem;
 
+    dxco::SurvivalLevelFinishedLayer* levelFinishedLayer;
 private:
 
     void preloadTextures();

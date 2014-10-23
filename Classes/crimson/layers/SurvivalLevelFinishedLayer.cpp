@@ -6,23 +6,9 @@
 
 namespace dxco {
 
-SurvivalLevelFinishedLayer::SurvivalLevelFinishedLayer() {
-	this->menuButton = NULL;
-	this->tryAgainButton = NULL;
-	this->points = 0;
-	this->kills = 0;
-	this->coins = 0;
-}
-
-bool SurvivalLevelFinishedLayer::init() {
-	if (!cocos2d::CCLayer::init()) {
-		return false;
-	}
+SurvivalLevelFinishedLayer::SurvivalLevelFinishedLayer(float x, float y, float width, float height) : Container(x, y, width, height) {
 
 	cocos2d::CCSize visibleSize = cocos2d::CCDirector::sharedDirector()->getVisibleSize();
-
-	cocos2d::CCSprite* spriteBackground = SpriteUtil::create("fondo_ciudad.jpg", 0, 0, visibleSize.width, visibleSize.height);
-	this->addChild(spriteBackground);
 
 	cocos2d::CCSprite* gameOverTitle = SpriteUtil::create("game_over_title.png", visibleSize.width * 0.2, visibleSize.height * 0.7,
 														   visibleSize.width * 0.6, visibleSize.height * 0.15);
@@ -49,7 +35,7 @@ bool SurvivalLevelFinishedLayer::init() {
 	this->addChild(tryAgainButtonSprite);
 	this->tryAgainButton = new SurvivalButton(tryAgainButtonSprite);
 
-	cocos2d::CCLabelTTF* pointsLabel = dxco::LabelUtil::create(StringUtil::toString(this->points), 14, visibleSize.width / 2, 10, dxco::LabelUtil::BOTTOM, dxco::LabelUtil::LEFT, "fonts/KBStickToThePlan.ttf");
+	this->pointsLabel = dxco::LabelUtil::create(StringUtil::toString(0), 14, visibleSize.width / 2, 10, dxco::LabelUtil::BOTTOM, dxco::LabelUtil::LEFT, "fonts/KBStickToThePlan.ttf");
 
 	pointsLabel->setPositionX(placaGameOver->getPositionX() - 0.37 * dxco::SpriteUtil::getWidth(placaGameOver));
 	pointsLabel->setPositionY(placaGameOver->getPositionY() - 0.20 * dxco::SpriteUtil::getHeight(placaGameOver));
@@ -61,7 +47,7 @@ bool SurvivalLevelFinishedLayer::init() {
 
 	this->addChild(trophy, 10);
 
-	cocos2d::CCLabelTTF* killsLabel = dxco::LabelUtil::create(StringUtil::toString(this->kills), 14, visibleSize.width / 2, 10, dxco::LabelUtil::BOTTOM, dxco::LabelUtil::LEFT, "fonts/KBStickToThePlan.ttf");
+	this->killsLabel = dxco::LabelUtil::create(StringUtil::toString(0), 14, visibleSize.width / 2, 10, dxco::LabelUtil::BOTTOM, dxco::LabelUtil::LEFT, "fonts/KBStickToThePlan.ttf");
 	killsLabel->setPositionX(trophy->getPositionX() + 0.17 * dxco::SpriteUtil::getWidth(placaGameOver));
 	killsLabel->setPositionY(pointsLabel->getPositionY());
 
@@ -73,7 +59,7 @@ bool SurvivalLevelFinishedLayer::init() {
 
 	this->addChild(cross, 10);
 
-	cocos2d::CCLabelTTF* coinsLabel = dxco::LabelUtil::create(StringUtil::toString(this->coins), 14, visibleSize.width / 2, 10, dxco::LabelUtil::BOTTOM, dxco::LabelUtil::LEFT, "fonts/KBStickToThePlan.ttf");
+	this->coinsLabel = dxco::LabelUtil::create(StringUtil::toString(0), 14, visibleSize.width / 2, 10, dxco::LabelUtil::BOTTOM, dxco::LabelUtil::LEFT, "fonts/KBStickToThePlan.ttf");
 	coinsLabel->setPositionX(cross->getPositionX() + 0.17 * dxco::SpriteUtil::getWidth(placaGameOver));
 	coinsLabel->setPositionY(pointsLabel->getPositionY());
 
@@ -85,24 +71,22 @@ bool SurvivalLevelFinishedLayer::init() {
 
 	this->addChild(coin, 10);
 
-	this->setTouchEnabled(true);
-
-	return true;
+	this->setTouchEnabled(false);
+	hide();
 }
 
-cocos2d::CCScene* SurvivalLevelFinishedLayer::scene(int points, int kills, int coins) {
+void SurvivalLevelFinishedLayer::show(int points, int kills, int coins) {
 
-	cocos2d::CCScene *scene = cocos2d::CCScene::create();
-	SurvivalLevelFinishedLayer* layer = new SurvivalLevelFinishedLayer();
+	this->killsLabel->setString(StringUtil::toString(kills).c_str());
+	this->coinsLabel->setString(StringUtil::toString(coins).c_str());
+	this->pointsLabel->setString(StringUtil::toString(points).c_str());
 
-	layer->points = points;
-	layer->kills = kills;
-	layer->coins = coins;
+	this->setVisible(true);
+	this->setTouchEnabled(true);
+}
 
-	layer->init();
-	scene->addChild(layer);
-
-	return scene;
+void SurvivalLevelFinishedLayer::hide() {
+	this->setVisible(false);
 }
 
 void SurvivalLevelFinishedLayer::ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent) {
