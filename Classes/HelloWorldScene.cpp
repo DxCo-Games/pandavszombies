@@ -451,11 +451,7 @@ void HelloWorld::update(float dt) {
 			this->preloaded = true;
 			this->realInit();
 
-			if (random() % 2) {
-						CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("sounds/bg1.mp3", true);
-					} else {
-						CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("sounds/bg2.mp3", true);
-					}
+			this->playMusic();
 		}
 	}
 }
@@ -472,7 +468,7 @@ void HelloWorld::keyBackClicked() {
 		this->juegoPausado = !this->juegoPausado;
 
 		if (!this->juegoPausado) {
-			this->playMusic();
+			CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
 		} else {
 			this->stopMusic();
 		}
@@ -485,11 +481,15 @@ void HelloWorld::keyBackClicked() {
 }
 
 void HelloWorld::playMusic() {
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("sounds/background.wav", true);
+	if (random() % 2) {
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("sounds/bg1.mp3", true);
+	} else {
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("sounds/bg2.mp3", true);
+	}
 }
 
 void HelloWorld::stopMusic() {
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
 }
 
