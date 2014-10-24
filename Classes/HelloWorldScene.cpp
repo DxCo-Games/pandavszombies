@@ -196,9 +196,7 @@ dxco::Player* HelloWorld::createPlayer() {
 
 	CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
 	this->playerContainer = new dxco::Container(this->mapa->getWidth() / 2,  this->mapa->getHeight() / 2, 80, 80);
-    CCSprite* spriteGuy = dxco::SpriteUtil::create("herida1_1_0000.png", 0.45 * this->mapa->getWidth(),  0.45 * this->mapa->getHeight(), 75, 75, true);
-
-    //this->playerContainer->addChild(spriteGuy);
+    CCSprite* spriteGuy = dxco::SpriteUtil::create("herida1_1_0000.png", 0.45 * this->mapa->getWidth(),  0.42 * this->mapa->getHeight(), 75, 75, true);
     this->mapa->addChild(spriteGuy, 2);
 
     std::map<int, dxco::Animation*> animations;

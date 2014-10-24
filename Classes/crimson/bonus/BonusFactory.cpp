@@ -22,7 +22,7 @@ void BonusFactory::createBonus(GameModel* model, cocos2d::CCPoint location) {
 	if (rand() % 100 < model->prop->get("bonus.probability")) {
 		Bonus* bonus;
 
-		int weaponProbability = 20;
+		int weaponProbability = 30;
 		if (model->player->weaponType == Player::PISTOL) {
 			weaponProbability = 80;
 		}
