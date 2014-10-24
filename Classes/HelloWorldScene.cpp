@@ -49,7 +49,7 @@ bool HelloWorld::init()
     }
     
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-    this->loading = dxco::SpriteUtil::create("ciudad_fondo.png", 0, 0, visibleSize.width, visibleSize.height);
+    this->loading = dxco::SpriteUtil::create("fondo_ciudad.jpg", 0, 0, visibleSize.width, visibleSize.height);
     this->addChild(loading);
 
     CCSprite* loadingSprite = dxco::SpriteUtil::create("LOADING-1.png", visibleSize.width * 0.25, visibleSize.height / 2 - visibleSize.width * 0.075, visibleSize.width * 0.5, visibleSize.width * 0.15);
