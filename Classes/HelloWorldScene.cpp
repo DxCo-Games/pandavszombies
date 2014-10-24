@@ -72,7 +72,6 @@ bool HelloWorld::init()
     spriteSheetCargada = 0;
 
     this->preloaded = false;
-    this->angulosCargados = 0;
     this->scheduleUpdate();
 
     this->juegoPausado = false;
@@ -440,15 +439,9 @@ void HelloWorld::update(float dt) {
 		this->preloadTextures();
 
 		if (this->spriteSheetCargada > 10) {
-			float angulosCargados = this->angulosCargados;
-			float cantAngulos = ENEMY_ANGLE_POSITIONS;
-
-			std::string porcentaje = dxco::StringUtil::toString((angulosCargados / cantAngulos) * 100);
-			porcentaje += "%";
 			CocosDenshion::SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(0.5);
 			this->preloaded = true;
 			this->realInit();
-
 			this->playMusic();
 		}
 	}

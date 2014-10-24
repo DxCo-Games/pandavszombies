@@ -53,13 +53,16 @@ public:
     cocos2d::CCLabelTTF* killsLabel;
     cocos2d::CCLabelTTF* killsChainLabel;
     bool survivalMode;
-    void playEffect(std::string effect);
 
     virtual void keyBackClicked();
-    void stopMusic();
-    void playMusic();
+
     bool juegoPausado;
     dxco::Item* loadingItem;
+
+    //FIXME move sound stuff to a different class
+    void playEffect(std::string effect);
+    void stopMusic();
+    void playMusic();
 
     dxco::SurvivalLevelFinishedLayer* levelFinishedLayer;
 private:
@@ -71,15 +74,10 @@ private:
     dxco::GameModel* model;
     dxco::JoystickController joystickController;
 
-    //FIXME limpiar cosas del preload que no sirven mas
     bool preloaded;
     void realInit();
-    int angulosCargados;
-    cocos2d::CCLabelTTF* porcentajeCargado;
     cocos2d::CCProgressTimer* lifeBar;
     cocos2d::CCSprite* loading;
-    cocos2d::CCSprite* joystickBotonIzq;
-    cocos2d::CCSprite* joystickBotonDrc;
     int spriteSheetCargada;
 };
 
