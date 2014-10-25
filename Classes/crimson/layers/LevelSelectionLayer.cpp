@@ -1,6 +1,8 @@
 #include "LevelSelectionLayer.h"
 #include "../../dxco/SpriteUtil.h"
 #include "../buttons/LevelButton.h"
+#include "../../dxco/StringUtil.h"
+#include "../../dxco/DB.h"
 
 namespace dxco {
 
@@ -29,6 +31,11 @@ bool LevelSelectionLayer::init() {
 
 	cocos2d::CCSprite* spriteBackground = SpriteUtil::create("fondo_ciudad.jpg", 0, 0, visibleSize.width, visibleSize.height);
 	this->addChild(spriteBackground);
+
+	//if first time, enable level 1
+	if (DB::getInteger("level1", -1) == -1) {
+		DB::putInteger("level1", 0);
+	}
 
 	//just to get dimensions :P
 	LevelButton button = LevelButton(1, 0, 0);

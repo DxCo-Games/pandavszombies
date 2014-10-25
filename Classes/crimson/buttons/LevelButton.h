@@ -12,6 +12,7 @@ public:
 	void execute();
 
 	int number;
+	bool enabled;
 	cocos2d::CCLabelTTF* label;
 };
 
