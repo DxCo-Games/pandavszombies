@@ -1,6 +1,6 @@
 #include "StoryButton.h"
 
-#include "../../HelloWorldScene.h"
+#include "../layers/LevelSelectionLayer.h"
 
 namespace dxco {
 
@@ -10,7 +10,7 @@ StoryButton::StoryButton(cocos2d::CCSprite* sprite) : ButtonDxCo(sprite) {
 
 void StoryButton::execute() {
 	cocos2d::CCDirector* pDirector = cocos2d::CCDirector::sharedDirector();
-	pDirector->runWithScene(HelloWorld::scene(false));
+	pDirector->runWithScene(LevelSelectionLayer::scene());
 }
 
 } /* namespace dxco */
