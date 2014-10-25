@@ -14,6 +14,7 @@
 #include "daos/UserDAO.h"
 #include <algorithm>
 #include "levels/LevelParser.h"
+#include "SimpleAudioEngine.h"
 
 namespace dxco {
 
@@ -156,6 +157,7 @@ void GameModel::update(float dt) {
 	if (!this->player->isActive() || this->level->isFinished()){
 		this->vista->levelFinishedLayer->show(this->player->score, this->kills, this->player->score / COIN_VALUE);
 		this->vista->juegoPausado = true; // TODO: Improve
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
 	}
 
 	//Bullet cleanup
