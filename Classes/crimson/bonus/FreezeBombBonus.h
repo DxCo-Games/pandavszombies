@@ -1,9 +1,9 @@
 #ifndef FREEZEBOMBBONUS_H_
 #define FREEZEBOMBBONUS_H_
 
-#include "TimeBonus.h"
-
 #define FREEZE_BOMB_BONUS_DURATION 6
+
+#include "TimeBonus.h"
 
 namespace dxco {
 

@@ -1,6 +1,7 @@
 #include "HelloWorldScene.h"
 #include "BonusFactory.h"
 #include "../GameModel.h"
+#include "../GameProperties.h"
 #include "HealthBonus.h"
 #include "WeaponBonus.h"
 #include "PuntosBonus.h"
@@ -18,10 +19,10 @@ BonusFactory::BonusFactory() {
 }
 
 void BonusFactory::createBonus(GameModel* model, cocos2d::CCPoint location) {
-	if (rand() % 100 < BONUS_PROBABILITY) {
+	if (rand() % 100 < model->prop->get("bonus.probability")) {
 		Bonus* bonus;
 
-		int weaponProbability = 20;
+		int weaponProbability = 30;
 		if (model->player->weaponType == Player::PISTOL) {
 			weaponProbability = 80;
 		}

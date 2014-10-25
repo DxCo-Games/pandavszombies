@@ -10,7 +10,7 @@ Boss::Boss(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*
 	this->life = 50 * (level +1);
 	this->score = 50 * (level +1);
 	this->strength = 25 * (level +1);
-	this->mass = 0.75 * ENEMY_DEFAULT_SPEED / speed;
+	this->mass = 0.75 * Enemy::getSpeed(1) / speed;
 }
 
 float Boss::getColitionRatio() {

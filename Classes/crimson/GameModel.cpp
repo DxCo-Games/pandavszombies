@@ -1,4 +1,5 @@
 #include "GameModel.h"
+#include "GameProperties.h"
 #include "levels/Level.h"
 #include "levels/SurvivalLevel.h"
 #include "levels/EnemyWave.h"
@@ -13,6 +14,7 @@
 #include "daos/UserDAO.h"
 #include <algorithm>
 #include "levels/LevelParser.h"
+#include "SimpleAudioEngine.h"
 
 namespace dxco {
 
@@ -55,9 +57,11 @@ public:
 
 GameModel::GameModel(HelloWorld* vista, Player* player, bool survival) {
 
+	this->prop = new GameProperties();
 	//not very nice
 	this->player = player;
 	player->model = this;
+	player->life = this->prop->get("player.life");
 	this->vista = vista;
 	this->mapa = vista->mapa;
 
@@ -153,6 +157,9 @@ void GameModel::update(float dt) {
 	if (!this->player->isActive() || this->level->isFinished()){
 		this->vista->levelFinishedLayer->show(this->player->score, this->kills, this->player->score / COIN_VALUE);
 		this->vista->juegoPausado = true; // TODO: Improve
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
+
+		this->vista->opacityLayer->setVisible(true);
 	}
 
 	//Bullet cleanup
@@ -176,10 +183,10 @@ void GameModel::restartGame() {
 	this->mapa->moveToAbsolute(mapCornerX, mapCornerY);
 	this->vista->clouds->moveToAbsolute(mapCornerX, mapCornerY);
 
-	Enemy::ENEMY_LEVEL = 1;
+	this->prop->set("enemy.level", 1);
 
 	this->player->restartPosition();
-	this->player->life = PLAYER_LIFE;
+	this->player->life = this->prop->get("player.life");
 	this->vista->weaponBar->setPercentage(100);
 	this->vista->bonus1->stopAllActions();
 	this->vista->bonus1->setOpacity(0);

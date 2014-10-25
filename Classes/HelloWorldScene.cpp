@@ -8,6 +8,7 @@
 #include "crimson/JoystickMira.h"
 #include "crimson/JoystickMovimiento.h"
 #include "crimson/GameModel.h"
+#include "crimson/GameProperties.h"
 #include "crimson/Player.h"
 #include "dxco/Animation.h"
 #include "dxco/Container.h"
@@ -48,7 +49,7 @@ bool HelloWorld::init()
     }
     
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-    this->loading = dxco::SpriteUtil::create("ciudad_fondo.png", 0, 0, visibleSize.width, visibleSize.height);
+    this->loading = dxco::SpriteUtil::create("fondo_ciudad.jpg", 0, 0, visibleSize.width, visibleSize.height);
     this->addChild(loading);
 
     CCSprite* loadingSprite = dxco::SpriteUtil::create("LOADING-1.png", visibleSize.width * 0.25, visibleSize.height / 2 - visibleSize.width * 0.075, visibleSize.width * 0.5, visibleSize.width * 0.15);
@@ -71,7 +72,6 @@ bool HelloWorld::init()
     spriteSheetCargada = 0;
 
     this->preloaded = false;
-    this->angulosCargados = 0;
     this->scheduleUpdate();
 
     this->juegoPausado = false;
@@ -395,6 +395,11 @@ void HelloWorld::createInterface() {
 	this->killsChainLabel->setPositionY(zombie->getPositionY());
 	this->addChild(killsChainLabel, 10);
 	this->killsChainLabel->setOpacity(0);
+
+	this->opacityLayer = CCLayerColor::create(ccc4(20, 20, 20, 200));
+	this->addChild(this->opacityLayer, 4);
+
+	this->opacityLayer->setVisible(false);
 }
 
 void HelloWorld::ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent) {
@@ -441,15 +446,9 @@ void HelloWorld::update(float dt) {
 		this->preloadTextures();
 
 		if (this->spriteSheetCargada > 10) {
-			float angulosCargados = this->angulosCargados;
-			float cantAngulos = ENEMY_ANGLE_POSITIONS;
-
-			std::string porcentaje = dxco::StringUtil::toString((angulosCargados / cantAngulos) * 100);
-			porcentaje += "%";
 			CocosDenshion::SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(0.5);
 			this->preloaded = true;
 			this->realInit();
-
 			this->playMusic();
 		}
 	}
@@ -510,8 +509,8 @@ void HelloWorld::updateLabels() {
 
 	std::string playerKillsText = dxco::StringUtil::toString(this->model->kills);
 	this->killsLabel->setString(playerKillsText.c_str());
-
-	this->lifeBar->setPercentage(this->model->player->life * 100 / PLAYER_LIFE);
+	float playerLife = this->model->prop->get("player.life");
+	this->lifeBar->setPercentage(this->model->player->life * 100 / playerLife);
 }
 
 void HelloWorld::updateBonus(std::string texture, float duration) {

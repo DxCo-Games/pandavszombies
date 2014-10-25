@@ -1,6 +1,7 @@
 #include "SurvivalLevel.h"
 #include "../enemies/Enemy.h"
 #include "../GameModel.h"
+#include "../GameProperties.h"
 
 namespace dxco {
 
@@ -27,7 +28,8 @@ void SurvivalLevel::update(float dt) {
 	}
 	this->enemyLevelDt += dt;
 	if (this->enemyLevelDt > SURVIVAL_ENEMY_LEVEL_DT){
-		Enemy::ENEMY_LEVEL++;
+		int enemyLevel = this->model->prop->get("enemy.level");
+		this->model->prop->set("enemy.level",  enemyLevel + 1);
 		this->enemyLevelDt = 0;
 	}
 }

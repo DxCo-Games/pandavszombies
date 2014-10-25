@@ -1,11 +1,13 @@
 #include "WeaponBonus.h"
 #include "../GameModel.h"
+#include "../GameProperties.h"
 #include "../../HelloWorldScene.h"
 #include "../../dxco/VoiceManager.h"
 
 namespace dxco {
 
-WeaponBonus::WeaponBonus(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations, Player::weapons type) : TimeBonus(model, sprite, animations, WEAPON_BONUS_DURATION) {
+WeaponBonus::WeaponBonus(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations, Player::weapons type) :
+		TimeBonus(model, sprite, animations, model->prop->get("weapon.duration")) {
 	this->type = type;
 	this->sound = "sounds/loadgun.ogg";
 }
@@ -20,6 +22,8 @@ void WeaponBonus::applyBonus() {
 	if (this->type == Player::BAZOOKA) {
 		this->model->voice->play("voices/friend.ogg", 0.5);
 	}
+
+	this->model->vista->fire->setAngle(-this->model->player->rotation);
 }
 
 void WeaponBonus::removeBonus() {

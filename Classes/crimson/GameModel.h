@@ -21,6 +21,7 @@ namespace dxco {
 
 class Level;
 class ChainedKillsManager;
+class GameProperties;
 class VoiceManager;
 
 class GameModel {
@@ -32,6 +33,7 @@ public:
 	Level *level;
 	ChainedKillsManager *chains;
 	VoiceManager *voice;
+	GameProperties *prop;
 
 	void addBullet(Bullet* bullet);
 	std::vector<Bullet*> bullets;

@@ -4,7 +4,6 @@
 #include "TimeBonus.h"
 #include "../Player.h"
 
-#define WEAPON_BONUS_DURATION 15
 
 namespace dxco {
 

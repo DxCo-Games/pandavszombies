@@ -1,4 +1,5 @@
 #include "HealthBonus.h"
+#include "../GameProperties.h"
 
 namespace dxco {
 
@@ -7,7 +8,7 @@ HealthBonus::HealthBonus(GameModel* model, cocos2d::CCSprite* sprite,
 }
 
 void HealthBonus::applyBonus(){
-	double healAmount = LIFE_AMOUNT_PERCENTAGE * PLAYER_LIFE;
+	double healAmount = LIFE_AMOUNT_PERCENTAGE * this->model->prop->get("player.life");
 	this->model->player->hurt(-healAmount);
 }
 
