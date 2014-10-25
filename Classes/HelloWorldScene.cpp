@@ -393,6 +393,11 @@ void HelloWorld::createInterface() {
 	this->killsChainLabel->setPositionY(zombie->getPositionY());
 	this->addChild(killsChainLabel, 10);
 	this->killsChainLabel->setOpacity(0);
+
+	this->opacityLayer = CCLayerColor::create(ccc4(20, 20, 20, 200));
+	this->addChild(this->opacityLayer, 4);
+
+	this->opacityLayer->setVisible(false);
 }
 
 void HelloWorld::ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent) {

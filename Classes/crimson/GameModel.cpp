@@ -158,6 +158,8 @@ void GameModel::update(float dt) {
 		this->vista->levelFinishedLayer->show(this->player->score, this->kills, this->player->score / COIN_VALUE);
 		this->vista->juegoPausado = true; // TODO: Improve
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
+
+		this->vista->opacityLayer->setVisible(true);
 	}
 
 	//Bullet cleanup

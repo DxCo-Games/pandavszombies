@@ -64,6 +64,8 @@ public:
     void stopMusic();
     void playMusic();
 
+    cocos2d::CCLayerColor* opacityLayer;
+
     dxco::SurvivalLevelFinishedLayer* levelFinishedLayer;
 private:
 
