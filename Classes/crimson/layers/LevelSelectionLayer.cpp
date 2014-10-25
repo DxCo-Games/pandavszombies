@@ -46,6 +46,7 @@ bool LevelSelectionLayer::init() {
 		LevelButton *button = new LevelButton(i+1, x, y);
 		this->buttons.push_back(button);
 		this->addChild(button->sprite);
+		this->addChild(button->label);
 	}
 
 	y = ymargin;
@@ -54,6 +55,7 @@ bool LevelSelectionLayer::init() {
 		LevelButton *button = new LevelButton(i+11, x, y);
 		this->buttons.push_back(button);
 		this->addChild(button->sprite);
+		this->addChild(button->label);
 	}
 
 	this->setTouchEnabled(true);

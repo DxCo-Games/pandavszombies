@@ -12,6 +12,7 @@ public:
 	void execute();
 
 	int number;
+	cocos2d::CCLabelTTF* label;
 };
 
 } /* namespace dxco */
