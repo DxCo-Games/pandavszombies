@@ -4,6 +4,7 @@
 #define PLAYER_LIFE 200
 #define PLAYER_SPEED 90
 #define PLAYER_ANGLE_POSITIONS 16
+#define PLAYER_UP_DELTA 20
 
 #include "../dxco/TopDownItem.h"
 
@@ -46,6 +47,7 @@ public:
 	float moveRotation;
 
 	void updateFireLocation();
+
 };
 
 } /* namespace dxco */
