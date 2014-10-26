@@ -12,10 +12,13 @@ LevelButton::LevelButton(int number, float x, float y) {
 	int stars = DB::getInteger("level"+StringUtil::toString(number), -1);
 	this->enabled = stars != -1;
 
+	cocos2d::CCSize visibleSize = cocos2d::CCDirector::sharedDirector()->getVisibleSize();
+	float height = visibleSize.height * 0.27;
+	float width = height * 0.45;
 	if (this->enabled) {
-		this->sprite = SpriteUtil::create("buttons/LEVELS-x" + StringUtil::toString(stars) + ".png", x, y);
+		this->sprite = SpriteUtil::create("buttons/LEVELS-x" + StringUtil::toString(stars) + ".png", x, y, width, height);
 	} else {
-		this->sprite = SpriteUtil::create("buttons/LEVELS-bloqueado.png", x, y);
+		this->sprite = SpriteUtil::create("buttons/LEVELS-bloqueado.png", x, y, width, height);
 	}
 	this->on();
 
@@ -31,8 +34,6 @@ LevelButton::LevelButton(int number, float x, float y) {
 		this->label->setColor(cocos2d::ccc3(145, 12, 28));
 	}
 
-	float height = SpriteUtil::getHeight((cocos2d::CCSprite*)this->sprite);
-	float width = SpriteUtil::getWidth((cocos2d::CCSprite*)this->sprite);
 	this->label->setPositionX(this->sprite->getPositionX() - 0.03*width);
 	this->label->setPositionY(this->sprite->getPositionY() + 0.29*height);
 }
