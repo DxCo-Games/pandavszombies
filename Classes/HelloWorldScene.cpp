@@ -358,7 +358,7 @@ void HelloWorld::createInterface() {
 		this->timerLabel = dxco::LabelUtil::create("00:00", 14, visibleSize.width / 2, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT, "fonts/KBStickToThePlan.ttf");
 	} else {
 		timer = dxco::SpriteUtil::create("gameplay/LEVEL.png", visibleSize.width / 2, 0, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
-		this->timerLabel = dxco::LabelUtil::create("LEVEL 1", 14, visibleSize.width / 2, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT, "fonts/KBStickToThePlan.ttf");
+		this->timerLabel = dxco::LabelUtil::create("LEVEL " + dxco::StringUtil::toString(this->level), 14, visibleSize.width / 2, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT, "fonts/KBStickToThePlan.ttf");
 	}
 	dxco::SpriteUtil::copyScale(lifeBack, timer);
 	timer->setPositionY(lifeBack->getPositionY());
