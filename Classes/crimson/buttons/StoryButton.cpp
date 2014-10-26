@@ -10,7 +10,7 @@ StoryButton::StoryButton(cocos2d::CCSprite* sprite) : ButtonDxCo(sprite) {
 
 void StoryButton::execute() {
 	cocos2d::CCDirector* pDirector = cocos2d::CCDirector::sharedDirector();
-	pDirector->runWithScene(LevelSelectionLayer::scene());
+	pDirector->replaceScene(LevelSelectionLayer::scene());
 }
 
 } /* namespace dxco */

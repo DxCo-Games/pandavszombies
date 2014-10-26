@@ -19,7 +19,11 @@ LevelButton::LevelButton(int number, float x, float y) {
 	}
 	this->on();
 
-	this->label = cocos2d::CCLabelTTF::create(StringUtil::padLeft(number, 2).c_str(), "fonts/KBStickToThePlan.ttf", 16);
+	std::string labelNumber = StringUtil::padLeft(number, 2);
+	if(number == 100) {
+		labelNumber = "?";
+	}
+	this->label = cocos2d::CCLabelTTF::create(labelNumber.c_str(), "fonts/KBStickToThePlan.ttf", 16);
 
 	if (this->enabled) {
 		this->label->setColor(cocos2d::ccc3(255, 255, 255));

@@ -7,6 +7,7 @@
 namespace dxco {
 
 class LevelButton;
+class LevelScreenButton;
 
 class LevelSelectionLayer: public cocos2d::CCLayer {
 public:
@@ -14,13 +15,16 @@ public:
 
 	virtual bool init();
 
-	static cocos2d::CCScene* scene();
+	static cocos2d::CCScene* scene(int page=0);
 
 	CREATE_FUNC(LevelSelectionLayer);
 
 	void ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
 
 	std::vector<LevelButton*> buttons;
+	int page;
+	LevelScreenButton *prev;
+	LevelScreenButton *next;
 };
 
 } /* namespace dxco */

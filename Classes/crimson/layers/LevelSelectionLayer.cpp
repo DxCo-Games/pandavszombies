@@ -1,21 +1,24 @@
 #include "LevelSelectionLayer.h"
 #include "../../dxco/SpriteUtil.h"
 #include "../buttons/LevelButton.h"
+#include "../buttons/LevelScreenButton.h"
 #include "../../dxco/StringUtil.h"
 #include "../../dxco/DB.h"
 
 namespace dxco {
 
 LevelSelectionLayer::LevelSelectionLayer() {
-	// TODO Auto-generated constructor stub
-
+	this->page = 0;
+	this->prev = NULL;
+	this->next = NULL;
 }
 
-cocos2d::CCScene* LevelSelectionLayer::scene() {
+cocos2d::CCScene* LevelSelectionLayer::scene(int page) {
 
 	cocos2d::CCScene *scene = cocos2d::CCScene::create();
 	LevelSelectionLayer* layer = new LevelSelectionLayer();
 
+	layer->page = page;
 	layer->init();
 	scene->addChild(layer);
 
@@ -26,10 +29,15 @@ bool LevelSelectionLayer::init() {
 	if (!cocos2d::CCLayer::init()) {
 		return false;
 	}
-
 	cocos2d::CCSize visibleSize = cocos2d::CCDirector::sharedDirector()->getVisibleSize();
 
-	cocos2d::CCSprite* spriteBackground = SpriteUtil::create("fondo_ciudad.jpg", 0, 0, visibleSize.width, visibleSize.height);
+	cocos2d::CCSprite* spriteBackground;
+
+	if(this->page % 2) {
+		spriteBackground = SpriteUtil::create("fondo_cementerio.jpg", 0, 0, visibleSize.width, visibleSize.height);
+	} else {
+		spriteBackground = SpriteUtil::create("fondo_ciudad.jpg", 0, 0, visibleSize.width, visibleSize.height);
+	}
 	this->addChild(spriteBackground);
 
 	//if first time, enable level 1
@@ -50,7 +58,7 @@ bool LevelSelectionLayer::init() {
 	float y = ymargin + buttonHeight + ypadding;
 	for (int i=0; i < 10 ;i++) {
 		float x = xmargin + i * buttonWidth;
-		LevelButton *button = new LevelButton(i+1, x, y);
+		LevelButton *button = new LevelButton(20*this->page + i+1, x, y);
 		this->buttons.push_back(button);
 		this->addChild(button->sprite);
 		this->addChild(button->label);
@@ -59,10 +67,26 @@ bool LevelSelectionLayer::init() {
 	y = ymargin;
 	for (int i=0; i < 10 ;i++) {
 		float x = xmargin + i * buttonWidth;
-		LevelButton *button = new LevelButton(i+11, x, y);
+		LevelButton *button = new LevelButton(20*this->page + i+11, x, y);
 		this->buttons.push_back(button);
 		this->addChild(button->sprite);
 		this->addChild(button->label);
+	}
+
+	cocos2d::CCSprite* prev = SpriteUtil::create("buttons/LEVELS-flechaIZ.png", 0,0);
+	SpriteUtil::leftAlign((cocos2d::CCSprite*) this->buttons[0]->sprite, prev);
+	prev->setPositionY(y - SpriteUtil::getHeight(prev) / 3);
+	if(this->page > 0){
+		this->prev = new LevelScreenButton(prev, this->page - 1);
+		this->addChild(prev);
+	}
+
+	if(this->page < 4){
+		cocos2d::CCSprite* next = SpriteUtil::create("buttons/LEVELS-flechaD.png", 0,y);
+		SpriteUtil::rightAlign((cocos2d::CCSprite*) this->buttons[9]->sprite, next);
+		next->setPositionY(prev->getPositionY());
+		this->next = new LevelScreenButton(next, this->page + 1);
+		this->addChild(next);
 	}
 
 	this->setTouchEnabled(true);
@@ -77,6 +101,14 @@ void LevelSelectionLayer::ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEv
 
 	for (int i=0; i < this->buttons.size(); i++) {
 		this->buttons[i]->touch(location);
+	}
+
+	if(this->page > 0){
+		this->prev->touch(location);
+	}
+
+	if(this->page < 4){
+		this->next->touch(location);
 	}
 }
 

@@ -82,6 +82,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/crimson/buttons/SurvivalButton.cpp \
                    ../../Classes/crimson/buttons/StoryButton.cpp \
                    ../../Classes/crimson/buttons/LevelButton.cpp \
+                   ../../Classes/crimson/buttons/LevelScreenButton.cpp \
                    ../../Classes/crimson/buttons/GameTypeSelectionButton.cpp \
                    ../../Classes/crimson/layers/SurvivalLevelFinishedLayer.cpp
                    
