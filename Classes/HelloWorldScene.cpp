@@ -62,7 +62,7 @@ bool HelloWorld::init()
 	this->assetLoader->addAsset("sprite_sheets/panda2.plist");
 	this->assetLoader->addAsset("sprite_sheets/panda3.plist");
 
-	// don«t add any music, only sound effects
+	// dont add any music, only sound effects
 	this->assetLoader->addAsset("sounds/bazooka.ogg", true);
 	this->assetLoader->addAsset("sounds/bomb.ogg", true);
 	this->assetLoader->addAsset("sounds/bonus.ogg", true);
@@ -83,8 +83,8 @@ bool HelloWorld::init()
 
 
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-    this->loading = dxco::SpriteUtil::create("fondo_ciudad.jpg", 0, 0, visibleSize.width, visibleSize.height);
-    this->addChild(loading);
+    this->backgroundLoading = dxco::SpriteUtil::create("fondo_ciudad.jpg", 0, 0, visibleSize.width, visibleSize.height);
+    this->addChild(backgroundLoading);
 
     CCSprite* loadingSprite = dxco::SpriteUtil::create("LOADING-1.png", visibleSize.width * 0.25, visibleSize.height / 2 - visibleSize.width * 0.075, visibleSize.width * 0.5, visibleSize.width * 0.15);
     this->addChild(loadingSprite);
@@ -372,6 +372,10 @@ void HelloWorld::createInterface() {
 	this->opacityLayer->setVisible(false);
 }
 
+void HelloWorld::hideControls() {
+
+}
+
 void HelloWorld::ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent) {
 
 	cocos2d::CCSetIterator it = pTouches->begin();
@@ -404,7 +408,7 @@ void HelloWorld::ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEve
 void HelloWorld::update(float dt) {
 
 	if (this->preloaded) {
-		this->removeChild(loading);
+		this->removeChild(backgroundLoading);
 		this->removeChild(loadingItem->getSprite());
 
 		if (!this->juegoPausado) {

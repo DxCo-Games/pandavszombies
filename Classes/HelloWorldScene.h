@@ -70,6 +70,8 @@ public:
 
     dxco::SurvivalLevelFinishedLayer* levelFinishedLayer;
     dxco::AssetLoader* assetLoader;
+
+    void hideControls();
 private:
 
     void preloadTextures();
@@ -82,7 +84,7 @@ private:
     bool preloaded;
     void realInit();
     cocos2d::CCProgressTimer* lifeBar;
-    cocos2d::CCSprite* loading;
+    cocos2d::CCSprite* backgroundLoading;
     int spriteSheetCargada;
 };
 
