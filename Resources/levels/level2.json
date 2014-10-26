@@ -1,0 +1,17 @@
+{
+"config": {
+	"background": "ciudad"
+},
+"waves": [{
+	"total" : 10,
+	"freq" : 0.3,
+	"level" : 1,
+	"isBoss" : 0
+	},
+	{
+	"total" : 2,
+	"freq" : 5,
+	"level" : 1,
+	"isBoss" : 1}
+	]
+}

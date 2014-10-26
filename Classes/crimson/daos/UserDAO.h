@@ -33,6 +33,10 @@ public:
 
 	static void addCoins(int coinsToAdd);
 	static int getCoins();
+
+	static void finishLevel(int level, int stars);
+	static bool levelEnabled(int level);
+	static int getLevelStars(int level);
 private:
 	static void doSaveFacebookUser();
 	static void deleteAllScores();

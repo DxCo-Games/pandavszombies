@@ -57,6 +57,7 @@ public:
 };
 
 GameModel::GameModel(HelloWorld* vista, Player* player, bool survival, int level) {
+	this->levelNumber = level;
 	this->prop = new GameProperties();
 	//not very nice
 	this->player = player;
@@ -148,13 +149,24 @@ void GameModel::update(float dt) {
 		this->bonuses[i]->update(dt);
 	}
 
-	if (!this->player->isActive() || this->level->isFinished()){
+	if (!this->player->isActive()){
 		this->vista->levelFinishedLayer->show(this->player->score, this->kills, this->player->score / COIN_VALUE);
 		this->vista->juegoPausado = true; // TODO: Improve
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
 
 		this->vista->opacityLayer->setVisible(true);
+	} else if (this->level->isFinished()) {
+		//FIXME mostrar level finished en vez de game over. Permitir pasar al proximo nivel
+		this->vista->levelFinishedLayer->show(this->player->score, this->kills, this->player->score / COIN_VALUE);
+		this->vista->juegoPausado = true; // TODO: Improve
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
+		this->vista->opacityLayer->setVisible(true);
+
+		//TODO calculate stars
+		UserDAO::finishLevel(this->levelNumber, 3);
 	}
+
+
 
 	//Bullet cleanup
 	this->bullets.erase(

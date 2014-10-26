@@ -1,21 +1,20 @@
 #include "LevelButton.h"
 #include "../../dxco/SpriteUtil.h"
 #include "../../dxco/StringUtil.h"
-#include "../../dxco/DB.h"
+#include "../daos/UserDAO.h"
 #include "../../HelloWorldScene.h"
 
 namespace dxco {
 
 LevelButton::LevelButton(int number, float x, float y) {
 	this->number = number;
-
-	int stars = DB::getInteger("level"+StringUtil::toString(number), -1);
-	this->enabled = stars != -1;
+	this->enabled = UserDAO::levelEnabled(number);
 
 	cocos2d::CCSize visibleSize = cocos2d::CCDirector::sharedDirector()->getVisibleSize();
 	float height = visibleSize.height * 0.27;
 	float width = height * 0.45;
 	if (this->enabled) {
+		int stars = UserDAO::getLevelStars(number);
 		this->sprite = SpriteUtil::create("buttons/LEVELS-x" + StringUtil::toString(stars) + ".png", x, y, width, height);
 	} else {
 		this->sprite = SpriteUtil::create("buttons/LEVELS-bloqueado.png", x, y, width, height);

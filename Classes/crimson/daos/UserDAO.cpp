@@ -105,4 +105,18 @@ void UserDAO::deleteAllScores() {
 	DB::putInteger(BEST_SCORE_KEY, 0);
 }
 
+void UserDAO::finishLevel(int level, int stars) {
+	//save stars and unlock next
+	DB::putInteger("level"+StringUtil::toString(level), stars);
+	DB::putInteger("level"+StringUtil::toString(level+1), 0);
+}
+
+bool UserDAO::levelEnabled(int level) {
+	return DB::getInteger("level"+StringUtil::toString(level), -1) > -1;
+}
+
+int UserDAO::getLevelStars(int level) {
+	return DB::getInteger("level"+StringUtil::toString(level), -1);
+}
+
 } /* namespace dxco */
