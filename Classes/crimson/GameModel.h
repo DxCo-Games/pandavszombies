@@ -26,7 +26,7 @@ class VoiceManager;
 
 class GameModel {
 public:
-	GameModel(HelloWorld* vista, Player* player, bool survival);
+	GameModel(HelloWorld* vista, Player* player, bool survival, int level = -1);
 	Player* player;
 	EnemyFactory* enemyFactory;
 	BonusFactory* bonusFactory;

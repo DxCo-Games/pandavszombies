@@ -22,7 +22,7 @@
 USING_NS_CC;
 
 
-CCScene* HelloWorld::scene(bool survivalMode)
+CCScene* HelloWorld::scene(bool survivalMode, int level)
 {
     // 'scene' is an autorelease object
     CCScene *scene = CCScene::create();
@@ -30,6 +30,7 @@ CCScene* HelloWorld::scene(bool survivalMode)
     // 'layer' is an autorelease object
     HelloWorld* layer = HelloWorld::create();
     layer->survivalMode = survivalMode;
+    layer->level = level;
 
     // add layer as a child to scene
     scene->addChild(layer);
@@ -118,7 +119,7 @@ void HelloWorld::realInit() {
 
 	    dxco::Player* player = this->createPlayer();
 
-	    model = new dxco::GameModel(this, player, this->survivalMode);
+	    model = new dxco::GameModel(this, player, this->survivalMode, this->level);
 
 	    this->createInterface();
 }

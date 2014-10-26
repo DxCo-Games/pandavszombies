@@ -66,8 +66,6 @@ bool LevelSelectionLayer::init() {
 	}
 
 	this->setTouchEnabled(true);
-
-
 	return true;
 }
 
@@ -77,8 +75,9 @@ void LevelSelectionLayer::ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEv
 	cocos2d::CCPoint location = touch->getLocationInView();
 	location = cocos2d::CCDirector::sharedDirector()->convertToGL(location);
 
-//	this->survivalButton->touch(location);
-//	this->storyButton->touch(location);
+	for (int i=0; i < this->buttons.size(); i++) {
+		this->buttons[i]->touch(location);
+	}
 }
 
 } /* namespace dxco */

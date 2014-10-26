@@ -2,6 +2,7 @@
 #include "../../dxco/SpriteUtil.h"
 #include "../../dxco/StringUtil.h"
 #include "../../dxco/DB.h"
+#include "../../HelloWorldScene.h"
 
 namespace dxco {
 
@@ -33,8 +34,10 @@ LevelButton::LevelButton(int number, float x, float y) {
 }
 
 void LevelButton::execute() {
-	//TODO call hello world in mode story with given level number
-	//only if available
+	if (this->enabled) {
+		cocos2d::CCDirector* pDirector = cocos2d::CCDirector::sharedDirector();
+		pDirector->runWithScene(HelloWorld::scene(false, this->number));
+	}
 }
 
 
