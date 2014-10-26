@@ -5,13 +5,13 @@
 "waves": [{
 	"total" : 10,
 	"freq" : 0.3,
-	"speed" : 30.0,
+	"level" : 1,
 	"isBoss" : 0
 	},
 	{
 	"total" : 2,
 	"freq" : 5,
-	"speed" : 30.0,
+	"level" : 1,
 	"isBoss" : 1}
 	]
 }
