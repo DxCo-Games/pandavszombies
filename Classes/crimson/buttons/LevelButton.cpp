@@ -40,7 +40,7 @@ LevelButton::LevelButton(int number, float x, float y) {
 void LevelButton::execute() {
 	if (this->enabled) {
 		cocos2d::CCDirector* pDirector = cocos2d::CCDirector::sharedDirector();
-		pDirector->runWithScene(HelloWorld::scene(false, this->number));
+		pDirector->replaceScene(HelloWorld::scene(false, this->number));
 	}
 }
 
