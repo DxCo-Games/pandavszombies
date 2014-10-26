@@ -85,6 +85,7 @@ private:
     void realInit();
     cocos2d::CCProgressTimer* lifeBar;
     cocos2d::CCSprite* backgroundLoading;
+    cocos2d::CCLayer* controlsLayer;
     int spriteSheetCargada;
 };
 

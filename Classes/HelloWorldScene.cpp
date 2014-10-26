@@ -239,20 +239,23 @@ dxco::Player* HelloWorld::createPlayer() {
 void HelloWorld::createInterface() {
 	CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
 
+	this->controlsLayer = cocos2d::CCLayer::create();
+	this->addChild(controlsLayer, 10);
+
 	//joysticks
 	CCSprite* joystickFondo2 = dxco::SpriteUtil::create("gameplay/JOYSTICK_base_blanco.png", visibleSize.width *  0.92 - 90, 25, 80, 80);
-	this->addChild(joystickFondo2, 10);
+	this->controlsLayer->addChild(joystickFondo2, 10);
 	joystickFondo2->setOpacity(128);
 
 	CCSprite* joystickBoton = dxco::SpriteUtil::create("gameplay/JOYSTICK_derecho.png", visibleSize.width * 0.92 - 90,  25, 80, 80);
-	this->addChild(joystickBoton, 12);
+	this->controlsLayer->addChild(joystickBoton, 12);
 
 	CCSprite* joystickFondo = dxco::SpriteUtil::create("gameplay/JOYSTICK_base_blanco.png", visibleSize.width *  0.05 + 10, 25, 80, 80);
-	this->addChild(joystickFondo, 12);
+	this->controlsLayer->addChild(joystickFondo, 12);
 	joystickFondo->setOpacity(128);
 
 	CCSprite* joystickBotonMovimiento = dxco::SpriteUtil::create("gameplay/JOYSTICK_izquierdo.png", visibleSize.width * 0.05 + 10, 25, 80, 80);
-	this->addChild(joystickBotonMovimiento, 12);
+	this->controlsLayer->addChild(joystickBotonMovimiento, 12);
 
 	dxco::Joystick* joystick = new dxco::JoystickMira(model, joystickBoton, 40);
 	this->joystickController.addJoystick(joystick);
@@ -271,8 +274,8 @@ void HelloWorld::createInterface() {
 	lifeBar->setMidpoint(ccp(0.16,0)); // the x coord tells the bar to put the 0% after the panda head
 	lifeBar->setBarChangeRate(ccp(1,0));
 	lifeBar->setPercentage(100);
-	this->addChild(lifeBack, 10);
-	this->addChild(lifeBar, 11);
+	this->controlsLayer->addChild(lifeBack, 10);
+	this->controlsLayer->addChild(lifeBar, 11);
 
 	//weapon bar
 	CCSprite* weaponBack = dxco::SpriteUtil::create("gameplay/BALAS_barra_fin.png", 5, 0.78 * visibleSize.height, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
@@ -290,9 +293,9 @@ void HelloWorld::createInterface() {
 	weaponIcon = dxco::SpriteUtil::create("bonus/PISTOLA.png", 5, 0.78 * visibleSize.height, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
 	weaponIcon->setPositionY(weaponBack->getPositionY());
 	dxco::SpriteUtil::leftAlign(lifeBack, weaponIcon);
-	this->addChild(weaponBack, 10);
-	this->addChild(weaponBar, 11);
-	this->addChild(weaponIcon, 11);
+	this->controlsLayer->addChild(weaponBack, 10);
+	this->controlsLayer->addChild(weaponBar, 11);
+	this->controlsLayer->addChild(weaponIcon, 11);
 
 	//bonus icons
 	bonus1 = dxco::SpriteUtil::create("bonus/BALAV_activada.png", 5, 0.78 * visibleSize.height, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
@@ -318,7 +321,7 @@ void HelloWorld::createInterface() {
 	//set the right margin equal to the left one
 	float sideMargin = lifeBack->getPositionX() - dxco::SpriteUtil::getWidth(lifeBack);
 	score->setPositionX(visibleSize.width - sideMargin - dxco::SpriteUtil::getWidth(score));
-	this->addChild(score, 10);
+	this->controlsLayer->addChild(score, 10);
 
 	//timer
 	CCSprite* timer;
@@ -335,35 +338,35 @@ void HelloWorld::createInterface() {
 	x0 = lifeBack->getPositionX() + dxco::SpriteUtil::getWidth(lifeBack) / 2;
 	xf = score->getPositionX() - dxco::SpriteUtil::getWidth(score) / 2;
 	timer->setPositionX(x0 + (xf - x0) / 2);
-	this->addChild(timer, 10);
+	this->controlsLayer->addChild(timer, 10);
 
 	this->timerLabel->setPositionX(timer->getPositionX() - 0.35 * dxco::SpriteUtil::getWidth(timer));
 	this->timerLabel->setPositionY(timer->getPositionY() + 0.22 * dxco::SpriteUtil::getHeight(timer));
-	this->addChild(timerLabel, 10);
+	this->controlsLayer->addChild(timerLabel, 10);
 
 	//zombie bar
 	CCSprite* zombie = dxco::SpriteUtil::create("gameplay/ZOMBIE_contador.png", 0, 0, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
 	dxco::SpriteUtil::copyScale(lifeBack, zombie);
 	zombie->setPositionY(weaponBack->getPositionY());
 	dxco::SpriteUtil::rightAlign(score, zombie);
-	this->addChild(zombie, 10);
+	this->controlsLayer->addChild(zombie, 10);
 
 	this->playerScoreLabel = dxco::LabelUtil::create("0", 14, 10, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::RIGHT, "fonts/KBStickToThePlan.ttf");
 	this->playerScoreLabel->setPositionX(score->getPositionX() + 0.32 * dxco::SpriteUtil::getWidth(score));
 	this->playerScoreLabel->setPositionY(this->timerLabel->getPositionY());
-	this->addChild(playerScoreLabel, 10);
+	this->controlsLayer->addChild(playerScoreLabel, 10);
 
 	this->killsLabel = dxco::LabelUtil::create("0", 14, visibleSize.width / 2, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::RIGHT, "fonts/KBStickToThePlan.ttf");
 	this->killsLabel->setPositionX(zombie->getPositionX() + 0.20 * dxco::SpriteUtil::getWidth(zombie));
 	this->killsLabel->setPositionY(zombie->getPositionY() + 0.22 * dxco::SpriteUtil::getHeight(zombie));
-	this->addChild(killsLabel, 10);
+	this->controlsLayer->addChild(killsLabel, 10);
 
 	this->killsChainLabel = CCLabelTTF::create("0 kills", "fonts/KBStickToThePlan.ttf", 18);
 	dxco::LabelUtil::setColor(this->killsChainLabel, dxco::LabelUtil::RED);
 	this->killsChainLabel->enableStroke(cocos2d::ccc3(220, 0, 0), 2, true);
 	this->killsChainLabel->setPositionX(timer->getPositionX());
 	this->killsChainLabel->setPositionY(zombie->getPositionY());
-	this->addChild(killsChainLabel, 10);
+	this->controlsLayer->addChild(killsChainLabel, 10);
 	this->killsChainLabel->setOpacity(0);
 
 	this->opacityLayer = CCLayerColor::create(ccc4(20, 20, 20, 200));
@@ -373,7 +376,7 @@ void HelloWorld::createInterface() {
 }
 
 void HelloWorld::hideControls() {
-
+	this->controlsLayer->setVisible(false);
 }
 
 void HelloWorld::ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent) {
