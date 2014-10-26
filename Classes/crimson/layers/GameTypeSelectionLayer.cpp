@@ -1,5 +1,4 @@
 #include "GameTypeSelectionLayer.h"
-
 #include "../../dxco/SpriteUtil.h"
 
 namespace dxco {
