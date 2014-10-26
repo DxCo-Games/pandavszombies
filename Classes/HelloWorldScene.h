@@ -8,6 +8,7 @@
 #include "dxco/Container.h"
 #include "dxco/Item.h"
 #include "crimson/layers/SurvivalLevelFinishedLayer.h"
+#include "dxco/AssetLoader.h"
 
 #include <string>
 
@@ -68,6 +69,7 @@ public:
     cocos2d::CCLayerColor* opacityLayer;
 
     dxco::SurvivalLevelFinishedLayer* levelFinishedLayer;
+    dxco::AssetLoader* assetLoader;
 private:
 
     void preloadTextures();

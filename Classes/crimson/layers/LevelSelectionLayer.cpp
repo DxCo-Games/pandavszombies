@@ -56,6 +56,7 @@ bool LevelSelectionLayer::init() {
 	float ymargin = (visibleSize.height - buttonHeight*2 - ypadding) / 2;
 
 	float y = ymargin + buttonHeight + ypadding;
+
 	for (int i=0; i < 10 ;i++) {
 		float x = xmargin + i * buttonWidth;
 		LevelButton *button = new LevelButton(20*this->page + i+1, x, y);

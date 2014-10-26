@@ -41,6 +41,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/dxco/MathUtil.cpp \
                    ../../Classes/dxco/TopDownItem.cpp \
                    ../../Classes/dxco/VoiceManager.cpp \
+                   ../../Classes/dxco/AssetLoader.cpp \
                    ../../Classes/dxco/SteeringBehaviorItem.cpp \
                    ../../Classes/crimson/JoystickMira.cpp \
                    ../../Classes/crimson/JoystickMovimiento.cpp \

@@ -26,7 +26,7 @@ CCScene* HelloWorld::scene(bool survivalMode, int level)
 {
     // 'scene' is an autorelease object
     CCScene *scene = CCScene::create();
-    
+
     // 'layer' is an autorelease object
     HelloWorld* layer = HelloWorld::create();
     layer->survivalMode = survivalMode;
@@ -48,7 +48,40 @@ bool HelloWorld::init()
     {
         return false;
     }
-    
+
+    this->assetLoader = new dxco::AssetLoader();
+
+	this->assetLoader->addAsset("sprite_sheets/basquet.plist");
+	this->assetLoader->addAsset("sprite_sheets/campesino.plist");
+	this->assetLoader->addAsset("sprite_sheets/cirujano.plist");
+	this->assetLoader->addAsset("sprite_sheets/cura.plist");
+	this->assetLoader->addAsset("sprite_sheets/elvis.plist");
+	this->assetLoader->addAsset("sprite_sheets/oficinista.plist");
+	this->assetLoader->addAsset("sprite_sheets/sangre.plist");
+	this->assetLoader->addAsset("sprite_sheets/panda1.plist");
+	this->assetLoader->addAsset("sprite_sheets/panda2.plist");
+	this->assetLoader->addAsset("sprite_sheets/panda3.plist");
+
+	// don«t add any music, only sound effects
+	this->assetLoader->addAsset("sounds/bazooka.ogg", true);
+	this->assetLoader->addAsset("sounds/bomb.ogg", true);
+	this->assetLoader->addAsset("sounds/bonus.ogg", true);
+	this->assetLoader->addAsset("sounds/cannon.ogg", true);
+	this->assetLoader->addAsset("sounds/flame2.ogg", true);
+	this->assetLoader->addAsset("sounds/gun1.ogg", true);
+	this->assetLoader->addAsset("sounds/loadgun.ogg", true);
+	this->assetLoader->addAsset("sounds/shotgun2.ogg", true);
+	this->assetLoader->addAsset("sounds/toasty.ogg", true);
+
+	this->assetLoader->addAsset("voices/cake.ogg", true);
+	this->assetLoader->addAsset("voices/dead.ogg", true);
+	this->assetLoader->addAsset("voices/friend.ogg", true);
+	this->assetLoader->addAsset("voices/groovy.ogg", true);
+	this->assetLoader->addAsset("voices/king.ogg", true);
+	this->assetLoader->addAsset("voices/rock.ogg", true);
+	this->assetLoader->addAsset("voices/talkin.ogg", true);
+
+
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
     this->loading = dxco::SpriteUtil::create("fondo_ciudad.jpg", 0, 0, visibleSize.width, visibleSize.height);
     this->addChild(loading);
@@ -76,8 +109,8 @@ bool HelloWorld::init()
     this->scheduleUpdate();
 
     this->juegoPausado = false;
-
     this->setKeypadEnabled(true);
+
     return true;
 }
 
@@ -125,71 +158,7 @@ void HelloWorld::realInit() {
 }
 
 void HelloWorld::preloadTextures() {
-	if (!this->preloaded) {
-		switch (spriteSheetCargada) {
-
-		case 0: {
-			dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/basquet.plist");
-			spriteSheetCargada++;
-			break;
-		}
-		case 1: {
-			dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/basquet.plist");
-			spriteSheetCargada++;
-			break;
-		}
-		case 2: {
-			dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/campesino.plist");
-			spriteSheetCargada++;
-			break;
-		}
-		case 3: {
-			dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/cirujano.plist");
-			spriteSheetCargada++;
-			break;
-		}
-		case 4: {
-			dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/cura.plist");
-			spriteSheetCargada++;
-			break;
-		}
-		case 5: {
-			dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/elvis.plist");
-			spriteSheetCargada++;
-			break;
-		}
-		case 6: {
-			dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/oficinista.plist");
-			spriteSheetCargada++;
-			break;
-		}
-		case 7: {
-			dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/sangre.plist");
-			spriteSheetCargada++;
-			break;
-		}
-		case 8: {
-			dxco::SpriteUtil::preloadTextureWithFile(
-					"sprite_sheets/panda1.plist");
-			spriteSheetCargada++;
-			break;
-		}
-		case 9: {
-			dxco::SpriteUtil::preloadTextureWithFile(
-					"sprite_sheets/panda2.plist");
-			spriteSheetCargada++;
-			break;
-		}
-		case 10: {
-			dxco::SpriteUtil::preloadTextureWithFile(
-					"sprite_sheets/panda3.plist");
-			spriteSheetCargada++;
-			break;
-		}
-		}
-
-	}
-
+	this->assetLoader->loadNext();
 }
 
 dxco::Player* HelloWorld::createPlayer() {
@@ -446,7 +415,7 @@ void HelloWorld::update(float dt) {
 		this->loadingItem->update(dt);
 		this->preloadTextures();
 
-		if (this->spriteSheetCargada > 10) {
+		if (!this->assetLoader->hasNext()) {
 			CocosDenshion::SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(0.5);
 			this->preloaded = true;
 			this->realInit();
