@@ -62,6 +62,25 @@ bool HelloWorld::init()
 	this->assetLoader->addAsset("sprite_sheets/panda2.plist");
 	this->assetLoader->addAsset("sprite_sheets/panda3.plist");
 
+	// don«t add any music, only sound effects
+	this->assetLoader->addAsset("sounds/bazooka.ogg", true);
+	this->assetLoader->addAsset("sounds/bomb.ogg", true);
+	this->assetLoader->addAsset("sounds/bonus.ogg", true);
+	this->assetLoader->addAsset("sounds/cannon.ogg", true);
+	this->assetLoader->addAsset("sounds/flame2.ogg", true);
+	this->assetLoader->addAsset("sounds/gun1.ogg", true);
+	this->assetLoader->addAsset("sounds/loadgun.ogg", true);
+	this->assetLoader->addAsset("sounds/shotgun2.ogg", true);
+	this->assetLoader->addAsset("sounds/toasty.ogg", true);
+
+	this->assetLoader->addAsset("voices/cake.ogg", true);
+	this->assetLoader->addAsset("voices/dead.ogg", true);
+	this->assetLoader->addAsset("voices/friend.ogg", true);
+	this->assetLoader->addAsset("voices/groovy.ogg", true);
+	this->assetLoader->addAsset("voices/king.ogg", true);
+	this->assetLoader->addAsset("voices/rock.ogg", true);
+	this->assetLoader->addAsset("voices/talkin.ogg", true);
+
 
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
     this->loading = dxco::SpriteUtil::create("fondo_ciudad.jpg", 0, 0, visibleSize.width, visibleSize.height);
