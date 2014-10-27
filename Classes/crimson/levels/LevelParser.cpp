@@ -1,5 +1,7 @@
 #include "LevelParser.h"
 #include "EnemyWave.h"
+#include "TimedLevel.h"
+#include "KillCountLevel.h"
 #include "../GameModel.h"
 #include "../../HelloWorldScene.h"
 
@@ -25,6 +27,16 @@ Level* LevelParser::parse(GameModel* model, std::string levelPath) {
 			resultado.push_back(new EnemyWave(model, total, freq, level, isBoss));
 	}
 
-	return new Level(model, resultado);
+	if ((*document)["config"].HasMember("kills")) {
+		int kills = (*document)["config"]["kills"].GetInt();
+		return new KillCountLevel(model, resultado, kills);
+	} else if((*document)["config"].HasMember("time")) {
+		int time = (*document)["config"]["time"].GetInt();
+		return new TimedLevel(model, resultado, time);
+	} else {
+		return new Level(model, resultado);
+	}
+
+
 }
 } /* namespace dxco */

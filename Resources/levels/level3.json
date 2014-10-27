@@ -1,17 +1,13 @@
 {
 "config": {
-	"background": 0
+	"background": 0,
+	"kills": 20
 },
 "waves": [{
-	"total" : 10,
+	"total" : 100,
 	"freq" : 0.3,
 	"level" : 1,
 	"isBoss" : 0
-	},
-	{
-	"total" : 2,
-	"freq" : 5,
-	"level" : 1,
-	"isBoss" : 1}
+	}
 	]
 }
