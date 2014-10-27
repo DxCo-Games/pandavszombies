@@ -67,6 +67,7 @@ GameModel::GameModel(HelloWorld* vista, Player* player, bool survival, int level
 
 	if (survival) {
 		this->level = new SurvivalLevel(this);
+		this->vista->setMap(rand() %2);
 	} else {
 		this->level = LevelParser::parse(this, "levels/level" + StringUtil::toString(level) +".json");
 	}

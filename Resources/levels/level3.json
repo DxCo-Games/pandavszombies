@@ -1,6 +1,6 @@
 {
 "config": {
-	"background": "ciudad"
+	"background": 0
 },
 "waves": [{
 	"total" : 10,

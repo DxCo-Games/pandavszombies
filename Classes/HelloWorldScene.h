@@ -61,6 +61,9 @@ public:
     bool juegoPausado;
     dxco::Item* loadingItem;
 
+    //0: city, 1: cemetery. cpp enums suck
+    void setMap(int map);
+
     //FIXME move sound stuff to a different class
     void playEffect(std::string effect);
     void stopMusic();
