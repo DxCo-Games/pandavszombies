@@ -2,7 +2,7 @@
 #include "GameProperties.h"
 #include "levels/Level.h"
 #include "levels/SurvivalLevel.h"
-#include "levels/EnemyWave.h"
+#include "levels/LevelParser.h"
 #include "../HelloWorldScene.h"
 #include "dxco/SpriteUtil.h"
 #include "dxco/StringUtil.h"
@@ -14,7 +14,6 @@
 #include "Player.h"
 #include "daos/UserDAO.h"
 #include <algorithm>
-#include "levels/LevelParser.h"
 #include "SimpleAudioEngine.h"
 
 namespace dxco {
@@ -69,8 +68,7 @@ GameModel::GameModel(HelloWorld* vista, Player* player, bool survival, int level
 	if (survival) {
 		this->level = new SurvivalLevel(this);
 	} else {
-		std::vector<EnemyWave*> waves = LevelParser::parse(this, "levels/level" + StringUtil::toString(level) +".json");
-		this->level = new Level(this, waves);
+		this->level = LevelParser::parse(this, "levels/level" + StringUtil::toString(level) +".json");
 	}
 
 

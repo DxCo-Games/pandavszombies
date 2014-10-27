@@ -1,16 +1,10 @@
-/*
- * LevelParser.cpp
- *
- *  Created on: Oct 9, 2014
- *      Author: gsosarolon
- */
-
 #include "LevelParser.h"
+#include "EnemyWave.h"
 #include "../GameModel.h"
 
 namespace dxco {
 
-std::vector<EnemyWave*> LevelParser::parse(GameModel* model, std::string levelPath) {
+Level* LevelParser::parse(GameModel* model, std::string levelPath) {
 
 	std::vector<EnemyWave*> resultado;
 	rapidjson::Document* document = JsonParser::parseJsonFile(levelPath);
@@ -28,6 +22,6 @@ std::vector<EnemyWave*> LevelParser::parse(GameModel* model, std::string levelPa
 			resultado.push_back(new EnemyWave(model, total, freq, level, isBoss));
 	}
 
-	return resultado;
+	return new Level(model, resultado);
 }
 } /* namespace dxco */
