@@ -397,7 +397,6 @@ void Weapon::createBullet(float x, float y, float rotation) {
 
 	float rotationAngle = angleState * -22.5;
 	float radianAngle = rotationAngle / -57.2957795;
-	CCLOG("angle state %i", angleState);
 
 	switch (angleState) {
 
