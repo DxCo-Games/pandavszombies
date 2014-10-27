@@ -372,21 +372,31 @@ void HelloWorld::createInterface() {
 	this->killsChainLabel->setOpacity(0);
 
 	//text messages
-	CCSprite* panel = dxco::SpriteUtil::create("gameplay/PLACA_texto.png", 0, 0, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
-	dxco::SpriteUtil::copyScale(lifeBack, panel);
-	panel->setPositionX(joystickBotonMovimiento->getPositionX() + (joystickBoton->getPositionX()-joystickBotonMovimiento->getPositionX())/2);
-	panel->setPositionY(joystickBoton->getPositionY());
-	this->controlsLayer->addChild(panel, 10);
-	CCLabelTTF* panelText = CCLabelTTF::create("This is a long enough text to go two lines", "fonts/KBStickToThePlan.ttf", 12, CCSize(160,0), kCCTextAlignmentCenter);
-	panelText->setColor(cocos2d::ccc3(255, 255, 255));
-	panelText->setPositionX(panel->getPositionX());
-	panelText->setPositionY(panel->getPositionY());
-	this->controlsLayer->addChild(panelText, 10);
+	this->panel = dxco::SpriteUtil::create("gameplay/PLACA_texto.png", 0, 0, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+	dxco::SpriteUtil::copyScale(lifeBack, this->panel);
+	this->panel->setPositionX(joystickBotonMovimiento->getPositionX() + (joystickBoton->getPositionX()-joystickBotonMovimiento->getPositionX())/2);
+	this->panel->setPositionY(joystickBoton->getPositionY());
+	this->controlsLayer->addChild(this->panel, 10);
+	this->panelText = CCLabelTTF::create("", "fonts/KBStickToThePlan.ttf", 12, CCSize(160,0), kCCTextAlignmentCenter);
+	this->panelText->setColor(cocos2d::ccc3(255, 255, 255));
+	this->panelText->setPositionX(this->panel->getPositionX());
+	this->panelText->setPositionY(this->panel->getPositionY());
+	this->controlsLayer->addChild(this->panelText, 10);
+	this->panel->setOpacity(0);
+	this->panelText->setOpacity(0);
 
 	this->opacityLayer = CCLayerColor::create(ccc4(20, 20, 20, 200));
 	this->addChild(this->opacityLayer, 4);
 
 	this->opacityLayer->setVisible(false);
+}
+
+void HelloWorld::message(std::string text, int seconds) {
+	this->panelText->setString(text.c_str());
+	CCSequence *seq = CCSequence::create(CCFadeIn::create(0.25), CCDelayTime::create(seconds),
+			CCFadeOut::create(0.25), NULL);
+	this->panel->runAction((CCSequence *)seq->copy());
+	this->panelText->runAction(seq);
 }
 
 void HelloWorld::hideControls() {
