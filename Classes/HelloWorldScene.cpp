@@ -371,6 +371,18 @@ void HelloWorld::createInterface() {
 	this->controlsLayer->addChild(killsChainLabel, 10);
 	this->killsChainLabel->setOpacity(0);
 
+	//text messages
+	CCSprite* panel = dxco::SpriteUtil::create("gameplay/PLACA_texto.png", 0, 0, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+	dxco::SpriteUtil::copyScale(lifeBack, panel);
+	panel->setPositionX(joystickBotonMovimiento->getPositionX() + (joystickBoton->getPositionX()-joystickBotonMovimiento->getPositionX())/2);
+	panel->setPositionY(joystickBoton->getPositionY());
+	this->controlsLayer->addChild(panel, 10);
+	CCLabelTTF* panelText = CCLabelTTF::create("This is a long enough text to go two lines", "fonts/KBStickToThePlan.ttf", 12, CCSize(160,0), kCCTextAlignmentCenter);
+	panelText->setColor(cocos2d::ccc3(255, 255, 255));
+	panelText->setPositionX(panel->getPositionX());
+	panelText->setPositionY(panel->getPositionY());
+	this->controlsLayer->addChild(panelText, 10);
+
 	this->opacityLayer = CCLayerColor::create(ccc4(20, 20, 20, 200));
 	this->addChild(this->opacityLayer, 4);
 
