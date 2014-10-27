@@ -68,6 +68,8 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/crimson/bonus/PuntosBonus.cpp \
                    ../../Classes/crimson/bonus/ShieldBonus.cpp \
                    ../../Classes/crimson/levels/Level.cpp \
+                   ../../Classes/crimson/levels/TimedLevel.cpp \
+                   ../../Classes/crimson/levels/KillCountLevel.cpp \
                    ../../Classes/crimson/levels/SurvivalLevel.cpp \
                    ../../Classes/crimson/levels/EnemyWave.cpp \
                    ../../Classes/crimson/levels/LevelParser.cpp \
