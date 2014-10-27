@@ -397,6 +397,7 @@ void Weapon::createBullet(float x, float y, float rotation) {
 
 	float rotationAngle = angleState * -22.5;
 	float radianAngle = rotationAngle / -57.2957795;
+	CCLOG("angle state %i", angleState);
 
 	switch (angleState) {
 
@@ -408,13 +409,13 @@ void Weapon::createBullet(float x, float y, float rotation) {
 	}
 	case 1: {
 		xBulletPosition = screenCenterX + 57 + cos(radianAngle) * playerWidth;
-		yBulletPosition = screenCenterY + 17 + sin(radianAngle) * playerHeight;
+		yBulletPosition = screenCenterY + 19 + sin(radianAngle) * playerHeight;
 		angleBullet = -8;
 		break;
 	}
 	case 2: {
 		xBulletPosition = screenCenterX + 70 + cos(radianAngle) * playerWidth;
-		yBulletPosition = screenCenterY + 10 + sin(radianAngle) * playerHeight;
+		yBulletPosition = screenCenterY + 11 + sin(radianAngle) * playerHeight;
 		angleBullet = -17;
 		break;
 	}
@@ -437,15 +438,15 @@ void Weapon::createBullet(float x, float y, float rotation) {
 		break;
 	}
 	case 6: {
-		xBulletPosition = screenCenterX + 40 + cos(radianAngle) * playerWidth;
+		xBulletPosition = screenCenterX + 50 + cos(radianAngle) * playerWidth;
 		yBulletPosition = screenCenterY + 25 + sin(radianAngle) * playerHeight;
 		angleBullet = -150;
 		break;
 	}
 	case 7: {
 		xBulletPosition = screenCenterX + 50 + cos(radianAngle) * playerWidth;
-		yBulletPosition = screenCenterY + 26 + sin(radianAngle) * playerHeight;
-		angleBullet = -173;
+		yBulletPosition = screenCenterY + 28 + sin(radianAngle) * playerHeight;
+		angleBullet = -171;
 		break;
 	}
 	case 8: {
@@ -456,20 +457,20 @@ void Weapon::createBullet(float x, float y, float rotation) {
 	}
 	case 9: {
 		xBulletPosition = screenCenterX + 35 + cos(radianAngle) * playerWidth;
-		yBulletPosition = screenCenterY + 45 + sin(radianAngle) * playerHeight;
-		angleBullet = -188;
+		yBulletPosition = screenCenterY + 47 + sin(radianAngle) * playerHeight;
+		angleBullet = -186;
 		break;
 	}
 	case 10: {
 		xBulletPosition = screenCenterX + 30 + cos(radianAngle) * playerWidth;
-		yBulletPosition = screenCenterY + 50 + sin(radianAngle) * playerHeight;
+		yBulletPosition = screenCenterY + 54 + sin(radianAngle) * playerHeight;
 		angleBullet = -193;
 		break;
 	}
 	case 11: {
-		xBulletPosition = screenCenterX + 30 + cos(radianAngle) * playerWidth;
+		xBulletPosition = screenCenterX + 32 + cos(radianAngle) * playerWidth;
 		yBulletPosition = screenCenterY + 55 + sin(radianAngle) * playerHeight;
-		angleBullet = -216;
+		angleBullet = -214;
 		break;
 	}
 	case 12: {
@@ -480,20 +481,20 @@ void Weapon::createBullet(float x, float y, float rotation) {
 	}
 	case 13: {
 		xBulletPosition = screenCenterX + 40 + cos(radianAngle) * playerWidth;
-		yBulletPosition = screenCenterY + 59 + sin(radianAngle) * playerHeight;
+		yBulletPosition = screenCenterY + 60 + sin(radianAngle) * playerHeight;
 		angleBullet = -316;
 		break;
 	}
 	case 14: {
 		xBulletPosition = screenCenterX + 37 + cos(radianAngle) * playerWidth;
-		yBulletPosition = screenCenterY + 51 + sin(radianAngle) * playerHeight;
-		angleBullet = -340;
+		yBulletPosition = screenCenterY + 54 + sin(radianAngle) * playerHeight;
+		angleBullet = -343;
 		break;
 	}
 
 	case 15: {
 		xBulletPosition = screenCenterX + 40 + cos(radianAngle) * playerWidth;
-		yBulletPosition = screenCenterY + 40 + sin(radianAngle) * playerHeight;
+		yBulletPosition = screenCenterY + 42 + sin(radianAngle) * playerHeight;
 		angleBullet = -355;
 		break;
 	}
@@ -504,7 +505,9 @@ void Weapon::createBullet(float x, float y, float rotation) {
 
 void Weapon::createBulletSprite(float xBulletPosition, float yBulletPosition, float angleBullet, float rotation) {
 	//need to tweak the coordinates as the location of the panda is not exactly its center.
-	cocos2d::CCSprite* spriteBullet = SpriteUtil::create("bullet.png", xBulletPosition - 2.5 - 20, yBulletPosition - 2.5 - 20, 7, 7);
+	cocos2d::CCPoint origin =
+					cocos2d::CCDirector::sharedDirector()->getVisibleOrigin();
+	cocos2d::CCSprite* spriteBullet = SpriteUtil::create("bullet.png", xBulletPosition - 2.5 - 20 - origin.x, yBulletPosition - 2.5 - origin.y, 7, 7);
 
 
 	/** degrees to radians */

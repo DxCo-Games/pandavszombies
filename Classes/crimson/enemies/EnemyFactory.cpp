@@ -16,7 +16,6 @@ EnemyFactory::EnemyFactory(){
 }
 
 void EnemyFactory::createEnemy(GameModel* model) {
-
 	//random sprite type
 	std::string type = "cura";
 
@@ -49,6 +48,7 @@ void EnemyFactory::createEnemy(GameModel* model) {
 }
 
 void EnemyFactory::createBoss(GameModel* model) {
+
 	int enemyLevel = model->prop->get("enemy.level");
 	std::map<int, dxco::Animation*> animations = loadAnimations(model, "elvis", Enemy::getSpeed(enemyLevel));
 
