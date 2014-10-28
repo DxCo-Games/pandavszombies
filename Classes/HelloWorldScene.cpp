@@ -122,20 +122,6 @@ void HelloWorld::realInit() {
 	    this->clouds = new dxco::Container(mapCornerX, mapCornerY, mapWidth, mapHeight);
 	    this->addChild(this->clouds, 4);
 
-	    if(random() % 2) { //TODO select background
-			CCSprite* pSprite = dxco::SpriteUtil::create("ciudad_fondo.png", -mapWidth/4, -mapHeight * 0.2, mapWidth*1.5, mapHeight*1.4);
-			this->mapa->addChild(pSprite, -10);
-			CCSprite* tanque = dxco::SpriteUtil::create("ciudad_tanque.png", -mapWidth/4, -mapHeight  * 0.2, mapWidth*1.5, mapHeight*1.4);
-			this->clouds->addChild(tanque);
-			CCSprite* rejas = dxco::SpriteUtil::create("ciudad_rejas.png", -mapWidth/4, -mapHeight  * 0.2, mapWidth*1.5, mapHeight*1.4);
-			this->clouds->addChild(rejas);
-	    } else {
-			CCSprite* pSprite = dxco::SpriteUtil::create("campo004_fondo.jpg", -mapWidth/4, -mapHeight * 0.2, mapWidth*1.5, mapHeight*1.4);
-			this->mapa->addChild(pSprite, -10);
-			CCSprite* tanque = dxco::SpriteUtil::create("campo004_rejas.png", -mapWidth/4, -mapHeight  * 0.2, mapWidth*1.5, mapHeight*1.4);
-			this->clouds->addChild(tanque);
-	    }
-
 		this->bubble = dxco::SpriteUtil::create("bubble.png", 0, 0, 93, 93);
 		this->bubble->setVisible(false);
 		this->bubble->setOpacity(128);
@@ -149,16 +135,33 @@ void HelloWorld::realInit() {
 
 	    dxco::Player* player = this->createPlayer();
 
-	    model = new dxco::GameModel(this, player, this->survivalMode, this->level);
-
 	    this->levelFinishedLayer = new dxco::LevelFinishedLayer(0, 0, visibleSize.width, visibleSize.height, this->survivalMode, this->level);
 	    this->addChild(levelFinishedLayer, 50);
 
+	    model = new dxco::GameModel(this, player);
 	    this->createInterface();
+
+	    model->loadLevel(this->survivalMode, this->level);
 }
 
 void HelloWorld::preloadTextures() {
 	this->assetLoader->loadNext();
+}
+
+void HelloWorld::setMap(int map) {
+	if(map == 0) {
+		CCSprite* pSprite = dxco::SpriteUtil::create("ciudad_fondo.png", -MAP_WIDTH/4, -MAP_HEIGHT * 0.2, MAP_WIDTH*1.5, MAP_HEIGHT*1.4);
+		this->mapa->addChild(pSprite, -10);
+		CCSprite* tanque = dxco::SpriteUtil::create("ciudad_tanque.png", -MAP_WIDTH/4, -MAP_HEIGHT  * 0.2, MAP_WIDTH*1.5, MAP_HEIGHT*1.4);
+		this->clouds->addChild(tanque);
+		CCSprite* rejas = dxco::SpriteUtil::create("ciudad_rejas.png", -MAP_WIDTH/4, -MAP_HEIGHT  * 0.2, MAP_WIDTH*1.5, MAP_HEIGHT*1.4);
+		this->clouds->addChild(rejas);
+	} else {
+		CCSprite* pSprite = dxco::SpriteUtil::create("campo004_fondo.jpg", -MAP_WIDTH/4, -MAP_HEIGHT * 0.2, MAP_WIDTH*1.5, MAP_HEIGHT*1.4);
+		this->mapa->addChild(pSprite, -10);
+		CCSprite* tanque = dxco::SpriteUtil::create("campo004_rejas.png", -MAP_WIDTH/4, -MAP_HEIGHT  * 0.2, MAP_WIDTH*1.5, MAP_HEIGHT*1.4);
+		this->clouds->addChild(tanque);
+	}
 }
 
 dxco::Player* HelloWorld::createPlayer() {
@@ -369,10 +372,32 @@ void HelloWorld::createInterface() {
 	this->controlsLayer->addChild(killsChainLabel, 10);
 	this->killsChainLabel->setOpacity(0);
 
+	//text messages
+	this->panel = dxco::SpriteUtil::create("gameplay/PLACA_texto.png", 0, 0, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+	dxco::SpriteUtil::copyScale(lifeBack, this->panel);
+	this->panel->setPositionX(joystickBotonMovimiento->getPositionX() + (joystickBoton->getPositionX()-joystickBotonMovimiento->getPositionX())/2);
+	this->panel->setPositionY(joystickBoton->getPositionY());
+	this->controlsLayer->addChild(this->panel, 10);
+	this->panelText = CCLabelTTF::create("", "fonts/KBStickToThePlan.ttf", 12, CCSize(160,0), kCCTextAlignmentCenter);
+	this->panelText->setColor(cocos2d::ccc3(255, 255, 255));
+	this->panelText->setPositionX(this->panel->getPositionX());
+	this->panelText->setPositionY(this->panel->getPositionY());
+	this->controlsLayer->addChild(this->panelText, 10);
+	this->panel->setOpacity(0);
+	this->panelText->setOpacity(0);
+
 	this->opacityLayer = CCLayerColor::create(ccc4(20, 20, 20, 200));
 	this->addChild(this->opacityLayer, 4);
 
 	this->opacityLayer->setVisible(false);
+}
+
+void HelloWorld::message(std::string text, int seconds) {
+	this->panelText->setString(text.c_str());
+	CCSequence *seq = CCSequence::create(CCFadeIn::create(0.25), CCDelayTime::create(seconds),
+			CCFadeOut::create(0.25), NULL);
+	this->panel->runAction((CCSequence *)seq->copy());
+	this->panelText->runAction(seq);
 }
 
 void HelloWorld::hideControls() {
