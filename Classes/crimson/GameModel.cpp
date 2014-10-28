@@ -55,8 +55,7 @@ public:
     }
 };
 
-GameModel::GameModel(HelloWorld* vista, Player* player, bool survival, int level) {
-	this->levelNumber = level;
+GameModel::GameModel(HelloWorld* vista, Player* player) {
 	this->prop = new GameProperties();
 	//not very nice
 	this->player = player;
@@ -64,14 +63,6 @@ GameModel::GameModel(HelloWorld* vista, Player* player, bool survival, int level
 	player->life = this->prop->get("player.life");
 	this->vista = vista;
 	this->mapa = vista->mapa;
-
-	if (survival) {
-		this->level = new SurvivalLevel(this);
-		this->vista->setMap(rand() %2);
-	} else {
-		this->level = LevelParser::parse(this, "levels/level" + StringUtil::toString(level) +".json");
-	}
-
 
 	this->player->setWeapon(Player::PISTOL);
 	this->bonusFactory = new BonusFactory();
@@ -86,6 +77,16 @@ GameModel::GameModel(HelloWorld* vista, Player* player, bool survival, int level
 
 	//batch node added to map
 	this->enemyFactory = new EnemyFactory();
+}
+
+void GameModel::loadLevel(bool survival, int level) {
+	this->levelNumber = level;
+	if (survival) {
+		this->level = new SurvivalLevel(this);
+		this->vista->setMap(rand() %2);
+	} else {
+		this->level = LevelParser::parse(this, "levels/level" + StringUtil::toString(level) +".json");
+	}
 }
 
 void GameModel::addBullet(Bullet* bullet) {

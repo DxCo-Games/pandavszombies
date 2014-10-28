@@ -107,8 +107,17 @@ void UserDAO::deleteAllScores() {
 
 void UserDAO::finishLevel(int level, int stars) {
 	//save stars and unlock next
-	DB::putInteger("level"+StringUtil::toString(level), stars);
-	DB::putInteger("level"+StringUtil::toString(level+1), 0);
+	std::string current = "level"+StringUtil::toString(level);
+	int previousStars = DB::getInteger(current, -1);
+	if (stars > previousStars) {
+		//update only if mark improved
+		DB::putInteger(current, stars);
+	}
+	std::string next = "level"+StringUtil::toString(level+1);
+	if (DB::getInteger(next, -1) == -1) {
+		//unlock only if locked
+		DB::putInteger(next, 0);
+	}
 }
 
 bool UserDAO::levelEnabled(int level) {

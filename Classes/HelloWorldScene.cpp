@@ -138,9 +138,10 @@ void HelloWorld::realInit() {
 
 	    dxco::Player* player = this->createPlayer();
 
-	    model = new dxco::GameModel(this, player, this->survivalMode, this->level);
-
+	    model = new dxco::GameModel(this, player);
 	    this->createInterface();
+
+	    model->loadLevel(this->survivalMode, this->level);
 }
 
 void HelloWorld::preloadTextures() {
