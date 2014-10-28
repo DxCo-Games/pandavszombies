@@ -7,7 +7,7 @@
 #include "crimson/Mapa.h"
 #include "dxco/Container.h"
 #include "dxco/Item.h"
-#include "crimson/layers/SurvivalLevelFinishedLayer.h"
+#include "crimson/layers/LevelFinishedLayer.h"
 #include "dxco/AssetLoader.h"
 
 #include <string>
@@ -68,7 +68,7 @@ public:
 
     cocos2d::CCLayerColor* opacityLayer;
 
-    dxco::SurvivalLevelFinishedLayer* levelFinishedLayer;
+    dxco::LevelFinishedLayer* levelFinishedLayer;
     dxco::AssetLoader* assetLoader;
 
     void hideControls();

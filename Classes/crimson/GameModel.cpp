@@ -151,7 +151,7 @@ void GameModel::update(float dt) {
 
 	if (!this->player->isActive()){
 		this->vista->hideControls();
-		this->vista->levelFinishedLayer->show(this->player->score, this->kills, this->player->score / COIN_VALUE);
+		this->vista->levelFinishedLayer->show(this->player->score, this->kills, this->player->score / COIN_VALUE, 0);
 		this->vista->juegoPausado = true; // TODO: Improve
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
 
@@ -159,7 +159,7 @@ void GameModel::update(float dt) {
 	} else if (this->level->isFinished()) {
 		//FIXME mostrar level finished en vez de game over. Permitir pasar al proximo nivel
 		this->vista->hideControls();
-		this->vista->levelFinishedLayer->show(this->player->score, this->kills, this->player->score / COIN_VALUE);
+		this->vista->levelFinishedLayer->show(this->player->score, this->kills, this->player->score / COIN_VALUE, 3);
 		this->vista->juegoPausado = true; // TODO: Improve
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
 
