@@ -68,7 +68,6 @@ void EnemyFactory::addEnemy(GameModel* model, Enemy* enemy) {
 
 std::map<int, dxco::Animation*> EnemyFactory::loadAnimations(GameModel* model, std::string type, float speed) {
 	float speedFactor = speed / Enemy::getSpeed(1);
-//	float frameTime = ENEMY_DEFAULT_SPEED / (1000 * speedFactor);
 	float frameTime = 30 / (1000 * speedFactor);
 
 	std::map<int, dxco::Animation*> animations;

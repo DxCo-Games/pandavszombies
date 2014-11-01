@@ -12,7 +12,10 @@
 namespace dxco {
 
 float Enemy::getSpeed(int level) {
-	return 20 + 5* level;
+	if (level > 10) {
+		level = 10;
+	}
+	return 23 + 2* level;
 }
 
 Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations, int level) :
