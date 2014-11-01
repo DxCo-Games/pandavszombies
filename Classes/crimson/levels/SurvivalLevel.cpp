@@ -2,6 +2,8 @@
 #include "../enemies/Enemy.h"
 #include "../GameModel.h"
 #include "../GameProperties.h"
+#include "../../HelloWorldScene.h"
+#include "../../dxco/StringUtil.h"
 
 namespace dxco {
 
@@ -32,6 +34,14 @@ void SurvivalLevel::update(float dt) {
 		this->model->prop->set("enemy.level",  enemyLevel + 1);
 		this->enemyLevelDt = 0;
 	}
+
+	this->updateInterface();
+}
+
+void SurvivalLevel::updateInterface() {
+	std::string playerKillsText = StringUtil::intToKString(this->model->kills);
+	this->model->vista->killsLabel->setString(playerKillsText.c_str());
+	this->model->vista->setTimerLabel(this->model->timer);
 }
 
 void SurvivalLevel::restartLevel() {

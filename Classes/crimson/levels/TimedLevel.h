@@ -13,6 +13,7 @@ public:
 	virtual bool isFinished();
 	virtual void update(float dt);
 	virtual void restartLevel();
+	virtual void updateInterface();
 
 	float dt;
 	int seconds;

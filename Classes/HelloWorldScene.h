@@ -47,10 +47,12 @@ public:
 
     void updateBonus(std::string texture, float duration);
     void updateLabels();
+    void setTimerLabel(int totalSeconds);
     void updateChainedKills();
 
     cocos2d::CCLabelTTF* playerScoreLabel;
     cocos2d::CCLabelTTF* timerLabel;
+    cocos2d::CCSprite* timer;
     cocos2d::CCLabelTTF* killsLabel;
     cocos2d::CCLabelTTF* killsChainLabel;
     bool survivalMode;

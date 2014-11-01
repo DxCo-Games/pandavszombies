@@ -16,10 +16,13 @@ public:
 	virtual void update(float dt);
 	virtual void restartLevel();
 
+	virtual void updateInterface();
+
 	//TODO add background creation to this?
 	GameModel* model;
 	std::vector<EnemyWave*> waves;
 	int currentWave;
+	int totalEnemies;
 };
 
 } /* namespace dxco */

@@ -327,24 +327,24 @@ void HelloWorld::createInterface() {
 	this->controlsLayer->addChild(score, 10);
 
 	//timer
-	CCSprite* timer;
+	this->timer;
 	if (this->survivalMode) {
-		timer = dxco::SpriteUtil::create("gameplay/TIMER.png", visibleSize.width / 2, 0, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+		this->timer = dxco::SpriteUtil::create("gameplay/TIMER.png", visibleSize.width / 2, 0, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
 		this->timerLabel = dxco::LabelUtil::create("00:00", 14, visibleSize.width / 2, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT, "fonts/KBStickToThePlan.ttf");
 	} else {
-		timer = dxco::SpriteUtil::create("gameplay/LEVEL.png", visibleSize.width / 2, 0, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+		this->timer = dxco::SpriteUtil::create("gameplay/LEVEL.png", visibleSize.width / 2, 0, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
 		this->timerLabel = dxco::LabelUtil::create("LEVEL " + dxco::StringUtil::toString(this->level), 14, visibleSize.width / 2, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT, "fonts/KBStickToThePlan.ttf");
 	}
-	dxco::SpriteUtil::copyScale(lifeBack, timer);
-	timer->setPositionY(lifeBack->getPositionY());
+	dxco::SpriteUtil::copyScale(lifeBack, this->timer);
+	this->timer->setPositionY(lifeBack->getPositionY());
 	//put timer in between score and life
 	x0 = lifeBack->getPositionX() + dxco::SpriteUtil::getWidth(lifeBack) / 2;
 	xf = score->getPositionX() - dxco::SpriteUtil::getWidth(score) / 2;
-	timer->setPositionX(x0 + (xf - x0) / 2);
-	this->controlsLayer->addChild(timer, 10);
+	this->timer->setPositionX(x0 + (xf - x0) / 2);
+	this->controlsLayer->addChild(this->timer, 10);
 
-	this->timerLabel->setPositionX(timer->getPositionX() - 0.35 * dxco::SpriteUtil::getWidth(timer));
-	this->timerLabel->setPositionY(timer->getPositionY() + 0.22 * dxco::SpriteUtil::getHeight(timer));
+	this->timerLabel->setPositionX(this->timer->getPositionX() - 0.35 * dxco::SpriteUtil::getWidth(this->timer));
+	this->timerLabel->setPositionY(this->timer->getPositionY() + 0.22 * dxco::SpriteUtil::getHeight(this->timer));
 	this->controlsLayer->addChild(timerLabel, 10);
 
 	//zombie bar
@@ -494,24 +494,21 @@ void HelloWorld::stopMusic() {
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
 }
 
+void HelloWorld::setTimerLabel(int totalSeconds) {
+	int minutes = ceil(totalSeconds / 60);
+	int seconds = totalSeconds % 60;
+
+	std::string stringMinutes =  dxco::StringUtil::padLeft(minutes, 2);
+	std::string stringSeconds = dxco::StringUtil::padLeft(seconds, 2);
+	std::string timerText = stringMinutes + ":" + stringSeconds;
+	this->timerLabel->setString(timerText.c_str());
+}
 
 void HelloWorld::updateLabels() {
-	if (this->survivalMode) {
-		int totalTime = this->model->timer;
-		int minutes = ceil(totalTime / 60);
-		int seconds = totalTime % 60;
-
-		std::string stringMinutes =  dxco::StringUtil::padLeft(minutes, 2);
-		std::string stringSeconds = dxco::StringUtil::padLeft(seconds, 2);
-		std::string timerText = stringMinutes + ":" + stringSeconds;
-		this->timerLabel->setString(timerText.c_str());
-	}
-
+	//WARNING the level specific labels are set in Level::updateInterface
 	std::string playerScoreText = dxco::StringUtil::toString(this->model->player->score);
 	this->playerScoreLabel->setString(playerScoreText.c_str());
 
-	std::string playerKillsText = dxco::StringUtil::toString(this->model->kills);
-	this->killsLabel->setString(playerKillsText.c_str());
 	float playerLife = this->model->prop->get("player.life");
 	this->lifeBar->setPercentage(this->model->player->life * 100 / playerLife);
 }

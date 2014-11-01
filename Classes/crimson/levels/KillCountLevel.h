@@ -11,6 +11,7 @@ public:
 	KillCountLevel(GameModel *model, std::vector<EnemyWave*>& waves, int kills);
 
 	virtual bool isFinished();
+	virtual void updateInterface();
 
 	int kills;
 };

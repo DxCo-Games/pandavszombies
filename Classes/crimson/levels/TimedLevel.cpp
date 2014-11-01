@@ -1,5 +1,6 @@
 #include "TimedLevel.h"
 #include "../../dxco/StringUtil.h"
+#include "../../dxco/SpriteUtil.h"
 #include "../../HelloWorldScene.h"
 
 namespace dxco {
@@ -10,10 +11,19 @@ TimedLevel::TimedLevel(GameModel *model, std::vector<EnemyWave*>& waves, int sec
 
 	std::string msg = "Survive for "+ StringUtil::toString(seconds) +" seconds to win.";
 	model->vista->message(msg);
+
+	//fix timer sprite
+	SpriteUtil::setTexture(model->vista->timer, "gameplay/TIMER.png");
 }
 
 bool TimedLevel::isFinished() {
 	return this->dt >= this->seconds;
+}
+
+void TimedLevel::updateInterface() {
+	std::string playerKillsText = StringUtil::intToKString(this->model->kills);
+	this->model->vista->killsLabel->setString(playerKillsText.c_str());
+	this->model->vista->setTimerLabel(this->seconds - this->dt);
 }
 
 void TimedLevel::update(float dt) {

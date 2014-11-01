@@ -1,14 +1,20 @@
 #include "Level.h"
 #include "EnemyWave.h"
 #include "../GameModel.h"
+#include "../../HelloWorldScene.h"
+#include "../../dxco/StringUtil.h"
 
 namespace dxco {
 
 Level::Level(GameModel *model, std::vector<EnemyWave*>& waves) {
-	// TODO Auto-generated constructor stub
 	this->waves = waves;
 	this->model = model;
 	this->currentWave = 0;
+
+	this->totalEnemies = 0;
+	for (int i=0; i < waves.size(); i++) {
+		this->totalEnemies += waves[i]->total;
+	}
 }
 
 void Level::update(float dt) {
@@ -20,6 +26,7 @@ void Level::update(float dt) {
 		this->currentWave +=1;
 		this->waves[this->currentWave]->reset();
 	}
+	this->updateInterface();
 }
 
 bool Level::isFinished() {
@@ -33,8 +40,14 @@ bool Level::isFinished() {
 }
 
 void Level::restartLevel() {
-	this->currentWave =0;
+	this->currentWave = 0;
 	this->waves[this->currentWave]->reset();
+}
+
+void Level::updateInterface() {
+	std::string playerKillsText = StringUtil::intToKString(this->model->kills) + "/" +
+			StringUtil::intToKString(this->totalEnemies);
+	this->model->vista->killsLabel->setString(playerKillsText.c_str());
 }
 
 } /* namespace dxco */

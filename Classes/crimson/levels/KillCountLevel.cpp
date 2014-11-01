@@ -16,4 +16,10 @@ bool KillCountLevel::isFinished() {
 	return this->model->kills >= this->kills;
 }
 
+void KillCountLevel::updateInterface() {
+	std::string playerKillsText = StringUtil::intToKString(this->model->kills) + "/" +
+			StringUtil::intToKString(this->kills);
+	this->model->vista->killsLabel->setString(playerKillsText.c_str());
+}
+
 } /* namespace dxco */

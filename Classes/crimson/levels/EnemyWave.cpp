@@ -16,7 +16,7 @@ EnemyWave::EnemyWave(GameModel *model, int total, float freq, int level, std::ve
 }
 
 bool EnemyWave::isFinished() {
-	//TODO returns true if all the enemies of this wave have been created
+	//returns true if all the enemies of this wave have been created
 	return this->count == this->total;
 }
 void EnemyWave::update(float dt) {
