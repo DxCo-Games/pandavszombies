@@ -452,6 +452,7 @@ void HelloWorld::update(float dt) {
 			this->preloaded = true;
 			this->realInit();
 			this->playMusic();
+			this->model->timer = 0;
 		}
 	}
 }
