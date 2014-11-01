@@ -24,7 +24,13 @@ Level* LevelParser::parse(GameModel* model, std::string levelPath) {
 			int isBoss = waveConfig["isBoss"].GetInt();
 
 			CCLOG("Wave leida %i %f %i %i", total, freq, level, isBoss);
-			resultado.push_back(new EnemyWave(model, total, freq, level, isBoss));
+			std::vector<std::string> vec;
+			if (waveConfig.HasMember("types")) {
+				for (rapidjson::SizeType j = 0; j < waveConfig["types"].Size(); j++) {
+					vec.push_back( waveConfig["types"][j].GetString());
+				}
+			}
+			resultado.push_back(new EnemyWave(model, total, freq, level, vec, isBoss));
 	}
 
 	if ((*document)["config"].HasMember("kills")) {

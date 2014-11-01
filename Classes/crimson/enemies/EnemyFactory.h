@@ -14,6 +14,7 @@ class EnemyFactory {
 public:
 	EnemyFactory();
 
+	void createEnemy(GameModel* model, std::vector<std::string> types);
 	void createEnemy(GameModel* model);
 	void createBoss(GameModel* model);
 

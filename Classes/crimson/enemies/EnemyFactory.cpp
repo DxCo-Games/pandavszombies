@@ -16,16 +16,18 @@ EnemyFactory::EnemyFactory(){
 }
 
 void EnemyFactory::createEnemy(GameModel* model) {
-	//random sprite type
-	std::string type = "cura";
+	std::vector<std::string> vec;
+	vec.push_back("campesino");
+	vec.push_back("oficinista");
+	vec.push_back("basquet");
+	vec.push_back("cirujano");
+	vec.push_back("cura");
+	this->createEnemy(model, vec);
+}
 
-	switch(rand() % 5) {
-	case 0: type = "campesino"; break;
-	case 1: type = "oficinista"; break;
-	case 2: type = "basquet"; break;
-	case 3: type = "cirujano"; break;
-	case 4: type = "cura"; break;
-	}
+void EnemyFactory::createEnemy(GameModel* model, std::vector<std::string>types) {
+	//random sprite type
+	std::string type = types[rand() % types.size()];
 
 	int delta = (rand() % 10);
 	int enemyLevel = model->prop->get("enemy.level");
@@ -39,7 +41,7 @@ void EnemyFactory::createEnemy(GameModel* model) {
 	cocos2d::CCSprite* enemySprite = createSpriteInRandomPosition(model, type + "_1_0000.png", 75 + delta, 75 + delta);
 
 	Enemy* enemy = new Enemy(model, enemySprite, animations, enemyLevel);
-	//FIXME add SpeedEnemy
+	//FIXME add SpeedyEnemy
 	if (type == "basquet") {
 		enemy->speed = speed;
 	}
