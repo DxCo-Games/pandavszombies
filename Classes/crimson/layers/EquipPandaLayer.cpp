@@ -62,6 +62,7 @@ bool EquipPandaLayer::init() {
 	}
 
 	this->setTouchEnabled(true);
+	this->setKeypadEnabled(true);
 
 	return true;
 }
