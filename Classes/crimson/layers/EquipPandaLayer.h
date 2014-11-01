@@ -30,6 +30,7 @@ public:
 	float moved;
 
 	std::vector<EquipPandaItem*> items;
+	void keyBackClicked();
 };
 
 } /* namespace dxco */

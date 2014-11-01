@@ -1,5 +1,6 @@
 #include "EquipPandaLayer.h"
 #include "../../dxco/SpriteUtil.h"
+#include "GameTypeSelectionLayer.h"
 
 namespace dxco {
 
@@ -119,6 +120,11 @@ void EquipPandaLayer::ccTouchesEnded(cocos2d::CCSet *pTouches,
 			this->movingLeftAnimation = true;
 		}
 	}
+}
+
+void EquipPandaLayer::keyBackClicked() {
+	cocos2d::CCDirector* pDirector = cocos2d::CCDirector::sharedDirector();
+	pDirector->replaceScene(GameTypeSelectionLayer::scene());
 }
 
 } /* namespace dxco */
