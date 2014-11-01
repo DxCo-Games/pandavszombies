@@ -89,9 +89,6 @@ bool HelloWorld::init()
     CCSprite* loadingSprite = dxco::SpriteUtil::create("LOADING-1.png", visibleSize.width * 0.25, visibleSize.height / 2 - visibleSize.width * 0.075, visibleSize.width * 0.5, visibleSize.width * 0.15);
     this->addChild(loadingSprite);
 
-    this->levelFinishedLayer = new dxco::SurvivalLevelFinishedLayer(0, 0, visibleSize.width, visibleSize.height);
-    this->addChild(levelFinishedLayer, 50);
-
     std::vector<cocos2d::CCTexture2D*> texturesLoading;
 
     texturesLoading.push_back(dxco::SpriteUtil::createTexture("LOADING-1.png"));
@@ -137,6 +134,9 @@ void HelloWorld::realInit() {
 	    this->addChild(mapa);
 
 	    dxco::Player* player = this->createPlayer();
+
+	    this->levelFinishedLayer = new dxco::LevelFinishedLayer(0, 0, visibleSize.width, visibleSize.height, this->survivalMode, this->level);
+	    this->addChild(levelFinishedLayer, 50);
 
 	    model = new dxco::GameModel(this, player);
 	    this->createInterface();

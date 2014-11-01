@@ -7,14 +7,17 @@
 
 #include "../buttons/GameTypeSelectionButton.h"
 #include "../buttons/SurvivalButton.h"
+#include "../buttons/NextLevelButton.h"
+
+#define LEVEL_COUNT 99
 
 namespace dxco {
 
-class SurvivalLevelFinishedLayer:  public Container {
+class LevelFinishedLayer:  public Container {
 public:
-	SurvivalLevelFinishedLayer(float x, float y, float width, float height);
+	LevelFinishedLayer(float x, float y, float width, float height, bool survival, int level = 0);
 
-	void show(int points, int kills, int coins);
+	void show(int points, int kills, int coins, int stars);
 	void hide();
 
 	void ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
@@ -25,6 +28,7 @@ public:
 private:
 	GameTypeSelectionButton* menuButton;
 	SurvivalButton* tryAgainButton;
+	NextLevelButton* nextLevelButton;
 };
 
 } /* namespace dxco */

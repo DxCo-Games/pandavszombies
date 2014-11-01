@@ -1,4 +1,4 @@
-#include "SurvivalLevelFinishedLayer.h"
+#include "LevelFinishedLayer.h"
 
 #include "../../dxco/SpriteUtil.h"
 #include "../../dxco/LabelUtil.h"
@@ -6,31 +6,52 @@
 
 namespace dxco {
 
-SurvivalLevelFinishedLayer::SurvivalLevelFinishedLayer(float x, float y, float width, float height) : Container(x, y, width, height) {
+LevelFinishedLayer::LevelFinishedLayer(float x, float y, float width, float height, bool survival, int level) : Container(x, y, width, height) {
 
 	cocos2d::CCSize visibleSize = cocos2d::CCDirector::sharedDirector()->getVisibleSize();
 
-	cocos2d::CCSprite* gameOverTitle = SpriteUtil::create("game_over_title.png", visibleSize.width * 0.2, visibleSize.height * 0.7,
-														   visibleSize.width * 0.6, visibleSize.height * 0.15);
+	cocos2d::CCSprite* title = NULL;
 
-	this->addChild(gameOverTitle);
+	if (survival) {
+		title = SpriteUtil::create("game_over_title.png", visibleSize.width * 0.2, visibleSize.height * 0.7,
+														  visibleSize.width * 0.6, visibleSize.height * 0.15);
+	} else {
+		title = SpriteUtil::create("level_finished_title.png", visibleSize.width * 0.15, visibleSize.height * 0.7,
+															   visibleSize.width * 0.7, visibleSize.height * 0.15);
+	}
 
-	cocos2d::CCSprite* placaGameOver = SpriteUtil::create("placa_game_over.png", visibleSize.width * 0.2, visibleSize.height * 0.3,
+	this->addChild(title);
+
+	if (!survival) {
+		cocos2d::CCSprite* stars = SpriteUtil::create("buttons/LEVELS-x" + StringUtil::toString(3) + ".png", visibleSize.width * 0.15, visibleSize.height * 0.3, visibleSize.height * 0.4 * 0.45, visibleSize.height * 0.4);
+		this->addChild(stars);
+	}
+
+	cocos2d::CCSprite* placaGameOver = SpriteUtil::create("placa_game_over.png", visibleSize.width * (survival ? 0.20 : 0.25), visibleSize.height * 0.3,
 														   visibleSize.width * 0.6, visibleSize.height * 0.4);
 
 	this->addChild(placaGameOver);
 
 	cocos2d::CCSprite* menuButtonSprite = SpriteUtil::create("buttons/menu_button.png", visibleSize.width * 0.2, visibleSize.height * 0.15, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
 
-	SpriteUtil::leftAlign(gameOverTitle, menuButtonSprite);
+	SpriteUtil::leftAlign(title, menuButtonSprite);
 
 	this->addChild(menuButtonSprite);
+
+	if (!survival && level != LEVEL_COUNT) {
+		cocos2d::CCSprite* nextLevelSprite = SpriteUtil::create("buttons/next_button.png", visibleSize.width * 0.65, visibleSize.height * 0.15, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+		this->addChild(nextLevelSprite);
+
+		SpriteUtil::copyScale(menuButtonSprite, nextLevelSprite);
+
+		this->nextLevelButton = new NextLevelButton(nextLevelSprite, level + 1);
+	}
 
 	this->menuButton = new GameTypeSelectionButton(menuButtonSprite);
 
 	cocos2d::CCSprite* tryAgainButtonSprite = SpriteUtil::create("buttons/try_again_button.png", visibleSize.width * 0.2, visibleSize.height * 0.15, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
 
-	SpriteUtil::rightAlign(gameOverTitle, tryAgainButtonSprite);
+	SpriteUtil::rightAlign(title, tryAgainButtonSprite);
 
 	this->addChild(tryAgainButtonSprite);
 	this->tryAgainButton = new SurvivalButton(tryAgainButtonSprite);
@@ -80,7 +101,7 @@ SurvivalLevelFinishedLayer::SurvivalLevelFinishedLayer(float x, float y, float w
 	hide();
 }
 
-void SurvivalLevelFinishedLayer::show(int points, int kills, int coins) {
+void LevelFinishedLayer::show(int points, int kills, int coins, int stars) {
 
 	this->killsLabel->setString(StringUtil::intToKString(kills).c_str());
 	this->coinsLabel->setString(StringUtil::intToKString(coins).c_str());
@@ -90,11 +111,11 @@ void SurvivalLevelFinishedLayer::show(int points, int kills, int coins) {
 	this->setTouchEnabled(true);
 }
 
-void SurvivalLevelFinishedLayer::hide() {
+void LevelFinishedLayer::hide() {
 	this->setVisible(false);
 }
 
-void SurvivalLevelFinishedLayer::ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent) {
+void LevelFinishedLayer::ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent) {
 
 	cocos2d::CCTouch* touch = (cocos2d::CCTouch*) (pTouches->anyObject());
 	cocos2d::CCPoint location = touch->getLocationInView();
@@ -102,6 +123,10 @@ void SurvivalLevelFinishedLayer::ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2
 
 	this->menuButton->touch(location);
 	this->tryAgainButton->touch(location);
+
+	if (this->nextLevelButton != NULL) {
+		this->nextLevelButton->touch(location);
+	}
 }
 
 } /* namespace dxco */
