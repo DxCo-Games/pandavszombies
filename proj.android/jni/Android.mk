@@ -87,8 +87,12 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/crimson/buttons/LevelButton.cpp \
                    ../../Classes/crimson/buttons/LevelScreenButton.cpp \
                    ../../Classes/crimson/buttons/GameTypeSelectionButton.cpp \
+                   ../../Classes/crimson/buttons/EquipPandaButton.cpp \
                    ../../Classes/crimson/buttons/NextLevelButton.cpp \
-                   ../../Classes/crimson/layers/LevelFinishedLayer.cpp
+                   ../../Classes/crimson/layers/LevelFinishedLayer.cpp \
+                   ../../Classes/crimson/layers/EquipPandaLayer.cpp \
+                   ../../Classes/crimson/layers/EquipPandaItem.cpp
+                   
                    
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes

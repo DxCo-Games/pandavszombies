@@ -6,6 +6,7 @@ namespace dxco {
 GameTypeSelectionLayer::GameTypeSelectionLayer() {
 	this->storyButton = NULL;
 	this->survivalButton = NULL;
+	this->equipPandaButton = NULL;
 }
 
 cocos2d::CCScene* GameTypeSelectionLayer::scene() {
@@ -30,7 +31,7 @@ bool GameTypeSelectionLayer::init() {
 	this->addChild(spriteBackground);
 
 	cocos2d::CCSprite* survivalButtonSprite = SpriteUtil::create("buttons/survival_button.png", visibleSize.width * 0.2, visibleSize.height * 0.5,
-																  visibleSize.width * 0.3, visibleSize.height * 0.15);
+																  visibleSize.width * 0.2, visibleSize.height * 0.15);
 
 	this->addChild(survivalButtonSprite);
 	this->survivalButton = new SurvivalButton(survivalButtonSprite);
@@ -40,6 +41,12 @@ bool GameTypeSelectionLayer::init() {
 
 	this->addChild(storyButtonSprite);
 	this->storyButton = new StoryButton(storyButtonSprite);
+
+	cocos2d::CCSprite* equipButtonSprite = SpriteUtil::create("buttons/equip_panda_button_text.png", visibleSize.width * 0.35, visibleSize.height * 0.2,
+																	  visibleSize.width * 0.3, visibleSize.height * 0.15);
+
+	this->addChild(equipButtonSprite);
+	this->equipPandaButton = new EquipPandaButton(equipButtonSprite);
 
 	this->setTouchEnabled(true);
 
@@ -54,6 +61,7 @@ void GameTypeSelectionLayer::ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::C
 
 	this->survivalButton->touch(location);
 	this->storyButton->touch(location);
+	this->equipPandaButton->touch(location);
 }
 
 

@@ -5,6 +5,7 @@
 
 #include "../buttons/SurvivalButton.h"
 #include "../buttons/StoryButton.h"
+#include "../buttons/EquipPandaButton.h"
 
 namespace dxco {
 
@@ -22,6 +23,7 @@ public:
 private:
 	SurvivalButton* survivalButton;
 	StoryButton* storyButton;
+	EquipPandaButton* equipPandaButton;
 };
 
 } /* namespace dxco */
