@@ -37,26 +37,29 @@ bool EquipPandaLayer::init() {
 	cocos2d::CCSprite* spriteBackground = SpriteUtil::create("fondo_ciudad.jpg", 0, 0, visibleSize.width, visibleSize.height);
 	this->addChild(spriteBackground);
 
-	cocos2d::CCSprite* spriteCoins = SpriteUtil::create("equip/coins.png", visibleSize.width * 0.1, visibleSize.height * 0.9
-													 - (visibleSize.width * 0.1 * 0.65), visibleSize.width * 0.13 * 1.9, visibleSize.width * 0.13 * 0.65 );
-	this->addChild(spriteCoins);
+	float xMargin = visibleSize.width * 0.05;
 
-	cocos2d::CCSprite* spriteGetCoinsButton = SpriteUtil::create("buttons/getcoins.png", visibleSize.width * 0.71, visibleSize.height * 0.9
-														 - (visibleSize.width * 0.11 * 0.65), visibleSize.width * 0.1 * 1.9, visibleSize.width * 0.1 * 0.65 );
-	this->addChild(spriteGetCoinsButton);
-	//TODO make get coins button
-
-	float skillsPandaX = visibleSize.width * 0.105;
-	float skillsPandaY = visibleSize.height * 0.2 - (visibleSize.width * 0.1 * 0.65);
-	float skillsPandaWidth = visibleSize.height * 1.4 * 0.272;
-	float skillsPandaHeight = visibleSize.height * 1.4 * 0.464;
+	float skillsPandaHeight = visibleSize.height * 0.6;
+	float skillsPandaWidth = skillsPandaHeight * 0.58;
+	float skillsPandaX = xMargin;
+	float skillsPandaY = (visibleSize.height - skillsPandaHeight) / 2;
 	cocos2d::CCSprite* skillsPanda = SpriteUtil::create("equip/MEJORA_panda.png", skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight);
 	this->addChild(skillsPanda, 10);
 
+	cocos2d::CCSprite* spriteCoins = SpriteUtil::create("equip/coins.png", 0, 0);
+	SpriteUtil::leftAlign(skillsPanda, spriteCoins);
+	spriteCoins->setPositionY(visibleSize.height * 0.95);
+	this->addChild(spriteCoins);
+
+	cocos2d::CCSprite* spriteGetCoinsButton = SpriteUtil::create("buttons/getcoins.png", 0,0);
+	SpriteUtil::copyScale(spriteCoins, spriteGetCoinsButton);
+	spriteGetCoinsButton->setPositionY(spriteCoins->getPositionY());
+	spriteGetCoinsButton->setPositionX(visibleSize.width - SpriteUtil::getWidth(spriteGetCoinsButton) - xMargin);
+	this->addChild(spriteGetCoinsButton);
 
 	for (int i = 0; i < mejoras.size(); i++) {
 		float itemsDeltaX = i * skillsPandaWidth + skillsPandaX + skillsPandaWidth * 1.2;
-		EquipPandaItem* item = new EquipPandaItem(mejoras[i], itemsDeltaX, skillsPandaY, skillsPandaWidth * 0.8, skillsPandaHeight);
+		EquipPandaItem* item = new EquipPandaItem(mejoras[i], itemsDeltaX, skillsPandaY, skillsPandaWidth * 0.8, skillsPandaHeight, skillsPanda);
 		items.push_back(item);
 		this->addChild(item);
 	}
