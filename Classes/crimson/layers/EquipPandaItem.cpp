@@ -54,7 +54,7 @@ EquipPandaItem::EquipPandaItem(std::string item, float x, float y, float width, 
 }
 
 std::string EquipPandaItem::getBuyImagePath() {
-	return "buttons/BOTON-buy-activo.png";
+	return "buttons/buy.png";
 }
 
 std::string EquipPandaItem::getImagePath() {
