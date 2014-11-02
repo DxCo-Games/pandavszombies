@@ -58,7 +58,7 @@ bool EquipPandaLayer::init() {
 	this->addChild(spriteGetCoinsButton);
 
 	for (int i = 0; i < mejoras.size(); i++) {
-		float itemsDeltaX = i * skillsPandaWidth + skillsPandaX + skillsPandaWidth * 1.2;
+		float itemsDeltaX = i * skillsPandaWidth * 0.85 + skillsPandaX + skillsPandaWidth * 1.15;
 		EquipPandaItem* item = new EquipPandaItem(mejoras[i], itemsDeltaX, skillsPandaY, skillsPandaWidth * 0.8, skillsPandaHeight, skillsPanda);
 		items.push_back(item);
 		this->addChild(item);
