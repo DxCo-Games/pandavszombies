@@ -32,25 +32,20 @@ LevelFinishedLayer::LevelFinishedLayer(float x, float y, float width, float heig
 
 	this->addChild(placaGameOver);
 
-	cocos2d::CCSprite* menuButtonSprite = SpriteUtil::create("buttons/menu_button.png", visibleSize.width * 0.2, visibleSize.height * 0.15, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
-
+	cocos2d::CCSprite* menuButtonSprite = SpriteUtil::create("buttons/menu_button.png", visibleSize.width * 0.2, visibleSize.height * 0.15, title);
 	SpriteUtil::leftAlign(title, menuButtonSprite);
 
 	this->addChild(menuButtonSprite);
 
 	if (!survival && level != LEVEL_COUNT) {
-		cocos2d::CCSprite* nextLevelSprite = SpriteUtil::create("buttons/next_button.png", visibleSize.width * 0.65, visibleSize.height * 0.15, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+		cocos2d::CCSprite* nextLevelSprite = SpriteUtil::create("buttons/next_button.png", visibleSize.width * 0.65, visibleSize.height * 0.15, menuButtonSprite);
 		this->addChild(nextLevelSprite);
-
-		SpriteUtil::copyScale(menuButtonSprite, nextLevelSprite);
-
 		this->nextLevelButton = new NextLevelButton(nextLevelSprite, level + 1);
 	}
 
 	this->menuButton = new GameTypeSelectionButton(menuButtonSprite);
 
-	cocos2d::CCSprite* tryAgainButtonSprite = SpriteUtil::create("buttons/try_again_button.png", visibleSize.width * 0.2, visibleSize.height * 0.15, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
-
+	cocos2d::CCSprite* tryAgainButtonSprite = SpriteUtil::create("buttons/try_again_button.png", visibleSize.width * 0.2, visibleSize.height * 0.15, title);
 	SpriteUtil::rightAlign(title, tryAgainButtonSprite);
 
 	this->addChild(tryAgainButtonSprite);

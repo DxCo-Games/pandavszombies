@@ -268,11 +268,9 @@ void HelloWorld::createInterface() {
 
 	//Life bar
 	CCSprite* lifeBack = dxco::SpriteUtil::create("gameplay/PANDA_energia_fin.png", 5, 0.87 * visibleSize.height, 0.35 * visibleSize.width , 0.102 * visibleSize.height);
-	CCSprite* lifeFront = dxco::SpriteUtil::create("gameplay/PANDA_energia.png", 5, 0.87 * visibleSize.height, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+	CCSprite* lifeFront = dxco::SpriteUtil::create("gameplay/PANDA_energia.png", 5, 0.87 * visibleSize.height, lifeBack);
 	lifeBar = CCProgressTimer::create(lifeFront);
 	lifeBar->setPosition(lifeBack->getPosition()); //positions don't match by default
-	lifeBar->setScaleX(lifeBack->getScaleX());
-	lifeBar->setScaleY(lifeBack->getScaleY());
 	lifeBar->setType(kCCProgressTimerTypeBar);
 	lifeBar->setMidpoint(ccp(0.16,0)); // the x coord tells the bar to put the 0% after the panda head
 	lifeBar->setBarChangeRate(ccp(1,0));
@@ -281,19 +279,17 @@ void HelloWorld::createInterface() {
 	this->controlsLayer->addChild(lifeBar, 11);
 
 	//weapon bar
-	CCSprite* weaponBack = dxco::SpriteUtil::create("gameplay/BALAS_barra_fin.png", 5, 0.78 * visibleSize.height, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+	CCSprite* weaponBack = dxco::SpriteUtil::create("gameplay/BALAS_barra_fin.png", 5, 0.78 * visibleSize.height, lifeBack);
 	dxco::SpriteUtil::leftAlign(lifeBack, weaponBack);
 
-	CCSprite* weaponFront = dxco::SpriteUtil::create("gameplay/BALAS_barra.png", 5, 0.78 * visibleSize.height, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+	CCSprite* weaponFront = dxco::SpriteUtil::create("gameplay/BALAS_barra.png", 5, 0.78 * visibleSize.height, lifeBack);
 	weaponBar = CCProgressTimer::create(weaponFront);
 	weaponBar->setPosition(weaponBack->getPosition()); //positions don't match by default
-	weaponBar->setScaleX(weaponBack->getScaleX());
-	weaponBar->setScaleY(weaponBack->getScaleY());
 	weaponBar->setType(kCCProgressTimerTypeBar);
 	weaponBar->setMidpoint(ccp(0.25,0)); // the x coord tells the bar to put the 0% after the panda head
 	weaponBar->setBarChangeRate(ccp(1,0));
 	weaponBar->setPercentage(100);
-	weaponIcon = dxco::SpriteUtil::create("bonus/PISTOLA.png", 5, 0.78 * visibleSize.height, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+	weaponIcon = dxco::SpriteUtil::create("bonus/PISTOLA.png", 5, 0.78 * visibleSize.height, lifeBack);
 	weaponIcon->setPositionY(weaponBack->getPositionY());
 	dxco::SpriteUtil::leftAlign(lifeBack, weaponIcon);
 	this->controlsLayer->addChild(weaponBack, 10);
@@ -301,12 +297,10 @@ void HelloWorld::createInterface() {
 	this->controlsLayer->addChild(weaponIcon, 11);
 
 	//bonus icons
-	bonus1 = dxco::SpriteUtil::create("bonus/BALAV_activada.png", 5, 0.78 * visibleSize.height, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
-	dxco::SpriteUtil::copyScale(lifeBack, bonus1);
+	bonus1 = dxco::SpriteUtil::create("bonus/BALAV_activada.png", 5, 0.78 * visibleSize.height, lifeBack);
 	this->addChild(bonus1, 11);
 	bonus1->setOpacity(0);
-	bonus2 = dxco::SpriteUtil::create("bonus/BALAV_activada.png", 5, 0.78 * visibleSize.height, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
-	dxco::SpriteUtil::copyScale(lifeBack, bonus2);
+	bonus2 = dxco::SpriteUtil::create("bonus/BALAV_activada.png", 5, 0.78 * visibleSize.height, lifeBack);
 	this->addChild(bonus2, 11);
 	bonus2->setOpacity(0);
 	//spread the bonus icons between the life and weapon bars
@@ -318,8 +312,7 @@ void HelloWorld::createInterface() {
 	bonus2->setPositionX(xf - padding - iconWidth / 2);
 
 	//score
-	CCSprite* score = dxco::SpriteUtil::create("gameplay/SCORE.png", visibleSize.width / 2, 0, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
-	dxco::SpriteUtil::copyScale(lifeBack, score);
+	CCSprite* score = dxco::SpriteUtil::create("gameplay/SCORE.png", visibleSize.width / 2, 0, lifeBack);
 	score->setPositionY(lifeBack->getPositionY());
 	//set the right margin equal to the left one
 	float sideMargin = lifeBack->getPositionX() - dxco::SpriteUtil::getWidth(lifeBack);
@@ -329,13 +322,12 @@ void HelloWorld::createInterface() {
 	//timer
 	this->timer;
 	if (this->survivalMode) {
-		this->timer = dxco::SpriteUtil::create("gameplay/TIMER.png", visibleSize.width / 2, 0, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+		this->timer = dxco::SpriteUtil::create("gameplay/TIMER.png", visibleSize.width / 2, 0, lifeBack);
 		this->timerLabel = dxco::LabelUtil::create("00:00", 14, visibleSize.width / 2, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT, "fonts/KBStickToThePlan.ttf");
 	} else {
-		this->timer = dxco::SpriteUtil::create("gameplay/LEVEL.png", visibleSize.width / 2, 0, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
+		this->timer = dxco::SpriteUtil::create("gameplay/LEVEL.png", visibleSize.width / 2, 0, lifeBack);
 		this->timerLabel = dxco::LabelUtil::create("LEVEL " + dxco::StringUtil::toString(this->level), 14, visibleSize.width / 2, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT, "fonts/KBStickToThePlan.ttf");
 	}
-	dxco::SpriteUtil::copyScale(lifeBack, this->timer);
 	this->timer->setPositionY(lifeBack->getPositionY());
 	//put timer in between score and life
 	x0 = lifeBack->getPositionX() + dxco::SpriteUtil::getWidth(lifeBack) / 2;
@@ -348,8 +340,7 @@ void HelloWorld::createInterface() {
 	this->controlsLayer->addChild(timerLabel, 10);
 
 	//zombie bar
-	CCSprite* zombie = dxco::SpriteUtil::create("gameplay/ZOMBIE_contador.png", 0, 0, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
-	dxco::SpriteUtil::copyScale(lifeBack, zombie);
+	CCSprite* zombie = dxco::SpriteUtil::create("gameplay/ZOMBIE_contador.png", 0, 0, lifeBack);
 	zombie->setPositionY(weaponBack->getPositionY());
 	dxco::SpriteUtil::rightAlign(score, zombie);
 	this->controlsLayer->addChild(zombie, 10);
@@ -373,8 +364,7 @@ void HelloWorld::createInterface() {
 	this->killsChainLabel->setOpacity(0);
 
 	//text messages
-	this->panel = dxco::SpriteUtil::create("gameplay/PLACA_texto.png", 0, 0, dxco::SpriteUtil::UNDEFINED, dxco::SpriteUtil::UNDEFINED);
-	dxco::SpriteUtil::copyScale(lifeBack, this->panel);
+	this->panel = dxco::SpriteUtil::create("gameplay/PLACA_texto.png", 0, 0, lifeBack);
 	this->panel->setPositionX(joystickBotonMovimiento->getPositionX() + (joystickBoton->getPositionX()-joystickBotonMovimiento->getPositionX())/2);
 	this->panel->setPositionY(joystickBoton->getPositionY());
 	this->controlsLayer->addChild(this->panel, 10);
