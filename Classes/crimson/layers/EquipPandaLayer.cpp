@@ -99,7 +99,6 @@ void EquipPandaLayer::ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent 
 
 		item->move(deltaX, 0);
 	}
-	//this->moveItems(deltaX);
 }
 
 void EquipPandaLayer::ccTouchesEnded(cocos2d::CCSet *pTouches,

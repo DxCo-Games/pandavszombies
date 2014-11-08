@@ -74,6 +74,7 @@ GameModel::GameModel(HelloWorld* vista, Player* player) {
 	this->kills = 0;
 	this->chains = new ChainedKillsManager(this);
 	this->timer = 0;
+	this->clearItems = false;
 
 	//batch node added to map
 	this->enemyFactory = new EnemyFactory();
@@ -112,6 +113,15 @@ void GameModel::enemyKilled(Enemy* enemy) {
 }
 
 void GameModel::update(float dt) {
+
+	if (this->clearItems) {
+		this->items.clear();
+		this->enemies.clear();
+		this->bonuses.clear();
+		this->bullets.clear();
+		this->clearItems = false;
+	}
+
 	this->timer += dt;
 	this->playerHurt = false;
 
@@ -181,15 +191,17 @@ void GameModel::update(float dt) {
 void GameModel::restartGame() {
 
 	updateCoins();
-
+	CCLOG("p1");
 	//reset positions
 	cocos2d::CCSize visibleSize = cocos2d::CCDirector::sharedDirector()->getVisibleSize();
 	float mapWidth = MAP_WIDTH;
 	float mapHeight = MAP_HEIGHT;
 	float mapCornerX = - (mapWidth - visibleSize.width) / 2;
 	float mapCornerY = - (mapHeight - visibleSize.height) / 2;
+
 	this->mapa->moveToAbsolute(mapCornerX, mapCornerY);
 	this->vista->clouds->moveToAbsolute(mapCornerX, mapCornerY);
+	this->vista->opacityLayer->setVisible(false);
 
 	this->prop->set("enemy.level", 1);
 
@@ -215,19 +227,20 @@ void GameModel::restartGame() {
 	for (int i = 0; i < this->items.size(); i++) {
 		this->mapa->removeChild(this->items[i]->getSprite());
 	}
-	this->items.clear();
-	this->enemies.clear();
 
 	for (int i = 0; i < this->bullets.size(); i++) {
 		this->mapa->removeChild(this->bullets[i]->getSprite());
 	}
-	this->bullets.clear();
 
 	for (int i = 0; i < this->bonuses.size(); i++) {
 		this->mapa->removeChild(this->bonuses[i]->getSprite());
 	}
-	this->bonuses.clear();
+
 	this->level->restartLevel();
+	this->vista->levelFinishedLayer->hide();
+	this->vista->showControls();
+	this->vista->juegoPausado = false;
+	this->clearItems = true;
 }
 
 void GameModel::updateCoins() {

@@ -135,10 +135,10 @@ void HelloWorld::realInit() {
 
 	    dxco::Player* player = this->createPlayer();
 
-	    this->levelFinishedLayer = new dxco::LevelFinishedLayer(0, 0, visibleSize.width, visibleSize.height, this->survivalMode, this->level);
+	    model = new dxco::GameModel(this, player);
+	    this->levelFinishedLayer = new dxco::LevelFinishedLayer(this->model, 0, 0, visibleSize.width, visibleSize.height, this->survivalMode, this->level);
 	    this->addChild(levelFinishedLayer, 50);
 
-	    model = new dxco::GameModel(this, player);
 	    this->createInterface();
 
 	    model->loadLevel(this->survivalMode, this->level);
@@ -392,6 +392,10 @@ void HelloWorld::message(std::string text, int seconds) {
 
 void HelloWorld::hideControls() {
 	this->controlsLayer->setVisible(false);
+}
+
+void HelloWorld::showControls() {
+	this->controlsLayer->setVisible(true);
 }
 
 void HelloWorld::ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent) {

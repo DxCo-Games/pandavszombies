@@ -15,6 +15,9 @@ public:
 	void execute();
 
 private:
+	int cantidadDisponible;
+	bool isActivo();
+	int getCantidadDisponible();
 	std::string getImagePath();
 	std::string getExplicacion();
 	std::string getName();

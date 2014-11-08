@@ -6,7 +6,7 @@
 
 namespace dxco {
 
-LevelFinishedLayer::LevelFinishedLayer(float x, float y, float width, float height, bool survival, int level) : Container(x, y, width, height) {
+LevelFinishedLayer::LevelFinishedLayer(GameModel* model, float x, float y, float width, float height, bool survival, int level) : Container(x, y, width, height) {
 
 	cocos2d::CCSize visibleSize = cocos2d::CCDirector::sharedDirector()->getVisibleSize();
 
@@ -41,6 +41,8 @@ LevelFinishedLayer::LevelFinishedLayer(float x, float y, float width, float heig
 		cocos2d::CCSprite* nextLevelSprite = SpriteUtil::create("buttons/next_button.png", visibleSize.width * 0.65, visibleSize.height * 0.15, menuButtonSprite);
 		this->addChild(nextLevelSprite);
 		this->nextLevelButton = new NextLevelButton(nextLevelSprite, level + 1);
+	} else {
+		this->nextLevelButton = NULL;
 	}
 
 	this->menuButton = new GameTypeSelectionButton(menuButtonSprite);
@@ -49,7 +51,7 @@ LevelFinishedLayer::LevelFinishedLayer(float x, float y, float width, float heig
 	SpriteUtil::rightAlign(title, tryAgainButtonSprite);
 
 	this->addChild(tryAgainButtonSprite);
-	this->tryAgainButton = new SurvivalButton(tryAgainButtonSprite);
+	this->tryAgainButton = new RestartSurvivalButton(model, tryAgainButtonSprite);
 
 	this->pointsLabel = cocos2d::CCLabelTTF::create("0", "fonts/KBStickToThePlan.ttf", 14);
 	pointsLabel->setAnchorPoint(ccp(1,0.5f));
@@ -107,6 +109,7 @@ void LevelFinishedLayer::show(int points, int kills, int coins, int stars) {
 }
 
 void LevelFinishedLayer::hide() {
+	this->setTouchEnabled(false);
 	this->setVisible(false);
 }
 
@@ -116,12 +119,13 @@ void LevelFinishedLayer::ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEve
 	cocos2d::CCPoint location = touch->getLocationInView();
 	location = cocos2d::CCDirector::sharedDirector()->convertToGL(location);
 
-	this->menuButton->touch(location);
-	this->tryAgainButton->touch(location);
 
 	if (this->nextLevelButton != NULL) {
 		this->nextLevelButton->touch(location);
 	}
+
+	this->menuButton->touch(location);
+	this->tryAgainButton->touch(location);
 }
 
 } /* namespace dxco */

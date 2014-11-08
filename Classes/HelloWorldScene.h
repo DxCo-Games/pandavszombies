@@ -81,6 +81,7 @@ public:
     dxco::AssetLoader* assetLoader;
 
     void hideControls();
+    void showControls();
 private:
 
     void preloadTextures();
