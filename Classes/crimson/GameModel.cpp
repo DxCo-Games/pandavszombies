@@ -74,7 +74,6 @@ GameModel::GameModel(HelloWorld* vista, Player* player) {
 	this->kills = 0;
 	this->chains = new ChainedKillsManager(this);
 	this->timer = 0;
-	this->clearItems = false;
 
 	//batch node added to map
 	this->enemyFactory = new EnemyFactory();
@@ -113,14 +112,6 @@ void GameModel::enemyKilled(Enemy* enemy) {
 }
 
 void GameModel::update(float dt) {
-
-	if (this->clearItems) {
-		this->items.clear();
-		this->enemies.clear();
-		this->bonuses.clear();
-		this->bullets.clear();
-		this->clearItems = false;
-	}
 
 	this->timer += dt;
 	this->playerHurt = false;
@@ -178,8 +169,6 @@ void GameModel::update(float dt) {
 		UserDAO::finishLevel(this->levelNumber, 3);
 	}
 
-
-
 	//Bullet cleanup
 	this->bullets.erase(
 	    std::remove_if(this->bullets.begin(), this->bullets.end(), ShouldDeleteBullet(this)),
@@ -202,6 +191,7 @@ void GameModel::restartGame() {
 	this->mapa->moveToAbsolute(mapCornerX, mapCornerY);
 	this->vista->clouds->moveToAbsolute(mapCornerX, mapCornerY);
 	this->vista->opacityLayer->setVisible(false);
+	this->vista->bubble->setVisible(true);
 
 	this->prop->set("enemy.level", 1);
 
@@ -240,7 +230,11 @@ void GameModel::restartGame() {
 	this->vista->levelFinishedLayer->hide();
 	this->vista->showControls();
 	this->vista->juegoPausado = false;
-	this->clearItems = true;
+
+	this->items.clear();
+	this->enemies.clear();
+	this->bonuses.clear();
+	this->bullets.clear();
 }
 
 void GameModel::updateCoins() {

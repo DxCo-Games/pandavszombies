@@ -8,6 +8,7 @@
 #include "../buttons/GameTypeSelectionButton.h"
 #include "../buttons/RestartSurvivalButton.h"
 #include "../buttons/NextLevelButton.h"
+#include "../buttons/EquipPandaButton.h"
 
 #define LEVEL_COUNT 99
 
@@ -27,9 +28,13 @@ public:
 	cocos2d::CCLabelTTF* pointsLabel;
 	cocos2d::CCLabelTTF* coinsLabel;
 private:
+
+	bool survival;
+
 	GameTypeSelectionButton* menuButton;
 	RestartSurvivalButton* tryAgainButton;
 	NextLevelButton* nextLevelButton;
+	EquipPandaButton* equipPandaButton;
 };
 
 } /* namespace dxco */
