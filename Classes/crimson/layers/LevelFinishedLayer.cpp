@@ -8,6 +8,8 @@ namespace dxco {
 
 LevelFinishedLayer::LevelFinishedLayer(GameModel* model, float x, float y, float width, float height, bool survival, int level) : Container(x, y, width, height) {
 
+	this->survival = survival;
+
 	cocos2d::CCSize visibleSize = cocos2d::CCDirector::sharedDirector()->getVisibleSize();
 
 	cocos2d::CCSprite* title = NULL;
@@ -21,11 +23,6 @@ LevelFinishedLayer::LevelFinishedLayer(GameModel* model, float x, float y, float
 	}
 
 	this->addChild(title);
-
-	if (!survival) {
-		cocos2d::CCSprite* stars = SpriteUtil::create("buttons/LEVELS-x" + StringUtil::toString(3) + ".png", visibleSize.width * 0.15, visibleSize.height * 0.3, visibleSize.height * 0.4 * 0.45, visibleSize.height * 0.4);
-		this->addChild(stars);
-	}
 
 	cocos2d::CCSprite* placaGameOver = SpriteUtil::create("placa_game_over.png", visibleSize.width * (survival ? 0.20 : 0.25), visibleSize.height * 0.3,
 														   visibleSize.width * 0.6, visibleSize.height * 0.4);
@@ -114,6 +111,12 @@ void LevelFinishedLayer::show(int points, int kills, int coins, int stars) {
 	this->killsLabel->setString(StringUtil::intToKString(kills).c_str());
 	this->coinsLabel->setString(StringUtil::intToKString(coins).c_str());
 	this->pointsLabel->setString(StringUtil::intToKString(points).c_str());
+
+	if (!this->survival) {
+		cocos2d::CCSize visibleSize = cocos2d::CCDirector::sharedDirector()->getVisibleSize();
+		cocos2d::CCSprite* starsSprite = SpriteUtil::create("buttons/LEVEL-FIN-SLOTS-" + StringUtil::toString(stars) + ".png", visibleSize.width * 0.15, visibleSize.height * 0.3, visibleSize.height * 0.4 * 0.45, visibleSize.height * 0.4);
+		this->addChild(starsSprite);
+	}
 
 	this->setVisible(true);
 	this->setTouchEnabled(true);

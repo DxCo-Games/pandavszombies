@@ -28,6 +28,9 @@ public:
 	cocos2d::CCLabelTTF* pointsLabel;
 	cocos2d::CCLabelTTF* coinsLabel;
 private:
+
+	bool survival;
+
 	GameTypeSelectionButton* menuButton;
 	RestartSurvivalButton* tryAgainButton;
 	NextLevelButton* nextLevelButton;
