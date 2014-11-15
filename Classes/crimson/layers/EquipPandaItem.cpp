@@ -9,12 +9,12 @@
 namespace dxco {
 
 
-EquipPandaItem::EquipPandaItem(std::string item, float x, float y, float width, float height, cocos2d::CCSprite *master) : Container(x, y, width, height), Touchable(this) {
+EquipPandaItem::EquipPandaItem(std::string item, float x, float y, float width, float height) : Container(x, y, width, height), Touchable(this) {
 	this->item = item;
 	this->cantidadDisponible = rand() % 2;
 
 	cocos2d::CCSprite* background = SpriteUtil::create(this->getImagePath().c_str(), 0, height * 0.2, width, height * 0.8);
-	SpriteUtil::copyScale(master, background);
+	//SpriteUtil::copyScale(master, background);
 	this->addChild(background);
 
 	cocos2d::CCLabelTTF* nameLabel = LabelUtil::create(this->getName(), 18, 0, 0, 0, 0, "fonts/KBStickToThePlan.ttf");
@@ -32,7 +32,7 @@ EquipPandaItem::EquipPandaItem(std::string item, float x, float y, float width, 
 	this->addChild(nameLabel);
 
 	cocos2d::CCSprite* coin = SpriteUtil::create("coin.png", width * 0.1, height * 0.25, width * 0.3, width * 0.3);
-	SpriteUtil::copyScale(master, coin);
+	//SpriteUtil::copyScale(master, coin);
 	this->addChild(coin);
 
 	cocos2d::CCLabelTTF* coinsLabel = LabelUtil::create(this->_getPrice(), 18, 0, 0, 0, 0, "fonts/KBStickToThePlan.ttf");
@@ -63,7 +63,7 @@ EquipPandaItem::EquipPandaItem(std::string item, float x, float y, float width, 
 	float cantidadLabelWidth = LabelUtil::getWidth(cantidadLabel);
 
 	float cantidadLabelX = (cantidadLabelWidth / 2) + origin.x + width * 0.09;
-	float cantidadLabelY = height - (cantidadLabelHeight / 2) + origin.y - width * 0.072;
+	float cantidadLabelY = height - (cantidadLabelHeight / 2) + origin.y - width * 0.09;
 
 	cantidadLabel->setPositionX(cantidadLabelX);
 	cantidadLabel->setPositionY(cantidadLabelY);
@@ -75,7 +75,7 @@ EquipPandaItem::EquipPandaItem(std::string item, float x, float y, float width, 
 	this->addChild(cantidadLabel);
 
 	cocos2d::CCSprite* buyButton = SpriteUtil::create(this->getBuyImagePath(), 0, 0, width, height * 0.15);
-	SpriteUtil::copyScale(master, buyButton);
+	//TODO SpriteUtil::copyScale(master, buyButton);
 	this->addChild(buyButton);
 }
 
