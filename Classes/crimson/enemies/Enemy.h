@@ -32,6 +32,7 @@ public:
 	bool burning;
 	bool dead;
 	float bloodDt;
+	bool frozen;
 
 	int score;
 
