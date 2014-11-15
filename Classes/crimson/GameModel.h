@@ -55,7 +55,6 @@ public:
 	bool playerHurt;
 	int freezeBonusActivated;
 	int kills;
-	bool clearItems;
 private:
 	void updateCoins();
 };

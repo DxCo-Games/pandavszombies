@@ -74,7 +74,6 @@ GameModel::GameModel(HelloWorld* vista, Player* player) {
 	this->kills = 0;
 	this->chains = new ChainedKillsManager(this);
 	this->timer = 0;
-	this->clearItems = false;
 
 	//batch node added to map
 	this->enemyFactory = new EnemyFactory();
@@ -113,14 +112,6 @@ void GameModel::enemyKilled(Enemy* enemy) {
 }
 
 void GameModel::update(float dt) {
-
-	if (this->clearItems) {
-		this->items.clear();
-		this->enemies.clear();
-		this->bonuses.clear();
-		this->bullets.clear();
-		this->clearItems = false;
-	}
 
 	this->timer += dt;
 	this->playerHurt = false;
@@ -177,8 +168,6 @@ void GameModel::update(float dt) {
 		//TODO calculate stars
 		UserDAO::finishLevel(this->levelNumber, 3);
 	}
-
-
 
 	//Bullet cleanup
 	this->bullets.erase(
@@ -241,7 +230,11 @@ void GameModel::restartGame() {
 	this->vista->levelFinishedLayer->hide();
 	this->vista->showControls();
 	this->vista->juegoPausado = false;
-	this->clearItems = true;
+
+	this->items.clear();
+	this->enemies.clear();
+	this->bonuses.clear();
+	this->bullets.clear();
 }
 
 void GameModel::updateCoins() {
