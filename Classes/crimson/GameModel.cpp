@@ -202,6 +202,7 @@ void GameModel::restartGame() {
 	this->mapa->moveToAbsolute(mapCornerX, mapCornerY);
 	this->vista->clouds->moveToAbsolute(mapCornerX, mapCornerY);
 	this->vista->opacityLayer->setVisible(false);
+	this->vista->bubble->setVisible(true);
 
 	this->prop->set("enemy.level", 1);
 
