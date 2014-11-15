@@ -47,11 +47,22 @@ LevelFinishedLayer::LevelFinishedLayer(GameModel* model, float x, float y, float
 
 	this->menuButton = new GameTypeSelectionButton(menuButtonSprite);
 
-	cocos2d::CCSprite* tryAgainButtonSprite = SpriteUtil::create("buttons/try_again_button.png", visibleSize.width * 0.2, visibleSize.height * 0.15, title);
-	SpriteUtil::rightAlign(title, tryAgainButtonSprite);
+	cocos2d::CCSprite* tryAgainButtonSprite = NULL;
+
+	if (survival) {
+		tryAgainButtonSprite = SpriteUtil::create("buttons/try_again_button.png", visibleSize.width * 0.6, visibleSize.height * 0.15, title);
+	} else {
+		tryAgainButtonSprite = SpriteUtil::create("buttons/try_again_button.png", visibleSize.width * 0.55, visibleSize.height * 0.15, title);
+	}
 
 	this->addChild(tryAgainButtonSprite);
 	this->tryAgainButton = new RestartSurvivalButton(model, tryAgainButtonSprite);
+
+	cocos2d::CCSprite* equipPandaButtonSprite = SpriteUtil::create("buttons/equip_panda_button.png", visibleSize.width * 0.2, visibleSize.height * 0.15, title);
+	SpriteUtil::rightAlign(title, equipPandaButtonSprite);
+
+	this->addChild(equipPandaButtonSprite);
+	this->equipPandaButton = new EquipPandaButton(equipPandaButtonSprite);
 
 	this->pointsLabel = cocos2d::CCLabelTTF::create("0", "fonts/KBStickToThePlan.ttf", 14);
 	pointsLabel->setAnchorPoint(ccp(1,0.5f));
@@ -126,6 +137,7 @@ void LevelFinishedLayer::ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEve
 
 	this->menuButton->touch(location);
 	this->tryAgainButton->touch(location);
+	this->equipPandaButton->touch(location);
 }
 
 } /* namespace dxco */

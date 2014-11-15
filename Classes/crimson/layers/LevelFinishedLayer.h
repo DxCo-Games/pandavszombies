@@ -8,6 +8,7 @@
 #include "../buttons/GameTypeSelectionButton.h"
 #include "../buttons/RestartSurvivalButton.h"
 #include "../buttons/NextLevelButton.h"
+#include "../buttons/EquipPandaButton.h"
 
 #define LEVEL_COUNT 99
 
@@ -30,6 +31,7 @@ private:
 	GameTypeSelectionButton* menuButton;
 	RestartSurvivalButton* tryAgainButton;
 	NextLevelButton* nextLevelButton;
+	EquipPandaButton* equipPandaButton;
 };
 
 } /* namespace dxco */
