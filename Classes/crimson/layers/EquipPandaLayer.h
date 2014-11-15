@@ -12,6 +12,7 @@
 namespace dxco {
 
 class EquipPandaLayer :  public cocos2d::CCLayer {
+
 public:
 
 	virtual bool init();
@@ -31,6 +32,8 @@ public:
 
 	std::vector<EquipPandaItem*> items;
 	void keyBackClicked();
+
+	int getTotalCoins();
 };
 
 } /* namespace dxco */

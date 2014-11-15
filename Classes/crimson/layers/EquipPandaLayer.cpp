@@ -1,6 +1,11 @@
 #include "EquipPandaLayer.h"
 #include "../../dxco/SpriteUtil.h"
 #include "GameTypeSelectionLayer.h"
+#include "EquipPandaSkillsContainer.h"
+#include <cstdlib>
+#include "../../dxco/LabelUtil.h"
+#include "../../dxco/StringUtil.h"
+#include <string>
 
 namespace dxco {
 
@@ -43,29 +48,47 @@ bool EquipPandaLayer::init() {
 	float skillsPandaWidth = skillsPandaHeight * 0.58;
 	float skillsPandaX = xMargin;
 	float skillsPandaY = (visibleSize.height - skillsPandaHeight) / 2;
-	cocos2d::CCSprite* skillsPanda = SpriteUtil::create("equip/MEJORA_panda.png", skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight);
-	this->addChild(skillsPanda, 10);
 
-	cocos2d::CCSprite* spriteCoins = SpriteUtil::create("equip/coins.png", 0, 0);
-	SpriteUtil::leftAlign(skillsPanda, spriteCoins);
-	spriteCoins->setPositionY(visibleSize.height * 0.95);
+	EquipPandaSkillsContainer* skillsContainer = new EquipPandaSkillsContainer(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight);
+	this->addChild(skillsContainer, 10);
+
+	cocos2d::CCSprite* spriteCoins = SpriteUtil::create("equip/coins.png", skillsPandaX,
+														skillsPandaHeight * 1.1 + skillsPandaY - ((skillsPandaWidth * 0.34) / 2),
+														skillsPandaWidth, skillsPandaWidth * 0.34);
 	this->addChild(spriteCoins);
 
-	cocos2d::CCSprite* spriteGetCoinsButton = SpriteUtil::create("buttons/getcoins.png", 0,0);
-	SpriteUtil::copyScale(spriteCoins, spriteGetCoinsButton);
-	spriteGetCoinsButton->setPositionY(spriteCoins->getPositionY());
-	spriteGetCoinsButton->setPositionX(visibleSize.width - SpriteUtil::getWidth(spriteGetCoinsButton) - xMargin);
+	cocos2d::CCSprite* spriteGetCoinsButton = SpriteUtil::create("buttons/getcoins.png", visibleSize.width * 0.9 - skillsPandaWidth,
+														skillsPandaHeight * 1.1 + skillsPandaY - ((skillsPandaWidth * 0.34) / 2),
+														skillsPandaWidth, skillsPandaWidth * 0.34);
+
 	this->addChild(spriteGetCoinsButton);
 
 	for (int i = 0; i < mejoras.size(); i++) {
 		float itemsDeltaX = i * skillsPandaWidth * 0.85 + skillsPandaX + skillsPandaWidth * 1.15;
-		EquipPandaItem* item = new EquipPandaItem(mejoras[i], itemsDeltaX, skillsPandaY, skillsPandaWidth * 0.8, skillsPandaHeight, skillsPanda);
+		EquipPandaItem* item = new EquipPandaItem(mejoras[i], itemsDeltaX, skillsPandaY, skillsPandaWidth * 0.8, skillsPandaHeight);
 		items.push_back(item);
 		this->addChild(item);
 	}
 
 	this->setTouchEnabled(true);
 	this->setKeypadEnabled(true);
+
+	std::string totalCoins = StringUtil::toString(this->getTotalCoins());
+
+	cocos2d::CCLabelTTF* totalCoinsLabel = LabelUtil::create(totalCoins, 20, 0, 0, 0, 0);
+	cocos2d::CCPoint origin =
+					cocos2d::CCDirector::sharedDirector()->getVisibleOrigin();
+
+	LabelUtil::setScaleByHeight(totalCoinsLabel, skillsPandaWidth * 0.15);
+
+	float labelTotalCoinsX = skillsPandaX + skillsPandaWidth * 0.35 + origin.x;
+	float labelTotalCoinsY = spriteCoins->getPositionY();
+
+	totalCoinsLabel->setAnchorPoint(ccp(0, 0.5));
+	totalCoinsLabel->setPositionX(labelTotalCoinsX);
+	totalCoinsLabel->setPositionY(labelTotalCoinsY);
+
+	this->addChild(totalCoinsLabel);
 
 	return true;
 }
@@ -128,6 +151,10 @@ void EquipPandaLayer::ccTouchesEnded(cocos2d::CCSet *pTouches,
 void EquipPandaLayer::keyBackClicked() {
 	cocos2d::CCDirector* pDirector = cocos2d::CCDirector::sharedDirector();
 	pDirector->replaceScene(GameTypeSelectionLayer::scene());
+}
+
+int EquipPandaLayer::getTotalCoins() {
+	return rand() % 10000;
 }
 
 } /* namespace dxco */
