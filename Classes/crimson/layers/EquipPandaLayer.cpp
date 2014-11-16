@@ -24,6 +24,8 @@ bool EquipPandaLayer::init() {
 	if (!cocos2d::CCLayer::init()) {
 		return false;
 	}
+	cocos2d::CCPoint origin =
+						cocos2d::CCDirector::sharedDirector()->getVisibleOrigin();
 
 	std::vector<std::string> mejoras;
 
@@ -44,10 +46,10 @@ bool EquipPandaLayer::init() {
 
 	float xMargin = visibleSize.width * 0.05;
 
-	float skillsPandaHeight = visibleSize.height * 0.6;
+	float skillsPandaHeight = visibleSize.height * 0.75;
 	float skillsPandaWidth = skillsPandaHeight * 0.58;
 	float skillsPandaX = xMargin;
-	float skillsPandaY = (visibleSize.height - skillsPandaHeight) / 2;
+	float skillsPandaY = visibleSize.height * 0.05;
 
 	EquipPandaSkillsContainer* skillsContainer = new EquipPandaSkillsContainer(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight);
 	this->addChild(skillsContainer, 10);
@@ -75,11 +77,9 @@ bool EquipPandaLayer::init() {
 
 	std::string totalCoins = StringUtil::toString(this->getTotalCoins());
 
-	cocos2d::CCLabelTTF* totalCoinsLabel = LabelUtil::create(totalCoins, 20, 0, 0, 0, 0);
-	cocos2d::CCPoint origin =
-					cocos2d::CCDirector::sharedDirector()->getVisibleOrigin();
+	cocos2d::CCLabelTTF* totalCoinsLabel = LabelUtil::create(totalCoins, 20, 0, 0, 0, 0, "fonts/KBStickToThePlan.ttf");
 
-	LabelUtil::setScaleByHeight(totalCoinsLabel, skillsPandaWidth * 0.15);
+	LabelUtil::setScaleByHeight(totalCoinsLabel, skillsPandaWidth * 0.14);
 
 	float labelTotalCoinsX = skillsPandaX + skillsPandaWidth * 0.35 + origin.x;
 	float labelTotalCoinsY = spriteCoins->getPositionY();
@@ -89,10 +89,50 @@ bool EquipPandaLayer::init() {
 	totalCoinsLabel->setPositionY(labelTotalCoinsY);
 
 	this->addChild(totalCoinsLabel);
+	this->addSkills(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight);
 
 	return true;
 }
 
+void EquipPandaLayer::addSkills(float skillsPandaX, float skillsPandaY, float skillsPandaWidth, float skillsPandaHeight) {
+	this->addSkill(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight, "Weapon Time", this->getWeaponTime(), 0);
+	this->addSkill(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight, "Life", this->getLife(), 1);
+	this->addSkill(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight, "Speed", this->getSpeed(), 2);
+	this->addSkill(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight, "Attack", this->getAttack(), 3);
+	this->addSkill(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight, "Bonus", this->getBonus(), 4);
+}
+
+void EquipPandaLayer::addSkill(float skillsPandaX, float skillsPandaY, float skillsPandaWidth, float skillsPandaHeight, std::string skillName, int skillValue, int index) {
+
+	cocos2d::ccColor3B color = cocos2d::ccc3(62, 62, 62);
+	float skillHeight = skillsPandaHeight * 0.05;
+	std::string skillValueStr = StringUtil::toString(skillValue);
+	cocos2d::CCPoint origin =
+							cocos2d::CCDirector::sharedDirector()->getVisibleOrigin();
+
+	cocos2d::CCLabelTTF* skillsLabel = LabelUtil::create(skillName, 20, 0, 0, 0, 0, "fonts/KBStickToThePlan.ttf");
+	cocos2d::CCLabelTTF* skillsLabelValue = LabelUtil::create(skillValueStr, 20, 0, 0, 0, 0, "fonts/KBStickToThePlan.ttf");
+
+	float skillsLabelX = skillsPandaX + skillsPandaWidth * 0.1 + origin.x;
+	float skillsLabelY = skillsPandaY + skillsPandaHeight * 0.5 + origin.y - (skillHeight * 0.8 * 2 * index);
+	float skillsLabelValueX = skillsPandaX + skillsPandaWidth * 0.86 + origin.x;
+
+	skillsLabel->setAnchorPoint(ccp(0, 0.5));
+	skillsLabel->setColor(color);
+	skillsLabel->setPositionX(skillsLabelX);
+	skillsLabel->setPositionY(skillsLabelY);
+
+	skillsLabelValue->setAnchorPoint(ccp(1, 0.5));
+	skillsLabelValue->setColor(color);
+	skillsLabelValue->setPositionX(skillsLabelValueX);
+	skillsLabelValue->setPositionY(skillsLabelY);
+
+	LabelUtil::setScaleByHeight(skillsLabel, skillHeight);
+	LabelUtil::setScaleByHeight(skillsLabelValue, skillHeight);
+
+	this->addChild(skillsLabel, 11);
+	this->addChild(skillsLabelValue, 11);
+}
 
 void EquipPandaLayer::ccTouchesBegan(cocos2d::CCSet *pTouches,
 		cocos2d::CCEvent *pEvent) {
@@ -155,6 +195,26 @@ void EquipPandaLayer::keyBackClicked() {
 
 int EquipPandaLayer::getTotalCoins() {
 	return rand() % 10000;
+}
+
+int EquipPandaLayer::getLife() {
+	return rand() % 1000;
+}
+
+int EquipPandaLayer::getSpeed() {
+	return rand() % 100;
+}
+
+int EquipPandaLayer::getAttack() {
+	return rand() % 1000000;
+}
+
+int EquipPandaLayer::getWeaponTime() {
+	return 10 + (rand() % 20);
+}
+
+int EquipPandaLayer::getBonus() {
+	return 10 + (rand() % 90);
 }
 
 } /* namespace dxco */

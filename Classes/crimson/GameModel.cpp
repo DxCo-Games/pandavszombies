@@ -48,6 +48,7 @@ public:
 		   bullet->getTopPosition() > maxY) {
 
 			this->model->mapa->removeChild(bullet->getSprite());
+			delete bullet;
 			return true;
 		}
 
