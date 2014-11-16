@@ -42,6 +42,8 @@ public:
 	int getAttack();
 	int getWeaponTime();
 	int getBonus();
+
+	int touchId;
 };
 
 } /* namespace dxco */

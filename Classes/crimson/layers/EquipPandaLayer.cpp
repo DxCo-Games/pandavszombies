@@ -91,6 +91,7 @@ bool EquipPandaLayer::init() {
 	this->addChild(totalCoinsLabel);
 	this->addSkills(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight);
 
+	this->touchId = 999;
 	return true;
 }
 
@@ -137,55 +138,98 @@ void EquipPandaLayer::addSkill(float skillsPandaX, float skillsPandaY, float ski
 void EquipPandaLayer::ccTouchesBegan(cocos2d::CCSet *pTouches,
 		cocos2d::CCEvent *pEvent) {
 
-	cocos2d::CCTouch* touch = (cocos2d::CCTouch*) (pTouches->anyObject());
+	if (this->touchId != 999) {
+		CCLOG("Se abandona por touch ID");
+		return;
+	}
 
-	cocos2d::CCPoint location = touch->getLocationInView();
-	location = cocos2d::CCDirector::sharedDirector()->convertToGL(location);
+	cocos2d::CCSetIterator it = pTouches->begin();
+	cocos2d::CCPoint location;
+	cocos2d::CCTouch * touch;
 
-	this->beginLocation = this->lastLocation = location;
-	this->moved = 0.0;
-	this->movingLeftAnimation = this->movingRigthAnimation = false;
+	for (int iTouchCount = 0; iTouchCount < pTouches->count(); iTouchCount++) {
+
+		touch = (cocos2d::CCTouch*) (*it);
+		location = touch->getLocationInView();
+		location = cocos2d::CCDirector::sharedDirector()->convertToGL(location);
+		this->touchId = touch->getID();
+
+		this->beginLocation = this->lastLocation = location;
+		this->moved = 0.0;
+		this->movingLeftAnimation = this->movingRigthAnimation = false;
+		it++;
+	}
 }
 
 void EquipPandaLayer::ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent) {
 
-	cocos2d::CCTouch* touch = (cocos2d::CCTouch*) (pTouches->anyObject());
-	cocos2d::CCPoint location = touch->getLocationInView();
-	location = cocos2d::CCDirector::sharedDirector()->convertToGL(location);
+	cocos2d::CCSetIterator it = pTouches->begin();
+	cocos2d::CCPoint location;
+	cocos2d::CCTouch * touch;
 
-	float deltaX = location.x - lastLocation.x;
-	float deltaY = location.y - lastLocation.y;
-	lastLocation = location;
+	for (int iTouchCount = 0; iTouchCount < pTouches->count(); iTouchCount++) {
 
-	for (int i = 0; i < items.size(); i++) {
-		EquipPandaItem* item = items[i];
+		touch = (cocos2d::CCTouch*) (*it);
+		location = touch->getLocationInView();
+		location = cocos2d::CCDirector::sharedDirector()->convertToGL(location);
 
-		item->move(deltaX, 0);
+		if (this->touchId != touch->getID()) {
+			continue;
+		}
+
+		float deltaX = location.x - lastLocation.x;
+		float deltaY = location.y - lastLocation.y;
+		lastLocation = location;
+
+		for (int i = 0; i < items.size(); i++) {
+			EquipPandaItem* item = items[i];
+
+			item->move(deltaX, 0);
+		}
+
+		it++;
 	}
 }
+
+
 
 void EquipPandaLayer::ccTouchesEnded(cocos2d::CCSet *pTouches,
 		cocos2d::CCEvent *pEvent) {
 
-	cocos2d::CCTouch* touch = (cocos2d::CCTouch*) (pTouches->anyObject());
-	cocos2d::CCPoint location = touch->getLocationInView();
-	location = cocos2d::CCDirector::sharedDirector()->convertToGL(location);
+	cocos2d::CCSetIterator it = pTouches->begin();
+	cocos2d::CCPoint location;
+	cocos2d::CCTouch * touch;
 
-	float delta = location.x - beginLocation.x;
+	for (int iTouchCount = 0; iTouchCount < pTouches->count(); iTouchCount++) {
 
-	if (delta < 0) {
-		delta *= -1;
-	}
+		touch = (cocos2d::CCTouch*) (*it);
+		location = touch->getLocationInView();
+		location = cocos2d::CCDirector::sharedDirector()->convertToGL(location);
 
-	if (delta < CLICK_MAX_DELTA) {
-
-	} else {
-		if (location.x - beginLocation.x > 0) {
-			this->movingRigthAnimation = true;
+		if (this->touchId == touch->getID()) {
+			this->touchId = 999;
 		} else {
-			this->movingLeftAnimation = true;
+			continue;
 		}
+
+		float delta = location.x - beginLocation.x;
+
+		if (delta < 0) {
+			delta *= -1;
+		}
+
+		if (delta < CLICK_MAX_DELTA) {
+
+		} else {
+			if (location.x - beginLocation.x > 0) {
+				this->movingRigthAnimation = true;
+			} else {
+				this->movingLeftAnimation = true;
+			}
+		}
+		it++;
 	}
+
 }
 
 void EquipPandaLayer::keyBackClicked() {
