@@ -8,6 +8,7 @@
 #include "dxco/Container.h"
 #include "dxco/Item.h"
 #include "crimson/layers/LevelFinishedLayer.h"
+#include "crimson/layers/PauseLayer.h"
 #include "dxco/AssetLoader.h"
 
 #include <string>
@@ -78,10 +79,14 @@ public:
     cocos2d::CCLayerColor* opacityLayer;
 
     dxco::LevelFinishedLayer* levelFinishedLayer;
+    dxco::PauseLayer* pauseLayer;
     dxco::AssetLoader* assetLoader;
 
     void hideControls();
     void showControls();
+
+    void pauseGame();
+    void resumeGame();
 private:
 
     void preloadTextures();

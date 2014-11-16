@@ -230,6 +230,7 @@ void GameModel::restartGame() {
 	this->vista->levelFinishedLayer->hide();
 	this->vista->showControls();
 	this->vista->juegoPausado = false;
+	this->vista->pauseLayer->hide();
 
 	this->items.clear();
 	this->enemies.clear();

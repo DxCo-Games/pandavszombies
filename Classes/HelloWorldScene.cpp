@@ -139,6 +139,9 @@ void HelloWorld::realInit() {
 	    this->levelFinishedLayer = new dxco::LevelFinishedLayer(this->model, 0, 0, visibleSize.width, visibleSize.height, this->survivalMode, this->level);
 	    this->addChild(levelFinishedLayer, 50);
 
+	    this->pauseLayer = new dxco::PauseLayer(this->model, 0, 0, visibleSize.width, visibleSize.height);
+	    this->addChild(pauseLayer, 50);
+
 	    this->createInterface();
 
 	    model->loadLevel(this->survivalMode, this->level);
@@ -453,7 +456,7 @@ void HelloWorld::update(float dt) {
 
 void HelloWorld::keyBackClicked() {
 
-	if (true) {
+	if (true) { // TODO: Chaco pls!
 		if (this->juegoPausado) {
 			cocos2d::CCDirector* pDirector = cocos2d::CCDirector::sharedDirector();
 			//pDirector->runWithScene(dxco::MenuParallax::scene());
@@ -462,10 +465,10 @@ void HelloWorld::keyBackClicked() {
 
 		this->juegoPausado = !this->juegoPausado;
 
-		if (!this->juegoPausado) {
-			CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
+		if (this->juegoPausado) {
+			this->pauseGame();
 		} else {
-			this->stopMusic();
+			this->resumeGame();
 		}
 	} else {
 		this->stopMusic();
@@ -473,6 +476,22 @@ void HelloWorld::keyBackClicked() {
 		//pDirector->runWithScene(dxco::MenuParallax::scene());
 		// TODO go to menu
 	}
+}
+
+void HelloWorld::pauseGame() {
+	this->stopMusic();
+	this->pauseLayer->show();
+	this->hideControls();
+	this->opacityLayer->setVisible(true);
+}
+
+void HelloWorld::resumeGame() {
+	this->juegoPausado = false;
+
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
+	this->pauseLayer->hide();
+	this->showControls();
+	this->opacityLayer->setVisible(false);
 }
 
 void HelloWorld::playMusic() {

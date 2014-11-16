@@ -90,10 +90,12 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/crimson/buttons/EquipPandaButton.cpp \
                    ../../Classes/crimson/buttons/NextLevelButton.cpp \
                    ../../Classes/crimson/buttons/RestartSurvivalButton.cpp \
+                   ../../Classes/crimson/buttons/ResumeButton.cpp \
                    ../../Classes/crimson/layers/LevelFinishedLayer.cpp \
                    ../../Classes/crimson/layers/EquipPandaLayer.cpp \
                    ../../Classes/crimson/layers/EquipPandaItem.cpp \
-                   ../../Classes/crimson/layers/EquipPandaSkillsContainer.cpp
+                   ../../Classes/crimson/layers/EquipPandaSkillsContainer.cpp \
+                   ../../Classes/crimson/layers/PauseLayer.cpp
                    
                    
 
