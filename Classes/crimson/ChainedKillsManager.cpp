@@ -31,10 +31,9 @@ void ChainedKillsManager::updateView() {
 		label->setString(playerKillsText.c_str());
 		this->lastChainLength = this->currentChainLength;
 		cocos2d::CCSequence *seq = cocos2d::CCSequence::create(cocos2d::CCDelayTime::create(1), cocos2d::CCFadeOut::create(0.15),
-				cocos2d::CCCallFuncN::create(this, cocos2d::SEL_CallFuncN(&ChainedKillsManager::setChainMessage)),
-				cocos2d::CCFadeIn::create(0.15), cocos2d::CCDelayTime::create(1), cocos2d::CCFadeOut::create(0.3),
-				NULL);
-
+				cocos2d::CCCallFuncN::create(this, cocos2d::SEL_CallFuncN(&ChainedKillsManager::updatePlayerScore)),
+				cocos2d::CCCallFuncN::create(this, cocos2d::SEL_CallFuncN(&ChainedKillsManager::setChainMessage)), cocos2d::CCFadeIn::create(0.15),
+				cocos2d::CCDelayTime::create(1), cocos2d::CCFadeOut::create(0.3), NULL);
 		if (label->getOpacity() == 0 && label->numberOfRunningActions() == 0) {
 			label->runAction(cocos2d::CCSequence::create(cocos2d::CCFadeIn::create(0.3), seq, NULL));
 		} else if (label->getOpacity() == 255) {
@@ -42,6 +41,10 @@ void ChainedKillsManager::updateView() {
 			label->runAction(seq);
 		}
 	}
+}
+
+void ChainedKillsManager::updatePlayerScore() {
+	this->model->player->score += this->lastChainLength * CHAIN_SCORE_PER_KILL;
 }
 
 bool ChainedKillsManager::shouldUpdateLabel() {

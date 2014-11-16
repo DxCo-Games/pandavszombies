@@ -2,6 +2,7 @@
 #define CHAINEDKILLSMANAGER_H_
 
 #define CHAIN_DURATION 0.75
+#define CHAIN_SCORE_PER_KILL 40
 
 #include "cocos2d.h"
 
@@ -20,11 +21,12 @@ public:
 
 	bool shouldUpdateLabel();
 
+	void updatePlayerScore();
+
 	GameModel *model;
 	int currentChainLength;
 	float lastKillTime;
 	int lastChainLength;
-
 };
 
 } /* namespace dxco */
