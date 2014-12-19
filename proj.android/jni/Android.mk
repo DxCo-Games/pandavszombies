@@ -71,6 +71,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/crimson/levels/TimedLevel.cpp \
                    ../../Classes/crimson/levels/KillCountLevel.cpp \
                    ../../Classes/crimson/levels/SurvivalLevel.cpp \
+                   ../../Classes/crimson/levels/TutorialLevel.cpp \
                    ../../Classes/crimson/levels/EnemyWave.cpp \
                    ../../Classes/crimson/levels/LevelParser.cpp \
                    ../../Classes/crimson/Mapa.cpp \
