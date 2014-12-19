@@ -37,6 +37,7 @@ public:
 	WeaponBonus* weaponBonus;
 
 	bool moving;
+	bool rotating;
 	bool invertido;
 
 	/* Since the player can move and look in different directions

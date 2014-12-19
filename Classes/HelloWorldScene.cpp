@@ -371,7 +371,7 @@ void HelloWorld::createInterface() {
 	this->panel->setPositionX(joystickBotonMovimiento->getPositionX() + (joystickBoton->getPositionX()-joystickBotonMovimiento->getPositionX())/2);
 	this->panel->setPositionY(joystickBoton->getPositionY());
 	this->controlsLayer->addChild(this->panel, 10);
-	this->panelText = CCLabelTTF::create("", "fonts/KBStickToThePlan.ttf", 12, CCSize(160,0), kCCTextAlignmentCenter);
+	this->panelText = CCLabelTTF::create("", "fonts/KBStickToThePlan.ttf", 12, CCSize(155,0), kCCTextAlignmentCenter);
 	this->panelText->setColor(cocos2d::ccc3(255, 255, 255));
 	this->panelText->setPositionX(this->panel->getPositionX());
 	this->panelText->setPositionY(this->panel->getPositionY());
@@ -386,9 +386,20 @@ void HelloWorld::createInterface() {
 }
 
 void HelloWorld::message(std::string text, int seconds) {
+	this->panelText->stopAllActions();
+	this->panel->stopAllActions();
+
 	this->panelText->setString(text.c_str());
-	CCSequence *seq = CCSequence::create(CCFadeIn::create(0.25), CCDelayTime::create(seconds),
-			CCFadeOut::create(0.25), NULL);
+
+	CCSequence *seq;
+	if (this->panel->getOpacity() != 0) {
+		this->panelText->setOpacity(255);
+		this->panel->setOpacity(255);
+		seq = CCSequence::create(CCDelayTime::create(seconds), CCFadeOut::create(0.25), NULL);
+	} else {
+		seq = CCSequence::create(CCFadeIn::create(0.25), CCDelayTime::create(seconds), CCFadeOut::create(0.25), NULL);
+	}
+
 	this->panel->runAction((CCSequence *)seq->copy());
 	this->panelText->runAction(seq);
 }

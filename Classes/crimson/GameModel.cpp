@@ -3,6 +3,7 @@
 #include "levels/Level.h"
 #include "levels/SurvivalLevel.h"
 #include "levels/LevelParser.h"
+#include "levels/TutorialLevel.h"
 #include "../HelloWorldScene.h"
 #include "dxco/SpriteUtil.h"
 #include "dxco/StringUtil.h"
@@ -97,6 +98,9 @@ void GameModel::loadLevel(bool survival, int level) {
 	if (survival) {
 		this->level = new SurvivalLevel(this);
 		this->vista->setMap(rand() %2);
+	} else if (level == 1){
+		this->level = new TutorialLevel(this);
+		this->vista->setMap(1);
 	} else {
 		this->level = LevelParser::parse(this, "levels/level" + StringUtil::toString(level) +".json");
 	}

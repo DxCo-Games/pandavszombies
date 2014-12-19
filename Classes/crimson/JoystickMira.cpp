@@ -27,7 +27,13 @@ void JoystickMira::onMoved(cocos2d::CCPoint location, float angle,
 
 	this->game->player->invertido = invertido;
 	this->game->player->rotation = rotation;
+	this->game->player->rotating = true;
 	this->game->vista->fire->setAngle(angle * 57.2957795);
+}
+
+void JoystickMira::onTouchedEnded(cocos2d::CCPoint location, float angle, float intensity) {
+	Joystick::onTouchedEnded(location, angle, intensity);
+	this->game->player->rotating = false;
 }
 
 } /* namespace dxco */
