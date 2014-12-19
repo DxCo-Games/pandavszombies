@@ -20,6 +20,7 @@ public:
 	CREATE_FUNC(GameTypeSelectionLayer);
 
 	void ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
+	void keyBackClicked();
 private:
 	SurvivalButton* survivalButton;
 	StoryButton* storyButton;

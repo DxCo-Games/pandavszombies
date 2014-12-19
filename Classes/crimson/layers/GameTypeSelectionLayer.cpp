@@ -59,8 +59,14 @@ bool GameTypeSelectionLayer::init() {
 	this->equipPandaButton = new EquipPandaButton(equipButtonSprite);
 
 	this->setTouchEnabled(true);
+	this->setKeypadEnabled(true);
 
 	return true;
+}
+
+void GameTypeSelectionLayer::keyBackClicked() {
+	cocos2d::CCDirector* pDirector = cocos2d::CCDirector::sharedDirector();
+	pDirector->end();
 }
 
 void GameTypeSelectionLayer::ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent) {
