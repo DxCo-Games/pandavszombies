@@ -14,6 +14,7 @@ public:
 
 	virtual bool isFinished();
 	virtual void update(float dt);
+	virtual void updateFreezed(float dt);
 	virtual void restartLevel();
 
 	virtual void updateInterface();

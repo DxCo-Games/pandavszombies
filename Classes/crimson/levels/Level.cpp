@@ -17,6 +17,10 @@ Level::Level(GameModel *model, std::vector<EnemyWave*>& waves) {
 	}
 }
 
+void Level::updateFreezed(float dt) {
+	this->updateInterface();
+}
+
 void Level::update(float dt) {
 	EnemyWave *wave = this->waves[this->currentWave];
 	if (!wave->isFinished()) {

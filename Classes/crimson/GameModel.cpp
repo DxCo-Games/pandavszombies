@@ -134,7 +134,9 @@ void GameModel::update(float dt) {
 	this->player->weapon->update(dt);
 	this->voice->update(dt);
 
-	if (!this->freezeBonusActivated) {
+	if (this->freezeBonusActivated) {
+		this->level->updateFreezed(dt);
+	} else {
 		this->level->update(dt);
 	}
 

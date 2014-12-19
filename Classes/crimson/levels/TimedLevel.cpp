@@ -26,6 +26,11 @@ void TimedLevel::updateInterface() {
 	this->model->vista->setTimerLabel(this->seconds - this->dt);
 }
 
+void TimedLevel::updateFreezed(float dt) {
+	updateInterface();
+	this->dt += dt;
+}
+
 void TimedLevel::update(float dt) {
 	Level::update(dt);
 	this->dt += dt;
