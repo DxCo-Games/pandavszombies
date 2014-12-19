@@ -40,7 +40,7 @@ void EnemyFactory::createEnemy(GameModel* model, std::vector<std::string>types) 
 	std::map<int, dxco::Animation*> animations = loadAnimations(model, type, speed);
 	cocos2d::CCSprite* enemySprite = createSpriteInRandomPosition(model, type + "_1_0000.png", 75 + delta, 75 + delta);
 
-	Enemy* enemy = new Enemy(model, enemySprite, animations, enemyLevel);
+	Enemy* enemy = new Enemy(model, enemySprite, animations, enemyLevel, type);
 	//FIXME add SpeedyEnemy
 	if (type == "basquet") {
 		enemy->speed = speed;
@@ -55,7 +55,7 @@ void EnemyFactory::createBoss(GameModel* model) {
 	std::map<int, dxco::Animation*> animations = loadAnimations(model, "elvis", Enemy::getSpeed(enemyLevel));
 
 	cocos2d::CCSprite* enemySprite = createSpriteInRandomPosition(model, "elvis_1_0000.png", 150, 150);
-	Enemy* enemy = new Boss(model, enemySprite, animations, enemyLevel);
+	Enemy* enemy = new Boss(model, enemySprite, animations, enemyLevel, "elvis");
 	addEnemy(model, enemy);
 
 	SpriteUtil::fadeIn(enemy->getSprite());

@@ -35,7 +35,8 @@ Level* LevelParser::parse(GameModel* model, std::string levelPath) {
 
 	if ((*document)["config"].HasMember("kills")) {
 		int kills = (*document)["config"]["kills"].GetInt();
-		return new KillCountLevel(model, resultado, kills);
+		std::string type = (*document)["config"]["type"].GetString();
+		return new KillCountLevel(model, resultado, kills, type);
 	} else if((*document)["config"].HasMember("time")) {
 		int time = (*document)["config"]["time"].GetInt();
 		return new TimedLevel(model, resultado, time);

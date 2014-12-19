@@ -76,8 +76,20 @@ GameModel::GameModel(HelloWorld* vista, Player* player) {
 	this->chains = new ChainedKillsManager(this);
 	this->timer = 0;
 
+	//se puede evitar esto?
+	this->resetTypeKills();
+
 	//batch node added to map
 	this->enemyFactory = new EnemyFactory();
+}
+
+void GameModel::resetTypeKills() {
+	this->typeKills["elvis"] = 0;
+	this->typeKills["oficinista"] = 0;
+	this->typeKills["granjero"] = 0;
+	this->typeKills["cirujano"] = 0;
+	this->typeKills["cura"] = 0;
+	this->typeKills["basket"] = 0;
 }
 
 void GameModel::loadLevel(bool survival, int level) {
@@ -109,6 +121,7 @@ void GameModel::enemyKilled(Enemy* enemy) {
 			location.y - enemy->getHeight() / 2));
 
 	this->kills += 1;
+	this->typeKills[enemy->type]++;
 	this->chains->addKill();
 }
 
@@ -210,6 +223,7 @@ void GameModel::restartGame() {
 	this->player->movementSpeedBonus = 1;
 	this->player->weaponSpeedBonus = 1;
 	this->kills = 0;
+	this->resetTypeKills();
 	this->chains->restart();
 	this->timer = 0;
 
