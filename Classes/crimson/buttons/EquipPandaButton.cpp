@@ -10,7 +10,7 @@ EquipPandaButton::EquipPandaButton(cocos2d::CCSprite* sprite) : ButtonDxCo(sprit
 
 void EquipPandaButton::execute() {
 	cocos2d::CCDirector* pDirector = cocos2d::CCDirector::sharedDirector();
-	pDirector->replaceScene(EquipPandaLayer::scene());
+	pDirector->pushScene(EquipPandaLayer::scene());
 }
 
 } /* namespace dxco */

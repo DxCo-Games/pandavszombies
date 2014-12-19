@@ -83,6 +83,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/crimson/BazookaBullet.cpp \
                    ../../Classes/crimson/layers/GameTypeSelectionLayer.cpp \
                    ../../Classes/crimson/layers/LevelSelectionLayer.cpp \
+                   ../../Classes/crimson/layers/AbstractMenuLayer.cpp \
                    ../../Classes/crimson/buttons/SurvivalButton.cpp \
                    ../../Classes/crimson/buttons/StoryButton.cpp \
                    ../../Classes/crimson/buttons/LevelButton.cpp \

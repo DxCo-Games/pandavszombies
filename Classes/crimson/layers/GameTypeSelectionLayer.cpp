@@ -64,11 +64,6 @@ bool GameTypeSelectionLayer::init() {
 	return true;
 }
 
-void GameTypeSelectionLayer::keyBackClicked() {
-	cocos2d::CCDirector* pDirector = cocos2d::CCDirector::sharedDirector();
-	pDirector->end();
-}
-
 void GameTypeSelectionLayer::ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent) {
 
 	cocos2d::CCTouch* touch = (cocos2d::CCTouch*) (pTouches->anyObject());

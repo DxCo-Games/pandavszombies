@@ -1,9 +1,11 @@
 #ifndef EQUIPPANDALAYER_H_
 #define EQUIPPANDALAYER_H_
 
-#include "cocos2d.h"
 #include "../../dxco/Container.h"
+
+#include "cocos2d.h"
 #include "EquipPandaItem.h"
+#include "AbstractMenuLayer.h"
 
 #include <string>
 #include <vector>
@@ -11,8 +13,7 @@
 
 namespace dxco {
 
-class EquipPandaLayer :  public cocos2d::CCLayer {
-
+class EquipPandaLayer : public AbstractMenuLayer {
 public:
 
 	virtual bool init();
@@ -31,7 +32,6 @@ public:
 	float moved;
 
 	std::vector<EquipPandaItem*> items;
-	void keyBackClicked();
 
 	int getTotalCoins();
 

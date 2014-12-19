@@ -188,11 +188,6 @@ void EquipPandaLayer::ccTouchesEnded(cocos2d::CCSet *pTouches,
 	}
 }
 
-void EquipPandaLayer::keyBackClicked() {
-	cocos2d::CCDirector* pDirector = cocos2d::CCDirector::sharedDirector();
-	pDirector->replaceScene(GameTypeSelectionLayer::scene());
-}
-
 int EquipPandaLayer::getTotalCoins() {
 	return rand() % 10000;
 }

@@ -6,10 +6,11 @@
 #include "../buttons/SurvivalButton.h"
 #include "../buttons/StoryButton.h"
 #include "../buttons/EquipPandaButton.h"
+#include "AbstractMenuLayer.h"
 
 namespace dxco {
 
-class GameTypeSelectionLayer :  public cocos2d::CCLayer {
+class GameTypeSelectionLayer : public AbstractMenuLayer {
 public:
 	GameTypeSelectionLayer();
 
@@ -20,7 +21,6 @@ public:
 	CREATE_FUNC(GameTypeSelectionLayer);
 
 	void ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
-	void keyBackClicked();
 private:
 	SurvivalButton* survivalButton;
 	StoryButton* storyButton;
