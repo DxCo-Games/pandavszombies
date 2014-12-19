@@ -87,7 +87,7 @@ GameModel::GameModel(HelloWorld* vista, Player* player) {
 void GameModel::resetTypeKills() {
 	this->typeKills["elvis"] = 0;
 	this->typeKills["oficinista"] = 0;
-	this->typeKills["granjero"] = 0;
+	this->typeKills["campesino"] = 0;
 	this->typeKills["cirujano"] = 0;
 	this->typeKills["cura"] = 0;
 	this->typeKills["basket"] = 0;

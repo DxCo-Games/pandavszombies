@@ -11,7 +11,6 @@ Level* LevelParser::parse(GameModel* model, std::string levelPath) {
 
 	std::vector<EnemyWave*> resultado;
 	rapidjson::Document* document = JsonParser::parseJsonFile(levelPath);
-	CCLOG("h1");
 	int map = (*document)["config"]["background"].GetInt();
 	model->vista->setMap(map);
 	for (rapidjson::SizeType i = 0; i < ((*document)["waves"]).Size(); i++) {

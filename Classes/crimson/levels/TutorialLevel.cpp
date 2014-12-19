@@ -78,7 +78,6 @@ void TutorialLevel::update(float dt) {
 			model->vista->message("Good job!");
 			this->messageDisplayed = true;
 		}
-		CCLOG("TOTAL KILLS %d", this->model->kills);
 		if (this->model->enemies.size() == 0) {
 			//note this waits for the blood splat to disappear.
 			this->currentStep++;

@@ -1,13 +1,13 @@
 {
 "config": {
-	"background": 0,
+	"background": 1,
 	"kills": 20,
-	"type": "oficinista"
+	"type": "campesino"
 },
 "waves": [{
 	"total" : 1000,
-	"freq" : 0.3,
-	"level" : 1,
+	"freq" : 0.5,
+	"level" : 0,
 	"isBoss" : 0
 	}
 	]

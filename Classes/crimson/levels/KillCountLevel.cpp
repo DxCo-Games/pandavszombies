@@ -15,7 +15,7 @@ KillCountLevel::KillCountLevel(GameModel *model, std::vector<EnemyWave*>& waves,
 
 std::string KillCountLevel::verboseType() {
 	if(this->type == "elvis") return "kings";
-	if(this->type == "granjero") return "farmers";
+	if(this->type == "campesino") return "farmers";
 	if(this->type == "cirujano") return "surgeons";
 	if(this->type == "oficinista") return "office workers";
 	if(this->type == "basket") return "basketball players";
