@@ -22,6 +22,7 @@ Player::Player(cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations)
 	this->shieldActivated = 0;
 	this->score = 0;
 	this->moving = false;
+	this->rotating = false;
 	this->moveRotation;
 	this->weapon = NULL;
 	this->weaponBonus = NULL;
