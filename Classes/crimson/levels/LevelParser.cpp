@@ -29,7 +29,13 @@ Level* LevelParser::parse(GameModel* model, std::string levelPath) {
 					vec.push_back( waveConfig["types"][j].GetString());
 				}
 			}
-			resultado.push_back(new EnemyWave(model, total, freq, level, vec, isBoss));
+			if (waveConfig.HasMember("killsFreq")) {
+				float killsFreq = waveConfig["killsFreq"].GetDouble();
+				std::string killsType = (*document)["config"]["type"].GetString();
+				resultado.push_back(new EnemyWave(model, total, freq, level, killsType, killsFreq));
+			} else {
+				resultado.push_back(new EnemyWave(model, total, freq, level, vec, isBoss));
+			}
 	}
 
 	if ((*document)["config"].HasMember("kills")) {
