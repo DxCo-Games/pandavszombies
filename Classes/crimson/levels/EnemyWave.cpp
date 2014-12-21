@@ -24,7 +24,7 @@ void EnemyWave::update(float dt) {
 	this->dt += dt;
 	if (this->dt > this->freq){
 		if (this->isBoss) {
-			this->model->enemyFactory->createBoss(model);
+			this->model->enemyFactory->createBoss(model, this->types);
 		} else {
 			if (this->types.size()) {
 				this->model->enemyFactory->createEnemy(model, this->types);
