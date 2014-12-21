@@ -29,6 +29,11 @@ public class MainMenuActivity extends Activity {
 	private ImageButton botonLoginFacebook;
 	//private ImageButton botonLogoutFacebook;
 	
+	private ImageButton botonMusicOn;
+	private ImageButton botonMusicOff;
+	private ImageButton botonSoundEffectsOn;
+	private ImageButton botonSoundEffectsOff;
+	
 	private static final String APP_ID = "com.dxco";
 	private static final String GAME_URL = "https://play.google.com/store/apps/details?id=" + APP_ID;
 	
@@ -42,10 +47,63 @@ public class MainMenuActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// printKeyHash();
+		SoundUtil.activity = this;
 		
 		setContentView(R.layout.main_menu_activity);
 
+		this.botonMusicOn = (ImageButton) findViewById(R.id.botonMusicOn);
+		this.botonMusicOff = (ImageButton) findViewById(R.id.botonMusicOff);
+		this.botonSoundEffectsOn = (ImageButton) findViewById(R.id.botonSoundEffectsOn);
+		this.botonSoundEffectsOff = (ImageButton) findViewById(R.id.botonSoundEffectsOff);
+		
+		if (SoundUtil.isMusicOn()) {
+			this.botonMusicOff.setVisibility(ImageButton.GONE);
+		} else {
+			this.botonMusicOn.setVisibility(ImageButton.GONE);
+		}
+		
+		if (SoundUtil.isSoundEffectsOn()) {
+			this.botonSoundEffectsOff.setVisibility(ImageButton.GONE);
+		} else {
+			this.botonSoundEffectsOn.setVisibility(ImageButton.GONE);
+		}
+		
+		this.botonMusicOn.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				SoundUtil.disableMusic();
+				botonMusicOff.setVisibility(ImageButton.VISIBLE);
+				botonMusicOn.setVisibility(ImageButton.GONE);
+			}
+		});
+		
+		this.botonMusicOff.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				SoundUtil.enableMusic();
+				botonMusicOn.setVisibility(ImageButton.VISIBLE);
+				botonMusicOff.setVisibility(ImageButton.GONE);
+			}
+		});
+		
+		this.botonSoundEffectsOn.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				SoundUtil.disableMusicEffects();
+				botonSoundEffectsOff.setVisibility(ImageButton.VISIBLE);
+				botonSoundEffectsOn.setVisibility(ImageButton.GONE);
+			}
+		});
+		
+		this.botonSoundEffectsOff.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				SoundUtil.enableSoundEffects();
+				botonSoundEffectsOn.setVisibility(ImageButton.VISIBLE);
+				botonSoundEffectsOff.setVisibility(ImageButton.GONE);
+			}
+		});
+		
 		ImageButton botonPlay = (ImageButton) findViewById(R.id.botonPlay);
 
 		botonPlay.setOnClickListener(new OnClickListener() {
@@ -65,8 +123,10 @@ public class MainMenuActivity extends Activity {
 			public void onClick(View view) {
 				onClickLogin();
 			}
-		});/*
-this.botonLogoutFacebook = (ImageButton) findViewById(R.id.botonLogoutFacebook);
+		});
+		
+		/*
+		this.botonLogoutFacebook = (ImageButton) findViewById(R.id.botonLogoutFacebook);
 		this.botonLogoutFacebook.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
 				onClickLogout();

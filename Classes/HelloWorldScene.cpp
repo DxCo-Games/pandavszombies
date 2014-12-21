@@ -11,6 +11,7 @@
 #include "crimson/GameProperties.h"
 #include "crimson/Player.h"
 #include "dxco/Animation.h"
+#include "crimson/SoundUtil.h"
 #include "dxco/Container.h"
 #include "dxco/StringUtil.h"
 #include "dxco/LabelUtil.h"
@@ -455,8 +456,17 @@ void HelloWorld::update(float dt) {
 		this->loadingItem->update(dt);
 		this->preloadTextures();
 
-		if (!this->assetLoader->hasNext()) {
+		if (dxco::SoundUtil::isMusicOn()) {
 			CocosDenshion::SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(0.5);
+		} else {
+			CocosDenshion::SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(0);
+		}
+
+		if (!dxco::SoundUtil::isSoundEffectsOn()) {
+			CocosDenshion::SimpleAudioEngine::sharedEngine()->setEffectsVolume(0);
+		}
+
+		if (!this->assetLoader->hasNext()) {
 			this->preloaded = true;
 			this->realInit();
 			this->playMusic();
@@ -506,10 +516,13 @@ void HelloWorld::resumeGame() {
 }
 
 void HelloWorld::playMusic() {
-	if (random() % 2) {
-		CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("sounds/bg1.mp3", true);
-	} else {
-		CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("sounds/bg2.mp3", true);
+
+	if (dxco::SoundUtil::isMusicOn()) {
+		if (random() % 2) {
+			CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("sounds/bg1.mp3", true);
+		} else {
+			CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("sounds/bg2.mp3", true);
+		}
 	}
 }
 
@@ -575,7 +588,10 @@ void HelloWorld::showFire() {
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->stopEffect(this->fireSoundId);
 	}
 	this->fire->setVisible(true);
-	this->fireSoundId = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("sounds/flame2.ogg", true);
+
+	if (dxco::SoundUtil::isSoundEffectsOn()) {
+		this->fireSoundId = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("sounds/flame2.ogg", true);
+	}
 }
 
 void HelloWorld::hideFire() {
@@ -586,7 +602,9 @@ void HelloWorld::hideFire() {
 }
 
 void HelloWorld::playEffect(std::string effect) {
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(effect.c_str());
+	if (dxco::SoundUtil::isSoundEffectsOn()) {
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(effect.c_str());
+	}
 }
 
 void HelloWorld::menuCloseCallback(CCObject* pSender)
