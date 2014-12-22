@@ -1,0 +1,68 @@
+{
+"config": {
+	"background": 1,
+	"kills": 3,
+	"type": "elvis"
+},
+"waves": [{
+	"total" : 50,
+	"freq" : 0.75,
+	"level" : 2,
+	"isBoss" : 0
+	},
+	{
+	"total" : 1,
+	"freq" : 0.5,
+	"level" : 2,
+	"isBoss" : 1
+	},
+	{
+	"total" : 100,
+	"freq" : 0.5,
+	"level" : 2,
+	"isBoss" : 0
+	},
+	{
+	"total" : 1,
+	"freq" : 0.5,
+	"level" : 2,
+	"isBoss" : 1
+	},
+	{
+	"total" : 150,
+	"freq" : 0.4,
+	"level" : 2,
+	"isBoss" : 0
+	},
+	{
+	"total" : 1,
+	"freq" : 0.5,
+	"level" : 2,
+	"isBoss" : 1
+	},
+	{
+	"total" : 150,
+	"freq" : 0.35,
+	"level" : 2,
+	"isBoss" : 0
+	},
+	{
+	"total" : 1,
+	"freq" : 0.5,
+	"level" : 2,
+	"isBoss" : 1
+	},
+	{
+	"total" : 200,
+	"freq" : 0.3,
+	"level" : 2,
+	"isBoss" : 0
+	},
+	{
+	"total" : 1,
+	"freq" : 0.5,
+	"level" : 2,
+	"isBoss" : 1
+	}
+	]
+}
