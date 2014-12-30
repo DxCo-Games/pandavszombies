@@ -12,17 +12,15 @@ LevelFinishedLayer::LevelFinishedLayer(GameModel* model, float x, float y, float
 
 	cocos2d::CCSize visibleSize = cocos2d::CCDirector::sharedDirector()->getVisibleSize();
 
-	cocos2d::CCSprite* title = NULL;
-
 	if (survival) {
-		title = SpriteUtil::create("game_over_title.png", visibleSize.width * 0.2, visibleSize.height * 0.7,
+		this->title = SpriteUtil::create("game_over_title.png", visibleSize.width * 0.2, visibleSize.height * 0.7,
 														  visibleSize.width * 0.6, visibleSize.height * 0.15);
 	} else {
-		title = SpriteUtil::create("level_finished_title.png", visibleSize.width * 0.15, visibleSize.height * 0.7,
+		this->title = SpriteUtil::create("level_finished_title.png", visibleSize.width * 0.15, visibleSize.height * 0.7,
 															   visibleSize.width * 0.7, visibleSize.height * 0.15);
 	}
 
-	this->addChild(title);
+	this->addChild(this->title);
 
 	cocos2d::CCSprite* placaGameOver = SpriteUtil::create("placa_game_over.png", visibleSize.width * (survival ? 0.20 : 0.25), visibleSize.height * 0.3,
 														   visibleSize.width * 0.6, visibleSize.height * 0.4);
@@ -30,7 +28,7 @@ LevelFinishedLayer::LevelFinishedLayer(GameModel* model, float x, float y, float
 	this->addChild(placaGameOver);
 
 	cocos2d::CCSprite* menuButtonSprite = SpriteUtil::create("buttons/menu_button.png", visibleSize.width * 0.2, visibleSize.height * 0.15, title);
-	SpriteUtil::leftAlign(title, menuButtonSprite);
+	SpriteUtil::leftAlign(this->title, menuButtonSprite);
 
 	this->addChild(menuButtonSprite);
 
@@ -56,7 +54,7 @@ LevelFinishedLayer::LevelFinishedLayer(GameModel* model, float x, float y, float
 	this->tryAgainButton = new RestartSurvivalButton(model, tryAgainButtonSprite);
 
 	cocos2d::CCSprite* equipPandaButtonSprite = SpriteUtil::create("buttons/equip_panda_button.png", visibleSize.width * 0.2, visibleSize.height * 0.15, title);
-	SpriteUtil::rightAlign(title, equipPandaButtonSprite);
+	SpriteUtil::rightAlign(this->title, equipPandaButtonSprite);
 
 	this->addChild(equipPandaButtonSprite);
 	this->equipPandaButton = new EquipPandaButton(equipPandaButtonSprite);
@@ -113,6 +111,18 @@ void LevelFinishedLayer::show(int points, int kills, int coins, int stars) {
 	this->pointsLabel->setString(StringUtil::intToKString(points).c_str());
 
 	if (!this->survival) {
+
+		if (stars == 0) {
+
+			cocos2d::CCSize visibleSize = cocos2d::CCDirector::sharedDirector()->getVisibleSize();
+			this->title = SpriteUtil::create("game_over_title.png", visibleSize.width * 0.15, visibleSize.height * 0.7, visibleSize.width * 0.7, visibleSize.height * 0.15);
+
+			this->addChild(title);
+
+			this->nextLevelButton->sprite->setVisible(false);
+			this->tryAgainButton->sprite->setPositionX(visibleSize.width * 0.68);
+		}
+
 		cocos2d::CCSize visibleSize = cocos2d::CCDirector::sharedDirector()->getVisibleSize();
 		cocos2d::CCSprite* starsSprite = SpriteUtil::create("buttons/LEVEL-FIN-SLOTS-" + StringUtil::toString(stars) + ".png", visibleSize.width * 0.15, visibleSize.height * 0.3, visibleSize.height * 0.4 * 0.45, visibleSize.height * 0.4);
 		this->addChild(starsSprite);

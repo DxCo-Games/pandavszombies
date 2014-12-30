@@ -35,6 +35,7 @@ private:
 	RestartSurvivalButton* tryAgainButton;
 	NextLevelButton* nextLevelButton;
 	EquipPandaButton* equipPandaButton;
+	cocos2d::CCSprite* title;
 };
 
 } /* namespace dxco */
