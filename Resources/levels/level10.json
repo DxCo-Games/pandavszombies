@@ -1,0 +1,27 @@
+{
+"config": {
+	"background": 1
+},
+"waves": [{
+	"total" : 30,
+	"freq" : 1,
+	"level" : 1,
+	"isBoss" : 0,
+	"types": ["campesino"]
+	},
+	{
+	"total" : 60,
+	"freq" : 0.5,
+	"level" : 1,
+	"isBoss" : 0,
+	"types": ["campesino"]
+	},
+	{
+	"total" : 120,
+	"freq" : 0.25,
+	"level" : 1,
+	"isBoss" : 0,
+	"types": ["campesino"]
+	}
+	]
+}

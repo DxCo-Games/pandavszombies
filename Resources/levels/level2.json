@@ -1,12 +1,11 @@
 {
 "config": {
-	"background": 1,
-	"time": 30
+	"background": 1
 },
 "waves": [{
-	"total" : 1000,
-	"freq" : 0.1,
-	"level" : 1,
+	"total" : 40,
+	"freq" : 0.75,
+	"level" : 0,
 	"isBoss" : 0
 	}
 	]

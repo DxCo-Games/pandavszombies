@@ -2,6 +2,9 @@
 #define LEVELSELECTIONLAYER_H_
 
 #include "cocos2d.h"
+
+#include "AbstractMenuLayer.h"
+
 #include <vector>
 
 namespace dxco {
@@ -9,7 +12,7 @@ namespace dxco {
 class LevelButton;
 class LevelScreenButton;
 
-class LevelSelectionLayer: public cocos2d::CCLayer {
+class LevelSelectionLayer: public AbstractMenuLayer {
 public:
 	LevelSelectionLayer();
 

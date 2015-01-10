@@ -11,6 +11,7 @@
 #include "crimson/GameProperties.h"
 #include "crimson/Player.h"
 #include "dxco/Animation.h"
+#include "crimson/SoundUtil.h"
 #include "dxco/Container.h"
 #include "dxco/StringUtil.h"
 #include "dxco/LabelUtil.h"
@@ -138,6 +139,9 @@ void HelloWorld::realInit() {
 	    model = new dxco::GameModel(this, player);
 	    this->levelFinishedLayer = new dxco::LevelFinishedLayer(this->model, 0, 0, visibleSize.width, visibleSize.height, this->survivalMode, this->level);
 	    this->addChild(levelFinishedLayer, 50);
+
+	    this->pauseLayer = new dxco::PauseLayer(this->model, 0, 0, visibleSize.width, visibleSize.height);
+	    this->addChild(pauseLayer, 50);
 
 	    this->createInterface();
 
@@ -368,7 +372,7 @@ void HelloWorld::createInterface() {
 	this->panel->setPositionX(joystickBotonMovimiento->getPositionX() + (joystickBoton->getPositionX()-joystickBotonMovimiento->getPositionX())/2);
 	this->panel->setPositionY(joystickBoton->getPositionY());
 	this->controlsLayer->addChild(this->panel, 10);
-	this->panelText = CCLabelTTF::create("", "fonts/KBStickToThePlan.ttf", 12, CCSize(160,0), kCCTextAlignmentCenter);
+	this->panelText = CCLabelTTF::create("", "fonts/KBStickToThePlan.ttf", 12, CCSize(155,0), kCCTextAlignmentCenter);
 	this->panelText->setColor(cocos2d::ccc3(255, 255, 255));
 	this->panelText->setPositionX(this->panel->getPositionX());
 	this->panelText->setPositionY(this->panel->getPositionY());
@@ -383,9 +387,20 @@ void HelloWorld::createInterface() {
 }
 
 void HelloWorld::message(std::string text, int seconds) {
+	this->panelText->stopAllActions();
+	this->panel->stopAllActions();
+
 	this->panelText->setString(text.c_str());
-	CCSequence *seq = CCSequence::create(CCFadeIn::create(0.25), CCDelayTime::create(seconds),
-			CCFadeOut::create(0.25), NULL);
+
+	CCSequence *seq;
+	if (this->panel->getOpacity() != 0) {
+		this->panelText->setOpacity(255);
+		this->panel->setOpacity(255);
+		seq = CCSequence::create(CCDelayTime::create(seconds), CCFadeOut::create(0.25), NULL);
+	} else {
+		seq = CCSequence::create(CCFadeIn::create(0.25), CCDelayTime::create(seconds), CCFadeOut::create(0.25), NULL);
+	}
+
 	this->panel->runAction((CCSequence *)seq->copy());
 	this->panelText->runAction(seq);
 }
@@ -441,8 +456,17 @@ void HelloWorld::update(float dt) {
 		this->loadingItem->update(dt);
 		this->preloadTextures();
 
-		if (!this->assetLoader->hasNext()) {
+		if (dxco::SoundUtil::isMusicOn()) {
 			CocosDenshion::SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(0.5);
+		} else {
+			CocosDenshion::SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(0);
+		}
+
+		if (!dxco::SoundUtil::isSoundEffectsOn()) {
+			CocosDenshion::SimpleAudioEngine::sharedEngine()->setEffectsVolume(0);
+		}
+
+		if (!this->assetLoader->hasNext()) {
 			this->preloaded = true;
 			this->realInit();
 			this->playMusic();
@@ -453,7 +477,7 @@ void HelloWorld::update(float dt) {
 
 void HelloWorld::keyBackClicked() {
 
-	if (true) {
+	if (true) { // TODO: Chaco pls!
 		if (this->juegoPausado) {
 			cocos2d::CCDirector* pDirector = cocos2d::CCDirector::sharedDirector();
 			//pDirector->runWithScene(dxco::MenuParallax::scene());
@@ -462,10 +486,10 @@ void HelloWorld::keyBackClicked() {
 
 		this->juegoPausado = !this->juegoPausado;
 
-		if (!this->juegoPausado) {
-			CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
+		if (this->juegoPausado) {
+			this->pauseGame();
 		} else {
-			this->stopMusic();
+			this->resumeGame();
 		}
 	} else {
 		this->stopMusic();
@@ -475,11 +499,30 @@ void HelloWorld::keyBackClicked() {
 	}
 }
 
+void HelloWorld::pauseGame() {
+	this->stopMusic();
+	this->pauseLayer->show();
+	this->hideControls();
+	this->opacityLayer->setVisible(true);
+}
+
+void HelloWorld::resumeGame() {
+	this->juegoPausado = false;
+
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
+	this->pauseLayer->hide();
+	this->showControls();
+	this->opacityLayer->setVisible(false);
+}
+
 void HelloWorld::playMusic() {
-	if (random() % 2) {
-		CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("sounds/bg1.mp3", true);
-	} else {
-		CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("sounds/bg2.mp3", true);
+
+	if (dxco::SoundUtil::isMusicOn()) {
+		if (random() % 2) {
+			CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("sounds/bg1.mp3", true);
+		} else {
+			CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("sounds/bg2.mp3", true);
+		}
 	}
 }
 
@@ -545,7 +588,10 @@ void HelloWorld::showFire() {
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->stopEffect(this->fireSoundId);
 	}
 	this->fire->setVisible(true);
-	this->fireSoundId = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("sounds/flame2.ogg", true);
+
+	if (dxco::SoundUtil::isSoundEffectsOn()) {
+		this->fireSoundId = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("sounds/flame2.ogg", true);
+	}
 }
 
 void HelloWorld::hideFire() {
@@ -556,7 +602,9 @@ void HelloWorld::hideFire() {
 }
 
 void HelloWorld::playEffect(std::string effect) {
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(effect.c_str());
+	if (dxco::SoundUtil::isSoundEffectsOn()) {
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(effect.c_str());
+	}
 }
 
 void HelloWorld::menuCloseCallback(CCObject* pSender)

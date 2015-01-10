@@ -18,7 +18,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:layout_gravity="center"
-            android:src="@drawable/logo" />
+            android:src="@drawable/logo"
+            android:contentDescription="@null" />
         
         <ImageButton
             android:id="@+id/botonPlay"
@@ -56,7 +57,7 @@
 	              android:src="@drawable/rate_button" />
 	          
 	          <ImageButton
-	            android:id="@+id/botonLoginFacebook"
+	            android:id="@+id/botonSoundEffectsOn"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_marginLeft="-5dp"
@@ -64,15 +65,34 @@
 	            android:background="@android:color/transparent"
 	            android:contentDescription="@null"
 	            android:src="@drawable/sound_button_on" />
+	          
+	          <ImageButton
+	            android:id="@+id/botonSoundEffectsOff"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_marginLeft="-5dp"
+	            android:layout_marginTop="30dp"
+	            android:background="@android:color/transparent"
+	            android:contentDescription="@null"
+	            android:src="@drawable/sound_button_off" />
 	        
 	          <ImageButton
-	            android:id="@+id/botonRate"
+	            android:id="@+id/botonMusicOn"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_marginTop="30dp"
 	            android:background="@android:color/transparent"
 	            android:contentDescription="@null"
 	            android:src="@drawable/music_button_on" />
+	          
+	          <ImageButton
+	            android:id="@+id/botonMusicOff"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_marginTop="30dp"
+	            android:background="@android:color/transparent"
+	            android:contentDescription="@null"
+	            android:src="@drawable/music_button_off" />
 		</LinearLayout>
     </LinearLayout>
 </merge>

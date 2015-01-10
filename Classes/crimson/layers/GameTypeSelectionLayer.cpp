@@ -59,6 +59,7 @@ bool GameTypeSelectionLayer::init() {
 	this->equipPandaButton = new EquipPandaButton(equipButtonSprite);
 
 	this->setTouchEnabled(true);
+	this->setKeypadEnabled(true);
 
 	return true;
 }

@@ -1,0 +1,14 @@
+{
+"config": {
+	"background": 1,
+	"kills": 20,
+	"type": "campesino"
+},
+"waves": [{
+	"total" : 1000,
+	"freq" : 0.5,
+	"level" : 0,
+	"isBoss" : 0
+	}
+	]
+}

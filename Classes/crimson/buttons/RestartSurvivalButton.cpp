@@ -1,11 +1,5 @@
-/*
- * RestartSurvivalButton.cpp
- *
- *  Created on: Nov 3, 2014
- *      Author: gsosarolon
- */
-
 #include "RestartSurvivalButton.h"
+
 #include "../GameModel.h"
 #include "../../HelloWorldScene.h"
 

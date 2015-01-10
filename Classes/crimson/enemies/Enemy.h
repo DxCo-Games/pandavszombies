@@ -20,7 +20,7 @@ class Player;
 
 class Enemy : public TopDownItem, public SteeringBehaviorItem {
 public:
-	Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations, int level);
+	Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations, int level, std::string type);
 	void update(float dt);
 
 	static float getSpeed(int level);
@@ -33,6 +33,7 @@ public:
 	bool dead;
 	float bloodDt;
 	bool frozen;
+	std::string type; //lo100to
 
 	int score;
 

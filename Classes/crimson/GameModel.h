@@ -55,6 +55,8 @@ public:
 	bool playerHurt;
 	int freezeBonusActivated;
 	int kills;
+	std::map<std::string,int> typeKills;
+	void resetTypeKills();
 private:
 	void updateCoins();
 };

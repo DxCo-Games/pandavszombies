@@ -31,7 +31,6 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/dxco/ViewListElement.cpp \
                    ../../Classes/dxco/ImageFileURLLoader.cpp \
                    ../../Classes/dxco/Sha1.cpp \
-                   ../../Classes/dxco/SoundUtil.cpp \
                    ../../Classes/dxco/CCAdView.cpp \
                    ../../Classes/dxco/AdsAPI.cpp \
                    ../../Classes/dxco/RevMob.cpp \
@@ -43,6 +42,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/dxco/VoiceManager.cpp \
                    ../../Classes/dxco/AssetLoader.cpp \
                    ../../Classes/dxco/SteeringBehaviorItem.cpp \
+                   ../../Classes/crimson/SoundUtil.cpp \
                    ../../Classes/crimson/JoystickMira.cpp \
                    ../../Classes/crimson/JoystickMovimiento.cpp \
                    ../../Classes/crimson/GameModel.cpp \
@@ -71,17 +71,18 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/crimson/levels/TimedLevel.cpp \
                    ../../Classes/crimson/levels/KillCountLevel.cpp \
                    ../../Classes/crimson/levels/SurvivalLevel.cpp \
+                   ../../Classes/crimson/levels/TutorialLevel.cpp \
                    ../../Classes/crimson/levels/EnemyWave.cpp \
                    ../../Classes/crimson/levels/LevelParser.cpp \
                    ../../Classes/crimson/Mapa.cpp \
                    ../../Classes/crimson/daos/UserDAO.cpp \
-                   ../../Classes/crimson/NativeMethods.cpp \
                    ../../Classes/crimson/FireBulletWeapon.cpp \
                    ../../Classes/crimson/Bazooka.cpp \
                    ../../Classes/crimson/ChainedKillsManager.cpp \
                    ../../Classes/crimson/BazookaBullet.cpp \
                    ../../Classes/crimson/layers/GameTypeSelectionLayer.cpp \
                    ../../Classes/crimson/layers/LevelSelectionLayer.cpp \
+                   ../../Classes/crimson/layers/AbstractMenuLayer.cpp \
                    ../../Classes/crimson/buttons/SurvivalButton.cpp \
                    ../../Classes/crimson/buttons/StoryButton.cpp \
                    ../../Classes/crimson/buttons/LevelButton.cpp \
@@ -90,10 +91,12 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/crimson/buttons/EquipPandaButton.cpp \
                    ../../Classes/crimson/buttons/NextLevelButton.cpp \
                    ../../Classes/crimson/buttons/RestartSurvivalButton.cpp \
+                   ../../Classes/crimson/buttons/ResumeButton.cpp \
                    ../../Classes/crimson/layers/LevelFinishedLayer.cpp \
                    ../../Classes/crimson/layers/EquipPandaLayer.cpp \
                    ../../Classes/crimson/layers/EquipPandaItem.cpp \
-                   ../../Classes/crimson/layers/EquipPandaSkillsContainer.cpp
+                   ../../Classes/crimson/layers/EquipPandaSkillsContainer.cpp \
+                   ../../Classes/crimson/layers/PauseLayer.cpp
                    
                    
 

@@ -1,0 +1,36 @@
+{
+"config": {
+	"background": 1
+},
+"waves": [{
+	"total" : 15,
+	"freq" : 1.5,
+	"level" : 1,
+	"isBoss" : 0
+	},
+	{
+	"total" : 60,
+	"freq" : 0.25,
+	"level" : 1,
+	"isBoss" : 0
+	},
+	{
+	"total" : 15,
+	"freq" : 1.5,
+	"level" : 1,
+	"isBoss" : 0
+	},
+	{
+	"total" : 5,
+	"freq" : 0.25,
+	"level" : 1,
+	"isBoss" : 1
+	},
+	{
+	"total" : 100,
+	"freq" : 0.25,
+	"level" : 1,
+	"isBoss" : 0
+	}
+	]
+}

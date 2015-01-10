@@ -3,6 +3,7 @@
 #include "levels/Level.h"
 #include "levels/SurvivalLevel.h"
 #include "levels/LevelParser.h"
+#include "levels/TutorialLevel.h"
 #include "../HelloWorldScene.h"
 #include "dxco/SpriteUtil.h"
 #include "dxco/StringUtil.h"
@@ -76,8 +77,20 @@ GameModel::GameModel(HelloWorld* vista, Player* player) {
 	this->chains = new ChainedKillsManager(this);
 	this->timer = 0;
 
+	//se puede evitar esto?
+	this->resetTypeKills();
+
 	//batch node added to map
 	this->enemyFactory = new EnemyFactory();
+}
+
+void GameModel::resetTypeKills() {
+	this->typeKills["elvis"] = 0;
+	this->typeKills["oficinista"] = 0;
+	this->typeKills["campesino"] = 0;
+	this->typeKills["cirujano"] = 0;
+	this->typeKills["cura"] = 0;
+	this->typeKills["basket"] = 0;
 }
 
 void GameModel::loadLevel(bool survival, int level) {
@@ -85,6 +98,9 @@ void GameModel::loadLevel(bool survival, int level) {
 	if (survival) {
 		this->level = new SurvivalLevel(this);
 		this->vista->setMap(rand() %2);
+	} else if (level == 1){
+		this->level = new TutorialLevel(this);
+		this->vista->setMap(1);
 	} else {
 		this->level = LevelParser::parse(this, "levels/level" + StringUtil::toString(level) +".json");
 	}
@@ -109,6 +125,7 @@ void GameModel::enemyKilled(Enemy* enemy) {
 			location.y - enemy->getHeight() / 2));
 
 	this->kills += 1;
+	this->typeKills[enemy->type]++;
 	this->chains->addKill();
 }
 
@@ -121,7 +138,9 @@ void GameModel::update(float dt) {
 	this->player->weapon->update(dt);
 	this->voice->update(dt);
 
-	if (!this->freezeBonusActivated) {
+	if (this->freezeBonusActivated) {
+		this->level->updateFreezed(dt);
+	} else {
 		this->level->update(dt);
 	}
 
@@ -154,15 +173,14 @@ void GameModel::update(float dt) {
 	if (!this->player->isActive()){
 		this->vista->hideControls();
 		this->vista->levelFinishedLayer->show(this->player->score, this->kills, this->player->score / COIN_VALUE, 0);
-		this->vista->juegoPausado = true; // TODO: Improve
+		this->vista->juegoPausado = true;
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
 
 		this->vista->opacityLayer->setVisible(true);
 	} else if (this->level->isFinished()) {
-		//FIXME mostrar level finished en vez de game over. Permitir pasar al proximo nivel
 		this->vista->hideControls();
 		this->vista->levelFinishedLayer->show(this->player->score, this->kills, this->player->score / COIN_VALUE, 3);
-		this->vista->juegoPausado = true; // TODO: Improve
+		this->vista->juegoPausado = true;
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
 
 		this->vista->opacityLayer->setVisible(true);
@@ -192,7 +210,7 @@ void GameModel::restartGame() {
 	this->mapa->moveToAbsolute(mapCornerX, mapCornerY);
 	this->vista->clouds->moveToAbsolute(mapCornerX, mapCornerY);
 	this->vista->opacityLayer->setVisible(false);
-	this->vista->bubble->setVisible(true);
+	this->vista->bubble->setVisible(false);
 
 	this->prop->set("enemy.level", 1);
 
@@ -210,6 +228,7 @@ void GameModel::restartGame() {
 	this->player->movementSpeedBonus = 1;
 	this->player->weaponSpeedBonus = 1;
 	this->kills = 0;
+	this->resetTypeKills();
 	this->chains->restart();
 	this->timer = 0;
 
@@ -231,6 +250,7 @@ void GameModel::restartGame() {
 	this->vista->levelFinishedLayer->hide();
 	this->vista->showControls();
 	this->vista->juegoPausado = false;
+	this->vista->pauseLayer->hide();
 
 	this->items.clear();
 	this->enemies.clear();

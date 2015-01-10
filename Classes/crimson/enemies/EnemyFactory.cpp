@@ -8,6 +8,7 @@
 #include "../GameModel.h"
 #include "../GameProperties.h"
 #include "../../HelloWorldScene.h"
+#include <algorithm>
 
 namespace dxco {
 
@@ -15,13 +16,21 @@ namespace dxco {
 EnemyFactory::EnemyFactory(){
 }
 
-void EnemyFactory::createEnemy(GameModel* model) {
+void EnemyFactory::createEnemy(GameModel* model, std::string type, float freq) {
 	std::vector<std::string> vec;
-	vec.push_back("campesino");
-	vec.push_back("oficinista");
-	vec.push_back("basquet");
-	vec.push_back("cirujano");
-	vec.push_back("cura");
+	CCLOG("CREATIN ENEMY %s %f", type.c_str(), freq);
+	//20 is equally probable, 15 is less, 5 is lesser...
+	if (rand() % 100 < freq * 100) {
+		vec.push_back(type);
+	} else {
+		vec.push_back("campesino");
+		vec.push_back("oficinista");
+		vec.push_back("basquet");
+		vec.push_back("cirujano");
+		vec.push_back("cura");
+		//remove type
+		vec.erase(std::remove(vec.begin(), vec.end(), type), vec.end());
+	}
 	this->createEnemy(model, vec);
 }
 
@@ -40,7 +49,7 @@ void EnemyFactory::createEnemy(GameModel* model, std::vector<std::string>types) 
 	std::map<int, dxco::Animation*> animations = loadAnimations(model, type, speed);
 	cocos2d::CCSprite* enemySprite = createSpriteInRandomPosition(model, type + "_1_0000.png", 75 + delta, 75 + delta);
 
-	Enemy* enemy = new Enemy(model, enemySprite, animations, enemyLevel);
+	Enemy* enemy = new Enemy(model, enemySprite, animations, enemyLevel, type);
 	//FIXME add SpeedyEnemy
 	if (type == "basquet") {
 		enemy->speed = speed;
@@ -50,12 +59,26 @@ void EnemyFactory::createEnemy(GameModel* model, std::vector<std::string>types) 
 }
 
 void EnemyFactory::createBoss(GameModel* model) {
+	this->createBoss(model, this->createTypesVector(true));
+}
+
+void EnemyFactory::createEnemy(GameModel* model) {
+	this->createEnemy(model, this->createTypesVector(false));
+}
+
+void EnemyFactory::createBoss(GameModel* model, std::vector<std::string> types) {
+
+	std::string type = "elvis";
+
+	if (types.size() != 0) {
+		type = types[rand() % types.size()];
+	}
 
 	int enemyLevel = model->prop->get("enemy.level");
-	std::map<int, dxco::Animation*> animations = loadAnimations(model, "elvis", Enemy::getSpeed(enemyLevel));
+	std::map<int, dxco::Animation*> animations = loadAnimations(model, type, Enemy::getSpeed(enemyLevel));
 
-	cocos2d::CCSprite* enemySprite = createSpriteInRandomPosition(model, "elvis_1_0000.png", 150, 150);
-	Enemy* enemy = new Boss(model, enemySprite, animations, enemyLevel);
+	cocos2d::CCSprite* enemySprite = createSpriteInRandomPosition(model, type + "_1_0000.png", 150, 150);
+	Enemy* enemy = new Boss(model, enemySprite, animations, enemyLevel, type);
 	addEnemy(model, enemy);
 
 	SpriteUtil::fadeIn(enemy->getSprite());
@@ -66,6 +89,21 @@ void EnemyFactory::addEnemy(GameModel* model, Enemy* enemy) {
 	model->enemies.push_back(enemy);
 	model->items.push_back(enemy);
 	model->mapa->addChild(enemy->getSprite());
+}
+
+std::vector<std::string> EnemyFactory::createTypesVector(bool includeElvis) {
+	std::vector<std::string> vec;
+	vec.push_back("campesino");
+	vec.push_back("oficinista");
+	vec.push_back("basquet");
+	vec.push_back("cirujano");
+	vec.push_back("cura");
+
+	if (includeElvis) {
+		vec.push_back("elvis");
+	}
+
+	return vec;
 }
 
 std::map<int, dxco::Animation*> EnemyFactory::loadAnimations(GameModel* model, std::string type, float speed) {
@@ -147,4 +185,4 @@ cocos2d::CCSprite* EnemyFactory::createSpriteInRandomPosition(GameModel* model, 
 	return dxco::SpriteUtil::create(texture, x, y, width, height, true);
 }
 
-} /* namespace dxco */
+}
