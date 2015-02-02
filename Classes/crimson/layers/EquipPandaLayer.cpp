@@ -6,6 +6,8 @@
 #include "../../dxco/LabelUtil.h"
 #include "../../dxco/StringUtil.h"
 #include <string>
+#include "EquipPandaItem.h"
+#include "../GameProperties.h"
 
 namespace dxco {
 
@@ -26,18 +28,6 @@ bool EquipPandaLayer::init() {
 	}
 	cocos2d::CCPoint origin =
 						cocos2d::CCDirector::sharedDirector()->getVisibleOrigin();
-
-	std::vector<std::string> mejoras;
-
-	mejoras.push_back("BOMB");
-	mejoras.push_back("SHOT");
-	mejoras.push_back("BONUS");
-	mejoras.push_back("BOMB");
-	mejoras.push_back("SHOT");
-	mejoras.push_back("BONUS");
-	mejoras.push_back("BOMB");
-	mejoras.push_back("SHOT");
-	mejoras.push_back("BONUS");
 
 	cocos2d::CCSize visibleSize = cocos2d::CCDirector::sharedDirector()->getVisibleSize();
 
@@ -65,12 +55,6 @@ bool EquipPandaLayer::init() {
 
 	this->addChild(spriteGetCoinsButton);
 
-	for (int i = 0; i < mejoras.size(); i++) {
-		float itemsDeltaX = i * skillsPandaWidth * 0.85 + skillsPandaX + skillsPandaWidth * 1.15;
-		EquipPandaItem* item = new EquipPandaItem(mejoras[i], itemsDeltaX, skillsPandaY, skillsPandaWidth * 0.8, skillsPandaHeight);
-		items.push_back(item);
-		this->addChild(item);
-	}
 
 	this->setTouchEnabled(true);
 	this->setKeypadEnabled(true);
@@ -91,7 +75,23 @@ bool EquipPandaLayer::init() {
 	this->addChild(totalCoinsLabel);
 	this->addSkills(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight);
 
+	this->touchId = 999;
+
+	this->loadMejoras(skillsPandaWidth, skillsPandaHeight, skillsPandaX, skillsPandaY);
+
 	return true;
+}
+
+void EquipPandaLayer::loadMejoras(float skillsPandaWidth, float skillsPandaHeight, float skillsPandaX, float skillsPandaY) {
+
+	std::vector<std::string> mejoras = EquipPandaItem::getMejoras();
+
+	for (int i = 0; i < mejoras.size(); i++) {
+		float itemsDeltaX = i * skillsPandaWidth * 0.85 + skillsPandaX + skillsPandaWidth * 1.15;
+		EquipPandaItem* item = new EquipPandaItem(mejoras[i], itemsDeltaX, skillsPandaY, skillsPandaWidth * 0.8, skillsPandaHeight);
+		items.push_back(item);
+		this->addChild(item);
+	}
 }
 
 void EquipPandaLayer::addSkills(float skillsPandaX, float skillsPandaY, float skillsPandaWidth, float skillsPandaHeight) {
@@ -137,55 +137,100 @@ void EquipPandaLayer::addSkill(float skillsPandaX, float skillsPandaY, float ski
 void EquipPandaLayer::ccTouchesBegan(cocos2d::CCSet *pTouches,
 		cocos2d::CCEvent *pEvent) {
 
-	cocos2d::CCTouch* touch = (cocos2d::CCTouch*) (pTouches->anyObject());
+	if (this->touchId != 999) {
+		CCLOG("Se abandona por touch ID");
+		return;
+	}
 
-	cocos2d::CCPoint location = touch->getLocationInView();
-	location = cocos2d::CCDirector::sharedDirector()->convertToGL(location);
+	cocos2d::CCSetIterator it = pTouches->begin();
+	cocos2d::CCPoint location;
+	cocos2d::CCTouch * touch;
 
-	this->beginLocation = this->lastLocation = location;
-	this->moved = 0.0;
-	this->movingLeftAnimation = this->movingRigthAnimation = false;
+	for (int iTouchCount = 0; iTouchCount < pTouches->count(); iTouchCount++) {
+
+		touch = (cocos2d::CCTouch*) (*it);
+		location = touch->getLocationInView();
+		location = cocos2d::CCDirector::sharedDirector()->convertToGL(location);
+		this->touchId = touch->getID();
+
+		this->beginLocation = this->lastLocation = location;
+		this->moved = 0.0;
+		this->movingLeftAnimation = this->movingRigthAnimation = false;
+		it++;
+	}
 }
 
 void EquipPandaLayer::ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent) {
 
-	cocos2d::CCTouch* touch = (cocos2d::CCTouch*) (pTouches->anyObject());
-	cocos2d::CCPoint location = touch->getLocationInView();
-	location = cocos2d::CCDirector::sharedDirector()->convertToGL(location);
+	cocos2d::CCSetIterator it = pTouches->begin();
+	cocos2d::CCPoint location;
+	cocos2d::CCTouch * touch;
 
-	float deltaX = location.x - lastLocation.x;
-	float deltaY = location.y - lastLocation.y;
-	lastLocation = location;
+	for (int iTouchCount = 0; iTouchCount < pTouches->count(); iTouchCount++) {
 
-	for (int i = 0; i < items.size(); i++) {
-		EquipPandaItem* item = items[i];
+		touch = (cocos2d::CCTouch*) (*it);
+		location = touch->getLocationInView();
+		location = cocos2d::CCDirector::sharedDirector()->convertToGL(location);
 
-		item->move(deltaX, 0);
+		if (this->touchId != touch->getID()) {
+			continue;
+		}
+
+		float deltaX = location.x - lastLocation.x;
+		float deltaY = location.y - lastLocation.y;
+		lastLocation = location;
+
+		for (int i = 0; i < items.size(); i++) {
+			EquipPandaItem* item = items[i];
+
+			item->move(deltaX, 0);
+		}
+
+		it++;
 	}
 }
+
+
 
 void EquipPandaLayer::ccTouchesEnded(cocos2d::CCSet *pTouches,
 		cocos2d::CCEvent *pEvent) {
 
-	cocos2d::CCTouch* touch = (cocos2d::CCTouch*) (pTouches->anyObject());
-	cocos2d::CCPoint location = touch->getLocationInView();
-	location = cocos2d::CCDirector::sharedDirector()->convertToGL(location);
+	cocos2d::CCSetIterator it = pTouches->begin();
+	cocos2d::CCPoint location;
+	cocos2d::CCTouch * touch;
 
-	float delta = location.x - beginLocation.x;
+	for (int iTouchCount = 0; iTouchCount < pTouches->count(); iTouchCount++) {
 
-	if (delta < 0) {
-		delta *= -1;
-	}
+		touch = (cocos2d::CCTouch*) (*it);
+		location = touch->getLocationInView();
+		location = cocos2d::CCDirector::sharedDirector()->convertToGL(location);
 
-	if (delta < CLICK_MAX_DELTA) {
-
-	} else {
-		if (location.x - beginLocation.x > 0) {
-			this->movingRigthAnimation = true;
+		if (this->touchId == touch->getID()) {
+			this->touchId = 999;
 		} else {
-			this->movingLeftAnimation = true;
+			continue;
 		}
+
+		float delta = location.x - beginLocation.x;
+
+		if (delta < 0) {
+			delta *= -1;
+		}
+
+		if (delta < CLICK_MAX_DELTA) {
+			for (int i = 0; i < this->items.size(); i++) {
+				this->items[i]->touch(location);
+			}
+		} else {
+			if (location.x - beginLocation.x > 0) {
+				this->movingRigthAnimation = true;
+			} else {
+				this->movingLeftAnimation = true;
+			}
+		}
+		it++;
 	}
+
 }
 
 int EquipPandaLayer::getTotalCoins() {
@@ -193,23 +238,23 @@ int EquipPandaLayer::getTotalCoins() {
 }
 
 int EquipPandaLayer::getLife() {
-	return rand() % 1000;
+	return GameProperties::get("player.life");
 }
 
 int EquipPandaLayer::getSpeed() {
-	return rand() % 100;
+	return GameProperties::get("player.speed");
 }
 
 int EquipPandaLayer::getAttack() {
-	return rand() % 1000000;
+	return GameProperties::get("bullet.damage");
 }
 
 int EquipPandaLayer::getWeaponTime() {
-	return 10 + (rand() % 20);
+	return GameProperties::get("weapon.duration");
 }
 
 int EquipPandaLayer::getBonus() {
-	return 10 + (rand() % 90);
+	return GameProperties::get("bonus.probability");
 }
 
 } /* namespace dxco */

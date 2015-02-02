@@ -3,6 +3,7 @@
 
 #include "../../dxco/Container.h"
 #include <string>
+#include <vector>
 
 namespace dxco {
 
@@ -14,15 +15,15 @@ public:
 
 	void execute();
 
+	static std::vector<std::string> getMejoras();
 private:
-	int cantidadDisponible;
 	bool isActivo();
 	int getCantidadDisponible();
 	std::string getImagePath();
 	std::string getExplicacion();
 	std::string getName();
 	std::string getBuyImagePath();
-	std::string _getPrice();
+	int getPrice();
 };
 
 } /* namespace dxco */

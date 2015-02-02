@@ -1,33 +1,112 @@
 #include "GameProperties.h"
 
+#include "../dxco/DB.h"
+#include "../dxco/StringUtil.h"
+#include <string>
+#include "cocos2d.h"
+
+#include <math.h>
+
 namespace dxco {
 
-GameProperties::GameProperties() {
+void GameProperties::init() {
+
+	int saveDefaultProperties = DB::getInteger("save_default_properties");
+
+	if (saveDefaultProperties != 1918) {
+		GameProperties::saveDefaultProperties();
+	}
+}
+
+void GameProperties::saveDefaultProperties() {
 	//default properties
-	this->prop["enemy.level"] = 1;
-	this->prop["player.life"] = 200;
-	this->prop["player.speed"] = 90;
-	this->prop["bonus.probability"] = 10;
+	DB::putInteger("enemy.level", 1);
+
+	DB::putInteger("player.life", 200);
+	DB::putInteger("player.speed", 90);
+	DB::putInteger("bonus.probability", 10);
 
 	//TODO check this in bonus factory
-	this->prop["bazooka.unlocked"] = 1;
-	this->prop["fire.unlocked"] = 1;
-	this->prop["firebullet.unlocked"] = 1;
+	DB::putInteger("bazooka.unlocked", 0);
+	DB::putInteger("fire.unlocked", 0);
+	DB::putInteger("firebullet.unlocked", 0);
 
-	this->prop["weapon.duration"] = 15;
-	this->prop["bullet.damage"] = 10;
-	this->prop["bazooka.damage"] = 80;
-	this->prop["explosion.damage"] = 80;
+	DB::putInteger("weapon.duration", 15);
+	DB::putInteger("bullet.damage", 10);
+	DB::putInteger("bazooka.damage", 80);
+	DB::putInteger("explosion.damage", 80);
+
+	// Indica el nivel de la mejor. Inicialmente en 0, luego 1, 2, 3, 4, ...
+	DB::putInteger("player.life.level", 1);
+	DB::putInteger("player.speed.level", 1);
+	DB::putInteger("bonus.probability.level", 1);
+
+	DB::putInteger("weapon.duration.level", 1);
+	DB::putInteger("bullet.damage.level", 1);
+	DB::putInteger("bazooka.damage.level", 1);
+	DB::putInteger("explosion.damage.level", 1);
+
+	// cuando se realiza una mejora, la propiedad mejora en este porcentaje.
+	DB::putInteger("player.life.percentage", 10);
+	DB::putInteger("player.speed.percentage", 2);
+	DB::putInteger("bonus.probability.percentage", 5);
+
+	DB::putInteger("weapon.duration.percentage", 10);
+	DB::putInteger("bullet.damage.percentage", 10);
+	DB::putInteger("bazooka.damage.percentage", 10);
+	DB::putInteger("explosion.damage.percentage", 10);
+
+	DB::putInteger("save_default_properties", 1918);
 }
 
-float GameProperties::get(std::string key) {
-	return this->prop[key];
+int GameProperties::get(std::string key) {
+	GameProperties::init();
+	return DB::getInteger(key);
 }
-void GameProperties::set(std::string key, float value) {
-	this->prop[key] = value;
+
+void GameProperties::set(std::string key, int value) {
+	GameProperties::init();
+	DB::putInteger(key, value);
 }
+
+
+void GameProperties::powerUp(std::string key) {
+	if (key == "bazooka.unlocked" || key == "fire.unlocked" || key == "firebullet.unlocked") {
+		DB::putInteger(key, 1);
+	} else {
+		float percentaje = (float) DB::getInteger(key + std::string(".percentage"));
+
+		GameProperties::powerUp(key, 1 + (percentaje / 100));
+		int currentLevel = GameProperties::increaseLevel(key);
+	}
+
+}
+
+int	 GameProperties::increaseLevel(std::string key) {
+	int currentLevel = DB::getInteger(key + std::string(".level"));
+	currentLevel++;
+
+	DB::putInteger(key + std::string(".level"), currentLevel);
+
+	return currentLevel;
+}
+
 void GameProperties::powerUp(std::string key, float percentage) {
-	this->prop[key] += this->prop[key] * percentage;
+	int current_value = GameProperties::get(key);
+	GameProperties::set(key, (int)(current_value * percentage));
+}
+
+int GameProperties::getPrice(std::string key) {
+	int level = GameProperties::get(key + std::string(".level")) - 1;
+
+	if (key == "bazooka.unlocked" || key == "fire.unlocked" || key == "firebullet.unlocked") {
+		level++;
+	}
+
+	// numero de dios =(
+	double multiplier = pow (1.618033988749, level);
+
+	return 500 * multiplier;
 }
 
 } /* namespace dxco */

@@ -42,6 +42,9 @@ public:
 	int getAttack();
 	int getWeaponTime();
 	int getBonus();
+	void loadMejoras(float skillsPandaWidth, float skillsPandaHeight, float skillsPandaX, float skillsPandaY);
+
+	int touchId;
 };
 
 } /* namespace dxco */

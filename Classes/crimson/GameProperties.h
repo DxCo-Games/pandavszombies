@@ -8,15 +8,22 @@ namespace dxco {
 
 class GameProperties {
 public:
-	//get default parameters
-	GameProperties();
 	//get parameters from level?
 
-	float get(std::string key);
-	void set(std::string key, float value);
-	void powerUp(std::string key, float percentage);
+	static int get(std::string key);
+	static void set(std::string key, int value);
+	static void powerUp(std::string key, float percentage);
 
-	std::map<std::string, float> prop;
+	// this function takes the saved property percentage
+	static void powerUp(std::string key);
+	static int increaseLevel(std::string key);
+
+	static std::map<std::string, float> prop;
+
+	static void saveDefaultProperties();
+	static void init();
+
+	static int getPrice(std::string);
 };
 
 } /* namespace dxco */
