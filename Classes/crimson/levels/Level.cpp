@@ -35,12 +35,7 @@ void Level::update(float dt) {
 
 bool Level::isFinished() {
 	//return true if all waves are finished and all enemies were killed
-	if (this->waves[this->currentWave]->isFinished() &&
-			this->currentWave == this->waves.size() -1) {
-		//note this waits for the blood splat to disappear.
-		return this->model->enemies.size() == 0;
-	}
-	return false;
+	return this->model->kills == this->totalEnemies;
 }
 
 void Level::restartLevel() {

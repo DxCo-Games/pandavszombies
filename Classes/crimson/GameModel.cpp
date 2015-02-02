@@ -179,13 +179,14 @@ void GameModel::update(float dt) {
 		this->vista->opacityLayer->setVisible(true);
 	} else if (this->level->isFinished()) {
 		this->vista->hideControls();
-		this->vista->levelFinishedLayer->show(this->player->score, this->kills, this->player->score / COIN_VALUE, 3);
+		int stars = this->getLevelStars();
+		this->vista->levelFinishedLayer->show(this->player->score, this->kills, this->player->score / COIN_VALUE, stars);
 		this->vista->juegoPausado = true;
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
 
 		this->vista->opacityLayer->setVisible(true);
-		//TODO calculate stars
-		UserDAO::finishLevel(this->levelNumber, 3);
+		UserDAO::finishLevel(this->levelNumber, stars);
+
 	}
 
 	//Bullet cleanup
@@ -194,6 +195,15 @@ void GameModel::update(float dt) {
 	    				this->bullets.end());
 
 	this->chains->updateView();
+}
+
+int GameModel::getLevelStars() {
+	if (this->player->life == this->prop->get("player.life")) {
+		return 3;
+	} else if (this->player->life > 0.75 * this->prop->get("player.life")) {
+		return 2;
+	}
+	return 1;
 }
 
 void GameModel::restartGame() {

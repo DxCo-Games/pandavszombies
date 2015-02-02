@@ -330,7 +330,14 @@ void HelloWorld::createInterface() {
 		this->timerLabel = dxco::LabelUtil::create("00:00", 14, visibleSize.width / 2, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT, "fonts/KBStickToThePlan.ttf");
 	} else {
 		this->timer = dxco::SpriteUtil::create("gameplay/LEVEL.png", visibleSize.width / 2, 0, lifeBack);
-		this->timerLabel = dxco::LabelUtil::create("LEVEL " + dxco::StringUtil::toString(this->level), 14, visibleSize.width / 2, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT, "fonts/KBStickToThePlan.ttf");
+
+		std::string levelText = "LEVEL " + dxco::StringUtil::toString(this->level);
+
+		if (this->level < 10) {
+			levelText = " " + levelText;
+		}
+
+		this->timerLabel = dxco::LabelUtil::create(levelText, 13, visibleSize.width / 2, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT, "fonts/KBStickToThePlan.ttf");
 	}
 	this->timer->setPositionY(lifeBack->getPositionY());
 	//put timer in between score and life
@@ -354,7 +361,7 @@ void HelloWorld::createInterface() {
 	this->playerScoreLabel->setPositionY(this->timerLabel->getPositionY());
 	this->controlsLayer->addChild(playerScoreLabel, 10);
 
-	this->killsLabel = dxco::LabelUtil::create("0", 14, visibleSize.width / 2, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::RIGHT, "fonts/KBStickToThePlan.ttf");
+	this->killsLabel = dxco::LabelUtil::create("0", 10, visibleSize.width / 2, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::RIGHT, "fonts/KBStickToThePlan.ttf");
 	this->killsLabel->setPositionX(zombie->getPositionX() + 0.20 * dxco::SpriteUtil::getWidth(zombie));
 	this->killsLabel->setPositionY(zombie->getPositionY() + 0.22 * dxco::SpriteUtil::getHeight(zombie));
 	this->controlsLayer->addChild(killsLabel, 10);

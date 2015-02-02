@@ -34,9 +34,9 @@ bool LevelSelectionLayer::init() {
 	cocos2d::CCSprite* spriteBackground;
 
 	if(this->page % 2) {
-		spriteBackground = SpriteUtil::create("fondo_cementerio.jpg", 0, 0, visibleSize.width, visibleSize.height);
-	} else {
 		spriteBackground = SpriteUtil::create("fondo_ciudad.jpg", 0, 0, visibleSize.width, visibleSize.height);
+	} else {
+		spriteBackground = SpriteUtil::create("fondo_cementerio.jpg", 0, 0, visibleSize.width, visibleSize.height);
 	}
 	this->addChild(spriteBackground);
 
