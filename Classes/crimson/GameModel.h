@@ -59,6 +59,7 @@ public:
 	void resetTypeKills();
 private:
 	void updateCoins();
+	int getLevelStars();
 };
 
 } /* namespace dxco */
