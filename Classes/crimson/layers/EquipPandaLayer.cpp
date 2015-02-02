@@ -6,6 +6,8 @@
 #include "../../dxco/LabelUtil.h"
 #include "../../dxco/StringUtil.h"
 #include <string>
+#include "EquipPandaItem.h"
+#include "../GameProperties.h"
 
 namespace dxco {
 
@@ -26,18 +28,6 @@ bool EquipPandaLayer::init() {
 	}
 	cocos2d::CCPoint origin =
 						cocos2d::CCDirector::sharedDirector()->getVisibleOrigin();
-
-	std::vector<std::string> mejoras;
-
-	mejoras.push_back("BOMB");
-	mejoras.push_back("SHOT");
-	mejoras.push_back("BONUS");
-	mejoras.push_back("BOMB");
-	mejoras.push_back("SHOT");
-	mejoras.push_back("BONUS");
-	mejoras.push_back("BOMB");
-	mejoras.push_back("SHOT");
-	mejoras.push_back("BONUS");
 
 	cocos2d::CCSize visibleSize = cocos2d::CCDirector::sharedDirector()->getVisibleSize();
 
@@ -65,12 +55,6 @@ bool EquipPandaLayer::init() {
 
 	this->addChild(spriteGetCoinsButton);
 
-	for (int i = 0; i < mejoras.size(); i++) {
-		float itemsDeltaX = i * skillsPandaWidth * 0.85 + skillsPandaX + skillsPandaWidth * 1.15;
-		EquipPandaItem* item = new EquipPandaItem(mejoras[i], itemsDeltaX, skillsPandaY, skillsPandaWidth * 0.8, skillsPandaHeight);
-		items.push_back(item);
-		this->addChild(item);
-	}
 
 	this->setTouchEnabled(true);
 	this->setKeypadEnabled(true);
@@ -92,7 +76,22 @@ bool EquipPandaLayer::init() {
 	this->addSkills(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight);
 
 	this->touchId = 999;
+
+	this->loadMejoras(skillsPandaWidth, skillsPandaHeight, skillsPandaX, skillsPandaY);
+
 	return true;
+}
+
+void EquipPandaLayer::loadMejoras(float skillsPandaWidth, float skillsPandaHeight, float skillsPandaX, float skillsPandaY) {
+
+	std::vector<std::string> mejoras = EquipPandaItem::getMejoras();
+
+	for (int i = 0; i < mejoras.size(); i++) {
+		float itemsDeltaX = i * skillsPandaWidth * 0.85 + skillsPandaX + skillsPandaWidth * 1.15;
+		EquipPandaItem* item = new EquipPandaItem(mejoras[i], itemsDeltaX, skillsPandaY, skillsPandaWidth * 0.8, skillsPandaHeight);
+		items.push_back(item);
+		this->addChild(item);
+	}
 }
 
 void EquipPandaLayer::addSkills(float skillsPandaX, float skillsPandaY, float skillsPandaWidth, float skillsPandaHeight) {
@@ -219,7 +218,9 @@ void EquipPandaLayer::ccTouchesEnded(cocos2d::CCSet *pTouches,
 		}
 
 		if (delta < CLICK_MAX_DELTA) {
-
+			for (int i = 0; i < this->items.size(); i++) {
+				this->items[i]->touch(location);
+			}
 		} else {
 			if (location.x - beginLocation.x > 0) {
 				this->movingRigthAnimation = true;
@@ -237,23 +238,23 @@ int EquipPandaLayer::getTotalCoins() {
 }
 
 int EquipPandaLayer::getLife() {
-	return rand() % 1000;
+	return GameProperties::get("player.life");
 }
 
 int EquipPandaLayer::getSpeed() {
-	return rand() % 100;
+	return GameProperties::get("player.speed");
 }
 
 int EquipPandaLayer::getAttack() {
-	return rand() % 1000000;
+	return GameProperties::get("bullet.damage");
 }
 
 int EquipPandaLayer::getWeaponTime() {
-	return 10 + (rand() % 20);
+	return GameProperties::get("weapon.duration");
 }
 
 int EquipPandaLayer::getBonus() {
-	return 10 + (rand() % 90);
+	return GameProperties::get("bonus.probability");
 }
 
 } /* namespace dxco */
