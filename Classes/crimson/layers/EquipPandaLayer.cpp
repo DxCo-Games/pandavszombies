@@ -1,7 +1,7 @@
 #include "EquipPandaLayer.h"
 #include "../../dxco/SpriteUtil.h"
 #include "GameTypeSelectionLayer.h"
-#include "EquipPandaSkillsContainer.h"
+#include "../../dxco/Container.h"
 #include <cstdlib>
 #include "../../dxco/LabelUtil.h"
 #include "../../dxco/StringUtil.h"
@@ -34,27 +34,32 @@ bool EquipPandaLayer::init() {
 	cocos2d::CCSprite* spriteBackground = SpriteUtil::create("fondo_ciudad.jpg", 0, 0, visibleSize.width, visibleSize.height);
 	this->addChild(spriteBackground);
 
+
+	float skillsPandaHeight = visibleSize.height * 0.72;
+	float skillsPandaWidth = skillsPandaHeight * 0.5862;
+
 	float xMargin = visibleSize.width * 0.05;
+	float yMargin = (visibleSize.height - skillsPandaHeight) / 3;
 
-	float skillsPandaHeight = visibleSize.height * 0.75;
-	float skillsPandaWidth = skillsPandaHeight * 0.58;
 	float skillsPandaX = xMargin;
-	float skillsPandaY = visibleSize.height * 0.05;
+	float skillsPandaY = yMargin;
 
-	EquipPandaSkillsContainer* skillsContainer = new EquipPandaSkillsContainer(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight);
+	Container* skillsContainer = new Container(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight);
+	cocos2d::CCSprite* skillsPanda = SpriteUtil::create("equip/MEJORA_panda.png", 0, 0, skillsPandaWidth, skillsPandaHeight);
+	skillsContainer->addChild(skillsPanda);
 	this->addChild(skillsContainer, 10);
 
 	cocos2d::CCSprite* spriteCoins = SpriteUtil::create("equip/coins.png", skillsPandaX,
 														skillsPandaHeight * 1.1 + skillsPandaY - ((skillsPandaWidth * 0.34) / 2),
-														skillsPandaWidth, skillsPandaWidth * 0.34);
+														skillsPanda);
+//	SpriteUtil::leftAlign(skillsPanda, spriteCoins);
 	this->addChild(spriteCoins);
 
-	cocos2d::CCSprite* spriteGetCoinsButton = SpriteUtil::create("buttons/getcoins.png", visibleSize.width * 0.9 - skillsPandaWidth,
-														skillsPandaHeight * 1.1 + skillsPandaY - ((skillsPandaWidth * 0.34) / 2),
-														skillsPandaWidth, skillsPandaWidth * 0.34);
+	cocos2d::CCSprite* spriteGetCoinsButton = SpriteUtil::create("buttons/getcoins.png", 0, 0, skillsPanda);
+	spriteGetCoinsButton->setPositionY(spriteCoins->getPositionY());
+	spriteGetCoinsButton->setPositionX(visibleSize.width - SpriteUtil::getWidth(spriteGetCoinsButton) / 2 - xMargin);
 
 	this->addChild(spriteGetCoinsButton);
-
 
 	this->setTouchEnabled(true);
 	this->setKeypadEnabled(true);
@@ -77,28 +82,29 @@ bool EquipPandaLayer::init() {
 
 	this->touchId = 999;
 
-	this->loadMejoras(skillsPandaWidth, skillsPandaHeight, skillsPandaX, skillsPandaY);
+	this->loadMejoras(skillsPandaWidth, skillsPandaHeight, skillsPandaX, skillsPandaY, skillsPanda);
 
 	return true;
 }
 
-void EquipPandaLayer::loadMejoras(float skillsPandaWidth, float skillsPandaHeight, float skillsPandaX, float skillsPandaY) {
+void EquipPandaLayer::loadMejoras(float skillsPandaWidth, float skillsPandaHeight, float skillsPandaX, float skillsPandaY,
+		cocos2d::CCSprite* scaleMaster) {
 
 	std::vector<std::string> mejoras = EquipPandaItem::getMejoras();
 
 	for (int i = 0; i < mejoras.size(); i++) {
 		float itemsDeltaX = i * skillsPandaWidth * 0.85 + skillsPandaX + skillsPandaWidth * 1.15;
-		EquipPandaItem* item = new EquipPandaItem(mejoras[i], itemsDeltaX, skillsPandaY, skillsPandaWidth * 0.8, skillsPandaHeight);
+		EquipPandaItem* item = new EquipPandaItem(mejoras[i], itemsDeltaX, skillsPandaY, skillsPandaWidth * 0.8, skillsPandaHeight, scaleMaster);
 		items.push_back(item);
 		this->addChild(item);
 	}
 }
 
 void EquipPandaLayer::addSkills(float skillsPandaX, float skillsPandaY, float skillsPandaWidth, float skillsPandaHeight) {
-	this->addSkill(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight, "Weapon Time", this->getWeaponTime(), 0);
 	this->addSkill(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight, "Life", this->getLife(), 1);
-	this->addSkill(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight, "Speed", this->getSpeed(), 2);
 	this->addSkill(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight, "Attack", this->getAttack(), 3);
+	this->addSkill(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight, "Speed", this->getSpeed(), 2);
+	this->addSkill(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight, "Weapon Time", this->getWeaponTime(), 0);
 	this->addSkill(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight, "Bonus", this->getBonus(), 4);
 }
 

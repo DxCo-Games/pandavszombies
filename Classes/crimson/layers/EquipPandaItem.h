@@ -9,7 +9,8 @@ namespace dxco {
 
 class EquipPandaItem : public Container, public Touchable {
 public:
-	EquipPandaItem(std::string item, float x, float y, float width, float height);
+	EquipPandaItem(std::string item, float x, float y, float width, float height,
+			cocos2d::CCSprite* scaleMaster);
 	std::string item;
 	int price;
 

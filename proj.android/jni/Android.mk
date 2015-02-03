@@ -95,7 +95,6 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/crimson/layers/LevelFinishedLayer.cpp \
                    ../../Classes/crimson/layers/EquipPandaLayer.cpp \
                    ../../Classes/crimson/layers/EquipPandaItem.cpp \
-                   ../../Classes/crimson/layers/EquipPandaSkillsContainer.cpp \
                    ../../Classes/crimson/layers/PauseLayer.cpp \
                    ../../Classes/crimson/layers/RankingLayer.cpp
                    

@@ -42,7 +42,8 @@ public:
 	int getAttack();
 	int getWeaponTime();
 	int getBonus();
-	void loadMejoras(float skillsPandaWidth, float skillsPandaHeight, float skillsPandaX, float skillsPandaY);
+	void loadMejoras(float skillsPandaWidth, float skillsPandaHeight, float skillsPandaX, float skillsPandaY,
+			cocos2d::CCSprite* scaleMaster);
 
 	int touchId;
 };
