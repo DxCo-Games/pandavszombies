@@ -101,10 +101,10 @@ void EquipPandaLayer::loadMejoras(float skillsPandaWidth, float skillsPandaHeigh
 }
 
 void EquipPandaLayer::addSkills(float skillsPandaX, float skillsPandaY, float skillsPandaWidth, float skillsPandaHeight) {
-	this->addSkill(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight, "Life", this->getLife(), 1);
-	this->addSkill(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight, "Attack", this->getAttack(), 3);
+	this->addSkill(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight, "Life", this->getLife(), 0);
+	this->addSkill(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight, "Attack", this->getAttack(), 1);
 	this->addSkill(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight, "Speed", this->getSpeed(), 2);
-	this->addSkill(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight, "Weapon Time", this->getWeaponTime(), 0);
+	this->addSkill(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight, "Weapon Time", this->getWeaponTime(), 3);
 	this->addSkill(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight, "Bonus", this->getBonus(), 4);
 }
 
@@ -240,6 +240,7 @@ void EquipPandaLayer::ccTouchesEnded(cocos2d::CCSet *pTouches,
 }
 
 int EquipPandaLayer::getTotalCoins() {
+	//FIXME use the correct number
 	return rand() % 10000;
 }
 

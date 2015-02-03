@@ -103,6 +103,7 @@ int EquipPandaItem::getCantidadDisponible() {
 		} else {
 			result = 1;
 		}
+	//FIXME sacar la opcion despues de desbloquear. El damage se mejora en conjunto con las otras armas
 	} else if (this->item == "bazooka.damage") {
 		if (!GameProperties::get("bazooka.unlocked")) {
 			// si todavia no destrabamos la bazooka no podemos mejorarla.
@@ -125,9 +126,6 @@ std::vector<std::string> EquipPandaItem::getMejoras() {
 
 	std::vector<std::string> mejoras;
 
-	mejoras.push_back("bazooka.unlocked");
-	mejoras.push_back("fire.unlocked");
-	mejoras.push_back("firebullet.unlocked");
 
 	mejoras.push_back("player.life");
 	mejoras.push_back("player.speed");
@@ -135,8 +133,13 @@ std::vector<std::string> EquipPandaItem::getMejoras() {
 
 	mejoras.push_back("weapon.duration");
 	mejoras.push_back("bullet.damage");
-	mejoras.push_back("bazooka.damage");
-	mejoras.push_back("explosion.damage");
+	//mejorar todos los damages juntos (propiedad attack del panda)
+//	mejoras.push_back("bazooka.damage");
+//	mejoras.push_back("explosion.damage");
+
+	mejoras.push_back("bazooka.unlocked");
+	mejoras.push_back("fire.unlocked");
+	mejoras.push_back("firebullet.unlocked");
 
 	return mejoras;
 }
@@ -165,15 +168,15 @@ std::string EquipPandaItem::getImagePath() {
 	} else if (this->item == "player.speed") {
 		result.append("velocidad");
 	} else if (this->item == "bonus.probability") {
-		result.append("reloj");
+		result.append("regalo");
 	} else if (this->item == "weapon.duration") {
 		result.append("reloj");
 	} else if (this->item == "bullet.damage") {
 		result.append("balasv");
-	} else if (this->item == "bazooka.damage") {
-		result.append("bazooka");
-	} else if (this->item == "explosion.damage") {
-		result.append("bomba");
+//	} else if (this->item == "bazooka.damage") {
+//		result.append("bazooka");
+//	} else if (this->item == "explosion.damage") {
+//		result.append("bomba");
 	}
 
 	if (this->isActivo()) {
