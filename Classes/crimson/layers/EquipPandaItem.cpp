@@ -29,12 +29,21 @@ EquipPandaItem::EquipPandaItem(std::string item, float x, float y, float width,
 	cocos2d::CCPoint origin =
 			cocos2d::CCDirector::sharedDirector()->getVisibleOrigin();
 
-	nameLabel->setPositionX(width * 0.5 + origin.x);
+	nameLabel->setPositionX(width * 0.52 + origin.x);
 	nameLabel->setPositionY(height * 0.59 + origin.y);
 
 	nameLabel->setColor(cocos2d::ccc3(62, 62, 62));
 
 	this->addChild(nameLabel);
+
+	cocos2d::CCLabelTTF* detailLabel = cocos2d::CCLabelTTF::create(this->getDetail().c_str(), "fonts/KBStickToThePlan.ttf",
+			10, cocos2d::CCSize(85,0), cocos2d::kCCTextAlignmentCenter);
+
+	detailLabel->setPositionX(nameLabel->getPositionX());
+	detailLabel->setPositionY(height * 0.43 + origin.y);
+	detailLabel->setColor(cocos2d::ccc3(62, 62, 62));
+	this->addChild(detailLabel);
+
 
 	cocos2d::CCSprite* coin = SpriteUtil::create("coin.png", width * 0.09,
 			height * 0.22, scaleMaster);
@@ -135,9 +144,9 @@ std::vector<std::string> EquipPandaItem::getMejoras() {
 //	mejoras.push_back("bazooka.damage");
 //	mejoras.push_back("explosion.damage");
 
+	mejoras.push_back("firebullet.unlocked");
 	mejoras.push_back("bazooka.unlocked");
 	mejoras.push_back("fire.unlocked");
-	mejoras.push_back("firebullet.unlocked");
 
 	return mejoras;
 }
@@ -214,6 +223,27 @@ std::string EquipPandaItem::getName() {
 //		return "Bomb";
 	}
 
+	return " ";
+}
+
+std::string EquipPandaItem::getDetail() {
+	if (this->item == "bazooka.unlocked") {
+		return "unlock the bazooka";
+	} else if (this->item == "fire.unlocked") {
+		return "unlock the flamethrower";
+	} else if (this->item == "firebullet.unlocked") {
+		return "unlock the fireballs";
+	} else if (this->item == "player.life") {
+		return "10% life increase";
+	} else if (this->item == "player.speed") {
+		return "2% speed increase";
+	} else if (this->item == "bonus.probability") {
+		return "2% bonus frequency increase";
+	} else if (this->item == "weapon.duration") {
+		return "10% weapon duration increase";
+	} else if (this->item == "bullet.damage") {
+		return "10% attack increase";
+	}
 	return " ";
 }
 

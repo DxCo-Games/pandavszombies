@@ -23,6 +23,7 @@ private:
 	std::string getImagePath();
 	std::string getExplicacion();
 	std::string getName();
+	std::string getDetail();
 	std::string getBuyImagePath();
 	int getPrice();
 };
