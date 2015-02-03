@@ -49,6 +49,8 @@ bool EquipPandaLayer::init() {
 	skillsContainer->addChild(skillsPanda);
 	this->addChild(skillsContainer, 10);
 
+	this->createPandaItem(skillsPanda);
+
 	cocos2d::CCSprite* spriteCoins = SpriteUtil::create("equip/coins.png", skillsPandaX,
 														skillsPandaHeight * 1.1 + skillsPandaY - ((skillsPandaWidth * 0.34) / 2),
 														skillsPanda);
@@ -83,6 +85,32 @@ bool EquipPandaLayer::init() {
 	this->loadMejoras(skillsPandaWidth, skillsPandaHeight, skillsPandaX, skillsPandaY, skillsPanda);
 
 	return true;
+}
+
+void EquipPandaLayer::createPandaItem(cocos2d::CCSprite* skillsPanda) {
+	dxco::SpriteUtil::preloadTextureWithFile("sprite_sheets/panda1.plist");
+
+	float pandaWidth = 0.85 * SpriteUtil::getWidth(skillsPanda);
+	float pandaX = skillsPanda->getPositionX() - SpriteUtil::getWidth(skillsPanda) * 0.2;
+	float pandaY = skillsPanda->getPositionY() + SpriteUtil::getHeight(skillsPanda) * 0.05;
+
+	cocos2d::CCSprite* pandaSprite = SpriteUtil::create("caminata_15_0000.png", pandaX, pandaY, pandaWidth, pandaWidth, true);
+	this->addChild(pandaSprite, 10);
+
+	cocos2d::CCArray *animFrames = cocos2d::CCArray::createWithCapacity(14);
+
+	for (int i=0; i <14; i++) {
+		std::string index = "00" + StringUtil::toString(i);
+		if (i < 10) {
+			index = "0" + index;
+		}
+		animFrames->addObject(SpriteUtil::createSpriteFrame("caminata_15_" + index + ".png"));
+	}
+
+	cocos2d::CCAnimation *animation = cocos2d::CCAnimation::createWithSpriteFrames(animFrames, 0.05);
+	cocos2d::CCAnimate* animate = cocos2d::CCAnimate::create(animation);
+	pandaSprite->runAction(cocos2d::CCRepeatForever::create(animate));
+
 }
 
 void EquipPandaLayer::loadMejoras(float skillsPandaWidth, float skillsPandaHeight, float skillsPandaX, float skillsPandaY,
