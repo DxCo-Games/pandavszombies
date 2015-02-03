@@ -21,7 +21,7 @@ EquipPandaItem::EquipPandaItem(std::string item, float x, float y, float width,
 	SpriteUtil::topAlign(scaleMaster, background);
 	this->addChild(background);
 
-	cocos2d::CCLabelTTF* nameLabel = LabelUtil::create(this->getName(), 18, 0,
+	cocos2d::CCLabelTTF* nameLabel = LabelUtil::create(this->getName(), 19, 0,
 			0, 0, 0, "fonts/KBStickToThePlan.ttf");
 	nameLabel->setAnchorPoint(ccp(0.5, 0.5));
 	LabelUtil::setScaleByWidth(nameLabel, width * 0.5);
@@ -30,18 +30,17 @@ EquipPandaItem::EquipPandaItem(std::string item, float x, float y, float width,
 			cocos2d::CCDirector::sharedDirector()->getVisibleOrigin();
 
 	nameLabel->setPositionX(width * 0.5 + origin.x);
-	nameLabel->setPositionY(height * 0.615 + origin.y);
+	nameLabel->setPositionY(height * 0.59 + origin.y);
 
 	nameLabel->setColor(cocos2d::ccc3(62, 62, 62));
 
 	this->addChild(nameLabel);
 
 	cocos2d::CCSprite* coin = SpriteUtil::create("coin.png", width * 0.09,
-			height * 0.25, scaleMaster);
-	//SpriteUtil::copyScale(master, coin);
+			height * 0.22, scaleMaster);
 	this->addChild(coin);
 
-	cocos2d::CCLabelTTF* coinsLabel = LabelUtil::create(StringUtil::toString(this->getPrice()), 12,
+	cocos2d::CCLabelTTF* coinsLabel = LabelUtil::create(StringUtil::toString(this->getPrice()), 13,
 			0, 0, 0, 0, "fonts/KBStickToThePlan.ttf");
 
 	coinsLabel->setAnchorPoint(ccp(0.5, 0.5));
@@ -51,7 +50,7 @@ EquipPandaItem::EquipPandaItem(std::string item, float x, float y, float width,
 	float coinsLabelHeight = LabelUtil::getHeight(coinsLabel);
 
 	float nameLabelX = width * 0.14 + origin.x + SpriteUtil::getWidth(coin) + 17;
-	float nameLabelY = height * 0.25 + origin.y + coinsLabelHeight;
+	float nameLabelY = coin->getPositionY();
 
 	coinsLabel->setPositionX(nameLabelX);
 	coinsLabel->setPositionY(nameLabelY);
@@ -194,25 +193,25 @@ std::string EquipPandaItem::getExplicacion() {
 std::string EquipPandaItem::getName() {
 
 	if (this->item == "bazooka.unlocked") {
-		return "Bazooka";
+		return "BAZOOKA";
 	} else if (this->item == "fire.unlocked") {
-		return "Fire";
+		return "FLAME";
 	} else if (this->item == "firebullet.unlocked") {
-		return "Fire bullet";
+		return "FIREBALL";
 	} else if (this->item == "player.life") {
-		return "Life";
+		return "LIFE";
 	} else if (this->item == "player.speed") {
-		return "Speed";
+		return "SPEED";
 	} else if (this->item == "bonus.probability") {
-		return "Bonus %";
+		return "BONUS %";
 	} else if (this->item == "weapon.duration") {
-		return "Weapon";
+		return "WEAPON";
 	} else if (this->item == "bullet.damage") {
-		return "Weapon";
-	} else if (this->item == "bazooka.damage") {
-		return "Bazooka";
-	} else if (this->item == "explosion.damage") {
-		return "Bomb";
+		return "ATTACK";
+//	} else if (this->item == "bazooka.damage") {
+//		return "Bazooka";
+//	} else if (this->item == "explosion.damage") {
+//		return "Bomb";
 	}
 
 	return " ";
