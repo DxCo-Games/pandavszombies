@@ -65,10 +65,8 @@ bool EquipPandaLayer::init() {
 	this->setKeypadEnabled(true);
 
 	std::string totalCoins = StringUtil::toString(this->getTotalCoins());
-
 	cocos2d::CCLabelTTF* totalCoinsLabel = LabelUtil::create(totalCoins, 20, 0, 0, 0, 0, "fonts/KBStickToThePlan.ttf");
-
-	LabelUtil::setScaleByHeight(totalCoinsLabel, skillsPandaWidth * 0.14);
+	LabelUtil::setScaleByHeight(totalCoinsLabel, skillsPandaWidth * 0.11);
 
 	float labelTotalCoinsX = skillsPandaX + skillsPandaWidth * 0.35 + origin.x;
 	float labelTotalCoinsY = spriteCoins->getPositionY();

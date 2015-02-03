@@ -66,15 +66,14 @@ EquipPandaItem::EquipPandaItem(std::string item, float x, float y, float width,
 	cocos2d::CCLabelTTF* cantidadLabel = LabelUtil::create(cantidadStr, 18, 0,
 			0, 0, 0, "fonts/KBStickToThePlan.ttf");
 
-	cantidadLabel->setAnchorPoint(ccp(0.5, 0.5));
 	LabelUtil::setScaleByHeight(cantidadLabel, width * 0.15);
 
 	float cantidadLabelHeight = LabelUtil::getHeight(cantidadLabel);
 	float cantidadLabelWidth = LabelUtil::getWidth(cantidadLabel);
 
-	float cantidadLabelX = (cantidadLabelWidth / 2) + origin.x + width * 0.09;
+	float cantidadLabelX = (cantidadLabelWidth / 2) + origin.x + width * 0.17;
 	float cantidadLabelY = height - (cantidadLabelHeight / 2) + origin.y
-			- width * 0.09;
+			- width * 0.19;
 
 	cantidadLabel->setPositionX(cantidadLabelX);
 	cantidadLabel->setPositionY(cantidadLabelY);
