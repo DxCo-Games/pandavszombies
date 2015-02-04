@@ -101,6 +101,9 @@ void GameModel::loadLevel(bool survival, int level) {
 	} else if (level == 1){
 		this->level = new TutorialLevel(this);
 		this->vista->setMap(1);
+	} else if (level == 100){
+		this->level = new SurvivalLevel(this);
+		this->vista->setMap(1);
 	} else {
 		this->level = LevelParser::parse(this, "levels/level" + StringUtil::toString(level) +".json");
 	}
