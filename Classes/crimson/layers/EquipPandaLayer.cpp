@@ -83,6 +83,8 @@ bool EquipPandaLayer::init() {
 	this->touchId = 999;
 
 	this->loadMejoras(skillsPandaWidth, skillsPandaHeight, skillsPandaX, skillsPandaY, skillsPanda);
+	this->minX = items[0]->getPositionX() - skillsPandaWidth * 0.4;
+	this->maxX = spriteGetCoinsButton->getPositionX() + SpriteUtil::getWidth(spriteGetCoinsButton) / 2;
 
 	return true;
 }
@@ -212,10 +214,16 @@ void EquipPandaLayer::ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent 
 		float deltaY = location.y - lastLocation.y;
 		lastLocation = location;
 
-		for (int i = 0; i < items.size(); i++) {
-			EquipPandaItem* item = items[i];
+		float itemWidth = SpriteUtil::getWidth((cocos2d::CCSprite*)items[0]->sprite);
+		float firstX = items[0]->getPositionX() - itemWidth / 2 + deltaX;
+		float lastX = items[items.size()-1]->getPositionX() + itemWidth + deltaX;
 
-			item->move(deltaX, 0);
+		if (firstX <= minX && lastX >= maxX) {
+			for (int i = 0; i < items.size(); i++) {
+				EquipPandaItem* item = items[i];
+
+				item->move(deltaX, 0);
+			}
 		}
 
 		it++;

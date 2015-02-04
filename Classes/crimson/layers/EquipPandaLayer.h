@@ -31,6 +31,9 @@ public:
 	bool movingLeftAnimation;
 	float moved;
 
+	float minX;
+	float maxX;
+
 	std::vector<EquipPandaItem*> items;
 
 	int getTotalCoins();
