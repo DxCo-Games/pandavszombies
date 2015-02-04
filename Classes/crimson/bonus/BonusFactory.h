@@ -13,6 +13,7 @@ public:
 	BonusFactory();
 
 	void createBonus(GameModel* model, cocos2d::CCPoint);
+	void addToMap(GameModel* model, Bonus* bonus);
 
 	Bonus* createWeaponBonus(GameModel* model, cocos2d::CCPoint);
 };

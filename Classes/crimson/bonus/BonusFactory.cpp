@@ -71,10 +71,14 @@ void BonusFactory::createBonus(GameModel* model, cocos2d::CCPoint location) {
 			}
 		}
 
-		model->bonuses.push_back(bonus);
-		model->mapa->putInside(bonus); //make sure it's reachable in the map
-		model->mapa->addChild(bonus->getSprite());
+		this->addToMap(model, bonus);
 	}
+}
+
+void BonusFactory::addToMap(GameModel* model, Bonus* bonus) {
+	model->bonuses.push_back(bonus);
+	model->mapa->putInside(bonus); //make sure it's reachable in the map
+	model->mapa->addChild(bonus->getSprite());
 }
 
 Bonus* BonusFactory::createWeaponBonus(GameModel* model, cocos2d::CCPoint location) {

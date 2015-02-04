@@ -9,7 +9,7 @@ TutorialLevel::TutorialLevel(GameModel* model): Level(model, *new std::vector<En
 	this->currentStep = 0;
 	this->movementDt = 0;
 	this->rotationDt = 0;
-	this->totalEnemies = 3;
+	this->totalEnemies = 4;
 	this->messageDisplayed = false;
 
 	//step 0 message
@@ -18,7 +18,7 @@ TutorialLevel::TutorialLevel(GameModel* model): Level(model, *new std::vector<En
 }
 
 bool TutorialLevel::isFinished() {
-	return this->currentStep >= 4;
+	return this->currentStep >= 6;
 }
 
 void TutorialLevel::update(float dt) {
@@ -62,11 +62,9 @@ void TutorialLevel::update(float dt) {
 		//rotate and move for total 3s to finish step
 		if (this->movementDt > 3 && this->rotationDt > 3) {
 			this->currentStep++;
-			model->vista->message("There are some zombies around, kill'em to win");
-			//create three zombies
+			model->vista->message("There's a zombie around, kill him!");
 
-			this->model->enemyFactory->createEnemy(this->model);
-			this->model->enemyFactory->createEnemy(this->model);
+			//create one zombie
 			this->model->enemyFactory->createEnemy(this->model);
 		}
 		break;
@@ -74,8 +72,34 @@ void TutorialLevel::update(float dt) {
 
 	case 3: {
 		//finish when all zombies killed
-		if (this->model->kills == 3 && !this->messageDisplayed) {
-			model->vista->message("Good job!");
+		if (this->model->kills == 1) {
+			model->vista->message("Pick up the bonus to improve your weapon");
+			this->currentStep++;
+
+			//plant a bonus
+			model->bonuses.clear(); //in case one was already created
+			Bonus* bonus = model->bonusFactory->createWeaponBonus(this->model,
+					this->model->enemies[0]->getLocation());
+			bonus->dt = -500; //make sure it won't disappear
+			model->bonusFactory->addToMap(this->model, bonus);
+
+		}
+		break;
+	}
+	case 4: {
+		//finish when bonus picked up
+		if(model->player->weaponType != Player::PISTOL) {
+			this->currentStep++;
+			model->vista->message("Watch out! Another zombie wave!");
+			this->model->enemyFactory->createEnemy(this->model);
+			this->model->enemyFactory->createEnemy(this->model);
+			this->model->enemyFactory->createEnemy(this->model);
+		}
+		break;
+	}
+	case 5: {
+		if (this->model->kills == 4 && !this->messageDisplayed) {
+			model->vista->message("You'll earn coins every 1000 points, use them to equip your panda.");
 			this->messageDisplayed = true;
 		}
 		if (this->model->enemies.size() == 0) {
