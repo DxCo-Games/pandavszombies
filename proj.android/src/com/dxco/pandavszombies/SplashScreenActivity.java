@@ -1,4 +1,4 @@
-package com.dxco.crimson;
+package com.dxco.pandavszombies;
 
 import java.util.Timer;
 import java.util.TimerTask;

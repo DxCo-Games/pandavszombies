@@ -1,4 +1,4 @@
-package com.dxco.crimson;
+package com.dxco.pandavszombies;
 
 import android.app.Activity;
 

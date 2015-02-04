@@ -14,7 +14,7 @@ bool SoundUtil::isMusicOn() {
 
 	cocos2d::JniMethodInfo t;
 
-	if (cocos2d::JniHelper::getStaticMethodInfo(t, "com/dxco/crimson/SoundUtil", "isMusicOnCpp", "()I")) {
+	if (cocos2d::JniHelper::getStaticMethodInfo(t, "com/dxco/pandavszombies/SoundUtil", "isMusicOnCpp", "()I")) {
 
 		int ret = (int) t.env->CallStaticIntMethod(t.classID, t.methodID);
 
@@ -32,7 +32,7 @@ bool SoundUtil::isSoundEffectsOn() {
 
 	cocos2d::JniMethodInfo t;
 
-	if (cocos2d::JniHelper::getStaticMethodInfo(t, "com/dxco/crimson/SoundUtil", "isSoundEffectsCpp", "()I")) {
+	if (cocos2d::JniHelper::getStaticMethodInfo(t, "com/dxco/pandavszombies/SoundUtil", "isSoundEffectsCpp", "()I")) {
 
 		int ret = (int) t.env->CallStaticIntMethod(t.classID, t.methodID);
 

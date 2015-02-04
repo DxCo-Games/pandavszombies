@@ -1,4 +1,4 @@
-package com.dxco.crimson;
+package com.dxco.pandavszombies;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -225,7 +225,7 @@ public class MainMenuActivity extends Activity {
 	
 	private void printKeyHash() {
 		try {
-			PackageInfo info = getPackageManager().getPackageInfo("com.dxco.crimson", PackageManager.GET_SIGNATURES);
+			PackageInfo info = getPackageManager().getPackageInfo("com.dxco.pandavszombies", PackageManager.GET_SIGNATURES);
 			for (Signature signature : info.signatures) {
 				MessageDigest md = MessageDigest.getInstance("SHA");
 				md.update(signature.toByteArray());
