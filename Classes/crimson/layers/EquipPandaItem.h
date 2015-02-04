@@ -7,14 +7,17 @@
 
 namespace dxco {
 
-class EquipPandaItem : public Container, public Touchable {
+class BuyPowerUpButton;
+
+class EquipPandaItem : public Container {
 public:
 	EquipPandaItem(std::string item, float x, float y, float width, float height,
 			cocos2d::CCSprite* scaleMaster);
 	std::string item;
 	int price;
 
-	void execute();
+	BuyPowerUpButton *button;
+	void applyPowerUp();
 
 	static std::vector<std::string> getMejoras();
 private:

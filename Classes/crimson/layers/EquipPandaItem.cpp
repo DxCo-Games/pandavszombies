@@ -4,6 +4,7 @@
 #include "../../dxco/LabelUtil.h"
 #include "../../dxco/StringUtil.h"
 #include "../GameProperties.h"
+#include "../buttons/BuyPowerUpButton.h"
 #include "cocos2d.h"
 
 #include <cstdlib>
@@ -12,7 +13,7 @@ namespace dxco {
 
 EquipPandaItem::EquipPandaItem(std::string item, float x, float y, float width,
 		float height,cocos2d::CCSprite* scaleMaster) :
-		Container(x, y, width, height), Touchable(this) {
+		Container(x, y, width, height) {
 	this->item = item;
 	this->price = 0;
 
@@ -97,6 +98,8 @@ EquipPandaItem::EquipPandaItem(std::string item, float x, float y, float width,
 	SpriteUtil::bottomAlign(scaleMaster, buyButton);
 	buyButton->setPositionX(background->getPositionX());
 	this->addChild(buyButton);
+	this->button = new BuyPowerUpButton(buyButton, this);
+
 }
 
 
@@ -251,7 +254,7 @@ int EquipPandaItem::getPrice() {
 	return GameProperties::getPrice(this->item);
 }
 
-void EquipPandaItem::execute() {
+void EquipPandaItem::applyPowerUp() {
 
 	CCLOG("Upgrade item %s", this->item.c_str());
 

@@ -8,6 +8,7 @@
 #include <string>
 #include "EquipPandaItem.h"
 #include "../GameProperties.h"
+#include "../buttons/BuyPowerUpButton.h"
 
 namespace dxco {
 
@@ -214,7 +215,7 @@ void EquipPandaLayer::ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent 
 		float deltaY = location.y - lastLocation.y;
 		lastLocation = location;
 
-		float itemWidth = SpriteUtil::getWidth((cocos2d::CCSprite*)items[0]->sprite);
+		float itemWidth = items[0]->getWidth();
 		float firstX = items[0]->getPositionX() - itemWidth / 2 + deltaX;
 		float lastX = items[items.size()-1]->getPositionX() + itemWidth + deltaX;
 
@@ -229,8 +230,6 @@ void EquipPandaLayer::ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent 
 		it++;
 	}
 }
-
-
 
 void EquipPandaLayer::ccTouchesEnded(cocos2d::CCSet *pTouches,
 		cocos2d::CCEvent *pEvent) {
@@ -259,7 +258,10 @@ void EquipPandaLayer::ccTouchesEnded(cocos2d::CCSet *pTouches,
 
 		if (delta < CLICK_MAX_DELTA) {
 			for (int i = 0; i < this->items.size(); i++) {
-				this->items[i]->touch(location);
+				//update coordinates so it works with the button inside the item
+				cocos2d::CCPoint fixedLocation(location.x - this->items[i]->getPositionX(),
+						location.y - this->items[i]->getPositionY());
+				this->items[i]->button->touch(fixedLocation);
 			}
 		} else {
 			if (location.x - beginLocation.x > 0) {
