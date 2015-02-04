@@ -9,7 +9,7 @@ import android.os.Bundle;
 
 public class SplashScreenActivity extends Activity {
 
-	private static final long SPLASH_SCREEN_DELAY = 3000;
+	private static final long SPLASH_SCREEN_DELAY = 2000;
 	
 	 @Override
 	    protected void onCreate(Bundle savedInstanceState) {
