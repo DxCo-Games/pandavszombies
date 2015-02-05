@@ -8,6 +8,8 @@
 #include "../Player.h"
 #include "../FireWeapon.h"
 #include <algorithm>
+#include "../../dxco/VoiceManager.h"
+#include "../../HelloWorldScene.h"
 
 namespace dxco {
 
@@ -127,6 +129,9 @@ void Enemy::kill() {
 	this->state = ENEMY_DEAD;
 	this->bloodDt = 0;
 	this->model->enemyKilled(this);
+	if (!this->model->voice->isPlaying()) {
+		this->model->vista->playEffect("sounds/splat.ogg");
+	}
 }
 
 void Enemy::fixZOrder(float playerY) {

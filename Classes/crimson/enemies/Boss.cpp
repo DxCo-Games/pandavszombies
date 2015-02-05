@@ -18,8 +18,8 @@ float Boss::getColitionRatio() {
 }
 
 void Boss::kill() {
-	Enemy::kill();
 	this->model->voice->play("voices/rock.ogg", "voices/cake.ogg");
+	Enemy::kill();
 }
 
 
