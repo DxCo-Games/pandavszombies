@@ -9,6 +9,7 @@
 #include "Bazooka.h"
 #include "SMG.h"
 #include "../HelloWorldScene.h"
+#include "../dxco/VoiceManager.h"
 #include "../dxco/SpriteUtil.h"
 
 namespace dxco {
@@ -36,6 +37,7 @@ void Player::hurt(float damage) {
 		if(damage > 0) {
 			this->model->playerHurt = true;
 			this->state = HERIDO;
+			this->model->voice->play("voices/ah.ogg", "voices/ouch.ogg");
 		}
 
 		float playerLife = this->model->prop->get("player.life");
