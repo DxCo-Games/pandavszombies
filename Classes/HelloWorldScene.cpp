@@ -274,6 +274,8 @@ void HelloWorld::createInterface() {
 	CCSprite* lifeBack = dxco::SpriteUtil::create("gameplay/PANDA_energia_fin.png", 5, 0.87 * visibleSize.height, 0.35 * visibleSize.width , 0.102 * visibleSize.height);
 	CCSprite* lifeFront = dxco::SpriteUtil::create("gameplay/PANDA_energia.png", 5, 0.87 * visibleSize.height, lifeBack);
 	lifeBar = CCProgressTimer::create(lifeFront);
+	lifeBar->setScaleX(lifeBack->getScaleX());
+	lifeBar->setScaleY(lifeBack->getScaleY());
 	lifeBar->setPosition(lifeBack->getPosition()); //positions don't match by default
 	lifeBar->setType(kCCProgressTimerTypeBar);
 	lifeBar->setMidpoint(ccp(0.16,0)); // the x coord tells the bar to put the 0% after the panda head
@@ -288,6 +290,8 @@ void HelloWorld::createInterface() {
 
 	CCSprite* weaponFront = dxco::SpriteUtil::create("gameplay/BALAS_barra.png", 5, 0.78 * visibleSize.height, lifeBack);
 	weaponBar = CCProgressTimer::create(weaponFront);
+	weaponBar->setScaleX(lifeBack->getScaleX());
+	weaponBar->setScaleY(lifeBack->getScaleY());
 	weaponBar->setPosition(weaponBack->getPosition()); //positions don't match by default
 	weaponBar->setType(kCCProgressTimerTypeBar);
 	weaponBar->setMidpoint(ccp(0.25,0)); // the x coord tells the bar to put the 0% after the panda head
