@@ -33,24 +33,24 @@ bool GameTypeSelectionLayer::init() {
 	float buttonWidth = visibleSize.width * 0.25;
 	float buttonHeight = buttonWidth * 0.32;
 	float ypadding = buttonHeight * 0.18;
-	float ymargin = (visibleSize.height - 3*ypadding - 4*buttonHeight) / 2;
+	float ymargin = (visibleSize.height - 2*ypadding - 3*buttonHeight) / 2;
 	float xmargin = (visibleSize.width - buttonWidth) / 2;
 
-	cocos2d::CCSprite* storyButtonSprite = SpriteUtil::create("buttons/story_button.png", xmargin, ymargin + 3*buttonHeight + 3*ypadding,
+	cocos2d::CCSprite* storyButtonSprite = SpriteUtil::create("buttons/story_button.png", xmargin, ymargin + 2*buttonHeight + 2*ypadding,
 			buttonWidth, buttonHeight);
 	this->addChild(storyButtonSprite);
 	this->storyButton = new StoryButton(storyButtonSprite);
 
-	cocos2d::CCSprite* survivalButtonSprite = SpriteUtil::create("buttons/survival_button.png", xmargin, ymargin + 2*buttonHeight + 2*ypadding,
+	cocos2d::CCSprite* survivalButtonSprite = SpriteUtil::create("buttons/survival_button.png", xmargin, ymargin + buttonHeight + ypadding,
 			storyButtonSprite);
 	SpriteUtil::leftAlign(storyButtonSprite, survivalButtonSprite);
 	this->addChild(survivalButtonSprite);
 	this->survivalButton = new SurvivalButton(survivalButtonSprite);
 
-	cocos2d::CCSprite* challengeButtonSprite = SpriteUtil::create("buttons/challenge_button.png", xmargin, ymargin + buttonHeight + ypadding,
-			storyButtonSprite);
-	SpriteUtil::leftAlign(storyButtonSprite, challengeButtonSprite);
-	this->addChild(challengeButtonSprite);
+//	cocos2d::CCSprite* challengeButtonSprite = SpriteUtil::create("buttons/challenge_button.png", xmargin, ymargin + buttonHeight + ypadding,
+//			storyButtonSprite);
+//	SpriteUtil::leftAlign(storyButtonSprite, challengeButtonSprite);
+//	this->addChild(challengeButtonSprite);
 
 	cocos2d::CCSprite* equipButtonSprite = SpriteUtil::create("buttons/equip_panda_button_text.png", xmargin, ymargin,
 			storyButtonSprite);
