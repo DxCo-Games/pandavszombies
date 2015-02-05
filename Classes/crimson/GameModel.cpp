@@ -71,6 +71,9 @@ GameModel::GameModel(HelloWorld* vista, Player* player) {
 	this->voice = new VoiceManager();
 	this->voice->loadRandom("voices/dead.ogg");
 	this->voice->loadRandom("voices/talkin.ogg");
+	this->voice->loadRandom("voices/brains1.ogg");
+	this->voice->loadRandom("voices/brains2.ogg");
+	this->voice->loadRandom("voices/chiau.ogg");
 	this->playerHurt = false;
 	this->freezeBonusActivated = 0;
 	this->kills = 0;
