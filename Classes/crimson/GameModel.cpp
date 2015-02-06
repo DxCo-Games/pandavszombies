@@ -176,23 +176,17 @@ void GameModel::update(float dt) {
 		this->bonuses[i]->update(dt);
 	}
 
-	if (!this->player->isActive()){
+	if (this->level->isFinished() || !this->player->isActive()) {
 		this->vista->hideControls();
-		this->vista->levelFinishedLayer->show(this->player->score, this->kills, this->player->score / COIN_VALUE, 0);
 		this->vista->juegoPausado = true;
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
-
 		this->vista->opacityLayer->setVisible(true);
-	} else if (this->level->isFinished()) {
-		this->vista->hideControls();
 		int stars = this->getLevelStars();
 		this->vista->levelFinishedLayer->show(this->player->score, this->kills, this->player->score / COIN_VALUE, stars);
-		this->vista->juegoPausado = true;
-		CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
-
-		this->vista->opacityLayer->setVisible(true);
-		UserDAO::finishLevel(this->levelNumber, stars);
-
+		updateCoins();
+		if (this->level->isFinished()) {
+			UserDAO::finishLevel(this->levelNumber, stars);
+		}
 	}
 
 	//Bullet cleanup
@@ -204,6 +198,9 @@ void GameModel::update(float dt) {
 }
 
 int GameModel::getLevelStars() {
+	if (!this->player->isActive()){
+		return 0;
+	}
 	if (this->player->life == this->prop->get("player.life")) {
 		return 3;
 	} else if (this->player->life > 0.75 * this->prop->get("player.life")) {
@@ -214,8 +211,6 @@ int GameModel::getLevelStars() {
 
 void GameModel::restartGame() {
 
-	updateCoins();
-	CCLOG("p1");
 	//reset positions
 	cocos2d::CCSize visibleSize = cocos2d::CCDirector::sharedDirector()->getVisibleSize();
 	float mapWidth = MAP_WIDTH;

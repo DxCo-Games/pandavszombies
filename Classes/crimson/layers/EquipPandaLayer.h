@@ -36,8 +36,6 @@ public:
 
 	std::vector<EquipPandaItem*> items;
 
-	int getTotalCoins();
-
 	void addSkills(float skillsPandaX, float skillsPandaY, float skillsPandaWidth, float skillsPandaHeight);
 	void addSkill(float skillsPandaX, float skillsPandaY, float skillsPandaWidth, float skillsPandaHeight, std::string skillName, int skillValue, int index);
 	int getLife();

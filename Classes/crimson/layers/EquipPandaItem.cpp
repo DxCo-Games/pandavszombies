@@ -4,6 +4,7 @@
 #include "../../dxco/LabelUtil.h"
 #include "../../dxco/StringUtil.h"
 #include "../GameProperties.h"
+#include "../daos/UserDAO.h"
 #include "../buttons/BuyPowerUpButton.h"
 #include "cocos2d.h"
 
@@ -257,9 +258,12 @@ int EquipPandaItem::getPrice() {
 void EquipPandaItem::applyPowerUp() {
 
 	CCLOG("Upgrade item %s", this->item.c_str());
+	int price = this->getPrice();
 
-	if (this->isActivo()) {
+	if (this->isActivo() && UserDAO::getCoins() >= price) {
 		CCLOG("Upgrade item %s active", this->item.c_str());
+
+		UserDAO::addCoins(-price);
 		GameProperties::powerUp(this->item);
 
 		cocos2d::CCDirector* pDirector = cocos2d::CCDirector::sharedDirector();

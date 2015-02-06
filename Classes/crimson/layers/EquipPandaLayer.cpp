@@ -8,6 +8,7 @@
 #include <string>
 #include "EquipPandaItem.h"
 #include "../GameProperties.h"
+#include "../daos/UserDAO.h"
 #include "../buttons/BuyPowerUpButton.h"
 
 namespace dxco {
@@ -67,8 +68,8 @@ bool EquipPandaLayer::init() {
 	this->setTouchEnabled(true);
 	this->setKeypadEnabled(true);
 
-	std::string totalCoins = StringUtil::toString(this->getTotalCoins());
-	cocos2d::CCLabelTTF* totalCoinsLabel = LabelUtil::create(totalCoins, 20, 0, 0, 0, 0, "fonts/KBStickToThePlan.ttf");
+	std::string totalCoins = StringUtil::toString(UserDAO::getCoins());
+	cocos2d::CCLabelTTF* totalCoinsLabel = LabelUtil::create(totalCoins, 20, 0, 0, 0, LabelUtil::RIGHT, "fonts/KBStickToThePlan.ttf");
 	LabelUtil::setScaleByHeight(totalCoinsLabel, skillsPandaWidth * 0.11);
 
 	float labelTotalCoinsX = skillsPandaX + skillsPandaWidth * 0.35 + origin.x;
@@ -273,11 +274,6 @@ void EquipPandaLayer::ccTouchesEnded(cocos2d::CCSet *pTouches,
 		it++;
 	}
 
-}
-
-int EquipPandaLayer::getTotalCoins() {
-	//FIXME use the correct number
-	return rand() % 10000;
 }
 
 int EquipPandaLayer::getLife() {
