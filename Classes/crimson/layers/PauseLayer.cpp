@@ -4,19 +4,20 @@
 
 namespace dxco {
 
-PauseLayer::PauseLayer(GameModel* model, float x, float y, float width, float height) : Container(x, y, width, height) {
+PauseLayer::PauseLayer(GameModel* model, float x, float y, float width, float height, cocos2d::CCSprite* scaleMaster) : Container(x, y, width, height) {
 
 	cocos2d::CCSize visibleSize = cocos2d::CCDirector::sharedDirector()->getVisibleSize();
-
-	cocos2d::CCSprite* pauseTitle = SpriteUtil::create("pause_title.png", visibleSize.width * 0.3, visibleSize.height * 0.5, visibleSize.width * 0.4, visibleSize.height * 0.15);
-
+	cocos2d::CCSprite* pauseTitle = SpriteUtil::create("pause_title.png", visibleSize.width * 0.38, visibleSize.height * 0.58, scaleMaster);
 	this->addChild(pauseTitle);
 
-	float posicionY = visibleSize.height * 0.38;
+	float posicionY = visibleSize.height * 0.46;
 
-	cocos2d::CCSprite* tryAgainButtonSprite = SpriteUtil::create("buttons/try_again_button.png", visibleSize.width * 0.32, posicionY, pauseTitle);
-	cocos2d::CCSprite* menuButtonSprite = SpriteUtil::create("buttons/menu_icon_button.png", visibleSize.width * 0.45, posicionY, pauseTitle);
-	cocos2d::CCSprite* resumeButtonSprite = SpriteUtil::create("buttons/play_icon_button.png", visibleSize.width * 0.58, posicionY, pauseTitle);
+	cocos2d::CCSprite* tryAgainButtonSprite = SpriteUtil::create("buttons/try_again_button.png", 0, posicionY, pauseTitle);
+	SpriteUtil::leftAlign(pauseTitle, tryAgainButtonSprite);
+	cocos2d::CCSprite* resumeButtonSprite = SpriteUtil::create("buttons/play_icon_button.png", 0, posicionY, pauseTitle);
+	SpriteUtil::rightAlign(pauseTitle, resumeButtonSprite);
+	cocos2d::CCSprite* menuButtonSprite = SpriteUtil::create("buttons/menu_icon_button.png", 0, posicionY, pauseTitle);
+	menuButtonSprite->setPositionX((tryAgainButtonSprite->getPositionX() + resumeButtonSprite->getPositionX()) /2);
 
 	this->addChild(tryAgainButtonSprite);
 	this->addChild(menuButtonSprite);

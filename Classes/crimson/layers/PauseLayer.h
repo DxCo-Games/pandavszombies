@@ -13,7 +13,7 @@ namespace dxco {
 
 class PauseLayer :  public Container {
 public:
-	PauseLayer(GameModel* model, float x, float y, float width, float height);
+	PauseLayer(GameModel* model, float x, float y, float width, float height, cocos2d::CCSprite* scaleMaster);
 
 	void show();
 	void hide();

@@ -140,10 +140,9 @@ void HelloWorld::realInit() {
 	    this->levelFinishedLayer = new dxco::LevelFinishedLayer(this->model, 0, 0, visibleSize.width, visibleSize.height, this->survivalMode, this->level);
 	    this->addChild(levelFinishedLayer, 50);
 
-	    this->pauseLayer = new dxco::PauseLayer(this->model, 0, 0, visibleSize.width, visibleSize.height);
-	    this->addChild(pauseLayer, 50);
-
 	    this->createInterface();
+	    this->pauseLayer = new dxco::PauseLayer(this->model, 0, 0, visibleSize.width, visibleSize.height, this->weaponIcon);
+	    this->addChild(pauseLayer, 50);
 
 	    model->loadLevel(this->survivalMode, this->level);
 }
