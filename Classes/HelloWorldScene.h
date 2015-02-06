@@ -20,7 +20,7 @@ public:
     virtual bool init();  
 
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
-    static cocos2d::CCScene* scene(bool survivalMode, int level = -1);
+    static cocos2d::CCScene* scene(bool survivalMode, bool frenzy, int level = -1);
     
     // a selector callback
     void menuCloseCallback(CCObject* pSender);
@@ -57,6 +57,7 @@ public:
     cocos2d::CCLabelTTF* killsLabel;
     cocos2d::CCLabelTTF* killsChainLabel;
     bool survivalMode;
+    bool frenzyMode;
     int level;
 
     virtual void keyBackClicked();

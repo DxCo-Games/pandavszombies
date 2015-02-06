@@ -77,12 +77,9 @@ void TutorialLevel::update(float dt) {
 			this->currentStep++;
 
 			//plant a bonus
-			model->bonuses.clear(); //in case one was already created
-			Bonus* bonus = model->bonusFactory->createWeaponBonus(this->model,
-					this->model->enemies[0]->getLocation());
-			bonus->dt = -500; //make sure it won't disappear
-			model->bonusFactory->addToMap(this->model, bonus);
-
+			if (model->bonuses.size()) {
+				model->bonuses[0]->dt = -500; //make sure it won't disappear
+			}
 		}
 		break;
 	}

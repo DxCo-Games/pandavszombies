@@ -27,7 +27,7 @@ class VoiceManager;
 class GameModel {
 public:
 	GameModel(HelloWorld* vista, Player* player);
-	void loadLevel(bool survival, int level=-1);
+	void loadLevel(bool survival, bool frenzy, int level=-1);
 	int levelNumber;
 	Player* player;
 	EnemyFactory* enemyFactory;

@@ -7,6 +7,7 @@ GameTypeSelectionLayer::GameTypeSelectionLayer() {
 	this->storyButton = NULL;
 	this->survivalButton = NULL;
 	this->equipPandaButton = NULL;
+	this->frenzyButton = NULL;
 }
 
 cocos2d::CCScene* GameTypeSelectionLayer::scene() {
@@ -33,24 +34,25 @@ bool GameTypeSelectionLayer::init() {
 	float buttonWidth = visibleSize.width * 0.25;
 	float buttonHeight = buttonWidth * 0.32;
 	float ypadding = buttonHeight * 0.18;
-	float ymargin = (visibleSize.height - 2*ypadding - 3*buttonHeight) / 2;
+	float ymargin = (visibleSize.height - 3*ypadding - 4*buttonHeight) / 2;
 	float xmargin = (visibleSize.width - buttonWidth) / 2;
 
-	cocos2d::CCSprite* storyButtonSprite = SpriteUtil::create("buttons/story_button.png", xmargin, ymargin + 2*buttonHeight + 2*ypadding,
+	cocos2d::CCSprite* storyButtonSprite = SpriteUtil::create("buttons/story_button.png", xmargin, ymargin + 3*buttonHeight + 3*ypadding,
 			buttonWidth, buttonHeight);
 	this->addChild(storyButtonSprite);
 	this->storyButton = new StoryButton(storyButtonSprite);
 
-	cocos2d::CCSprite* survivalButtonSprite = SpriteUtil::create("buttons/survival_button.png", xmargin, ymargin + buttonHeight + ypadding,
+	cocos2d::CCSprite* survivalButtonSprite = SpriteUtil::create("buttons/survival_button.png", xmargin, ymargin + 2*buttonHeight + 2*ypadding,
 			storyButtonSprite);
 	SpriteUtil::leftAlign(storyButtonSprite, survivalButtonSprite);
 	this->addChild(survivalButtonSprite);
 	this->survivalButton = new SurvivalButton(survivalButtonSprite);
 
-//	cocos2d::CCSprite* challengeButtonSprite = SpriteUtil::create("buttons/challenge_button.png", xmargin, ymargin + buttonHeight + ypadding,
-//			storyButtonSprite);
-//	SpriteUtil::leftAlign(storyButtonSprite, challengeButtonSprite);
-//	this->addChild(challengeButtonSprite);
+	cocos2d::CCSprite* frenzyButtonSprite = SpriteUtil::create("buttons/frenzy_button.png", xmargin, ymargin + buttonHeight + ypadding,
+				storyButtonSprite);
+	SpriteUtil::leftAlign(storyButtonSprite, frenzyButtonSprite);
+	this->addChild(frenzyButtonSprite);
+	this->frenzyButton = new SurvivalButton(frenzyButtonSprite, true);
 
 	cocos2d::CCSprite* equipButtonSprite = SpriteUtil::create("buttons/equip_panda_button_text.png", xmargin, ymargin,
 			storyButtonSprite);
@@ -73,6 +75,7 @@ void GameTypeSelectionLayer::ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::C
 	this->survivalButton->touch(location);
 	this->storyButton->touch(location);
 	this->equipPandaButton->touch(location);
+	this->frenzyButton->touch(location);
 }
 
 

@@ -16,6 +16,7 @@
 #include "daos/UserDAO.h"
 #include <algorithm>
 #include "SimpleAudioEngine.h"
+#include "bonus/WeaponFirstBonusFactory.h"
 
 namespace dxco {
 
@@ -96,13 +97,18 @@ void GameModel::resetTypeKills() {
 	this->typeKills["basket"] = 0;
 }
 
-void GameModel::loadLevel(bool survival, int level) {
+void GameModel::loadLevel(bool survival, bool frenzy, int level) {
 	this->levelNumber = level;
 	if (survival) {
 		this->level = new SurvivalLevel(this);
 		this->vista->setMap(rand() %2);
+	} else if (frenzy) {
+		this->level = new SurvivalLevel(this, 0.05, 3);
+		this->bonusFactory = new WeaponFirstBonusFactory();
+		this->vista->setMap(rand() %2);
 	} else if (level == 1){
 		this->level = new TutorialLevel(this);
+		this->bonusFactory = new WeaponFirstBonusFactory();
 		this->vista->setMap(1);
 	} else if (level == 100){
 		this->level = new SurvivalLevel(this);
@@ -127,12 +133,12 @@ void GameModel::enemyKilled(Enemy* enemy) {
 	this->player->score += enemy->score;
 
 	cocos2d::CCPoint location = enemy->getLocation();
-	this->bonusFactory->createBonus(this, cocos2d::CCPoint(location.x,
-			location.y - enemy->getHeight() / 2));
-
 	this->kills += 1;
 	this->typeKills[enemy->type]++;
 	this->chains->addKill();
+
+	this->bonusFactory->createBonus(this, cocos2d::CCPoint(location.x,
+			location.y - enemy->getHeight() / 2));
 }
 
 void GameModel::update(float dt) {

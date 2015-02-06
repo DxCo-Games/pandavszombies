@@ -23,7 +23,7 @@
 USING_NS_CC;
 
 
-CCScene* HelloWorld::scene(bool survivalMode, int level)
+CCScene* HelloWorld::scene(bool survivalMode, bool frenzyMode, int level)
 {
     // 'scene' is an autorelease object
     CCScene *scene = CCScene::create();
@@ -31,6 +31,7 @@ CCScene* HelloWorld::scene(bool survivalMode, int level)
     // 'layer' is an autorelease object
     HelloWorld* layer = HelloWorld::create();
     layer->survivalMode = survivalMode;
+    layer->frenzyMode = frenzyMode;
     layer->level = level;
 
     // add layer as a child to scene
@@ -144,7 +145,7 @@ void HelloWorld::realInit() {
 	    this->pauseLayer = new dxco::PauseLayer(this->model, 0, 0, visibleSize.width, visibleSize.height, this->weaponIcon);
 	    this->addChild(pauseLayer, 50);
 
-	    model->loadLevel(this->survivalMode, this->level);
+	    model->loadLevel(this->survivalMode, this->frenzyMode, this->level);
 }
 
 void HelloWorld::preloadTextures() {
@@ -328,7 +329,7 @@ void HelloWorld::createInterface() {
 
 	//timer
 	this->timer;
-	if (this->survivalMode) {
+	if (this->survivalMode || this->frenzyMode) {
 		this->timer = dxco::SpriteUtil::create("gameplay/TIMER.png", visibleSize.width / 2, 0, lifeBack);
 		this->timerLabel = dxco::LabelUtil::create("00:00", 14, visibleSize.width / 2, 10, dxco::LabelUtil::TOP, dxco::LabelUtil::LEFT, "fonts/KBStickToThePlan.ttf");
 	} else {

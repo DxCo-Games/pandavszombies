@@ -7,7 +7,8 @@ namespace dxco {
 
 class SurvivalButton : public ButtonDxCo {
 public:
-	SurvivalButton(cocos2d::CCSprite* sprite);
+	SurvivalButton(cocos2d::CCSprite* sprite, bool frenzy=false);
+	bool frenzy;
 
 	virtual void execute();
 };
