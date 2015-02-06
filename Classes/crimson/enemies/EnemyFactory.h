@@ -1,6 +1,8 @@
 #ifndef ENEMYFACTORY_H_
 #define ENEMYFACTORY_H_
 
+#define MAX_CONCURRENT_ZOMBIES 300
+
 #include "cocos2d.h"
 
 #include "../../dxco/Animation.h"

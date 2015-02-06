@@ -35,6 +35,9 @@ void EnemyFactory::createEnemy(GameModel* model, std::string type, float freq) {
 }
 
 void EnemyFactory::createEnemy(GameModel* model, std::vector<std::string>types) {
+	if (model->enemies.size() > MAX_CONCURRENT_ZOMBIES) {
+		return;
+	}
 	//random sprite type
 	std::string type = types[rand() % types.size()];
 
@@ -67,7 +70,9 @@ void EnemyFactory::createEnemy(GameModel* model) {
 }
 
 void EnemyFactory::createBoss(GameModel* model, std::vector<std::string> types) {
-
+	if (model->enemies.size() > MAX_CONCURRENT_ZOMBIES) {
+		return;
+	}
 	std::string type = "elvis";
 
 	if (types.size() != 0) {
