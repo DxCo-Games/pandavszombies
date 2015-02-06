@@ -130,6 +130,11 @@ void LevelFinishedLayer::show(int points, int kills, int coins, int stars) {
 
 	this->setVisible(true);
 	this->setTouchEnabled(true);
+
+	for (int i = 0; i < this->getChildren()->count(); i++) {
+		cocos2d::CCSprite* child = (cocos2d::CCSprite*)this->getChildren()->objectAtIndex(i);
+		SpriteUtil::fadeIn(child);
+	}
 }
 
 void LevelFinishedLayer::hide() {
