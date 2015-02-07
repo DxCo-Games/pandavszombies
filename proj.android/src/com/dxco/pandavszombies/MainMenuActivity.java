@@ -115,7 +115,7 @@ public class MainMenuActivity extends Activity {
 			}
 		});
 
-		this.botonLoginFacebook = (ImageButton) findViewById(R.id.botonLoginFacebook);
+		/*this.botonLoginFacebook = (ImageButton) findViewById(R.id.botonLoginFacebook);
 		
 		SocialUtil.addRateAppListener(this, findViewById(R.id.botonRate), APP_ID, GAME_URL);
 
@@ -125,7 +125,7 @@ public class MainMenuActivity extends Activity {
 			}
 		});
 		
-		/*
+		
 		this.botonLogoutFacebook = (ImageButton) findViewById(R.id.botonLogoutFacebook);
 		this.botonLogoutFacebook.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {

@@ -14,8 +14,8 @@
 
         <ImageView
             android:id="@+id/logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="750dp"
+            android:layout_height="300dp"
             android:layout_marginTop="15dp"
             android:layout_gravity="center"
             android:src="@drawable/logo"
@@ -26,44 +26,44 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="40dp"
             android:background="@android:color/transparent"
             android:src="@drawable/play_button"
             android:contentDescription="@null" />
         
-		<LinearLayout
+	<LinearLayout
         	android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			android:id="@+id/insideLayout"
         	android:orientation="horizontal"
         	android:paddingLeft="0dp"
 			android:paddingRight="0dp">
-	        
-	          <ImageButton
-	              android:id="@+id/botonRate"
-	              android:layout_width="wrap_content"
-	              android:layout_height="wrap_content"
-	              android:layout_marginLeft="210dp"
-	              android:background="@android:color/transparent"
-	              android:contentDescription="@null"
-	              android:src="@drawable/rate_button" />
+
+		<ImageButton
+		    android:id="@+id/botonRate"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_marginLeft="390dp"
+		    android:background="@android:color/transparent"
+		    android:contentDescription="@null"
+		    android:src="@drawable/rate_button" />
 	          
 	          <ImageButton
-	            android:id="@+id/botonSoundEffectsOn"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_marginTop="30dp"
-	            android:layout_marginLeft="30dp"
-	            android:background="@android:color/transparent"
-	            android:contentDescription="@null"
-	            android:src="@drawable/sound_button_on" />
+	              android:id="@+id/botonSoundEffectsOn"
+	              android:layout_width="wrap_content"
+	              android:layout_height="wrap_content"
+	              android:layout_marginLeft="110dp"
+	              android:layout_marginTop="40dp"
+	              android:background="@android:color/transparent"
+	              android:contentDescription="@null"
+	              android:src="@drawable/sound_button_on" />
 	          
 	          <ImageButton
 	            android:id="@+id/botonSoundEffectsOff"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:layout_marginLeft="30dp"
-	            android:layout_marginTop="30dp"
+	            android:layout_marginLeft="110dp"
+	            android:layout_marginTop="40dp"
 	            android:background="@android:color/transparent"
 	            android:contentDescription="@null"
 	            android:src="@drawable/sound_button_off" />
@@ -72,7 +72,7 @@
 	            android:id="@+id/botonMusicOn"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:layout_marginTop="30dp"
+	            android:layout_marginTop="40dp"
 	            android:background="@android:color/transparent"
 	            android:contentDescription="@null"
 	            android:src="@drawable/music_button_on" />
@@ -81,7 +81,7 @@
 	            android:id="@+id/botonMusicOff"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:layout_marginTop="30dp"
+	            android:layout_marginTop="40dp"
 	            android:background="@android:color/transparent"
 	            android:contentDescription="@null"
 	            android:src="@drawable/music_button_off" />
