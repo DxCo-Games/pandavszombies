@@ -138,16 +138,12 @@ std::vector<std::string> EquipPandaItem::getMejoras() {
 
 	std::vector<std::string> mejoras;
 
-
 	mejoras.push_back("player.life");
 	mejoras.push_back("player.speed");
 	mejoras.push_back("bonus.probability");
 
 	mejoras.push_back("weapon.duration");
-	mejoras.push_back("bullet.damage");
-	//mejorar todos los damages juntos (propiedad attack del panda)
-//	mejoras.push_back("bazooka.damage");
-//	mejoras.push_back("explosion.damage");
+	mejoras.push_back("attack.damage");
 
 	mejoras.push_back("firebullet.unlocked");
 	mejoras.push_back("bazooka.unlocked");
@@ -183,12 +179,8 @@ std::string EquipPandaItem::getImagePath() {
 		result.append("regalo");
 	} else if (this->item == "weapon.duration") {
 		result.append("reloj");
-	} else if (this->item == "bullet.damage") {
+	} else if (this->item == "attack.damage") {
 		result.append("balasv");
-//	} else if (this->item == "bazooka.damage") {
-//		result.append("bazooka");
-//	} else if (this->item == "explosion.damage") {
-//		result.append("bomba");
 	}
 
 	if (this->isActivo()) {
@@ -220,12 +212,8 @@ std::string EquipPandaItem::getName() {
 		return "BONUS %";
 	} else if (this->item == "weapon.duration") {
 		return "WEAPON";
-	} else if (this->item == "bullet.damage") {
+	} else if (this->item == "attack.damage") {
 		return "ATTACK";
-//	} else if (this->item == "bazooka.damage") {
-//		return "Bazooka";
-//	} else if (this->item == "explosion.damage") {
-//		return "Bomb";
 	}
 
 	return " ";
@@ -246,7 +234,7 @@ std::string EquipPandaItem::getDetail() {
 		return "2% bonus frequency increase";
 	} else if (this->item == "weapon.duration") {
 		return "10% weapon duration increase";
-	} else if (this->item == "bullet.damage") {
+	} else if (this->item == "attack.damage") {
 		return "10% attack increase";
 	}
 	return " ";

@@ -13,7 +13,7 @@ void GameProperties::init() {
 
 	int saveDefaultProperties = DB::getInteger("save_default_properties");
 
-	if (saveDefaultProperties != 1918) {
+	if (saveDefaultProperties != DB_VERSION) {
 		GameProperties::saveDefaultProperties();
 	}
 }
@@ -32,9 +32,7 @@ void GameProperties::saveDefaultProperties() {
 	DB::putInteger("firebullet.unlocked", 0);
 
 	DB::putInteger("weapon.duration", 15);
-	DB::putInteger("bullet.damage", 10);
-	DB::putInteger("bazooka.damage", 80);
-	DB::putInteger("explosion.damage", 80);
+	DB::putInteger("attack.damage", 10);
 
 	// Indica el nivel de la mejor. Inicialmente en 0, luego 1, 2, 3, 4, ...
 	DB::putInteger("player.life.level", 1);
@@ -42,9 +40,7 @@ void GameProperties::saveDefaultProperties() {
 	DB::putInteger("bonus.probability.level", 1);
 
 	DB::putInteger("weapon.duration.level", 1);
-	DB::putInteger("bullet.damage.level", 1);
-	DB::putInteger("bazooka.damage.level", 1);
-	DB::putInteger("explosion.damage.level", 1);
+	DB::putInteger("attack.damage.level", 1);
 
 	// cuando se realiza una mejora, la propiedad mejora en este porcentaje.
 	DB::putInteger("player.life.percentage", 10);
@@ -52,11 +48,9 @@ void GameProperties::saveDefaultProperties() {
 	DB::putInteger("bonus.probability.percentage", 5);
 
 	DB::putInteger("weapon.duration.percentage", 10);
-	DB::putInteger("bullet.damage.percentage", 10);
-	DB::putInteger("bazooka.damage.percentage", 10);
-	DB::putInteger("explosion.damage.percentage", 10);
+	DB::putInteger("attack.damage.percentage", 10);
 
-	DB::putInteger("save_default_properties", 1918);
+	DB::putInteger("save_default_properties", DB_VERSION);
 }
 
 int GameProperties::get(std::string key) {
