@@ -20,6 +20,7 @@ BonusFactory::BonusFactory() {
 
 void BonusFactory::createBonus(GameModel* model, cocos2d::CCPoint location) {
 	if (rand() % 100 < model->prop->get("bonus.probability")) {
+
 		Bonus* bonus;
 
 		int weaponProbability = 30;
@@ -83,6 +84,7 @@ void BonusFactory::addToMap(GameModel* model, Bonus* bonus) {
 
 Bonus* BonusFactory::createWeaponBonus(GameModel* model, cocos2d::CCPoint location) {
 	std::map<int, dxco::Animation*> animations;
+
 	switch (rand() % 5) {
 	case 0: {
 		cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/shotgun.png", location.x, location.y, 45, 45);
@@ -93,16 +95,32 @@ Bonus* BonusFactory::createWeaponBonus(GameModel* model, cocos2d::CCPoint locati
 		return new WeaponBonus(model, bonusSprite, animations, Player::SMG_);
 	}
 	case 2: {
-		cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/flame_thrower.png", location.x, location.y, 45, 45);
-		return new WeaponBonus(model, bonusSprite, animations, Player::FIRE);
+
+		if (model->prop->get("fire.unlocked")) {
+			cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/flame_thrower.png", location.x, location.y, 45, 45);
+			return new WeaponBonus(model, bonusSprite, animations, Player::FIRE);
+		} else {
+			cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/shotgun.png", location.x, location.y, 45, 45);
+			return new WeaponBonus(model, bonusSprite, animations, Player::SHOTGUN);
+		}
 	}
 	case 3: {
-		cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/bazooka.png", location.x, location.y, 45, 45);
-		return new WeaponBonus(model, bonusSprite, animations, Player::BAZOOKA);
+			if (model->prop->get("bazooka.unlocked")) {
+				cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/bazooka.png", location.x, location.y, 45, 45);
+				return new WeaponBonus(model, bonusSprite, animations, Player::BAZOOKA);
+			} else {
+				cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/smg.png", location.x, location.y, 45, 45);
+				return new WeaponBonus(model, bonusSprite, animations, Player::SMG_);
+			}
 	}
 	case 4: {
-		cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/fire.png", location.x, location.y, 45, 45);
-		return new WeaponBonus(model, bonusSprite, animations, Player::FIREBULLET);
+		if (model->prop->get("firebullet.unlocked")) {
+			cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/fire.png", location.x, location.y, 45, 45);
+			return new WeaponBonus(model, bonusSprite, animations, Player::FIREBULLET);
+		} else {
+			cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/smg.png", location.x, location.y, 45, 45);
+			return new WeaponBonus(model, bonusSprite, animations, Player::SMG_);
+		}
 	}
 	}
 

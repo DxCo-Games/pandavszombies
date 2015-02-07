@@ -97,10 +97,15 @@ void GameProperties::powerUp(std::string key, float percentage) {
 }
 
 int GameProperties::getPrice(std::string key) {
-	int level = GameProperties::get(key + std::string(".level")) - 1;
+	float level = (float)GameProperties::get(key + std::string(".level")) - 1;
+	level /= 1.618033988749; //numero de dios =(
 
-	if (key == "bazooka.unlocked" || key == "fire.unlocked" || key == "firebullet.unlocked") {
-		level++;
+	if (key == "firebullet.unlocked") {
+		return 1500;
+	} else if (key == "bazooka.unlocked") {
+		return 2500;
+	} else if (key == "fire.unlocked") {
+		return 5200;
 	}
 
 	// numero de dios =(

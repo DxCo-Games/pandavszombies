@@ -7,6 +7,7 @@
 #include "../daos/UserDAO.h"
 #include "../buttons/BuyPowerUpButton.h"
 #include "cocos2d.h"
+#include "SimpleAudioEngine.h"
 
 #include <cstdlib>
 
@@ -258,9 +259,10 @@ int EquipPandaItem::getPrice() {
 void EquipPandaItem::applyPowerUp() {
 
 	CCLOG("Upgrade item %s", this->item.c_str());
-	int price = this->getPrice();
+	int price = 0;this->getPrice();
 
 	if (this->isActivo() && UserDAO::getCoins() >= price) {
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("sounds/bonus.ogg");
 		CCLOG("Upgrade item %s active", this->item.c_str());
 
 		UserDAO::addCoins(-price);
@@ -270,6 +272,8 @@ void EquipPandaItem::applyPowerUp() {
 		//TODO reload scene, hay alguna forma mejor de hacerlo?
 		pDirector->popScene();
 		pDirector->pushScene(EquipPandaLayer::scene());
+	} else if (UserDAO::getCoins() < price) {
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("sounds/cannotbuy.mp3");
 	}
 }
 
