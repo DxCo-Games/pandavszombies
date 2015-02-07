@@ -285,7 +285,7 @@ int EquipPandaLayer::getSpeed() {
 }
 
 int EquipPandaLayer::getAttack() {
-	return GameProperties::get("bullet.damage");
+	return GameProperties::get("attack.damage");
 }
 
 int EquipPandaLayer::getWeaponTime() {
