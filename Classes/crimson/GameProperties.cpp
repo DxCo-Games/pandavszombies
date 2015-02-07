@@ -26,7 +26,6 @@ void GameProperties::saveDefaultProperties() {
 	DB::putInteger("player.speed", 90);
 	DB::putInteger("bonus.probability", 10);
 
-	//TODO check this in bonus factory
 	DB::putInteger("bazooka.unlocked", 0);
 	DB::putInteger("fire.unlocked", 0);
 	DB::putInteger("firebullet.unlocked", 0);
@@ -86,8 +85,15 @@ int	 GameProperties::increaseLevel(std::string key) {
 }
 
 void GameProperties::powerUp(std::string key, float percentage) {
-	int current_value = GameProperties::get(key);
-	GameProperties::set(key, (int)(current_value * percentage));
+	int currentValue = GameProperties::get(key);
+	int nextValue = (int)(currentValue * percentage);
+
+	if (nextValue == currentValue) {
+		nextValue++;
+	}
+
+	CCLOG("Powerup %s %f %i %i", key.c_str(), percentage, currentValue, nextValue);
+	GameProperties::set(key, nextValue);
 }
 
 int GameProperties::getPrice(std::string key) {
