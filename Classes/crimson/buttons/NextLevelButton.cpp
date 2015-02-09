@@ -13,7 +13,7 @@ NextLevelButton::NextLevelButton(cocos2d::CCSprite* sprite, int levelNumber) : B
 
 void NextLevelButton::execute() {
 	cocos2d::CCDirector* pDirector = cocos2d::CCDirector::sharedDirector();
-	pDirector->replaceScene(HelloWorld::scene(false, this->levelNumber));
+	pDirector->replaceScene(HelloWorld::scene(false, false, this->levelNumber));
 
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
 }
