@@ -1,4 +1,5 @@
 #include "GameTypeSelectionLayer.h"
+#include "../GameProperties.h"
 #include "../../dxco/SpriteUtil.h"
 
 namespace dxco {
@@ -31,31 +32,25 @@ bool GameTypeSelectionLayer::init() {
 	cocos2d::CCSprite* spriteBackground = SpriteUtil::create("fondo_ciudad.jpg", 0, 0, visibleSize.width, visibleSize.height);
 	this->addChild(spriteBackground);
 
-	float buttonWidth = visibleSize.width * 0.25;
-	float buttonHeight = buttonWidth * 0.32;
-	float ypadding = buttonHeight * 0.18;
-	float ymargin = (visibleSize.height - 3*ypadding - 4*buttonHeight) / 2;
-	float xmargin = (visibleSize.width - buttonWidth) / 2;
+	int frenzy = GameProperties::get("frenzy.unlocked");
 
-	cocos2d::CCSprite* storyButtonSprite = SpriteUtil::create("buttons/story_button.png", xmargin, ymargin + 3*buttonHeight + 3*ypadding,
-			buttonWidth, buttonHeight);
+	cocos2d::CCSprite* storyButtonSprite = this->getSprite("buttons/story_button.png", 2 + frenzy);
 	this->addChild(storyButtonSprite);
 	this->storyButton = new StoryButton(storyButtonSprite);
 
-	cocos2d::CCSprite* survivalButtonSprite = SpriteUtil::create("buttons/survival_button.png", xmargin, ymargin + 2*buttonHeight + 2*ypadding,
-			storyButtonSprite);
+	cocos2d::CCSprite* survivalButtonSprite = this->getSprite("buttons/survival_button.png", 1 + frenzy);
 	SpriteUtil::leftAlign(storyButtonSprite, survivalButtonSprite);
 	this->addChild(survivalButtonSprite);
 	this->survivalButton = new SurvivalButton(survivalButtonSprite);
 
-	cocos2d::CCSprite* frenzyButtonSprite = SpriteUtil::create("buttons/frenzy_button.png", xmargin, ymargin + buttonHeight + ypadding,
-				storyButtonSprite);
-	SpriteUtil::leftAlign(storyButtonSprite, frenzyButtonSprite);
-	this->addChild(frenzyButtonSprite);
-	this->frenzyButton = new SurvivalButton(frenzyButtonSprite, true);
+	if (frenzy) {
+		cocos2d::CCSprite* frenzyButtonSprite = this->getSprite("buttons/frenzy_button.png", 1);
+		SpriteUtil::leftAlign(storyButtonSprite, frenzyButtonSprite);
+		this->addChild(frenzyButtonSprite);
+		this->frenzyButton = new SurvivalButton(frenzyButtonSprite, true);
+	}
 
-	cocos2d::CCSprite* equipButtonSprite = SpriteUtil::create("buttons/equip_panda_button_text.png", xmargin, ymargin,
-			storyButtonSprite);
+	cocos2d::CCSprite* equipButtonSprite = this->getSprite("buttons/equip_panda_button_text.png", 0);
 	SpriteUtil::leftAlign(storyButtonSprite, equipButtonSprite);
 	this->addChild(equipButtonSprite);
 	this->equipPandaButton = new EquipPandaButton(equipButtonSprite);
@@ -64,6 +59,24 @@ bool GameTypeSelectionLayer::init() {
 	this->setKeypadEnabled(true);
 
 	return true;
+}
+
+cocos2d::CCSprite* GameTypeSelectionLayer::getSprite(std::string texture, int index) {
+	cocos2d::CCSize visibleSize = cocos2d::CCDirector::sharedDirector()->getVisibleSize();
+	float buttonWidth = visibleSize.width * 0.25;
+	float buttonHeight = buttonWidth * 0.32;
+	float ypadding = buttonHeight * 0.18;
+
+	int total = 3;
+	if (GameProperties::get("frenzy.unlocked")) {
+		total = 4;
+	}
+
+	float ymargin = (visibleSize.height - (total -1)*ypadding - total*buttonHeight) / 2;
+	float xmargin = (visibleSize.width - buttonWidth) / 2;
+
+	return SpriteUtil::create(texture, xmargin, ymargin + index*buttonHeight + index*ypadding,
+				buttonWidth, buttonHeight);
 }
 
 void GameTypeSelectionLayer::ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent) {
@@ -75,7 +88,10 @@ void GameTypeSelectionLayer::ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::C
 	this->survivalButton->touch(location);
 	this->storyButton->touch(location);
 	this->equipPandaButton->touch(location);
-	this->frenzyButton->touch(location);
+
+	if (this->frenzyButton != NULL) {
+		this->frenzyButton->touch(location);
+	}
 }
 
 

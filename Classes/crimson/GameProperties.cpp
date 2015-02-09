@@ -32,6 +32,7 @@ void GameProperties::saveDefaultProperties() {
 	DB::putInteger("bazooka.unlocked", 0);
 	DB::putInteger("fire.unlocked", 0);
 	DB::putInteger("firebullet.unlocked", 0);
+	DB::putInteger("frenzy.unlocked", 0);
 
 
 	// Indica el nivel de la mejor. Inicialmente en 0, luego 1, 2, 3, 4, ...
@@ -65,7 +66,7 @@ void GameProperties::set(std::string key, int value) {
 
 
 void GameProperties::powerUp(std::string key) {
-	if (key == "bazooka.unlocked" || key == "fire.unlocked" || key == "firebullet.unlocked") {
+	if (key == "bazooka.unlocked" || key == "fire.unlocked" || key == "firebullet.unlocked" || key == "frenzy.unlocked") {
 		DB::putInteger(key, 1);
 	} else {
 		int currentLevel = GameProperties::increaseLevel(key);
@@ -108,6 +109,8 @@ int GameProperties::getPrice(std::string key) {
 		return 2500;
 	} else if (key == "fire.unlocked") {
 		return 5200;
+	} else if (key == "frenzy.unlocked") {
+		return 10000;
 	}
 
 	// numero de dios =(

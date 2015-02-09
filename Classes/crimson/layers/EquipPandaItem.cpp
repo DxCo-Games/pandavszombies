@@ -115,7 +115,7 @@ int EquipPandaItem::getCantidadDisponible() {
 
 	int result = 5;
 
-	if (this->item == "bazooka.unlocked" || this->item == "fire.unlocked" || this->item == "firebullet.unlocked") {
+	if (this->item == "bazooka.unlocked" || this->item == "fire.unlocked" || this->item == "firebullet.unlocked" || this->item == "frenzy.unlocked") {
 		if (GameProperties::get(this->item)) {
 			result = 0;
 		} else {
@@ -154,6 +154,7 @@ std::vector<std::string> EquipPandaItem::getMejoras() {
 	mejoras.push_back("firebullet.unlocked");
 	mejoras.push_back("bazooka.unlocked");
 	mejoras.push_back("fire.unlocked");
+	mejoras.push_back("frenzy.unlocked");
 
 	return mejoras;
 }
@@ -183,6 +184,8 @@ std::string EquipPandaItem::getImagePath() {
 		result.append("velocidad");
 	} else if (this->item == "bonus.probability") {
 		result.append("regalo");
+	} else if (this->item == "frenzy.unlocked") {
+		result.append("regalo");
 	} else if (this->item == "weapon.duration") {
 		result.append("reloj");
 	} else if (this->item == "attack.damage") {
@@ -198,16 +201,14 @@ std::string EquipPandaItem::getImagePath() {
 	return result;
 }
 
-std::string EquipPandaItem::getExplicacion() {
-	return "Improve bomb explosion";
-}
-
 std::string EquipPandaItem::getName() {
 
 	if (this->item == "bazooka.unlocked") {
 		return "BAZOOKA";
 	} else if (this->item == "fire.unlocked") {
 		return "FLAME";
+	} else if (this->item == "frenzy.unlocked") {
+			return "FRENZY";
 	} else if (this->item == "firebullet.unlocked") {
 		return "FIREBALL";
 	} else if (this->item == "player.life") {
@@ -232,6 +233,8 @@ std::string EquipPandaItem::getDetail() {
 		return "unlock the flamethrower";
 	} else if (this->item == "firebullet.unlocked") {
 		return "unlock the fireballs";
+	} else if (this->item == "frenzy.unlocked") {
+			return "unlock the frenzy game mode";
 	} else if (this->item == "player.life") {
 		return "+50 life increase";
 	} else if (this->item == "player.speed") {
