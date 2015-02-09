@@ -240,6 +240,7 @@ void GameModel::restartGame() {
 	this->vista->bonus2->setOpacity(0);
 	this->player->score = 0;
 	this->player->weaponBonus = 0;
+	this->freezeBonusActivated = 0;
 
 	this->player->shieldActivated = 0;
 	this->player->movementSpeedBonus = 1;
