@@ -18,6 +18,8 @@ public:
 
 	static cocos2d::CCScene* scene();
 
+	cocos2d::CCSprite* getSprite(std::string texture, int index);
+
 	CREATE_FUNC(GameTypeSelectionLayer);
 
 	void ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
