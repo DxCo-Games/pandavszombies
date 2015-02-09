@@ -24,7 +24,6 @@ private:
 	bool isActivo();
 	int getCantidadDisponible();
 	std::string getImagePath();
-	std::string getExplicacion();
 	std::string getName();
 	std::string getDetail();
 	std::string getBuyImagePath();
