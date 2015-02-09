@@ -3,7 +3,7 @@
 
 #include <map>
 #include <string>
-#define DB_VERSION 1912
+#define DB_VERSION 1911
 
 namespace dxco {
 
@@ -13,7 +13,7 @@ public:
 
 	static int get(std::string key);
 	static void set(std::string key, int value);
-	static void powerUp(std::string key, float percentage);
+	static void powerUp(std::string key, int level);
 
 	// this function takes the saved property percentage
 	static void powerUp(std::string key);

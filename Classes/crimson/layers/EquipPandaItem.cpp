@@ -52,7 +52,13 @@ EquipPandaItem::EquipPandaItem(std::string item, float x, float y, float width,
 			height * 0.22, scaleMaster);
 	this->addChild(coin);
 
-	cocos2d::CCLabelTTF* coinsLabel = LabelUtil::create(StringUtil::toString(this->getPrice()), 13,
+	int fontSize = 13;
+
+	if (this->getPrice() > 1000000) {
+		fontSize = 9;
+	}
+
+	cocos2d::CCLabelTTF* coinsLabel = LabelUtil::create(StringUtil::toString(this->getPrice()), fontSize,
 			0, 0, 0, 0, "fonts/KBStickToThePlan.ttf");
 
 	coinsLabel->setAnchorPoint(ccp(0.5, 0.5));

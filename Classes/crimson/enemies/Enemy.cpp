@@ -17,16 +17,19 @@ float Enemy::getSpeed(int level) {
 	if (level > 10) {
 		level = 10;
 	}
-	return 23 + 2* level;
+	return 23 + 2 * level;
 }
 
 Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations, int level, std::string type) :
 		TopDownItem(ENEMY_ANGLE_POSITIONS), SteeringBehaviorItem(Enemy::getSpeed(level), 0.25 * Enemy::getSpeed(1) / Enemy::getSpeed(level)),
 		Item(sprite, animations){
 	this->model = model;
-	this->life = 10 * (level + 1);
+
 	this->score = 10 * (level + 1);
-	this->strength = 5 * (level + 1);
+	this->life = 5 * (level + 1);
+	this->strength = 2.5 * * (level + 1);
+
+	CCLOG("Enemy life: %f, Enemy strength: %f", this->life, this->strength);
 	this->burning = false;
 	this->state = ENEMY_STANDING;
 	this->action = NULL;

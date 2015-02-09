@@ -26,12 +26,13 @@ void GameProperties::saveDefaultProperties() {
 	DB::putInteger("player.speed", 90);
 	DB::putInteger("bonus.probability", 10);
 
+	DB::putInteger("weapon.duration", 15);
+	DB::putInteger("attack.damage", 10);
+
 	DB::putInteger("bazooka.unlocked", 0);
 	DB::putInteger("fire.unlocked", 0);
 	DB::putInteger("firebullet.unlocked", 0);
 
-	DB::putInteger("weapon.duration", 15);
-	DB::putInteger("attack.damage", 10);
 
 	// Indica el nivel de la mejor. Inicialmente en 0, luego 1, 2, 3, 4, ...
 	DB::putInteger("player.life.level", 1);
@@ -42,12 +43,12 @@ void GameProperties::saveDefaultProperties() {
 	DB::putInteger("attack.damage.level", 1);
 
 	// cuando se realiza una mejora, la propiedad mejora en este porcentaje.
-	DB::putInteger("player.life.percentage", 10);
-	DB::putInteger("player.speed.percentage", 2);
-	DB::putInteger("bonus.probability.percentage", 5);
+	DB::putInteger("player.life.addition", 50);
+	DB::putInteger("player.speed.addition", 2);
+	DB::putInteger("bonus.probability.addition", 5);
 
-	DB::putInteger("weapon.duration.percentage", 10);
-	DB::putInteger("attack.damage.percentage", 10);
+	DB::putInteger("weapon.duration.addition", 10);
+	DB::putInteger("attack.damage.addition", 10);
 
 	DB::putInteger("save_default_properties", DB_VERSION);
 }
@@ -67,10 +68,8 @@ void GameProperties::powerUp(std::string key) {
 	if (key == "bazooka.unlocked" || key == "fire.unlocked" || key == "firebullet.unlocked") {
 		DB::putInteger(key, 1);
 	} else {
-		float percentaje = (float) DB::getInteger(key + std::string(".percentage"));
-
-		GameProperties::powerUp(key, 1 + (percentaje / 100));
 		int currentLevel = GameProperties::increaseLevel(key);
+		GameProperties::powerUp(key, currentLevel);
 	}
 
 }
@@ -84,11 +83,14 @@ int	 GameProperties::increaseLevel(std::string key) {
 	return currentLevel;
 }
 
-void GameProperties::powerUp(std::string key, float percentage) {
+void GameProperties::powerUp(std::string key, int level) {
 	int currentValue = GameProperties::get(key);
-	int nextValue = (int)(currentValue * percentage);
+	int addition = DB::getInteger(key + std::string(".addition"));
+
+	int nextValue = currentValue + addition;
 
 	if (nextValue == currentValue) {
+		// addition never should be zero.
 		nextValue++;
 	}
 

@@ -17,6 +17,7 @@
 #include <algorithm>
 #include "SimpleAudioEngine.h"
 #include "bonus/WeaponFirstBonusFactory.h"
+#include "enemies/Enemy.h"
 
 namespace dxco {
 

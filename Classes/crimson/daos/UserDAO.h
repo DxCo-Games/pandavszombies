@@ -32,6 +32,7 @@ public:
 	static int getBestScore();
 
 	static void addCoins(int coinsToAdd);
+	static void deleteCoins(int coinsToDelete);
 	static int getCoins();
 
 	static void finishLevel(int level, int stars);

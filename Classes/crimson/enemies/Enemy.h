@@ -7,11 +7,15 @@
 #define ENEMY_ARRIVE_RANGE 30
 #define ENEMY_BLOOD_DURATION 5
 
+#define ENEMY_LIFE_MULTIPLIER 0.75
+#define ENEMY_STRENGTH_MULTIPLIER 2.0
+
 #include "cocos2d.h"
 #include "../../dxco/TopDownItem.h"
 #include "../../dxco/SteeringBehaviorItem.h"
 #include "../../dxco/Action.h"
 #include "../Bullet.h"
+#include <math.h>
 
 namespace dxco {
 
