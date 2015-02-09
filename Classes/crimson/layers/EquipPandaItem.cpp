@@ -253,7 +253,7 @@ int EquipPandaItem::getPrice() {
 void EquipPandaItem::applyPowerUp() {
 
 	CCLOG("Upgrade item %s", this->item.c_str());
-	int price = 0;this->getPrice();
+	int price = this->getPrice();
 
 	if (this->isActivo() && UserDAO::getCoins() >= price) {
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("sounds/bonus.ogg");
