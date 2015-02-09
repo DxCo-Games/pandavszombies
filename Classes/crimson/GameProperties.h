@@ -3,7 +3,7 @@
 
 #include <map>
 #include <string>
-#define DB_VERSION 1911
+#define DB_VERSION 1919
 
 namespace dxco {
 

@@ -45,7 +45,7 @@ void GameProperties::saveDefaultProperties() {
 	// cuando se realiza una mejora, la propiedad mejora en este porcentaje.
 	DB::putInteger("player.life.addition", 50);
 	DB::putInteger("player.speed.addition", 2);
-	DB::putInteger("bonus.probability.addition", 5);
+	DB::putInteger("bonus.probability.addition", 4);
 
 	DB::putInteger("weapon.duration.addition", 10);
 	DB::putInteger("attack.damage.addition", 10);
@@ -94,7 +94,7 @@ void GameProperties::powerUp(std::string key, int level) {
 		nextValue++;
 	}
 
-	CCLOG("Powerup %s %f %i %i", key.c_str(), percentage, currentValue, nextValue);
+	CCLOG("Powerup %s %d %i %i", key.c_str(), addition, currentValue, nextValue);
 	GameProperties::set(key, nextValue);
 }
 

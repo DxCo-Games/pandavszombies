@@ -13,7 +13,7 @@ class GameModel;
 
 class LevelParser {
 public:
-	static Level* parse(GameModel* model, std::string levelPath);
+	static Level* parse(GameModel* model, std::string levelPath, int level);
 };
 
 } /* namespace dxco */

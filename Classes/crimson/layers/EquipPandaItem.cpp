@@ -233,15 +233,15 @@ std::string EquipPandaItem::getDetail() {
 	} else if (this->item == "firebullet.unlocked") {
 		return "unlock the fireballs";
 	} else if (this->item == "player.life") {
-		return "10% life increase";
+		return "+50 life increase";
 	} else if (this->item == "player.speed") {
-		return "2% speed increase";
+		return "+2 speed increase";
 	} else if (this->item == "bonus.probability") {
-		return "2% bonus frequency increase";
+		return "+4 bonus frequency increase";
 	} else if (this->item == "weapon.duration") {
-		return "10% weapon duration increase";
+		return "+10 weapon duration increase";
 	} else if (this->item == "attack.damage") {
-		return "10% attack increase";
+		return "+10 attack increase";
 	}
 	return " ";
 }
@@ -253,7 +253,7 @@ int EquipPandaItem::getPrice() {
 void EquipPandaItem::applyPowerUp() {
 
 	CCLOG("Upgrade item %s", this->item.c_str());
-	int price = this->getPrice();
+	int price = 0;//this->getPrice();
 
 	if (this->isActivo() && UserDAO::getCoins() >= price) {
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("sounds/bonus.ogg");

@@ -7,7 +7,7 @@
 
 namespace dxco {
 
-Level* LevelParser::parse(GameModel* model, std::string levelPath) {
+Level* LevelParser::parse(GameModel* model, std::string levelPath, int currentLevel) {
 
 	std::vector<EnemyWave*> resultado;
 	rapidjson::Document* document = JsonParser::parseJsonFile(levelPath);
@@ -19,10 +19,10 @@ Level* LevelParser::parse(GameModel* model, std::string levelPath) {
 
 			int total = waveConfig["total"].GetInt();
 			float freq = waveConfig["freq"].GetDouble();
-			float level = waveConfig["level"].GetInt();
+			//float level = waveConfig["level"].GetInt();
 			int isBoss = waveConfig["isBoss"].GetInt();
 
-			CCLOG("Wave leida %i %f %i %i", total, freq, level, isBoss);
+			CCLOG("Wave leida %i %f %i %i", total, freq, currentLevel, isBoss);
 			std::vector<std::string> vec;
 			if (waveConfig.HasMember("types")) {
 				for (rapidjson::SizeType j = 0; j < waveConfig["types"].Size(); j++) {
@@ -32,9 +32,9 @@ Level* LevelParser::parse(GameModel* model, std::string levelPath) {
 			if (waveConfig.HasMember("killsFreq")) {
 				float killsFreq = waveConfig["killsFreq"].GetDouble();
 				std::string killsType = (*document)["config"]["type"].GetString();
-				resultado.push_back(new EnemyWave(model, total, freq, level, killsType, killsFreq));
+				resultado.push_back(new EnemyWave(model, total, freq, currentLevel, killsType, killsFreq));
 			} else {
-				resultado.push_back(new EnemyWave(model, total, freq, level, vec, isBoss));
+				resultado.push_back(new EnemyWave(model, total, freq, currentLevel, vec, isBoss));
 			}
 	}
 

@@ -115,7 +115,7 @@ void GameModel::loadLevel(bool survival, bool frenzy, int level) {
 		this->level = new SurvivalLevel(this);
 		this->vista->setMap(1);
 	} else {
-		this->level = LevelParser::parse(this, "levels/level" + StringUtil::toString(level) +".json");
+		this->level = LevelParser::parse(this, "levels/level" + StringUtil::toString(level) +".json", level);
 	}
 }
 
