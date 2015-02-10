@@ -3,6 +3,7 @@
 #include "../../HelloWorldScene.h"
 #include "../GameProperties.h"
 #include "../Player.h"
+#include "../../dxco/StringUtil.h"
 
 namespace dxco {
 
@@ -97,7 +98,8 @@ void TutorialLevel::update(float dt) {
 	}
 	case 5: {
 		if (this->model->kills == 4 && !this->messageDisplayed) {
-			model->vista->message("You'll earn coins every 1000 points, use them to equip your panda.");
+			std::string value = StringUtil::toString(COIN_VALUE);
+			model->vista->message("You'll earn coins every " + value + " points, use them to equip your panda.");
 			this->messageDisplayed = true;
 		}
 		if (this->model->enemies.size() == 0) {
