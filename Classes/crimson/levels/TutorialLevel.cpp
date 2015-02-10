@@ -2,6 +2,7 @@
 #include "../GameModel.h"
 #include "../../HelloWorldScene.h"
 #include "../GameProperties.h"
+#include "../Player.h"
 
 namespace dxco {
 
@@ -14,7 +15,7 @@ TutorialLevel::TutorialLevel(GameModel* model): Level(model, *new std::vector<En
 
 	//step 0 message
 	model->vista->message("Hold and move the left pad to move around");
-	this->model->prop->set("enemy.level",  0);
+	this->model->prop->set("enemy.level",  1);
 }
 
 bool TutorialLevel::isFinished() {

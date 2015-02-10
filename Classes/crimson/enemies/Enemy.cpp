@@ -29,7 +29,7 @@ Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animatio
 	this->life = 5.5 * (level + 1);
 	this->strength = 3 * (level + 1);
 
-	CCLOG("Enemy life: %f, Enemy strength: %f", this->life, this->strength);
+	CCLOG("Enemy life: %f, Enemy strength: %f, Level: %i", this->life, this->strength, level);
 	this->burning = false;
 	this->state = ENEMY_STANDING;
 	this->action = NULL;
@@ -168,7 +168,7 @@ bool Enemy::shoot(Bullet* bullet) {
 			bullet->use();
 			result = true;
 
-			this->hurt(this->model->prop->get("bullet.damage"));
+			this->hurt(this->model->prop->get("attack.damage"));
 		}
 	}
 
