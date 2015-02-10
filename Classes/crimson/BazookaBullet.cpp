@@ -32,7 +32,7 @@ void BazookaBullet::use() {
 
 		if (MathUtil::distance(firework->getPosition(), enemy->getLocation())
 				< BAZOOKA_RANGE) {
-			enemy->hurt(this->model->prop->get("bazooka.damage"));
+			enemy->hurt(this->model->prop->get("attack.damage") * 5);
 		}
 	}
 

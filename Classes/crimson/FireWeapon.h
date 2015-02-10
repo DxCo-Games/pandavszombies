@@ -3,7 +3,7 @@
 
 #include "Weapon.h"
 
-#define FIRE_DAMAGE 80
+#define FIRE_DAMAGE 8
 
 namespace dxco {
 

@@ -200,7 +200,7 @@ void Enemy::burn(float dt, cocos2d::CCPoint playerLocation, float distance, floa
 			abs(abs(this->model->player->getRotation() - angle) - 180) < 60);
 
 	if (this->burning && wasBurning){
-		this->hurt(FIRE_DAMAGE * dt);
+		this->hurt(FIRE_DAMAGE * dt * this->model->prop->get("attack.damage"));
 	}
 }
 
