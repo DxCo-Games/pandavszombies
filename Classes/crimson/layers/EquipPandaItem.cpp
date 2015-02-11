@@ -1,5 +1,6 @@
 #include "EquipPandaItem.h"
 #include "EquipPandaLayer.h"
+#include "GameTypeSelectionLayer.h"
 #include "../../dxco/SpriteUtil.h"
 #include "../../dxco/LabelUtil.h"
 #include "../../dxco/StringUtil.h"
@@ -266,9 +267,15 @@ void EquipPandaItem::applyPowerUp() {
 		GameProperties::powerUp(this->item);
 
 		cocos2d::CCDirector* pDirector = cocos2d::CCDirector::sharedDirector();
-		//TODO reload scene, hay alguna forma mejor de hacerlo?
-		pDirector->popScene();
-		pDirector->pushScene(EquipPandaLayer::scene());
+
+		if (this->item == "frenzy.unlocked") {
+			pDirector->popToSceneStackLevel(1);
+			pDirector->replaceScene(GameTypeSelectionLayer::scene());
+		} else {//TODO reload scene, hay alguna forma mejor de hacerlo?
+			pDirector->popScene();
+			pDirector->pushScene(EquipPandaLayer::scene());
+		}
+
 	} else if (UserDAO::getCoins() < price) {
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("sounds/cannotbuy.mp3");
 	}
