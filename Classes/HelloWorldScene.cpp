@@ -490,9 +490,9 @@ void HelloWorld::update(float dt) {
 
 		this->titleDt += dt;
 
-		if (this->titleDt > TITLE_DT - 0.25 && this->level != -1 && !this->title1->numberOfRunningActions()) {
-			this->title1->runAction(CCFadeOut::create(0.25));
-			this->title2->runAction(CCFadeOut::create(0.25));
+		if (this->titleDt > TITLE_DT - 0.5 && this->level != -1 && !this->title1->numberOfRunningActions()) {
+			this->title1->runAction(CCFadeOut::create(0.5));
+			this->title2->runAction(CCFadeOut::create(0.5));
 		}
 
 		if (this->titleDt > TITLE_DT || this->level == -1) {

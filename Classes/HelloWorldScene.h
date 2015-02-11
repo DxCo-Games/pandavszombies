@@ -13,7 +13,7 @@
 
 #include <string>
 
-#define TITLE_DT 3
+#define TITLE_DT 2.5
 
 class HelloWorld : public cocos2d::CCLayer
 {
