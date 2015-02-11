@@ -34,7 +34,7 @@ public class MainMenuActivity extends Activity {
 	private ImageButton botonSoundEffectsOn;
 	private ImageButton botonSoundEffectsOff;
 	
-	private static final String APP_ID = "com.dxco";
+	private static final String APP_ID = "com.dxco.pandavszombies";
 	private static final String GAME_URL = "https://play.google.com/store/apps/details?id=" + APP_ID;
 	
 	static {
@@ -115,16 +115,19 @@ public class MainMenuActivity extends Activity {
 			}
 		});
 
-		/*this.botonLoginFacebook = (ImageButton) findViewById(R.id.botonLoginFacebook);
+		
 		
 		SocialUtil.addRateAppListener(this, findViewById(R.id.botonRate), APP_ID, GAME_URL);
 
-		this.botonLoginFacebook.setOnClickListener(new OnClickListener() {
+		/*this.botonLoginFacebook.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
 				onClickLogin();
 			}
 		});
 		
+		
+		
+		this.botonLoginFacebook = (ImageButton) findViewById(R.id.botonLoginFacebook);
 		
 		this.botonLogoutFacebook = (ImageButton) findViewById(R.id.botonLogoutFacebook);
 		this.botonLogoutFacebook.setOnClickListener(new OnClickListener() {
