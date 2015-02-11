@@ -48,7 +48,7 @@ void GameProperties::saveDefaultProperties() {
 	DB::putInteger("player.speed.addition", 2);
 	DB::putInteger("bonus.probability.addition", 4);
 
-	DB::putInteger("weapon.duration.addition", 10);
+	DB::putInteger("weapon.duration.addition", 3);
 	DB::putInteger("attack.damage.addition", 10);
 
 	DB::putInteger("save_default_properties", DB_VERSION);
@@ -116,7 +116,7 @@ int GameProperties::getPrice(std::string key) {
 	// numero de dios =(
 	double multiplier = pow (1.618033988749, level);
 
-	return 500 * multiplier;
+	return ITEM_INITIAL_COST * multiplier;
 }
 
 } /* namespace dxco */
