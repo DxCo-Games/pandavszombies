@@ -10,8 +10,8 @@ PauseLayer::PauseLayer(GameModel* model, float x, float y, float width, float he
 	cocos2d::CCSprite* pauseTitle = SpriteUtil::create("pause_title.png", visibleSize.width * 0.38, visibleSize.height * 0.58, scaleMaster);
 	this->addChild(pauseTitle);
 
-	pauseTitle->setScaleX(pauseTitle->getScaleX()* 1.1);
-	pauseTitle->setScaleY(pauseTitle->getScaleY()* 1.1);
+	pauseTitle->setScaleX(pauseTitle->getScaleX()* 1.2);
+	pauseTitle->setScaleY(pauseTitle->getScaleY()* 1.2);
 
 	float posicionY = visibleSize.height * 0.46;
 
