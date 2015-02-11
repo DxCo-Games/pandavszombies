@@ -11,6 +11,8 @@
 #include "../daos/UserDAO.h"
 #include "../buttons/BuyPowerUpButton.h"
 
+#include "./GameTypeSelectionLayer.h"
+
 namespace dxco {
 
 cocos2d::CCScene* EquipPandaLayer::scene() {
@@ -273,7 +275,12 @@ void EquipPandaLayer::ccTouchesEnded(cocos2d::CCSet *pTouches,
 		}
 		it++;
 	}
+}
 
+void EquipPandaLayer::keyBackClicked() {
+	cocos2d::CCDirector* pDirector = cocos2d::CCDirector::sharedDirector();
+	pDirector->popScene();
+	pDirector->replaceScene(GameTypeSelectionLayer::scene());
 }
 
 int EquipPandaLayer::getLife() {

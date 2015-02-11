@@ -13,14 +13,13 @@
 
 namespace dxco {
 
-class EquipPandaLayer : public AbstractMenuLayer {
+class EquipPandaLayer : public cocos2d::CCLayer {
 public:
 
 	virtual bool init();
 	static cocos2d::CCScene* scene();
 
 	CREATE_FUNC(EquipPandaLayer);
-
 
 	void ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
 	void ccTouchesEnded(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
@@ -43,9 +42,10 @@ public:
 	int getAttack();
 	int getWeaponTime();
 	int getBonus();
-	void loadMejoras(float skillsPandaWidth, float skillsPandaHeight, float skillsPandaX, float skillsPandaY,
-			cocos2d::CCSprite* scaleMaster);
+	void loadMejoras(float skillsPandaWidth, float skillsPandaHeight, float skillsPandaX, float skillsPandaY, cocos2d::CCSprite* scaleMaster);
 	void createPandaItem(cocos2d::CCSprite* skillsPanda);
+
+	void keyBackClicked();
 
 	int touchId;
 };
