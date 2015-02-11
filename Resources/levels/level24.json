@@ -1,6 +1,7 @@
 {
 "config": {
 	"background": 1,
+	"title": "So many zombies, so little time",
 	"time": 20
 },
 "waves": [{

@@ -146,6 +146,7 @@ void HelloWorld::realInit() {
 	    this->addChild(pauseLayer, 50);
 
 	    model->loadLevel(this->survivalMode, this->frenzyMode, this->level);
+	    this->setLevelTitle();
 }
 
 void HelloWorld::preloadTextures() {
@@ -172,7 +173,7 @@ dxco::Player* HelloWorld::createPlayer() {
 
 	CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
 	this->playerContainer = new dxco::Container(this->mapa->getWidth() / 2,  this->mapa->getHeight() / 2, 80, 80);
-    CCSprite* spriteGuy = dxco::SpriteUtil::create("herida1_1_0000.png", 0.45 * this->mapa->getWidth(),  0.4 * this->mapa->getHeight(), 75, 75, true);
+    CCSprite* spriteGuy = dxco::SpriteUtil::create("herida1_5_0000.png", 0.45 * this->mapa->getWidth(),  0.4 * this->mapa->getHeight(), 75, 75, true);
 
     //this->playerContainer->addChild(spriteGuy);
     this->mapa->addChild(spriteGuy, 2);
@@ -378,6 +379,24 @@ void HelloWorld::createInterface() {
 	this->controlsLayer->addChild(killsChainLabel, 10);
 	this->killsChainLabel->setOpacity(0);
 
+	if (this->level != -1) {
+		std::string levelstring = "LEVEL " + dxco::StringUtil::toString(level);
+		this->title1 = CCLabelTTF::create(levelstring.c_str(), "fonts/KBStickToThePlan.ttf", 18);
+		this->title1->setPositionX(timer->getPositionX());
+		this->title1->setPositionY(zombie->getPositionY());
+		this->title1->enableStroke(cocos2d::ccc3(220, 0, 0), 2, true);
+		dxco::LabelUtil::setColor(title1, dxco::LabelUtil::RED);
+		this->addChild(this->title1);
+
+		this->title2 = CCLabelTTF::create("NONAME", "fonts/KBStickToThePlan.ttf", 22, CCSize(350,0), kCCTextAlignmentCenter);
+		this->title2->setPositionX(timer->getPositionX());
+		this->title2->setPositionY(zombie->getPositionY() - dxco::SpriteUtil::getHeight(zombie) * 1.5);
+		this->title2->enableStroke(cocos2d::ccc3(220, 0, 0), 2, true);
+		dxco::LabelUtil::setColor(title2, dxco::LabelUtil::RED);
+		this->title2->setVisible(false);
+		this->addChild(this->title2);
+	}
+
 	//text messages
 	this->panel = dxco::SpriteUtil::create("gameplay/PLACA_texto.png", 0, 0, lifeBack);
 	this->panel->setPositionX(joystickBotonMovimiento->getPositionX() + (joystickBoton->getPositionX()-joystickBotonMovimiento->getPositionX())/2);
@@ -395,6 +414,16 @@ void HelloWorld::createInterface() {
 	this->addChild(this->opacityLayer, 4);
 
 	this->opacityLayer->setVisible(false);
+}
+
+void HelloWorld::setLevelTitle() {
+	std::string title = this->model->level->title;
+	if (this->level > 0 && title != "") {
+		std::string levelstring = "LEVEL " + dxco::StringUtil::toString(level) + ":";
+		this->title1->setString(levelstring.c_str());
+		this->title2->setString(title.c_str());
+		this->title2->setVisible(true);
+	}
 }
 
 void HelloWorld::message(std::string text, int seconds) {
@@ -459,10 +488,27 @@ void HelloWorld::update(float dt) {
 		this->removeChild(backgroundLoading);
 		this->removeChild(loadingItem->getSprite());
 
-		if (!this->juegoPausado) {
-			this->model->update(dt);
-			updateLabels();
+		this->titleDt += dt;
+
+		if (this->titleDt > TITLE_DT - 0.25 && this->level != -1 && !this->title1->numberOfRunningActions()) {
+			this->title1->runAction(CCFadeOut::create(0.25));
+			this->title2->runAction(CCFadeOut::create(0.25));
 		}
+
+		if (this->titleDt > TITLE_DT || this->level == -1) {
+			if (!this->juegoPausado) {
+				this->model->update(dt);
+				updateLabels();
+			}
+
+			if (!this->titleShown && this->level != -1) {
+				this->titleShown = true;
+				this->title1->setVisible(false);
+				this->title2->setVisible(false);
+				this->showControls();
+			}
+		}
+
 	} else {
 		this->loadingItem->update(dt);
 		this->preloadTextures();
@@ -482,6 +528,9 @@ void HelloWorld::update(float dt) {
 			this->realInit();
 			this->playMusic();
 			this->model->timer = 0;
+			if(this->level != -1) {
+				this->hideControls();
+			}
 		}
 	}
 }

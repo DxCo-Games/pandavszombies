@@ -1,6 +1,7 @@
 {
 "config": {
 	"background": 1,
+	"title": "Ride the zombie wave",
 	"kills": 20,
 	"type": "campesino"
 },

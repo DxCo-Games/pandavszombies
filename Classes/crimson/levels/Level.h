@@ -2,6 +2,7 @@
 #define LEVEL_H_
 
 #include <vector>
+#include <string>
 
 namespace dxco {
 
@@ -10,7 +11,7 @@ class GameModel;
 
 class Level {
 public:
-	Level(GameModel *model, std::vector<EnemyWave*>& waves);
+	Level(GameModel *model, std::vector<EnemyWave*>& waves, std::string title="");
 
 	virtual bool isFinished();
 	virtual void update(float dt);
@@ -24,6 +25,7 @@ public:
 	std::vector<EnemyWave*> waves;
 	int currentWave;
 	int totalEnemies;
+	std::string title;
 };
 
 } /* namespace dxco */

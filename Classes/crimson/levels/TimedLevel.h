@@ -8,7 +8,7 @@ namespace dxco {
 //A story mode level that finishes after a fixed amount of seconds
 class TimedLevel: public Level {
 public:
-	TimedLevel(GameModel *model, std::vector<EnemyWave*>& waves, int seconds);
+	TimedLevel(GameModel *model, std::vector<EnemyWave*>& waves, int seconds, std::string title="");
 
 	virtual bool isFinished();
 	virtual void update(float dt);

@@ -1,6 +1,7 @@
 {
 "config": {
 	"background": 1,
+	"title": "A quick one",
 	"time": 30
 },
 "waves": [{

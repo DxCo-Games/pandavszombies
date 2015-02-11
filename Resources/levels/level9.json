@@ -1,6 +1,7 @@
 {
 "config": {
 	"background": 1,
+	"title": "Subterranean homesick zombie",
 	"kills": 20,
 	"type": "oficinista"
 },

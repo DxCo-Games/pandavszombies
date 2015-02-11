@@ -5,7 +5,7 @@
 
 namespace dxco {
 
-KillCountLevel::KillCountLevel(GameModel *model, std::vector<EnemyWave*>& waves, int kills, std::string type): Level(model, waves) {
+KillCountLevel::KillCountLevel(GameModel *model, std::vector<EnemyWave*>& waves, int kills, std::string type, std::string title): Level(model, waves, title) {
 	this->kills = kills;
 	this->type = type;
 

@@ -7,7 +7,7 @@
 
 namespace dxco {
 
-TutorialLevel::TutorialLevel(GameModel* model): Level(model, *new std::vector<EnemyWave*>) {
+TutorialLevel::TutorialLevel(GameModel* model): Level(model, *new std::vector<EnemyWave*>, "Tutorial") {
 	this->currentStep = 0;
 	this->movementDt = 0;
 	this->rotationDt = 0;

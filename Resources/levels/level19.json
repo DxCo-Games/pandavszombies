@@ -1,6 +1,7 @@
 {
 "config": {
 	"background": 1,
+	"title": "Codename: dx9",
 	"kills": 10,
 	"type": "oficinista"
 },

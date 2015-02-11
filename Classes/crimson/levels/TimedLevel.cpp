@@ -5,7 +5,7 @@
 
 namespace dxco {
 
-TimedLevel::TimedLevel(GameModel *model, std::vector<EnemyWave*>& waves, int seconds): Level(model, waves) {
+TimedLevel::TimedLevel(GameModel *model, std::vector<EnemyWave*>& waves, int seconds, std::string title): Level(model, waves, title) {
 	this->seconds = seconds;
 	this->dt = 0;
 

@@ -6,10 +6,11 @@
 
 namespace dxco {
 
-Level::Level(GameModel *model, std::vector<EnemyWave*>& waves) {
+Level::Level(GameModel *model, std::vector<EnemyWave*>& waves, std::string title) {
 	this->waves = waves;
 	this->model = model;
 	this->currentWave = 0;
+	this->title = title;
 
 	this->totalEnemies = 0;
 	for (int i=0; i < waves.size(); i++) {

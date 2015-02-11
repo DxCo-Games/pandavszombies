@@ -1,6 +1,7 @@
 {
 "config": {
-	"background": 1
+	"background": 1,
+	"title": "I see dead people"
 },
 "waves": [{
 	"total" : 40,

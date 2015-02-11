@@ -18,6 +18,7 @@ Level* LevelParser::parse(GameModel* model, std::string levelPath, int currentLe
 			const rapidjson::Value& waveConfig = ((*document)["waves"])[i];
 
 			int total = waveConfig["total"].GetInt();
+
 			float freq = waveConfig["freq"].GetDouble();
 			//float level = waveConfig["level"].GetInt();
 			int isBoss = waveConfig["isBoss"].GetInt();
@@ -38,15 +39,20 @@ Level* LevelParser::parse(GameModel* model, std::string levelPath, int currentLe
 			}
 	}
 
+	std::string title = "";
+	if ((*document)["config"].HasMember("title")) {
+		title = (*document)["config"]["title"].GetString();
+	}
+
 	if ((*document)["config"].HasMember("kills")) {
 		int kills = (*document)["config"]["kills"].GetInt();
 		std::string type = (*document)["config"]["type"].GetString();
-		return new KillCountLevel(model, resultado, kills, type);
+		return new KillCountLevel(model, resultado, kills, type, title);
 	} else if((*document)["config"].HasMember("time")) {
 		int time = (*document)["config"]["time"].GetInt();
-		return new TimedLevel(model, resultado, time);
+		return new TimedLevel(model, resultado, time, title);
 	} else {
-		return new Level(model, resultado);
+		return new Level(model, resultado, title);
 	}
 
 

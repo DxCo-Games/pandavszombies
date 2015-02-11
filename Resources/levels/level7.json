@@ -1,6 +1,7 @@
 {
 "config": {
-	"background": 1
+	"background": 1,
+	"title": "You better equip for this"
 },
 "waves": [{
 	"total" : 15,

@@ -13,6 +13,8 @@
 
 #include <string>
 
+#define TITLE_DT 3
+
 class HelloWorld : public cocos2d::CCLayer
 {
 public:
@@ -59,6 +61,12 @@ public:
     bool survivalMode;
     bool frenzyMode;
     int level;
+
+    cocos2d::CCLabelTTF* title1;
+    cocos2d::CCLabelTTF* title2;
+    bool titleShown;
+    float titleDt;
+    void setLevelTitle();
 
     virtual void keyBackClicked();
 

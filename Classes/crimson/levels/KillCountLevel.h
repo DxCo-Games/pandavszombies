@@ -9,7 +9,7 @@ namespace dxco {
 //Story mode level that finishes after a fixed amount of enemies have been killed
 class KillCountLevel: public Level {
 public:
-	KillCountLevel(GameModel *model, std::vector<EnemyWave*>& waves, int kills, std::string type);
+	KillCountLevel(GameModel *model, std::vector<EnemyWave*>& waves, int kills, std::string type, std::string title="");
 
 	virtual bool isFinished();
 	virtual void updateInterface();
