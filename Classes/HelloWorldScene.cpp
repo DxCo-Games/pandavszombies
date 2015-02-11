@@ -17,6 +17,7 @@
 #include "dxco/LabelUtil.h"
 #include "crimson/levels/Level.h"
 #include "crimson/daos/UserDAO.h"
+#include "crimson/layers/GameTypeSelectionLayer.h"
 
 #include <map>
 
@@ -536,6 +537,14 @@ void HelloWorld::update(float dt) {
 }
 
 void HelloWorld::keyBackClicked() {
+
+	if (this->levelFinishedLayer->isVisible()) { // Game over
+		cocos2d::CCDirector* pDirector = cocos2d::CCDirector::sharedDirector();
+		pDirector->replaceScene(dxco::GameTypeSelectionLayer::scene());
+
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
+	}
 
 	if (true) { // TODO: Chaco pls!
 		if (this->juegoPausado) {
