@@ -1,0 +1,31 @@
+{
+"config": {
+	"background": 0, 
+	"title": "Fitter happier"
+},
+"waves": [{
+	"total" : 5,
+	"freq" : 0.25,
+	"isBoss" : 1,
+	"types": ["oficinista"]
+	},
+	{
+	"total" : 50,
+	"freq" : 0.5,
+	"isBoss" : 0,
+	"types": ["oficinista"]
+	},
+	{
+	"total" : 5,
+	"freq" : 0.25,
+	"isBoss" : 1,
+	"types": ["oficinista"]
+	},
+	{
+	"total" : 150,
+	"freq" : 0.1,
+	"isBoss" : 0,
+	"types": ["oficinista"]
+	}
+	]
+}
