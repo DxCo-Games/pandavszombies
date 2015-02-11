@@ -112,20 +112,32 @@ void LevelFinishedLayer::show(int points, int kills, int coins, int stars) {
 
 	if (!this->survival) {
 
+		cocos2d::CCSize visibleSize = cocos2d::CCDirector::sharedDirector()->getVisibleSize();
+
 		if (stars == 0) {
 
-			cocos2d::CCSize visibleSize = cocos2d::CCDirector::sharedDirector()->getVisibleSize();
-			this->title = SpriteUtil::create("game_over_title.png", visibleSize.width * 0.15, visibleSize.height * 0.7, visibleSize.width * 0.7, visibleSize.height * 0.15);
 
+			this->removeChild(this->title);
+			this->title = SpriteUtil::create("game_over_title.png", visibleSize.width * 0.15, visibleSize.height * 0.7, visibleSize.width * 0.7, visibleSize.height * 0.15);
 			this->addChild(title);
 
 			this->nextLevelButton->sprite->setVisible(false);
 			this->tryAgainButton->sprite->setPositionX(visibleSize.width * 0.68);
+		} else {
+			this->removeChild(this->title);
+			this->title = SpriteUtil::create("level_finished_title.png", visibleSize.width * 0.15, visibleSize.height * 0.7, visibleSize.width * 0.7, visibleSize.height * 0.15);
+			this->addChild(title);
+			this->nextLevelButton->sprite->setVisible(true);
+
+			this->tryAgainButton->sprite->setPositionX(visibleSize.width * 0.59);
 		}
 
-		cocos2d::CCSize visibleSize = cocos2d::CCDirector::sharedDirector()->getVisibleSize();
-		cocos2d::CCSprite* starsSprite = SpriteUtil::create("buttons/LEVEL-FIN-SLOTS-" + StringUtil::toString(stars) + ".png", visibleSize.width * 0.15, visibleSize.height * 0.3, visibleSize.height * 0.4 * 0.45, visibleSize.height * 0.4);
-		this->addChild(starsSprite);
+		if (this->starsSprite != NULL) {
+			this->removeChild(this->starsSprite);
+		}
+
+		this->starsSprite = SpriteUtil::create("buttons/LEVEL-FIN-SLOTS-" + StringUtil::toString(stars) + ".png", visibleSize.width * 0.15, visibleSize.height * 0.3, visibleSize.height * 0.4 * 0.45, visibleSize.height * 0.4);
+		this->addChild(this->starsSprite);
 	}
 
 	this->setVisible(true);

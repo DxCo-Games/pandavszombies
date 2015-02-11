@@ -36,6 +36,7 @@ private:
 	NextLevelButton* nextLevelButton;
 	EquipPandaButton* equipPandaButton;
 	cocos2d::CCSprite* title;
+	cocos2d::CCSprite* starsSprite;
 };
 
 } /* namespace dxco */
