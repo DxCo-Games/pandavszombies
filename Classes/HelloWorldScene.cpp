@@ -138,7 +138,7 @@ void HelloWorld::realInit() {
 	    dxco::Player* player = this->createPlayer();
 
 	    model = new dxco::GameModel(this, player);
-	    this->levelFinishedLayer = new dxco::LevelFinishedLayer(this->model, 0, 0, visibleSize.width, visibleSize.height, this->survivalMode, this->level);
+	    this->levelFinishedLayer = new dxco::LevelFinishedLayer(this->model, 0, 0, visibleSize.width, visibleSize.height, this->survivalMode || this->frenzyMode, this->level);
 	    this->addChild(levelFinishedLayer, 50);
 
 	    this->createInterface();
