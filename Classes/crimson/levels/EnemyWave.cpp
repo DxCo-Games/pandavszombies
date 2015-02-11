@@ -18,7 +18,7 @@ EnemyWave::EnemyWave(GameModel *model, int total, float freq, int level, std::ve
 }
 
 
-EnemyWave::EnemyWave(GameModel *model, int total, float freq, int level, std::string killsType, float killsFreq) {
+EnemyWave::EnemyWave(GameModel *model, int total, float freq, int level, std::vector<std::string> types, std::string killsType, float killsFreq) {
 	this->dt = 100;
 	this->freq = freq;
 	this->level = level;
@@ -28,6 +28,7 @@ EnemyWave::EnemyWave(GameModel *model, int total, float freq, int level, std::st
 	this->total = total;
 	this->killsType = killsType;
 	this->killsFreq = killsFreq;
+	this->types = types;
 }
 
 bool EnemyWave::isFinished() {
@@ -41,10 +42,10 @@ void EnemyWave::update(float dt) {
 		if (this->isBoss) {
 			this->model->enemyFactory->createBoss(model, this->types);
 		} else {
-			if (this->types.size()) {
+			if (this->killsType != ""){
+				this->model->enemyFactory->createEnemy(model, this->types, this->killsType, this->killsFreq);
+			} else if (this->types.size()) {
 				this->model->enemyFactory->createEnemy(model, this->types);
-			} else if (this->killsType != ""){
-				this->model->enemyFactory->createEnemy(model, this->killsType, this->killsFreq);
 			} else {
 				this->model->enemyFactory->createEnemy(model);
 			}

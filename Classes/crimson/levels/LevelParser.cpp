@@ -33,7 +33,7 @@ Level* LevelParser::parse(GameModel* model, std::string levelPath, int currentLe
 			if (waveConfig.HasMember("killsFreq")) {
 				float killsFreq = waveConfig["killsFreq"].GetDouble();
 				std::string killsType = (*document)["config"]["type"].GetString();
-				resultado.push_back(new EnemyWave(model, total, freq, currentLevel, killsType, killsFreq));
+				resultado.push_back(new EnemyWave(model, total, freq, currentLevel, vec, killsType, killsFreq));
 			} else {
 				resultado.push_back(new EnemyWave(model, total, freq, currentLevel, vec, isBoss));
 			}

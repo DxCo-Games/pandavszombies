@@ -1,0 +1,14 @@
+{
+"config": {
+	"background": 1,
+	"title": "Alice in zombieland",
+	"time": 30
+},
+"waves": [{
+	"total" : 1000,
+	"freq" : 0.75,
+	"isBoss" : 1,
+	"types": ["campesino", "oficinista", "cura", "cirujano"]
+	}
+	]
+}

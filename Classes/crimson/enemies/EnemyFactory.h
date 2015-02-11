@@ -18,7 +18,7 @@ public:
 
 	void createEnemy(GameModel* model, std::vector<std::string> types);
 	void createEnemy(GameModel* model);
-	void createEnemy(GameModel* model, std::string type, float freq); //create that type with probability, else any other type
+	void createEnemy(GameModel* model, std::vector<std::string>types, std::string type, float freq); //create that type with probability, else any other type
 	void createBoss(GameModel* model);
 	void createBoss(GameModel* model, std::vector<std::string> types);
 
