@@ -29,6 +29,8 @@ public:
 	int getAngleState();
 	float getRotation();
 	void setRotation(float rotation);
+
+	virtual ~TopDownItem() {};
 };
 
 } /* namespace dxco */

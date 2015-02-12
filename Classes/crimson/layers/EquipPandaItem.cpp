@@ -145,12 +145,12 @@ std::vector<std::string> EquipPandaItem::getMejoras() {
 
 	std::vector<std::string> mejoras;
 
-	mejoras.push_back("player.life");
-	mejoras.push_back("player.speed");
-	mejoras.push_back("bonus.probability");
-
-	mejoras.push_back("weapon.duration");
 	mejoras.push_back("attack.damage");
+	mejoras.push_back("player.life");
+	mejoras.push_back("bonus.probability");
+	mejoras.push_back("weapon.duration");
+	mejoras.push_back("player.speed");
+
 
 	mejoras.push_back("firebullet.unlocked");
 	mejoras.push_back("bazooka.unlocked");
@@ -257,7 +257,7 @@ int EquipPandaItem::getPrice() {
 void EquipPandaItem::applyPowerUp() {
 
 	CCLOG("Upgrade item %s", this->item.c_str());
-	int price = 0;//this->getPrice();
+	int price = this->getPrice();
 
 	if (this->isActivo() && UserDAO::getCoins() >= price) {
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("sounds/bonus.ogg");

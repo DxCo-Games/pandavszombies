@@ -81,7 +81,8 @@ GameModel::GameModel(HelloWorld* vista, Player* player) {
 	this->kills = 0;
 	this->chains = new ChainedKillsManager(this);
 	this->timer = 0;
-
+	this->level = 0;
+	this->levelNumber = 0;
 	//se puede evitar esto?
 	this->resetTypeKills();
 
