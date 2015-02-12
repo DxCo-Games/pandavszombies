@@ -271,7 +271,7 @@ void EquipPandaItem::applyPowerUp() {
 		if (this->item == "frenzy.unlocked") {
 			pDirector->popToSceneStackLevel(1);
 			pDirector->replaceScene(GameTypeSelectionLayer::scene());
-		} else {//TODO reload scene, hay alguna forma mejor de hacerlo?
+		} else {//TODO reload scene, hay alguna forma mejor de hacerlo? Si, pero es bastante mas facill hacerlo asi =(.
 			pDirector->popScene();
 			pDirector->pushScene(EquipPandaLayer::scene());
 		}
