@@ -10,7 +10,7 @@ class GameModel;
 
 class EnemyWave {
 public:
-	EnemyWave(GameModel *model, int total, float freq, int level, std::vector<std::string> types, bool isBoss=false);
+	EnemyWave(GameModel *model, int total, float freq, int level, std::vector<std::string> types, int isBoss=0);
 	EnemyWave(GameModel *model, int total, float freq, int level, std::vector<std::string> types, std::string killsType, float killsFreq=0.2);
 
 	bool isFinished();
@@ -18,7 +18,7 @@ public:
 	void reset();
 
 	GameModel *model;
-	bool isBoss; //TODO makes sense?
+	int isBoss;
 	int total;
 	int count;
 	int level;

@@ -22,7 +22,7 @@ LevelButton::LevelButton(int number, float x, float y) {
 	this->on();
 
 	std::string labelNumber = StringUtil::padLeft(number, 2);
-	if(number == 100) {
+	if(number == 100 || number == 39) {
 		labelNumber = "?";
 	}
 	this->label = cocos2d::CCLabelTTF::create(labelNumber.c_str(), "fonts/KBStickToThePlan.ttf", 16);
