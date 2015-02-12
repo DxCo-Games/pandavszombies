@@ -1,6 +1,6 @@
 {
 "config": {
-	"background": 1,
+	"background": 0,
 	"title": "Enter the secret code",
 	"time": 20
 },
