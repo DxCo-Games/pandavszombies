@@ -1,0 +1,13 @@
+{
+"config": {
+	"background": 1,
+	"title": "Enter the secret code",
+	"time": 20
+},
+"waves": [{
+	"total" : 0,
+	"freq" : 0.5,
+	"isBoss" : 0
+	}
+	]
+}
