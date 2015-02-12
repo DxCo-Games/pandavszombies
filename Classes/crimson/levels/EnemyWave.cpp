@@ -4,7 +4,7 @@
 
 namespace dxco {
 
-EnemyWave::EnemyWave(GameModel *model, int total, float freq, int level, std::vector<std::string> types, bool isBoss) {
+EnemyWave::EnemyWave(GameModel *model, int total, float freq, int level, std::vector<std::string> types, int isBoss) {
 	this->dt = 100;
 	this->freq = freq;
 	this->level = level;
@@ -23,7 +23,7 @@ EnemyWave::EnemyWave(GameModel *model, int total, float freq, int level, std::ve
 	this->freq = freq;
 	this->level = level;
 	this->model = model;
-	this->isBoss = false;
+	this->isBoss = 0;
 	this->count = 0;
 	this->total = total;
 	this->killsType = killsType;
@@ -39,8 +39,10 @@ void EnemyWave::update(float dt) {
 	this->model->prop->set("enemy.level", this->level);
 	this->dt += dt;
 	if (this->dt > this->freq){
-		if (this->isBoss) {
+		if (this->isBoss == 1) {
 			this->model->enemyFactory->createBoss(model, this->types);
+		} else if (this->isBoss == 2){
+			this->model->enemyFactory->createSuperBoss(model, this->types);
 		} else {
 			if (this->killsType != ""){
 				this->model->enemyFactory->createEnemy(model, this->types, this->killsType, this->killsFreq);

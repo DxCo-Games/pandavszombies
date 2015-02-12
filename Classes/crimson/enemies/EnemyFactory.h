@@ -22,6 +22,8 @@ public:
 	void createBoss(GameModel* model);
 	void createBoss(GameModel* model, std::vector<std::string> types);
 
+	void createSuperBoss(GameModel* model, std::vector<std::string> types);
+
 	cocos2d::CCSprite* createSpriteInRandomPosition(GameModel* model, std::string texture, int width, int height);
 
 	std::map<int, dxco::Animation*> loadAnimations(GameModel* model, std::string type, float speed);
