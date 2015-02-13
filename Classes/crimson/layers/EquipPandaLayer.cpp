@@ -30,6 +30,13 @@ bool EquipPandaLayer::init() {
 	if (!cocos2d::CCLayer::init()) {
 		return false;
 	}
+
+	int equipPanda = GameProperties::get("push.equip");
+
+	if (equipPanda == 1) {
+		GameProperties::set("push.equip", 2);
+	}
+
 	cocos2d::CCPoint origin =
 						cocos2d::CCDirector::sharedDirector()->getVisibleOrigin();
 

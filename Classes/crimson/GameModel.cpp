@@ -193,6 +193,7 @@ void GameModel::update(float dt) {
 		int stars = this->getLevelStars();
 		this->vista->levelFinishedLayer->show(this->player->score, this->kills, this->player->score / COIN_VALUE, stars);
 		updateCoins();
+
 		if (this->level->isFinished()) {
 			UserDAO::finishLevel(this->levelNumber, stars);
 		}

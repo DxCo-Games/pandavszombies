@@ -23,11 +23,15 @@ public:
 	CREATE_FUNC(GameTypeSelectionLayer);
 
 	void ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
+
+	void update(float dt);
 private:
 	SurvivalButton* survivalButton;
 	SurvivalButton* frenzyButton;
 	StoryButton* storyButton;
 	EquipPandaButton* equipPandaButton;
+	bool fadeIn;
+	float dt;
 };
 
 } /* namespace dxco */

@@ -20,6 +20,9 @@ void GameProperties::init() {
 
 void GameProperties::saveDefaultProperties() {
 	//default properties
+
+	DB::putInteger("push.equip", 0);
+
 	DB::putInteger("enemy.level", 1);
 
 	DB::putInteger("player.life", 200);

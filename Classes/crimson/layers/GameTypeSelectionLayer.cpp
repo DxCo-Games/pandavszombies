@@ -22,10 +22,33 @@ cocos2d::CCScene* GameTypeSelectionLayer::scene() {
 	return scene;
 }
 
+void GameTypeSelectionLayer::update(float dt) {
+
+	int pushEquip = GameProperties::get("push.equip");
+
+	this->dt += dt;
+
+	if (pushEquip == 1 && this->dt > 0.5) {
+		this->dt = 0.0;
+		cocos2d::CCSprite* equipSprite = (cocos2d::CCSprite*)this->equipPandaButton->getSprite();
+
+		if (this->fadeIn) {
+			equipSprite->runAction(cocos2d::CCFadeOut::create(0.5));
+		} else {
+			equipSprite->runAction(cocos2d::CCFadeIn::create(0.5));
+		}
+
+	}
+}
+
 bool GameTypeSelectionLayer::init() {
 	if (!cocos2d::CCLayer::init()) {
 		return false;
 	}
+
+	this->dt = 0.5;
+	this->fadeIn = false;
+	this->scheduleUpdate();
 
 	cocos2d::CCSize visibleSize = cocos2d::CCDirector::sharedDirector()->getVisibleSize();
 
@@ -54,6 +77,7 @@ bool GameTypeSelectionLayer::init() {
 	SpriteUtil::leftAlign(storyButtonSprite, equipButtonSprite);
 	this->addChild(equipButtonSprite);
 	this->equipPandaButton = new EquipPandaButton(equipButtonSprite);
+
 
 	this->setTouchEnabled(true);
 	this->setKeypadEnabled(true);
@@ -85,11 +109,16 @@ void GameTypeSelectionLayer::ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::C
 	cocos2d::CCPoint location = touch->getLocationInView();
 	location = cocos2d::CCDirector::sharedDirector()->convertToGL(location);
 
-	this->survivalButton->touch(location);
-	this->storyButton->touch(location);
+	int pushEquip = GameProperties::get("push.equip");
+
+	if (pushEquip != 1) {
+		this->survivalButton->touch(location);
+		this->storyButton->touch(location);
+	}
+
 	this->equipPandaButton->touch(location);
 
-	if (this->frenzyButton != NULL) {
+	if (this->frenzyButton != NULL && pushEquip != 1) {
 		this->frenzyButton->touch(location);
 	}
 }
