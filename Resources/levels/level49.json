@@ -1,0 +1,13 @@
+{
+"config": {
+	"background": 1,
+	"title": "The serenity now",
+	"time": 120
+},
+"waves": [{
+	"total" : 50000,
+	"freq" : 0.05,
+	"isBoss" : 0
+	}
+	]
+}

@@ -1,0 +1,14 @@
+{
+"config": {
+	"background": 1,
+	"kills": 20,
+	"type": "cirujano"
+},
+"waves": [{
+	"total" : 5000,
+	"freq" : 0.75,
+	"level" : 0,
+	"isBoss" : 0
+	}
+	]
+}

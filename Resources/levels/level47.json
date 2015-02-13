@@ -1,0 +1,31 @@
+{
+"config": {
+	"background": 1,
+	"title": "Run like hell"
+},
+"waves": [{
+	"total" : 50,
+	"freq" : 0.4,
+	"isBoss" : 0,
+	"types": ["basquet"]
+	},
+	{
+	"total" : 3,
+	"freq" : 0.1,
+	"isBoss" : 1,
+	"types": ["basquet"]
+	},
+	{
+	"total" : 100,
+	"freq" : 0.55,
+	"isBoss" : 0,
+	"types": ["basquet"]
+	},
+	{
+	"total" : 10,
+	"freq" : 0.1,
+	"isBoss" : 1,
+	"types": ["basquet"]
+	}
+	]
+}
