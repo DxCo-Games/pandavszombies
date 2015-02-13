@@ -1,0 +1,25 @@
+{
+"config": {
+	"background": 1,
+	"title": "Through the zombie glass"
+},
+"waves": [{
+	"total" : 20,
+	"freq" : 1,
+	"isBoss" : 1,
+	"types": ["campesino", "oficinista", "cura", "cirujano"]
+	},
+	{
+	"total" : 5,
+	"freq" : 3,
+	"isBoss" : 1,
+	"types": ["campesino", "oficinista", "cura", "cirujano"]
+	},
+	{
+	"total" : 40,
+	"freq" : 0.75,
+	"isBoss" : 1,
+	"types": ["campesino", "oficinista", "cura", "cirujano"]
+	}
+	]
+}
