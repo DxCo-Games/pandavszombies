@@ -3,6 +3,7 @@
 #include "../../dxco/StringUtil.h"
 #include "../daos/UserDAO.h"
 #include "../../HelloWorldScene.h"
+#include "SimpleAudioEngine.h"
 
 namespace dxco {
 
@@ -39,8 +40,11 @@ LevelButton::LevelButton(int number, float x, float y) {
 
 void LevelButton::execute() {
 	if (this->enabled) {
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("sounds/bonus.ogg");
 		cocos2d::CCDirector* pDirector = cocos2d::CCDirector::sharedDirector();
 		pDirector->replaceScene(HelloWorld::scene(false, false, this->number));
+	} else {
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("sounds/cannotbuy.mp3");
 	}
 }
 

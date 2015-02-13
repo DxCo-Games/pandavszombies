@@ -58,6 +58,8 @@ public:
 	virtual void stand(float dt, cocos2d::CCPoint target);
 
 	cocos2d::CCAction* action;
+
+	virtual ~Enemy() {};
 };
 
 } /* namespace dxco */
