@@ -1,0 +1,62 @@
+{
+"config": {
+	"background": 1,
+	"title": "Can't afford another background",
+	"time": 90
+},
+"waves": [{
+	"total" : 20,
+	"freq" : 1,
+	"level" : 3,
+	"isBoss" : 0
+	},
+	{
+	"total" : 1,
+	"freq" : 0.25,
+	"level" : 3,
+	"isBoss" : 1
+	},
+	{
+	"total" : 40,
+	"freq" : 0.5,
+	"level" : 3,
+	"isBoss" : 0
+	},
+	{
+	"total" : 2,
+	"freq" : 0.25,
+	"level" : 3,
+	"isBoss" : 1
+	},
+	{
+	"total" : 80,
+	"freq" : 0.25,
+	"level" : 3,
+	"isBoss" : 0
+	},
+	{
+	"total" : 4,
+	"freq" : 0.25,
+	"level" : 3,
+	"isBoss" : 1
+	},
+	{
+	"total" : 160,
+	"freq" : 0.125,
+	"level" : 3,
+	"isBoss" : 0
+	},
+	{
+	"total" : 8,
+	"freq" : 0.25,
+	"level" : 3,
+	"isBoss" : 1
+	},
+	{
+	"total" : 500,
+	"freq" : 0.3,
+	"level" : 3,
+	"isBoss" : 0
+	}
+	]
+}

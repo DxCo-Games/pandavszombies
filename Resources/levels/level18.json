@@ -1,61 +1,66 @@
 {
 "config": {
-	"background": 1,
-	"time": 90
+	"background": 1
 },
 "waves": [{
-	"total" : 20,
-	"freq" : 1,
-	"level" : 3,
+	"total" : 50,
+	"freq" : 0.75,
+	"level" : 2,
 	"isBoss" : 0
 	},
 	{
 	"total" : 1,
-	"freq" : 0.25,
-	"level" : 3,
-	"isBoss" : 1
-	},
-	{
-	"total" : 40,
 	"freq" : 0.5,
-	"level" : 3,
-	"isBoss" : 0
-	},
-	{
-	"total" : 2,
-	"freq" : 0.25,
-	"level" : 3,
+	"level" : 2,
 	"isBoss" : 1
 	},
 	{
-	"total" : 80,
-	"freq" : 0.25,
-	"level" : 3,
+	"total" : 100,
+	"freq" : 0.5,
+	"level" : 2,
 	"isBoss" : 0
 	},
 	{
-	"total" : 4,
-	"freq" : 0.25,
-	"level" : 3,
+	"total" : 1,
+	"freq" : 0.5,
+	"level" : 2,
 	"isBoss" : 1
 	},
 	{
-	"total" : 160,
-	"freq" : 0.125,
-	"level" : 3,
+	"total" : 150,
+	"freq" : 0.4,
+	"level" : 2,
 	"isBoss" : 0
 	},
 	{
-	"total" : 8,
-	"freq" : 0.25,
-	"level" : 3,
+	"total" : 1,
+	"freq" : 0.5,
+	"level" : 2,
 	"isBoss" : 1
 	},
 	{
-	"total" : 500,
+	"total" : 150,
+	"freq" : 0.35,
+	"level" : 2,
+	"isBoss" : 0
+	},
+	{
+	"total" : 1,
+	"freq" : 0.5,
+	"level" : 2,
+	"isBoss" : 1
+	},
+	{
+	"total" : 200,
 	"freq" : 0.3,
-	"level" : 3,
+	"level" : 2,
 	"isBoss" : 0
+	},
+	{
+	"total" : 1,
+	"freq" : 0.5,
+	"level" : 2,
+	"isBoss" : 1
 	}
 	]
 }
