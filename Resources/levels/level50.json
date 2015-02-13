@@ -1,0 +1,32 @@
+{
+"config": {
+	"background": 1,
+	"title": "The Superboss vol. 3"
+},
+"waves": [{
+	"total" : 5,
+	"freq" : 0.2,
+	"isBoss" : 0
+	},
+	{
+	"total" : 1,
+	"freq" : 0.1,
+	"isBoss" : 2
+	},
+	{
+	"total" : 50,
+	"freq" : 2,
+	"isBoss" : 0
+	},
+	{
+	"total" : 1,
+	"freq" : 0.1,
+	"isBoss" : 2
+	},
+	{
+	"total" : 50,
+	"freq" : 2,
+	"isBoss" : 0
+	}
+	]
+}
