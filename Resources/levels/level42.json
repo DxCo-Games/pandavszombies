@@ -1,0 +1,29 @@
+{
+"config": {
+	"background": 1,
+	"title": "The King is alive"
+},
+"waves": [{
+	"total" : 5,
+	"freq" : 0.2,
+	"isBoss" : 1
+	},
+	{
+	"total" : 50,
+	"freq" : 0.4,
+	"isBoss" : 0,
+	"types": ["cirujano"]
+	},
+	{
+	"total" : 5,
+	"freq" : 0.2,
+	"isBoss" : 1
+	},
+	{
+	"total" : 100,
+	"freq" : 0.3,
+	"isBoss" : 0,
+	"types": ["cirujano"]
+	}
+	]
+}

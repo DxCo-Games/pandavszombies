@@ -1,0 +1,13 @@
+{
+"config": {
+	"background": 1,
+	"title": "The King is undead, actually",
+	"time": 90
+},
+"waves": [{
+	"total" : 5000,
+	"freq" : 0.5,
+	"isBoss" : 1
+	}
+	]
+}

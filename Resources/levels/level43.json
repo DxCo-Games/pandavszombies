@@ -1,0 +1,35 @@
+{
+"config": {
+	"background": 1,
+	"title": "The King is dead, long live the king"
+},
+"waves": [{
+	"total" : 50,
+	"freq" : 0.4,
+	"isBoss" : 0,
+	"types": ["cura"]
+	},
+	{
+	"total" : 10,
+	"freq" : 0.2,
+	"isBoss" : 1
+	},
+	{
+	"total" : 50,
+	"freq" : 0.4,
+	"isBoss" : 0,
+	"types": ["cura"]
+	},
+	{
+	"total" : 10,
+	"freq" : 0.2,
+	"isBoss" : 1
+	},
+	{
+	"total" : 50,
+	"freq" : 0.3,
+	"isBoss" : 0,
+	"types": ["cura"]
+	}
+	]
+}
