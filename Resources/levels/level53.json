@@ -1,0 +1,27 @@
+{
+"config": {
+	"background": 1
+},
+"waves": [{
+	"total" : 50,
+	"freq" : 0.75,
+	"level" : 2,
+	"isBoss" : 0,
+	"types": ["cura"]
+	},
+	{
+	"total" : 100,
+	"freq" : 0.4,
+	"level" : 2,
+	"isBoss" : 0,
+	"types": ["cura"]
+	},
+	{
+	"total" : 5,
+	"freq" : 0.25,
+	"level" : 2,
+	"isBoss" : 1,
+	"types": ["cura"]
+	}
+	]
+}
