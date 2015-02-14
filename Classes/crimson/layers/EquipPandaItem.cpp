@@ -241,7 +241,7 @@ std::string EquipPandaItem::getDetail() {
 	} else if (this->item == "player.speed") {
 		return "+2 speed increase";
 	} else if (this->item == "bonus.probability") {
-		return "+4 bonus frequency increase";
+		return "+2 bonus frequency increase";
 	} else if (this->item == "weapon.duration") {
 		return "+3 weapon duration increase";
 	} else if (this->item == "attack.damage") {
