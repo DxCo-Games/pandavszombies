@@ -2,6 +2,7 @@
 #include "GameProperties.h"
 #include "levels/Level.h"
 #include "levels/SurvivalLevel.h"
+#include "levels/FrenzyLevel.h"
 #include "levels/LevelParser.h"
 #include "levels/TutorialLevel.h"
 #include "../HelloWorldScene.h"
@@ -69,7 +70,6 @@ GameModel::GameModel(HelloWorld* vista, Player* player) {
 	this->mapa = vista->mapa;
 
 	this->player->setWeapon(Player::PISTOL);
-	this->bonusFactory = new BonusFactory();
 	this->voice = new VoiceManager();
 	this->voice->loadRandom("voices/dead.ogg");
 	this->voice->loadRandom("voices/talkin.ogg");
@@ -103,15 +103,10 @@ void GameModel::loadLevel(bool survival, bool frenzy, int level) {
 	this->levelNumber = level;
 	if (survival) {
 		this->level = new SurvivalLevel(this);
-		this->vista->setMap(rand() %2);
 	} else if (frenzy) {
-		this->level = new SurvivalLevel(this, 0.05, 3);
-		this->bonusFactory = new WeaponFirstBonusFactory();
-		this->vista->setMap(rand() %2);
+		this->level = new FrenzyLevel(this);
 	} else if (level == 1){
 		this->level = new TutorialLevel(this);
-		this->bonusFactory = new WeaponFirstBonusFactory();
-		this->vista->setMap(1);
 	} else if (level == 100){
 		this->level = new SurvivalLevel(this);
 		this->level->title = "The mystery level";
@@ -140,7 +135,7 @@ void GameModel::enemyKilled(Enemy* enemy) {
 	this->typeKills[enemy->type]++;
 	this->chains->addKill();
 
-	this->bonusFactory->createBonus(this, cocos2d::CCPoint(location.x,
+	this->level->bonusFactory->createBonus(this, cocos2d::CCPoint(location.x,
 			location.y - enemy->getHeight() / 2));
 }
 

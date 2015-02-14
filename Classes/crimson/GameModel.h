@@ -31,7 +31,6 @@ public:
 	int levelNumber;
 	Player* player;
 	EnemyFactory* enemyFactory;
-	BonusFactory* bonusFactory;
 	Level *level;
 	ChainedKillsManager *chains;
 	VoiceManager *voice;

@@ -13,6 +13,8 @@ SurvivalLevel::SurvivalLevel(GameModel* model, float maxEnemyDt, float maxBossDt
 	this->enemyLevelDt = 0;
 	this->maxEnemyDt = maxEnemyDt;
 	this->maxBossDt = maxBossDt;
+
+	model->vista->setMap(rand() %2);
 }
 
 bool SurvivalLevel::isFinished() {

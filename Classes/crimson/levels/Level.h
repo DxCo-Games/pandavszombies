@@ -8,6 +8,7 @@ namespace dxco {
 
 class EnemyWave;
 class GameModel;
+class BonusFactory;
 
 class Level {
 public:
@@ -22,6 +23,7 @@ public:
 
 	//TODO add background creation to this?
 	GameModel* model;
+	BonusFactory* bonusFactory;
 	std::vector<EnemyWave*> waves;
 	int currentWave;
 	int totalEnemies;
