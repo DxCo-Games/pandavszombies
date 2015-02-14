@@ -36,6 +36,8 @@ Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animatio
 	this->type = type;
 	this->dead = false;
 	this->frozen = false;
+
+	this->baseColor = cocos2d::ccc3(255, 255, 255);
 }
 
 void Enemy::setNewWanderTarget() {
@@ -51,7 +53,7 @@ void Enemy::freeze() {
 
 void Enemy::unfreeze() {
 	this->frozen = false;
-	cocos2d::CCAction* unfreezeAction = cocos2d::CCSequence::create(cocos2d::CCTintTo::create(0.05f, 255, 255, 255), NULL);
+	cocos2d::CCAction* unfreezeAction = cocos2d::CCSequence::create(cocos2d::CCTintTo::create(0.05f, this->baseColor.r, this->baseColor.g, this->baseColor.b), NULL);
 	this->getSprite()->runAction(unfreezeAction);
 }
 
@@ -185,7 +187,7 @@ void Enemy::hurt(float value) {
 				cocos2d::CCAction* hurtFrozenAction = cocos2d::CCSequence::create(cocos2d::CCTintTo::create(0.05f, 255, 0, 0), cocos2d::CCTintTo::create(0.05f, 98, 253, 253), NULL);
 				this->getSprite()->runAction(hurtFrozenAction);
 			} else {
-				cocos2d::CCAction* hurtAction = cocos2d::CCSequence::create(cocos2d::CCTintTo::create(0.05f, 255, 0, 0), cocos2d::CCTintTo::create(0.05f, 255, 255, 255), NULL);
+				cocos2d::CCAction* hurtAction = cocos2d::CCSequence::create(cocos2d::CCTintTo::create(0.05f, 255, 0, 0), cocos2d::CCTintTo::create(0.05f, this->baseColor.r, this->baseColor.g, this->baseColor.b), NULL);
 				this->getSprite()->runAction(hurtAction);
 			}
 		}

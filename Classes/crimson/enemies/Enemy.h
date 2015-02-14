@@ -40,6 +40,7 @@ public:
 	std::string type; //lo100to
 
 	int score;
+	cocos2d::ccColor3B baseColor;
 
 	enum estados { ENEMY_STANDING, ENEMY_WALKING, ENEMY_DEAD };
 

@@ -21,12 +21,13 @@ public:
 	void createEnemy(GameModel* model, std::vector<std::string>types, std::string type, float freq); //create that type with probability, else any other type
 	void createBoss(GameModel* model);
 	void createBoss(GameModel* model, std::vector<std::string> types);
-
 	void createSuperBoss(GameModel* model, std::vector<std::string> types);
+	void createPanda(GameModel* model);
 
 	cocos2d::CCSprite* createSpriteInRandomPosition(GameModel* model, std::string texture, int width, int height);
 
 	std::map<int, dxco::Animation*> loadAnimations(GameModel* model, std::string type, float speed);
+	std::map<int, dxco::Animation*> pandaAnimations(GameModel* model);
 private:
 	void addEnemy(GameModel* model, Enemy* enemy);
 	std::vector<std::string> createTypesVector(bool includeElvis);

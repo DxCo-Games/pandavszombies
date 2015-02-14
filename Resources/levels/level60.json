@@ -1,0 +1,17 @@
+{
+"config": {
+	"background": 1,
+	"title": "Mirror Match"
+},
+"waves": [{
+	"total" : 50,
+	"freq" : 0.6,
+	"isBoss" : -1
+	},
+	{
+	"total" : 150,
+	"freq" : 0.4,
+	"isBoss" : -1
+	}
+	]
+}

@@ -43,6 +43,8 @@ void EnemyWave::update(float dt) {
 			this->model->enemyFactory->createBoss(model, this->types);
 		} else if (this->isBoss == 2){
 			this->model->enemyFactory->createSuperBoss(model, this->types);
+		} else if (this->isBoss == -1){
+			this->model->enemyFactory->createPanda(model);
 		} else {
 			if (this->killsType != ""){
 				this->model->enemyFactory->createEnemy(model, this->types, this->killsType, this->killsFreq);

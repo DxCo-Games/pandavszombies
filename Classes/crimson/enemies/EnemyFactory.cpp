@@ -68,6 +68,22 @@ void EnemyFactory::createEnemy(GameModel* model, std::vector<std::string>types) 
 	SpriteUtil::fadeIn(enemy->getSprite());
 }
 
+void EnemyFactory::createPanda(GameModel* model) {
+	if (model->enemies.size() > MAX_CONCURRENT_ZOMBIES) {
+		return;
+	}
+	int enemyLevel = model->prop->get("enemy.level");
+
+	std::map<int, dxco::Animation*> animations = pandaAnimations(model);
+	cocos2d::CCSprite* enemySprite = createSpriteInRandomPosition(model, "herida1_5_0000.png", 75, 75);
+	Enemy* enemy = new Enemy(model, enemySprite, animations, enemyLevel, "cura");
+	enemySprite->setColor(cocos2d::ccc3(60, 100, 60));
+	enemy->baseColor = cocos2d::ccc3(60, 100, 60);
+	enemy->anglePositions = 16;
+	addEnemy(model, enemy);
+	SpriteUtil::fadeIn(enemy->getSprite());
+}
+
 void EnemyFactory::createBoss(GameModel* model) {
 	this->createBoss(model, this->createTypesVector(true));
 }
@@ -167,6 +183,43 @@ std::map<int, dxco::Animation*> EnemyFactory::loadAnimations(GameModel* model, s
 		}
 		animation = new Animation(texturesBlood, 0.015, false); //don't repeat
 		animations[Enemy::ENEMY_DEAD * ENEMY_ANGLE_POSITIONS + i] = animation;
+	}
+
+	return animations;
+}
+
+std::map<int, dxco::Animation*> EnemyFactory::pandaAnimations(GameModel* model) {
+	float frameTime = 0.03;
+	int angles = 16;
+
+	std::map<int, dxco::Animation*> animations;
+
+	for (int i = 0; i < angles; i++) {
+		std::vector<cocos2d::CCSpriteFrame*> texturesStanding;
+		texturesStanding.push_back(dxco::SpriteUtil::createSpriteFrame("herida1_" + dxco::StringUtil::toString(i + 1) + "_0000.png"));
+
+		dxco::Animation* animation = new Animation(texturesStanding, frameTime);
+		animations[Enemy::ENEMY_STANDING * angles + i] = animation;
+
+		std::vector<cocos2d::CCSpriteFrame*> texturesWalking;
+
+		for (int j = 0; j < 14; j++){
+			std::string index = dxco::StringUtil::padLeft(j, 4);
+
+			texturesWalking.push_back(dxco::SpriteUtil::createSpriteFrame("caminata_" + dxco::StringUtil::toString(i + 1) + "_" + index + ".png"));
+		}
+
+		animation = new Animation(texturesWalking, frameTime);
+		animations[Enemy::ENEMY_WALKING * angles + i] = animation;
+
+		std::vector<cocos2d::CCSpriteFrame*> texturesBlood;
+		std::string bloodType = "sangre" + dxco::StringUtil::toString(rand() % 2 + 1) + "_";
+		for (int j = 0; j < 31; j++) {
+			std::string index = dxco::StringUtil::padLeft(j, 4);
+			texturesBlood.push_back(dxco::SpriteUtil::createSpriteFrame(bloodType + index +".png"));
+		}
+		animation = new Animation(texturesBlood, 0.015, false); //don't repeat
+		animations[Enemy::ENEMY_DEAD * angles + i] = animation;
 	}
 
 	return animations;
