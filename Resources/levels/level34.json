@@ -1,7 +1,8 @@
 {
 "config": {
 	"background": 0, 
-	"title": "Run, jump, run"
+	"title": "Run, jump, run",
+	"bonus": 1
 },
 "waves": [{
 	"total" : 50,

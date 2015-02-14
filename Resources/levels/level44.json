@@ -2,7 +2,8 @@
 "config": {
 	"background": 1,
 	"title": "The King is undead, actually",
-	"time": 60
+	"time": 60,
+	"bonus": 1
 },
 "waves": [{
 	"total" : 5000,

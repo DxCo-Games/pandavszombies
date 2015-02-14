@@ -1,6 +1,7 @@
 #include "Level.h"
 #include "EnemyWave.h"
 #include "../GameModel.h"
+#include "../bonus/BonusFactory.h"
 #include "../../HelloWorldScene.h"
 #include "../../dxco/StringUtil.h"
 
@@ -11,6 +12,7 @@ Level::Level(GameModel *model, std::vector<EnemyWave*>& waves, std::string title
 	this->model = model;
 	this->currentWave = 0;
 	this->title = title;
+	this->bonusFactory = new BonusFactory();
 
 	this->totalEnemies = 0;
 	for (int i=0; i < waves.size(); i++) {

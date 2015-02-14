@@ -1,5 +1,6 @@
 #include "TutorialLevel.h"
 #include "../GameModel.h"
+#include "../bonus/WeaponFirstBonusFactory.h"
 #include "../../HelloWorldScene.h"
 #include "../GameProperties.h"
 #include "../Player.h"
@@ -17,6 +18,10 @@ TutorialLevel::TutorialLevel(GameModel* model): Level(model, *new std::vector<En
 	this->totalEnemies = 4;
 	this->messageDisplayed = false;
 
+	this->bonusFactory = new WeaponFirstBonusFactory();
+
+
+	model->vista->setMap(1);
 	//step 0 message
 	model->vista->message("Hold and move the left pad to move around");
 	this->model->prop->set("enemy.level",  1);

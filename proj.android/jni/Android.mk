@@ -55,6 +55,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/crimson/enemies/EnemyFactory.cpp \
                    ../../Classes/crimson/bonus/TimeBonus.cpp \
                    ../../Classes/crimson/bonus/BonusFactory.cpp \
+                   ../../Classes/crimson/bonus/NoBonusFactory.cpp \
                    ../../Classes/crimson/bonus/WeaponFirstBonusFactory.cpp \
                    ../../Classes/crimson/bonus/Bonus.cpp \
                    ../../Classes/crimson/bonus/HealthBonus.cpp \
@@ -73,6 +74,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/crimson/levels/TimedLevel.cpp \
                    ../../Classes/crimson/levels/KillCountLevel.cpp \
                    ../../Classes/crimson/levels/SurvivalLevel.cpp \
+                   ../../Classes/crimson/levels/FrenzyLevel.cpp \
                    ../../Classes/crimson/levels/TutorialLevel.cpp \
                    ../../Classes/crimson/levels/EnemyWave.cpp \
                    ../../Classes/crimson/levels/LevelParser.cpp \
