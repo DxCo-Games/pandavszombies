@@ -1,6 +1,8 @@
 #include "GameTypeSelectionLayer.h"
 #include "../GameProperties.h"
 #include "../../dxco/SpriteUtil.h"
+#include "../SoundUtil.h"
+#include "SimpleAudioEngine.h"
 
 namespace dxco {
 
@@ -44,6 +46,10 @@ void GameTypeSelectionLayer::update(float dt) {
 bool GameTypeSelectionLayer::init() {
 	if (!cocos2d::CCLayer::init()) {
 		return false;
+	}
+
+	if (!dxco::SoundUtil::isSoundEffectsOn()) {
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->setEffectsVolume(0);
 	}
 
 	this->dt = 0.5;
