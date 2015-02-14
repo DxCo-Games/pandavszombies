@@ -3,6 +3,8 @@
 #include "TimedLevel.h"
 #include "KillCountLevel.h"
 #include "../GameModel.h"
+#include "../bonus/NoBonusFactory.h"
+#include "../bonus/WeaponFirstBonusFactory.h"
 #include "../../HelloWorldScene.h"
 
 namespace dxco {
@@ -44,16 +46,28 @@ Level* LevelParser::parse(GameModel* model, std::string levelPath, int currentLe
 		title = (*document)["config"]["title"].GetString();
 	}
 
+	Level *level;
 	if ((*document)["config"].HasMember("kills")) {
 		int kills = (*document)["config"]["kills"].GetInt();
 		std::string type = (*document)["config"]["type"].GetString();
-		return new KillCountLevel(model, resultado, kills, type, title);
+		level = new KillCountLevel(model, resultado, kills, type, title);
 	} else if((*document)["config"].HasMember("time")) {
 		int time = (*document)["config"]["time"].GetInt();
-		return new TimedLevel(model, resultado, time, title);
+		level = new TimedLevel(model, resultado, time, title);
 	} else {
-		return new Level(model, resultado, title);
+		level = new Level(model, resultado, title);
 	}
+
+	if ((*document)["config"].HasMember("bonus")) {
+		int bonus = (*document)["config"]["bonus"].GetInt();
+		if (bonus == 1) {
+			level->bonusFactory = new WeaponFirstBonusFactory();
+		} else if (bonus == 2) {
+			level->bonusFactory = new NoBonusFactory();
+		}
+	}
+
+	return level;
 
 
 }

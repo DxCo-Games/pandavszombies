@@ -2,7 +2,8 @@
 "config": {
 	"background": 0,
 	"title": "So many zombies, so little time",
-	"time": 20
+	"time": 20,
+	"bonus": 1
 },
 "waves": [{
 	"total" : 5000,
