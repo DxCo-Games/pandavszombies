@@ -56,6 +56,7 @@ public:
 	int kills;
 	std::map<std::string,int> typeKills;
 	void resetTypeKills();
+	bool addShowed;
 private:
 	void updateCoins();
 	int getLevelStars();

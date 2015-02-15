@@ -31,6 +31,7 @@ THE SOFTWARE.
 #include "crimson/layers/GameTypeSelectionLayer.h"
 #include "AppMacros.h"
 #include "SimpleAudioEngine.h"
+#include "dxco/RevMob.h"
 
 USING_NS_CC;
 using namespace std;
@@ -58,6 +59,16 @@ bool AppDelegate::applicationDidFinishLaunching() {
     pEGLView->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, kResolutionNoBorder);
 #endif
 
+	revmob::RevMob *revmob = revmob::RevMob::SharedInstance();
+
+	#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+	    revmob->StartSession("YOUR IOS APPID");
+	#elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	    CCLOG("comenzando session de renmob");
+	    revmob->StartSession("54df7781b474a0740951d1eb");
+	#endif
+
+	revmob->SetTestingMode(revmob::kTestingModeWithAds);
     
     vector<string> searchPath;
 
