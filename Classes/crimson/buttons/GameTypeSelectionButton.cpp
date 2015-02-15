@@ -16,6 +16,8 @@ void GameTypeSelectionButton::execute() {
 
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
+
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("sounds/background_menu.mp3", true);
 }
 
 } /* namespace dxco */

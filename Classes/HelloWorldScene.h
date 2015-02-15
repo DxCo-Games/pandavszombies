@@ -96,7 +96,6 @@ public:
 
     void pauseGame();
     void resumeGame();
-    virtual void onExit();
 private:
 
     void preloadTextures();
