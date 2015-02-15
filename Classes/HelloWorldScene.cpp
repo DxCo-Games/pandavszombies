@@ -117,6 +117,11 @@ bool HelloWorld::init()
     return true;
 }
 
+void HelloWorld::onExit() {
+	CCLayer::onExit();
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("sounds/background_menu.mp3", true);
+}
+
 void HelloWorld::realInit() {
 		CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
 	    float mapWidth = MAP_WIDTH; //visibleSize.width * 1.2;
