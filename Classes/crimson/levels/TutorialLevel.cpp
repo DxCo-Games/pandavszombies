@@ -110,7 +110,7 @@ void TutorialLevel::update(float dt) {
 		if (this->model->kills == 4 && !this->messageDisplayed) {
 
 			if (equipPanda == 0) {
-				model->vista->message("Good job! here are 250 coins, use them to equip your panda");
+				model->vista->message("Good job! here are 450 coins, use them to equip your panda");
 			} else {
 				model->vista->message("Good job!");
 			}
@@ -123,7 +123,7 @@ void TutorialLevel::update(float dt) {
 
 			if (equipPanda == 0) {
 				GameProperties::set("push.equip", 1);
-				UserDAO::addCoins(250);
+				UserDAO::addCoins(450);
 
 				cocos2d::CCDirector* pDirector = cocos2d::CCDirector::sharedDirector();
 				pDirector->replaceScene(GameTypeSelectionLayer::scene());

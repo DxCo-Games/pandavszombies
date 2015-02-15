@@ -52,6 +52,8 @@ bool GameTypeSelectionLayer::init() {
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->setEffectsVolume(0);
 	}
 
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("sounds/background_menu.mp3", true);
+
 	this->dt = 0.5;
 	this->fadeIn = false;
 	this->scheduleUpdate();

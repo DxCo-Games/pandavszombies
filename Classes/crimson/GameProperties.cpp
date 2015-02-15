@@ -51,7 +51,7 @@ void GameProperties::saveDefaultProperties() {
 	DB::putInteger("player.speed.addition", 2);
 	DB::putInteger("bonus.probability.addition", 2);
 
-	DB::putInteger("weapon.duration.addition", 3);
+	DB::putInteger("weapon.duration.addition", 1);
 	DB::putInteger("attack.damage.addition", 10);
 
 	DB::putInteger("save_default_properties", DB_VERSION);

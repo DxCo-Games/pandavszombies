@@ -87,6 +87,8 @@ bool HelloWorld::init()
 	revmob::RevMob::SharedInstance()->LoadFullscreen();
 
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
+    CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
+
     this->backgroundLoading = dxco::SpriteUtil::create("fondo_ciudad.jpg", 0, 0, visibleSize.width, visibleSize.height);
     this->addChild(backgroundLoading);
 
