@@ -13,7 +13,7 @@
 
 namespace dxco {
 
-class EquipPandaLayer : public cocos2d::CCLayer {
+class EquipPandaLayer : public AbstractMenuLayer {
 public:
 
 	virtual bool init();
@@ -44,8 +44,6 @@ public:
 	int getBonus();
 	void loadMejoras(float skillsPandaWidth, float skillsPandaHeight, float skillsPandaX, float skillsPandaY, cocos2d::CCSprite* scaleMaster);
 	void createPandaItem(cocos2d::CCSprite* skillsPanda);
-
-	void keyBackClicked();
 
 	int touchId;
 };
