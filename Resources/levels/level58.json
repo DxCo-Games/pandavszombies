@@ -1,0 +1,43 @@
+{
+"config": {
+	"background": 1,
+	"title": "Like level 17 but way harder"
+},
+"waves": [{
+	"total" : 20,
+	"freq" : 1,
+	"level" : 3,
+	"isBoss" : 0
+	},
+	{
+	"total" : 2,
+	"freq" : 10,
+	"level" : 3,
+	"isBoss" : 0
+	},
+	{
+	"total" : 20,
+	"freq" : 1,
+	"level" : 3,
+	"isBoss" : 0
+	},
+	{
+	"total" : 2,
+	"freq" : 10,
+	"level" : 3,
+	"isBoss" : 0
+	},
+	{
+	"total" : 20,
+	"freq" : 1,
+	"level" : 3,
+	"isBoss" : 0
+	},
+	{
+	"total" : 500,
+	"freq" : 0.15,
+	"level" : 3,
+	"isBoss" : 0
+	}
+	]
+}

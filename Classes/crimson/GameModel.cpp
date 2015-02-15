@@ -190,6 +190,7 @@ void GameModel::update(float dt) {
 		updateCoins();
 
 		if (this->level->isFinished()) {
+			this->vista->playEffect("sounds/youwin2.ogg");
 			UserDAO::finishLevel(this->levelNumber, stars);
 		}
 	}

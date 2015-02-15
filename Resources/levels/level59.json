@@ -1,0 +1,15 @@
+{
+"config": {
+	"background": 1,
+	"title": "Codename: dx10",
+	"kills": 10,
+	"type": "oficinista"
+},
+"waves": [{
+	"total" : 5000,
+	"freq" : 0.75,
+	"level" : 3,
+	"isBoss" : 0
+	}
+	]
+}
