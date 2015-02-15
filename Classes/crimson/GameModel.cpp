@@ -313,6 +313,10 @@ void GameModel::restartGame() {
 	this->adDt = 0.0;
 
 	this->level->showMessage();
+
+    //start looking up
+    this->player->setRotation(-90);
+    this->vista->fire->setAngle(-90);
 }
 
 void GameModel::updateCoins() {
