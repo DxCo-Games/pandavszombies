@@ -250,6 +250,10 @@ std::string EquipPandaItem::getDetail() {
 	return " ";
 }
 
+float EquipPandaItem::getMaxX() {
+	return this->getPositionX() + (this->getWidth() / 2);
+}
+
 int EquipPandaItem::getPrice() {
 	return GameProperties::getPrice(this->item);
 }

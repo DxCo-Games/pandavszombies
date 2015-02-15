@@ -61,7 +61,7 @@ bool EquipPandaLayer::init() {
 	float skillsPandaX = xMargin;
 	float skillsPandaY = yMargin;
 
-	Container* skillsContainer = new Container(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight);
+	skillsContainer = new Container(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight);
 	cocos2d::CCSprite* skillsPanda = SpriteUtil::create("equip/MEJORA_panda.png", 0, 0, skillsPandaWidth, skillsPandaHeight);
 	skillsContainer->addChild(skillsPanda);
 	this->addChild(skillsContainer, 10);
@@ -240,6 +240,11 @@ void EquipPandaLayer::ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent 
 				EquipPandaItem* item = items[i];
 
 				item->move(deltaX, 0);
+				float maxX = item->getMaxX();
+				float maxXSkills = skillsContainer->getPositionX() + (skillsContainer->getWidth() / 2);
+
+				item->setVisible(!(maxX < maxXSkills));
+
 			}
 		}
 
