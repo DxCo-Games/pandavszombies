@@ -44,7 +44,7 @@ public:
 	int getBonus();
 	void loadMejoras(float skillsPandaWidth, float skillsPandaHeight, float skillsPandaX, float skillsPandaY, cocos2d::CCSprite* scaleMaster);
 	void createPandaItem(cocos2d::CCSprite* skillsPanda);
-
+	Container* skillsContainer;
 	int touchId;
 };
 

@@ -20,6 +20,7 @@ public:
 	void applyPowerUp();
 
 	static std::vector<std::string> getMejoras();
+	float getMaxX();
 private:
 	bool isActivo();
 	int getCantidadDisponible();

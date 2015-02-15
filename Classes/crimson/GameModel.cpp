@@ -125,6 +125,8 @@ bool GameModel::showAd() {
 
 	if (this->vista->level > 15) {
 		show = (rand() % 100) < 34; // muestro uno de cada 3.
+	} else if (this->vista->level == -1) {
+		show = (rand() % 100) < 20; // muestro uno de cada 5.
 	}
 
 	return show;
