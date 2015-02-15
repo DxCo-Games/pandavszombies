@@ -20,6 +20,10 @@ Level::Level(GameModel *model, std::vector<EnemyWave*>& waves, std::string title
 	}
 }
 
+void Level::showMessage() {
+
+}
+
 void Level::updateFreezed(float dt) {
 	this->updateInterface();
 }

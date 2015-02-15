@@ -16,6 +16,8 @@ public:
 	virtual void restartLevel();
 	virtual void updateInterface();
 
+	virtual void showMessage();
+
 	float dt;
 	int seconds;
 };

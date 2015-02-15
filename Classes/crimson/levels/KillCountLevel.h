@@ -15,6 +15,8 @@ public:
 	virtual void updateInterface();
 	std::string verboseType();
 
+	virtual void showMessage();
+
 	int kills;
 	std::string type;
 };

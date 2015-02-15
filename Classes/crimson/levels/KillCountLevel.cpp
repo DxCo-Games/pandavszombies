@@ -9,7 +9,11 @@ KillCountLevel::KillCountLevel(GameModel *model, std::vector<EnemyWave*>& waves,
 	this->kills = kills;
 	this->type = type;
 
-	std::string msg = "Kill "+ StringUtil::toString(kills) +" " + this->verboseType() + " to win.";
+	showMessage();
+}
+
+void KillCountLevel::showMessage() {
+	std::string msg = "Kill "+ StringUtil::toString(this->kills) +" " + this->verboseType() + " to win.";
 	model->vista->message(msg);
 }
 
