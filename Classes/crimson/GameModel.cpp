@@ -89,7 +89,8 @@ GameModel::GameModel(HelloWorld* vista, Player* player) {
 
 	//batch node added to map
 	this->enemyFactory = new EnemyFactory();
-	this->addShowed = false;
+	this->adShowed = true;
+	this->adDt = 0.0;
 }
 
 void GameModel::resetTypeKills() {
@@ -189,20 +190,8 @@ void GameModel::update(float dt) {
 		this->vista->opacityLayer->setVisible(true);
 		int stars = this->getLevelStars();
 		this->vista->levelFinishedLayer->show(this->player->score, this->kills, this->player->score / COIN_VALUE, stars);
+
 		updateCoins();
-
-		if (this->level->isFinished()) {
-			UserDAO::finishLevel(this->levelNumber, stars);
-
-			revmob::RevMob *revmob = revmob::RevMob::SharedInstance();
-
-			if (!this->addShowed) {
-				CCLOG("Add will be showed");
-				this->addShowed = true;
-				revmob->ShowLoadedFullscreen();
-				revmob->LoadFullscreen();
-			}
-		}
 	}
 
 	//Bullet cleanup
@@ -211,6 +200,21 @@ void GameModel::update(float dt) {
 	    				this->bullets.end());
 
 	this->chains->updateView();
+}
+
+void GameModel::updateAds(float dt) {
+
+	if (this->level->isFinished()) {
+		this->adDt += dt;
+
+		if (!this->adShowed && this->adDt > 1.5) {
+
+			this->adShowed = true;
+			revmob::RevMob *revmob = revmob::RevMob::SharedInstance();
+			revmob->ShowLoadedFullscreen();
+			revmob->LoadFullscreen();
+		}
+	}
 }
 
 int GameModel::getLevelStars() {
@@ -286,7 +290,8 @@ void GameModel::restartGame() {
 	this->bullets.clear();
 
 	// TODO hacer que esto sea por probabilidad y level > 20
-	this->addShowed = false;
+	this->adShowed = false;
+	this->adDt = 0.0;
 }
 
 void GameModel::updateCoins() {

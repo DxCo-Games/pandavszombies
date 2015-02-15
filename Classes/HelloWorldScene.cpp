@@ -510,7 +510,7 @@ void HelloWorld::update(float dt) {
 				this->showControls();
 			}
 		}
-
+		this->model->updateAds(dt);
 	} else {
 		this->loadingItem->update(dt);
 		this->preloadTextures();
