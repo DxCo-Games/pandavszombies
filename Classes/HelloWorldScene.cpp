@@ -18,7 +18,7 @@
 #include "crimson/levels/Level.h"
 #include "crimson/daos/UserDAO.h"
 #include "crimson/layers/GameTypeSelectionLayer.h"
-
+#include "dxco/RevMob.h"
 #include <map>
 
 USING_NS_CC;
@@ -84,6 +84,7 @@ bool HelloWorld::init()
 	this->assetLoader->addAsset("voices/rock.ogg", true);
 	this->assetLoader->addAsset("voices/talkin.ogg", true);
 
+	revmob::RevMob::SharedInstance()->LoadFullscreen();
 
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
     this->backgroundLoading = dxco::SpriteUtil::create("fondo_ciudad.jpg", 0, 0, visibleSize.width, visibleSize.height);

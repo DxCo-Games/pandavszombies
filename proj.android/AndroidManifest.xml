@@ -45,7 +45,14 @@
                   android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
                   android:configChanges="orientation">
         </activity>
+        
+        <!--  RevMob -->
+        <activity android:name="com.revmob.ads.fullscreen.FullscreenActivity"
+              android:theme="@android:style/Theme.Translucent"
+              android:configChanges="keyboardHidden|orientation">
+    	</activity>
     </application>
+    
     <supports-screens android:largeScreens="true"
                       android:smallScreens="true"
                       android:anyDensity="true"

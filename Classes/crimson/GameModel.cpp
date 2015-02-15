@@ -19,6 +19,7 @@
 #include "SimpleAudioEngine.h"
 #include "bonus/WeaponFirstBonusFactory.h"
 #include "enemies/Enemy.h"
+#include "../dxco/RevMob.h"
 
 namespace dxco {
 
@@ -88,6 +89,7 @@ GameModel::GameModel(HelloWorld* vista, Player* player) {
 
 	//batch node added to map
 	this->enemyFactory = new EnemyFactory();
+	this->addShowed = false;
 }
 
 void GameModel::resetTypeKills() {
@@ -191,6 +193,15 @@ void GameModel::update(float dt) {
 
 		if (this->level->isFinished()) {
 			UserDAO::finishLevel(this->levelNumber, stars);
+
+			revmob::RevMob *revmob = revmob::RevMob::SharedInstance();
+
+			if (!this->addShowed) {
+				CCLOG("Add will be showed");
+				this->addShowed = true;
+				revmob->ShowLoadedFullscreen();
+				revmob->LoadFullscreen();
+			}
 		}
 	}
 
@@ -273,6 +284,9 @@ void GameModel::restartGame() {
 	this->enemies.clear();
 	this->bonuses.clear();
 	this->bullets.clear();
+
+	// TODO hacer que esto sea por probabilidad y level > 20
+	this->addShowed = false;
 }
 
 void GameModel::updateCoins() {

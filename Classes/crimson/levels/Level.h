@@ -28,6 +28,8 @@ public:
 	int currentWave;
 	int totalEnemies;
 	std::string title;
+
+
 };
 
 } /* namespace dxco */
