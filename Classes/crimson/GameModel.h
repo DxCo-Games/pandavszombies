@@ -61,6 +61,8 @@ public:
 
 	bool adShowed;
 	float adDt;
+
+	bool showAd();
 private:
 	void updateCoins();
 	int getLevelStars();

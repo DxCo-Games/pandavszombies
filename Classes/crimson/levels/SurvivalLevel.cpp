@@ -4,6 +4,7 @@
 #include "../GameProperties.h"
 #include "../../HelloWorldScene.h"
 #include "../../dxco/StringUtil.h"
+#include <cstdlib>
 
 namespace dxco {
 
@@ -40,6 +41,10 @@ void SurvivalLevel::update(float dt) {
 	}
 
 	this->updateInterface();
+}
+
+bool SurvivalLevel::showAdd() {
+	return (rand() % 100) < 20;
 }
 
 void SurvivalLevel::updateInterface() {

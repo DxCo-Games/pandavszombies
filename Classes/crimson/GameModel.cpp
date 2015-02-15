@@ -20,6 +20,7 @@
 #include "bonus/WeaponFirstBonusFactory.h"
 #include "enemies/Enemy.h"
 #include "../dxco/RevMob.h"
+#include <cstdlib>
 
 namespace dxco {
 
@@ -117,6 +118,16 @@ void GameModel::loadLevel(bool survival, bool frenzy, int level) {
 	} else {
 		this->level = LevelParser::parse(this, "levels/level" + StringUtil::toString(level) +".json", level);
 	}
+}
+
+bool GameModel::showAd() {
+	bool show = false;
+
+	if (this->vista->level > 15) {
+		show = (rand() % 100) < 34; // muestro uno de cada 3.
+	}
+
+	return show;
 }
 
 void GameModel::addBullet(Bullet* bullet) {
@@ -290,7 +301,7 @@ void GameModel::restartGame() {
 	this->bullets.clear();
 
 	// TODO hacer que esto sea por probabilidad y level > 20
-	this->adShowed = false;
+	this->adShowed = !this->showAd();
 	this->adDt = 0.0;
 }
 

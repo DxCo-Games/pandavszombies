@@ -23,6 +23,7 @@ public:
 
 	float maxEnemyDt;
 	float maxBossDt;
+	bool showAdd();
 };
 
 } /* namespace dxco */

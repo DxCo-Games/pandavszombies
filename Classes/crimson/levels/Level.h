@@ -29,7 +29,7 @@ public:
 	int totalEnemies;
 	std::string title;
 
-
+	virtual bool showAdd();
 };
 
 } /* namespace dxco */

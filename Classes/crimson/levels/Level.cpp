@@ -24,6 +24,10 @@ void Level::updateFreezed(float dt) {
 	this->updateInterface();
 }
 
+bool Level::showAdd() {
+	return false;
+}
+
 void Level::update(float dt) {
 	EnemyWave *wave = this->waves[this->currentWave];
 	if (!wave->isFinished()) {
