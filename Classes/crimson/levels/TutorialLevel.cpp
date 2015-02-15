@@ -7,6 +7,7 @@
 #include "../../dxco/StringUtil.h"
 #include "../layers/GameTypeSelectionLayer.h"
 #include "SimpleAudioEngine.h"
+#include "../daos/UserDAO.h"
 
 namespace dxco {
 
@@ -104,17 +105,26 @@ void TutorialLevel::update(float dt) {
 		break;
 	}
 	case 5: {
+		int equipPanda = GameProperties::get("push.equip");
+
 		if (this->model->kills == 4 && !this->messageDisplayed) {
-			model->vista->message("You'll earn coins each kill, use these coins to equip your panda.");
+
+			if (equipPanda == 0) {
+				model->vista->message("Good job! here are 250 coins, use them to equip your panda");
+			} else {
+				model->vista->message("Good job!");
+			}
+
 			this->messageDisplayed = true;
 		}
+
 		if (this->model->enemies.size() == 0) {
 			//note this waits for the blood splat to disappear.
 
-			int equipPanda = GameProperties::get("push.equip");
-
 			if (equipPanda == 0) {
 				GameProperties::set("push.equip", 1);
+				UserDAO::addCoins(250);
+
 				cocos2d::CCDirector* pDirector = cocos2d::CCDirector::sharedDirector();
 				pDirector->replaceScene(GameTypeSelectionLayer::scene());
 

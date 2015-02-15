@@ -19,6 +19,8 @@
 #include "SimpleAudioEngine.h"
 #include "bonus/WeaponFirstBonusFactory.h"
 #include "enemies/Enemy.h"
+#include "../dxco/RevMob.h"
+#include <cstdlib>
 
 namespace dxco {
 
@@ -88,6 +90,8 @@ GameModel::GameModel(HelloWorld* vista, Player* player) {
 
 	//batch node added to map
 	this->enemyFactory = new EnemyFactory();
+	this->adShowed = true;
+	this->adDt = 0.0;
 }
 
 void GameModel::resetTypeKills() {
@@ -114,6 +118,16 @@ void GameModel::loadLevel(bool survival, bool frenzy, int level) {
 	} else {
 		this->level = LevelParser::parse(this, "levels/level" + StringUtil::toString(level) +".json", level);
 	}
+}
+
+bool GameModel::showAd() {
+	bool show = false;
+
+	if (this->vista->level > 15) {
+		show = (rand() % 100) < 34; // muestro uno de cada 3.
+	}
+
+	return show;
 }
 
 void GameModel::addBullet(Bullet* bullet) {
@@ -187,12 +201,12 @@ void GameModel::update(float dt) {
 		this->vista->opacityLayer->setVisible(true);
 		int stars = this->getLevelStars();
 		this->vista->levelFinishedLayer->show(this->player->score, this->kills, this->player->score / COIN_VALUE, stars);
-		updateCoins();
 
 		if (this->level->isFinished()) {
 			this->vista->playEffect("sounds/youwin2.ogg");
 			UserDAO::finishLevel(this->levelNumber, stars);
 		}
+		updateCoins();
 	}
 
 	//Bullet cleanup
@@ -201,6 +215,21 @@ void GameModel::update(float dt) {
 	    				this->bullets.end());
 
 	this->chains->updateView();
+}
+
+void GameModel::updateAds(float dt) {
+
+	if (this->level->isFinished()) {
+		this->adDt += dt;
+
+		if (!this->adShowed && this->adDt > 1.5) {
+
+			this->adShowed = true;
+			revmob::RevMob *revmob = revmob::RevMob::SharedInstance();
+			revmob->ShowLoadedFullscreen();
+			revmob->LoadFullscreen();
+		}
+	}
 }
 
 int GameModel::getLevelStars() {
@@ -274,6 +303,10 @@ void GameModel::restartGame() {
 	this->enemies.clear();
 	this->bonuses.clear();
 	this->bullets.clear();
+
+	// TODO hacer que esto sea por probabilidad y level > 20
+	this->adShowed = !this->showAd();
+	this->adDt = 0.0;
 }
 
 void GameModel::updateCoins() {

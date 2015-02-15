@@ -12,6 +12,8 @@
 #include "../buttons/BuyPowerUpButton.h"
 
 #include "./GameTypeSelectionLayer.h"
+#include "../SoundUtil.h"
+#include "SimpleAudioEngine.h"
 
 namespace dxco {
 
@@ -29,6 +31,10 @@ cocos2d::CCScene* EquipPandaLayer::scene() {
 bool EquipPandaLayer::init() {
 	if (!cocos2d::CCLayer::init()) {
 		return false;
+	}
+
+	if (!dxco::SoundUtil::isSoundEffectsOn()) {
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->setEffectsVolume(0);
 	}
 
 	int equipPanda = GameProperties::get("push.equip");
@@ -282,12 +288,6 @@ void EquipPandaLayer::ccTouchesEnded(cocos2d::CCSet *pTouches,
 		}
 		it++;
 	}
-}
-
-void EquipPandaLayer::keyBackClicked() {
-	cocos2d::CCDirector* pDirector = cocos2d::CCDirector::sharedDirector();
-	pDirector->popScene();
-	pDirector->replaceScene(GameTypeSelectionLayer::scene());
 }
 
 int EquipPandaLayer::getLife() {

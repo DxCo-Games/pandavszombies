@@ -3,7 +3,7 @@
 
 #include <map>
 #include <string>
-#define DB_VERSION 1920
+#define DB_VERSION 1919
 #define ITEM_INITIAL_COST 250
 
 namespace dxco {

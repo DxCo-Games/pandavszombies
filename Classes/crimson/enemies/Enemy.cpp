@@ -29,7 +29,6 @@ Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animatio
 	this->life = 5.5 * (multiplier + 1);
 	this->strength = 3 * (multiplier + 1);
 
-	CCLOG("Enemy life: %f, Enemy strength: %f, Level: %i", this->life, this->strength, level);
 	this->burning = false;
 	this->state = ENEMY_STANDING;
 	this->action = NULL;

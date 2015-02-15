@@ -241,7 +241,7 @@ std::string EquipPandaItem::getDetail() {
 	} else if (this->item == "player.speed") {
 		return "+2 speed increase";
 	} else if (this->item == "bonus.probability") {
-		return "+4 bonus frequency increase";
+		return "+2 bonus frequency increase";
 	} else if (this->item == "weapon.duration") {
 		return "+3 weapon duration increase";
 	} else if (this->item == "attack.damage") {
@@ -271,6 +271,8 @@ void EquipPandaItem::applyPowerUp() {
 		if (this->item == "frenzy.unlocked") {
 			pDirector->popToSceneStackLevel(1);
 			pDirector->replaceScene(GameTypeSelectionLayer::scene());
+			CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
+			CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
 		} else {//TODO reload scene, hay alguna forma mejor de hacerlo? Si, pero es bastante mas facill hacerlo asi =(.
 			pDirector->popScene();
 			pDirector->pushScene(EquipPandaLayer::scene());
