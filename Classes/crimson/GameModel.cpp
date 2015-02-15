@@ -309,6 +309,8 @@ void GameModel::restartGame() {
 	// TODO hacer que esto sea por probabilidad y level > 20
 	this->adShowed = !this->showAd();
 	this->adDt = 0.0;
+
+	this->level->showMessage();
 }
 
 void GameModel::updateCoins() {

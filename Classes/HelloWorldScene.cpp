@@ -541,21 +541,13 @@ void HelloWorld::update(float dt) {
 
 void HelloWorld::keyBackClicked() {
 
-	if (this->levelFinishedLayer->isVisible()) { // Game over
+	if (this->levelFinishedLayer->isVisible()) { // if game is over
 		cocos2d::CCDirector* pDirector = cocos2d::CCDirector::sharedDirector();
 		pDirector->replaceScene(dxco::GameTypeSelectionLayer::scene());
 
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
-	}
-
-	if (true) { // TODO: Chaco pls!
-		if (this->juegoPausado) {
-			cocos2d::CCDirector* pDirector = cocos2d::CCDirector::sharedDirector();
-			//pDirector->runWithScene(dxco::MenuParallax::scene());
-			// TODO go to menu
-		}
-
+	} else {
 		this->juegoPausado = !this->juegoPausado;
 
 		if (this->juegoPausado) {
@@ -563,11 +555,6 @@ void HelloWorld::keyBackClicked() {
 		} else {
 			this->resumeGame();
 		}
-	} else {
-		this->stopMusic();
-		cocos2d::CCDirector* pDirector = cocos2d::CCDirector::sharedDirector();
-		//pDirector->runWithScene(dxco::MenuParallax::scene());
-		// TODO go to menu
 	}
 }
 

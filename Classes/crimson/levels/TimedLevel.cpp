@@ -9,11 +9,15 @@ TimedLevel::TimedLevel(GameModel *model, std::vector<EnemyWave*>& waves, int sec
 	this->seconds = seconds;
 	this->dt = 0;
 
-	std::string msg = "Survive for "+ StringUtil::toString(seconds) +" seconds to win.";
-	model->vista->message(msg);
+	showMessage();
 
 	//fix timer sprite
 	SpriteUtil::setTexture(model->vista->timer, "gameplay/TIMER.png");
+}
+
+void TimedLevel::showMessage() {
+	std::string msg = "Survive for "+ StringUtil::toString(this->seconds) + " seconds to win.";
+	model->vista->message(msg);
 }
 
 bool TimedLevel::isFinished() {

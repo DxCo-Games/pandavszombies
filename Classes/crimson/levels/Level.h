@@ -18,6 +18,7 @@ public:
 	virtual void update(float dt);
 	virtual void updateFreezed(float dt);
 	virtual void restartLevel();
+	virtual void showMessage();
 
 	virtual void updateInterface();
 
