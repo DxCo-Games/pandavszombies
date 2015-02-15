@@ -248,6 +248,8 @@ int GameModel::getLevelStars() {
 
 void GameModel::restartGame() {
 
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
+
 	//reset positions
 	cocos2d::CCSize visibleSize = cocos2d::CCDirector::sharedDirector()->getVisibleSize();
 	float mapWidth = MAP_WIDTH;
