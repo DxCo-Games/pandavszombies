@@ -33,7 +33,7 @@ LevelFinishedLayer::LevelFinishedLayer(GameModel* model, float x, float y, float
 	this->addChild(menuButtonSprite);
 
 	if (!survival && level != LEVEL_COUNT) {
-		cocos2d::CCSprite* nextLevelSprite = SpriteUtil::create("buttons/next_button.png", visibleSize.width * 0.65, visibleSize.height * 0.15, menuButtonSprite);
+		cocos2d::CCSprite* nextLevelSprite = SpriteUtil::create("buttons/next_button.png", visibleSize.width * 0.64, visibleSize.height * 0.15, menuButtonSprite);
 		this->addChild(nextLevelSprite);
 		this->nextLevelButton = new NextLevelButton(nextLevelSprite, level + 1);
 	} else {
@@ -45,7 +45,7 @@ LevelFinishedLayer::LevelFinishedLayer(GameModel* model, float x, float y, float
 	cocos2d::CCSprite* tryAgainButtonSprite = NULL;
 
 	if (survival) {
-		tryAgainButtonSprite = SpriteUtil::create("buttons/try_again_button.png", visibleSize.width * 0.6, visibleSize.height * 0.15, title);
+		tryAgainButtonSprite = SpriteUtil::create("buttons/try_again_button.png", visibleSize.width * 0.58, visibleSize.height * 0.15, title);
 	} else {
 		tryAgainButtonSprite = SpriteUtil::create("buttons/try_again_button.png", visibleSize.width * 0.55, visibleSize.height * 0.15, title);
 	}
@@ -122,14 +122,14 @@ void LevelFinishedLayer::show(int points, int kills, int coins, int stars) {
 			this->addChild(title);
 
 			this->nextLevelButton->sprite->setVisible(false);
-			this->tryAgainButton->sprite->setPositionX(visibleSize.width * 0.68);
+			this->tryAgainButton->sprite->setPositionX(visibleSize.width * 0.69);
 		} else {
 			this->removeChild(this->title);
 			this->title = SpriteUtil::create("level_finished_title.png", visibleSize.width * 0.15, visibleSize.height * 0.7, visibleSize.width * 0.7, visibleSize.height * 0.15);
 			this->addChild(title);
 			this->nextLevelButton->sprite->setVisible(true);
 
-			this->tryAgainButton->sprite->setPositionX(visibleSize.width * 0.59);
+			this->tryAgainButton->sprite->setPositionX(visibleSize.width * 0.60);
 		}
 
 		if (this->starsSprite != NULL) {
