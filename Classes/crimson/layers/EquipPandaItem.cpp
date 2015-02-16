@@ -23,6 +23,9 @@ EquipPandaItem::EquipPandaItem(std::string item, float x, float y, float width,
 	cocos2d::CCSprite* background = SpriteUtil::create(
 			this->getImagePath().c_str(), 0, height * 0.2, scaleMaster);
 	SpriteUtil::topAlign(scaleMaster, background);
+	CCLOG("Width: %f, Scaled: %f", width, SpriteUtil::getWidth(background));
+
+	width = SpriteUtil::getWidth(background);
 	this->addChild(background);
 
 	cocos2d::CCLabelTTF* nameLabel = LabelUtil::create(this->getName(), 19, 0,
@@ -32,7 +35,7 @@ EquipPandaItem::EquipPandaItem(std::string item, float x, float y, float width,
 
 	cocos2d::CCPoint origin =
 			cocos2d::CCDirector::sharedDirector()->getVisibleOrigin();
-
+	CCLOG("Name Label Width: %f", LabelUtil::getWidth(nameLabel));
 	nameLabel->setPositionX(width * 0.52 + origin.x);
 	nameLabel->setPositionY(height * 0.59 + origin.y);
 

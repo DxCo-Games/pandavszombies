@@ -11,6 +11,9 @@ GameTypeSelectionLayer::GameTypeSelectionLayer() {
 	this->survivalButton = NULL;
 	this->equipPandaButton = NULL;
 	this->frenzyButton = NULL;
+
+	this->dt = 0.5;
+	this->fadeIn = false;
 }
 
 cocos2d::CCScene* GameTypeSelectionLayer::scene() {
