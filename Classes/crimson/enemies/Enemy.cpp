@@ -21,7 +21,7 @@ Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animatio
 		TopDownItem(ENEMY_ANGLE_POSITIONS), SteeringBehaviorItem(Enemy::getSpeed(level), 0.25 * Enemy::getSpeed(1) / Enemy::getSpeed(level)),
 		Item(sprite, animations){
 
-	int multiplier = (level < 6) ? 1 : level - 6;
+	int multiplier = (level < 6) ? 1 : level - 5;
 
 	this->model = model;
 

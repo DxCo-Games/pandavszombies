@@ -1,7 +1,7 @@
 #ifndef SURVIVALLEVEL_H_
 #define SURVIVALLEVEL_H_
 
-#define SURVIVAL_ENEMY_LEVEL_DT 60
+#define SURVIVAL_ENEMY_LEVEL_DT 15
 
 #include "Level.h"
 

@@ -262,7 +262,7 @@ void GameModel::restartGame() {
 	this->vista->opacityLayer->setVisible(false);
 	this->vista->bubble->setVisible(false);
 
-	this->prop->set("enemy.level", 1);
+	this->prop->set("enemy.level", 5);
 
 	this->player->restartPosition();
 	this->player->life = this->prop->get("player.life");
