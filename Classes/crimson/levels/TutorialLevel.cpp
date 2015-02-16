@@ -140,12 +140,13 @@ void TutorialLevel::update(float dt) {
 	this->updateInterface();
 }
 
-//FIXME good job not displayed
-
 void TutorialLevel::restartLevel() {
 	this->currentStep = 0;
 	this->movementDt = 0;
 	this->rotationDt = 0;
+	this->messageDisplayed = false;
+
+	model->vista->message("Hold and move the left pad to move around");
 }
 
 } /* namespace dxco */

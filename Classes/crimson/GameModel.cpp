@@ -248,6 +248,8 @@ int GameModel::getLevelStars() {
 
 void GameModel::restartGame() {
 
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
+
 	//reset positions
 	cocos2d::CCSize visibleSize = cocos2d::CCDirector::sharedDirector()->getVisibleSize();
 	float mapWidth = MAP_WIDTH;
@@ -311,6 +313,10 @@ void GameModel::restartGame() {
 	this->adDt = 0.0;
 
 	this->level->showMessage();
+
+    //start looking up
+    this->player->setRotation(-90);
+    this->vista->fire->setAngle(-90);
 }
 
 void GameModel::updateCoins() {

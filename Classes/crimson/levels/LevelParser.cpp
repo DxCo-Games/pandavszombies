@@ -16,16 +16,13 @@ Level* LevelParser::parse(GameModel* model, std::string levelPath, int currentLe
 	int map = (*document)["config"]["background"].GetInt();
 	model->vista->setMap(map);
 	for (rapidjson::SizeType i = 0; i < ((*document)["waves"]).Size(); i++) {
-			CCLOG("h3");
 			const rapidjson::Value& waveConfig = ((*document)["waves"])[i];
 
 			int total = waveConfig["total"].GetInt();
 
 			float freq = waveConfig["freq"].GetDouble();
-			//float level = waveConfig["level"].GetInt();
 			int isBoss = waveConfig["isBoss"].GetInt();
 
-			CCLOG("Wave leida %i %f %i %i", total, freq, currentLevel, isBoss);
 			std::vector<std::string> vec;
 			if (waveConfig.HasMember("types")) {
 				for (rapidjson::SizeType j = 0; j < waveConfig["types"].Size(); j++) {
