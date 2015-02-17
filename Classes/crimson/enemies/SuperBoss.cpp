@@ -6,10 +6,13 @@ SuperBoss::SuperBoss(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, 
 		Boss(model, sprite, animations, level, type),
 		Item(sprite, animations){
 	//fix superboss parameters
-	this->life *= 20;
+	this->life *= 30;
 	this->strength *= 5;
 	this->mass *= 1.8;
 	this->speed *= 0.65;
+
+	//make it always chase the player
+	this->wander_range *= 3;
 }
 
 float SuperBoss::getColitionRatio() {

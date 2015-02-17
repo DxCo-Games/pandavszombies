@@ -36,6 +36,10 @@ Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animatio
 	this->dead = false;
 	this->frozen = false;
 
+	this->wander_range = ENEMY_WANDER_RANGE;
+	this->seek_range = ENEMY_SEEK_RANGE;
+	this->arrive_range = ENEMY_ARRIVE_RANGE;
+
 	this->baseColor = cocos2d::ccc3(255, 255, 255);
 }
 
@@ -73,11 +77,11 @@ void Enemy::update(float dt) {
 
 			//Enable behaviors according to distance from target
 			int behaviors;
-			if (dist > ENEMY_WANDER_RANGE) {
+			if (dist > this->wander_range) {
 				behaviors = USE_WANDER;
-			} else if (dist > ENEMY_SEEK_RANGE) {
+			} else if (dist > this->seek_range) {
 				behaviors = USE_SEEK;
-			} else if (dist > ENEMY_ARRIVE_RANGE) {
+			} else if (dist > this->arrive_range) {
 				behaviors = USE_ARRIVE;
 			} else {
 				behaviors = USE_STAND;

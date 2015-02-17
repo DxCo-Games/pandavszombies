@@ -15,7 +15,7 @@
 	},
 	{
 	"total" : 50,
-	"freq" : 2,
+	"freq" : 1.5,
 	"isBoss" : 0
 	},
 	{
@@ -25,7 +25,7 @@
 	},
 	{
 	"total" : 50,
-	"freq" : 2,
+	"freq" : 1.5,
 	"isBoss" : 0
 	}
 	]

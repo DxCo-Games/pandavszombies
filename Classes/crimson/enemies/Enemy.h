@@ -29,6 +29,10 @@ public:
 
 	static float getSpeed(int level);
 
+	int wander_range;
+	int seek_range;
+	int arrive_range;
+
 	bool shoot(Bullet* bullet);
 	GameModel* model;
 	float life;

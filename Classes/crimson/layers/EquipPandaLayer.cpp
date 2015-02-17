@@ -79,6 +79,7 @@ bool EquipPandaLayer::init() {
 	spriteGetCoinsButton->setPositionX(visibleSize.width - SpriteUtil::getWidth(spriteGetCoinsButton) / 2 - xMargin);
 
 	this->addChild(spriteGetCoinsButton);
+	spriteGetCoinsButton->setVisible(false);
 
 	this->setTouchEnabled(true);
 	this->setKeypadEnabled(true);
