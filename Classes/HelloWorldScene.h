@@ -37,6 +37,7 @@ public:
     dxco::Mapa* mapa;
     dxco::Container* clouds;
     cocos2d::CCSprite* bubble;
+    cocos2d::CCSprite* shadow;
     cocos2d::CCSprite* weaponIcon;
     cocos2d::CCProgressTimer* weaponBar;
     cocos2d::CCSprite* bonus1;

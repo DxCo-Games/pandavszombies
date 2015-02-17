@@ -265,6 +265,7 @@ void GameModel::restartGame() {
 	this->prop->set("enemy.level", 5);
 
 	this->player->restartPosition();
+	this->vista->shadow->setPosition(player->getLocation());
 	this->player->life = this->prop->get("player.life");
 	this->vista->weaponBar->setPercentage(100);
 	this->vista->bonus1->stopAllActions();

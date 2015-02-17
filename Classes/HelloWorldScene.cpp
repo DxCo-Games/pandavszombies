@@ -141,6 +141,11 @@ void HelloWorld::realInit() {
 
 	    dxco::Player* player = this->createPlayer();
 
+	    this->shadow = dxco::SpriteUtil::create("mask-circle.png", 0, 0, visibleSize.width*1.2, visibleSize.height*1.2);
+		this->shadow->setPosition(player->getLocation());
+		this->shadow->setVisible(false);
+		this->clouds->addChild(shadow, 10);
+
 	    model = new dxco::GameModel(this, player);
 	    this->levelFinishedLayer = new dxco::LevelFinishedLayer(this->model, 0, 0, visibleSize.width, visibleSize.height, this->survivalMode || this->frenzyMode, this->level);
 	    this->addChild(levelFinishedLayer, 50);
@@ -170,6 +175,11 @@ void HelloWorld::setMap(int map) {
 		this->mapa->addChild(pSprite, -10);
 		CCSprite* tanque = dxco::SpriteUtil::create("campo004_rejas.png", -MAP_WIDTH/4, -MAP_HEIGHT  * 0.2, MAP_WIDTH*1.5, MAP_HEIGHT*1.4);
 		this->clouds->addChild(tanque);
+
+		//the dark level UO
+		if (map == 2) {
+			this->shadow->setVisible(true);
+		}
 	}
 }
 
