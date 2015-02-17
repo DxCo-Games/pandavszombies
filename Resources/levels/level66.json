@@ -1,0 +1,26 @@
+{
+"config": {
+	"background": 0, 
+	"title": "Harder than 65",
+	"bonus": 1
+},
+"waves": [{
+	"total" : 50,
+	"freq" : 0.1,
+	"isBoss" : 0,
+	"types": ["cirujano"]
+	},
+	{
+	"total" : 3,
+	"freq" : 1,
+	"isBoss" : 1,
+	"types": ["cirujano"]
+	},
+	{
+	"total" : 100,
+	"freq" : 0.05,
+	"isBoss" : 0,
+	"types": ["cirujano"]
+	}
+	]
+}

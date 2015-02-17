@@ -1,0 +1,15 @@
+{
+"config": {
+	"background": 0,
+	"kills": 200,
+	"type": "oficinista",
+	"title": "The one before 65"
+},
+"waves": [{
+	"total" : 10000,
+	"freq" : 0.5,
+	"isBoss" : 0,
+	"killsFreq": 0.5
+	}
+	]
+}

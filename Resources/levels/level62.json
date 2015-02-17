@@ -1,0 +1,13 @@
+{
+"config": {
+	"background": 0,
+	"time": 60
+},
+"waves": [{
+	"total" : 5000,
+	"freq" : 0.4,
+	"isBoss" : 0,
+	"types": ["elvis"]
+	}
+	]
+}

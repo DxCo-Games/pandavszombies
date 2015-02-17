@@ -1,0 +1,49 @@
+{
+"config": {
+	"background": 0, 
+	"title": "Statically typed zombies",
+	"bonus": 1
+},
+"waves": [{
+	"total" : 100,
+	"freq" : 0.3,
+	"isBoss" : 0,
+	"types": ["campesino"]
+	},
+	{
+	"total" : 5,
+	"freq" : 1,
+	"isBoss" : 1,
+	"types": ["campesino"]
+	},
+	{
+	"total" : 100,
+	"freq" : 0.3,
+	"isBoss" : 0,
+	"types": ["cura"]
+	},
+	{
+	"total" : 5,
+	"freq" : 1,
+	"isBoss" : 1,
+	"types": ["cura"]
+	},
+	{
+	"total" : 100,
+	"freq" : 0.3,
+	"isBoss" : 0,
+	"types": ["oficinista"]
+	},
+	{
+	"total" : 5,
+	"freq" : 1,
+	"isBoss" : 1,
+	"types": ["oficinista"]
+	},
+	{
+	"total" : 20,
+	"freq" : 0.6,
+	"isBoss" : 1
+	}
+	]
+}
