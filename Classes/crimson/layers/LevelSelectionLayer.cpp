@@ -11,6 +11,7 @@ LevelSelectionLayer::LevelSelectionLayer() {
 	this->page = 0;
 	this->prev = NULL;
 	this->next = NULL;
+	this->touchId = 999;
 }
 
 cocos2d::CCScene* LevelSelectionLayer::scene(int page) {
@@ -94,22 +95,110 @@ bool LevelSelectionLayer::init() {
 	return true;
 }
 
-void LevelSelectionLayer::ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent) {
 
-	cocos2d::CCTouch* touch = (cocos2d::CCTouch*) (pTouches->anyObject());
-	cocos2d::CCPoint location = touch->getLocationInView();
-	location = cocos2d::CCDirector::sharedDirector()->convertToGL(location);
+void LevelSelectionLayer::ccTouchesBegan(cocos2d::CCSet *pTouches,
+		cocos2d::CCEvent *pEvent) {
 
-	for (int i=0; i < this->buttons.size(); i++) {
-		this->buttons[i]->touch(location);
+	if (this->touchId != 999) {
+		CCLOG("Se abandona por touch ID");
+		return;
 	}
 
-	if(this->page > 0){
-		this->prev->touch(location);
-	}
+	cocos2d::CCSetIterator it = pTouches->begin();
+	cocos2d::CCPoint location;
+	cocos2d::CCTouch * touch;
 
-	if(this->page < 4){
-		this->next->touch(location);
+	for (int iTouchCount = 0; iTouchCount < pTouches->count(); iTouchCount++) {
+
+		touch = (cocos2d::CCTouch*) (*it);
+		location = touch->getLocationInView();
+		location = cocos2d::CCDirector::sharedDirector()->convertToGL(location);
+		this->touchId = touch->getID();
+
+		this->beginLocation = this->lastLocation = location;
+		it++;
+	}
+}
+
+void LevelSelectionLayer::ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent) {
+
+	cocos2d::CCSetIterator it = pTouches->begin();
+	cocos2d::CCPoint location;
+	cocos2d::CCTouch * touch;
+
+	for (int iTouchCount = 0; iTouchCount < pTouches->count(); iTouchCount++) {
+
+		touch = (cocos2d::CCTouch*) (*it);
+		location = touch->getLocationInView();
+		location = cocos2d::CCDirector::sharedDirector()->convertToGL(location);
+
+		if (this->touchId != touch->getID()) {
+			continue;
+		}
+
+		float deltaX = location.x - lastLocation.x;
+		float deltaY = location.y - lastLocation.y;
+		lastLocation = location;
+
+		it++;
+	}
+}
+
+void LevelSelectionLayer::ccTouchesEnded(cocos2d::CCSet *pTouches,
+		cocos2d::CCEvent *pEvent) {
+
+	cocos2d::CCSetIterator it = pTouches->begin();
+	cocos2d::CCPoint location;
+	cocos2d::CCTouch * touch;
+
+	for (int iTouchCount = 0; iTouchCount < pTouches->count(); iTouchCount++) {
+
+		touch = (cocos2d::CCTouch*) (*it);
+		location = touch->getLocationInView();
+		location = cocos2d::CCDirector::sharedDirector()->convertToGL(location);
+
+		if (this->touchId == touch->getID()) {
+			CCLOG("Touch id renovado");
+			this->touchId = 999;
+		} else {
+			continue;
+		}
+
+		float delta = location.x - beginLocation.x;
+		float absDelta = delta;
+
+		if (absDelta < 0) {
+			absDelta *= -1;
+		}
+
+		if (absDelta < CLICK_MAX_DELTA) {
+			cocos2d::CCTouch* touch = (cocos2d::CCTouch*) (pTouches->anyObject());
+			cocos2d::CCPoint location = touch->getLocationInView();
+			location = cocos2d::CCDirector::sharedDirector()->convertToGL(location);
+
+			for (int i=0; i < this->buttons.size(); i++) {
+				this->buttons[i]->touch(location);
+			}
+
+			if(this->page > 0){
+				this->prev->touch(location);
+			}
+
+			if(this->page < 4){
+				this->next->touch(location);
+			}
+		} else if (absDelta > 4 * CLICK_MAX_DELTA) {
+			// move left or right
+
+			if(this->page > 0 && delta > 0){
+				this->prev->execute();
+			}
+
+			if(this->page < 4 && delta < 0){
+				this->next->execute();
+			}
+		}
+		it++;
 	}
 }
 
