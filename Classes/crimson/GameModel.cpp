@@ -221,7 +221,7 @@ void GameModel::update(float dt) {
 
 void GameModel::updateAds(float dt) {
 
-	if (this->level->isFinished()) {
+	if (this->level->isFinished() || !this->player->isActive()) {
 		this->adDt += dt;
 
 		if (!this->adShowed && this->adDt > 1.5) {
