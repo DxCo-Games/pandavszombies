@@ -89,6 +89,7 @@ void TutorialLevel::update(float dt) {
 			//plant a bonus
 			if (model->bonuses.size()) {
 				model->bonuses[0]->dt = -500; //make sure it won't disappear
+				model->bonuses[0]->getSprite()->stopAllActions();
 			}
 		}
 		break;

@@ -1,0 +1,47 @@
+{
+"config": {
+	"background": 0,
+	"title": "The Superboss vol. 4"
+},
+"waves": [{
+	"total" : 5,
+	"freq" : 0.2,
+	"isBoss" : 0
+	},
+	{
+	"total" : 1,
+	"freq" : 0.1,
+	"isBoss" : 2
+	},
+	{
+	"total" : 40,
+	"freq" : 2,
+	"isBoss" : 0
+	},
+	{
+	"total" : 5,
+	"freq" : 0.5,
+	"isBoss" : 1
+	},
+	{
+	"total" : 3,
+	"freq" : 0.1,
+	"isBoss" : 2
+	},
+	{
+	"total" : 60,
+	"freq" : 2,
+	"isBoss" : 0
+	},
+	{
+	"total" : 5,
+	"freq" : 0.5,
+	"isBoss" : 1
+	},
+	{
+	"total" : 50,
+	"freq" : 2,
+	"isBoss" : 0
+	}
+	]
+}
