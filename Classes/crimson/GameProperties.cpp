@@ -98,13 +98,11 @@ void GameProperties::powerUp(std::string key, int level) {
 		nextValue++;
 	}
 
-	CCLOG("Powerup %s %d %i %i", key.c_str(), addition, currentValue, nextValue);
 	GameProperties::set(key, nextValue);
 }
 
 int GameProperties::getPrice(std::string key) {
 	float level = (float)GameProperties::get(key + std::string(".level")) - 1;
-	level /= 1.618033988749; //numero de dios =(
 
 	if (key == "firebullet.unlocked") {
 		return 1500;
@@ -116,6 +114,7 @@ int GameProperties::getPrice(std::string key) {
 		return 10000;
 	}
 
+	level /= 1.3; //numero de dios =(
 	// numero de dios =(
 	double multiplier = pow (1.618033988749, level);
 
