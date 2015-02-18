@@ -1,0 +1,13 @@
+{
+"config": {
+	"background": 0,
+	"title": "The simple level"
+},
+"waves": [{
+	"total" : 50,
+	"freq" : 0.75,
+	"level" : 0,
+	"isBoss" : 0
+	}
+	]
+}

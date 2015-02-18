@@ -1,0 +1,14 @@
+{
+"config": {
+	"background": 0,
+	"time": 60,
+	"bonus": 1,
+	"title": "How many zombies it takes to crash?"
+},
+"waves": [{
+	"total" : 10000,
+	"freq" : 0.01,
+	"isBoss" : 0
+	}
+	]
+}
