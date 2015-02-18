@@ -17,7 +17,7 @@ namespace dxco {
 EnemyFactory::EnemyFactory(){
 }
 
-void EnemyFactory::createEnemy(GameModel* model, std::vector<std::string>types, std::string type, float freq) {
+void EnemyFactory::createEnemy(GameModel* model, std::vector<std::string>types, std::string type, float freq, int extraType) {
 	std::vector<std::string> vec;
 	//20 is equally probable, 15 is less, 5 is lesser...
 	if (rand() % 100 < freq * 100) {
@@ -38,10 +38,10 @@ void EnemyFactory::createEnemy(GameModel* model, std::vector<std::string>types, 
 			vec.erase(std::remove(vec.begin(), vec.end(), type), vec.end());
 		}
 	}
-	this->createEnemy(model, vec);
+	this->createEnemy(model, vec, extraType);
 }
 
-void EnemyFactory::createEnemy(GameModel* model, std::vector<std::string>types) {
+void EnemyFactory::createEnemy(GameModel* model, std::vector<std::string>types, int extraType) {
 	if (model->enemies.size() > MAX_CONCURRENT_ZOMBIES) {
 		return;
 	}
@@ -59,13 +59,16 @@ void EnemyFactory::createEnemy(GameModel* model, std::vector<std::string>types) 
 	std::map<int, dxco::Animation*> animations = loadAnimations(model, type, speed);
 	cocos2d::CCSprite* enemySprite = createSpriteInRandomPosition(model, type + "_1_0000.png", 75 + delta, 75 + delta);
 
-	Enemy* enemy = new Enemy(model, enemySprite, animations, enemyLevel, type);
+	Enemy* enemy = new Enemy(model, enemySprite, animations, enemyLevel, type, extraType);
 	//FIXME add SpeedyEnemy
 	if (type == "basquet") {
 		enemy->speed = speed;
 	}
 	addEnemy(model, enemy);
-	SpriteUtil::fadeIn(enemy->getSprite());
+
+	if (!extraType) {
+		SpriteUtil::fadeIn(enemy->getSprite());
+	}
 }
 
 void EnemyFactory::createPanda(GameModel* model) {
@@ -76,7 +79,7 @@ void EnemyFactory::createPanda(GameModel* model) {
 
 	std::map<int, dxco::Animation*> animations = pandaAnimations(model);
 	cocos2d::CCSprite* enemySprite = createSpriteInRandomPosition(model, "herida1_5_0000.png", 75, 75);
-	Enemy* enemy = new Enemy(model, enemySprite, animations, enemyLevel, "cura");
+	Enemy* enemy = new Enemy(model, enemySprite, animations, enemyLevel, "cura", false);
 	enemySprite->setColor(cocos2d::ccc3(60, 100, 60));
 	enemy->baseColor = cocos2d::ccc3(60, 100, 60);
 	enemy->anglePositions = 16;
@@ -84,15 +87,15 @@ void EnemyFactory::createPanda(GameModel* model) {
 	SpriteUtil::fadeIn(enemy->getSprite());
 }
 
-void EnemyFactory::createBoss(GameModel* model) {
-	this->createBoss(model, this->createTypesVector(true));
+void EnemyFactory::createBoss(GameModel* model, int extraType) {
+	this->createBoss(model, this->createTypesVector(true), extraType);
 }
 
-void EnemyFactory::createEnemy(GameModel* model) {
-	this->createEnemy(model, this->createTypesVector(false));
+void EnemyFactory::createEnemy(GameModel* model, int extraType) {
+	this->createEnemy(model, this->createTypesVector(false), extraType);
 }
 
-void EnemyFactory::createBoss(GameModel* model, std::vector<std::string> types) {
+void EnemyFactory::createBoss(GameModel* model, std::vector<std::string> types, int extraType) {
 	if (model->enemies.size() > MAX_CONCURRENT_ZOMBIES) {
 		return;
 	}
@@ -106,13 +109,15 @@ void EnemyFactory::createBoss(GameModel* model, std::vector<std::string> types) 
 	std::map<int, dxco::Animation*> animations = loadAnimations(model, type, Enemy::getSpeed(enemyLevel));
 
 	cocos2d::CCSprite* enemySprite = createSpriteInRandomPosition(model, type + "_1_0000.png", 150, 150);
-	Enemy* enemy = new Boss(model, enemySprite, animations, enemyLevel, type);
+	Enemy* enemy = new Boss(model, enemySprite, animations, enemyLevel, type, extraType);
 	addEnemy(model, enemy);
 
-	SpriteUtil::fadeIn(enemy->getSprite());
+	if (!extraType) {
+		SpriteUtil::fadeIn(enemy->getSprite());
+	}
 }
 
-void EnemyFactory::createSuperBoss(GameModel* model, std::vector<std::string> types) {
+void EnemyFactory::createSuperBoss(GameModel* model, std::vector<std::string> types, int extraType) {
 	std::string type = "elvis";
 
 	if (types.size() != 0) {
@@ -123,10 +128,12 @@ void EnemyFactory::createSuperBoss(GameModel* model, std::vector<std::string> ty
 	std::map<int, dxco::Animation*> animations = loadAnimations(model, type, Enemy::getSpeed(enemyLevel));
 
 	cocos2d::CCSprite* enemySprite = createSpriteInRandomPosition(model, type + "_1_0000.png", 280, 280);
-	Enemy* enemy = new SuperBoss(model, enemySprite, animations, enemyLevel, type);
+	Enemy* enemy = new SuperBoss(model, enemySprite, animations, enemyLevel, type, extraType);
 	addEnemy(model, enemy);
 
-	SpriteUtil::fadeIn(enemy->getSprite());
+	if (!extraType) {
+		SpriteUtil::fadeIn(enemy->getSprite());
+	}
 }
 
 void EnemyFactory::addEnemy(GameModel* model, Enemy* enemy) {

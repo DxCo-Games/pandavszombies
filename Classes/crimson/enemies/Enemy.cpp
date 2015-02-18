@@ -17,7 +17,7 @@ float Enemy::getSpeed(int level) {
 	return 23 + 0.2 * level;
 }
 
-Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations, int level, std::string type) :
+Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations, int level, std::string type, int extraType) :
 		TopDownItem(ENEMY_ANGLE_POSITIONS), SteeringBehaviorItem(Enemy::getSpeed(level), 0.25 * Enemy::getSpeed(1) / Enemy::getSpeed(level)),
 		Item(sprite, animations){
 
@@ -41,6 +41,14 @@ Enemy::Enemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animatio
 	this->arrive_range = ENEMY_ARRIVE_RANGE;
 
 	this->baseColor = cocos2d::ccc3(255, 255, 255);
+	this->extraType = extraType;
+
+	if (extraType == 1) {
+		this->baseColor = cocos2d::ccc3(20, 30, 20);
+		this->getSprite()->setOpacity(150);
+	}
+
+	this->getSprite()->runAction(cocos2d::CCTintTo::create(0.01f, this->baseColor.r, this->baseColor.g, this->baseColor.b));
 }
 
 void Enemy::setNewWanderTarget() {

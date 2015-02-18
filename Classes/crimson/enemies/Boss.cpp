@@ -4,8 +4,8 @@
 
 namespace dxco {
 
-Boss::Boss(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations, int level, std::string type) :
-	Enemy(model, sprite, animations, level, type),
+Boss::Boss(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations, int level, std::string type, int extraType) :
+	Enemy(model, sprite, animations, level, type, extraType),
 	Item(sprite, animations) {
 	this->life = 5 * this->life;
 	this->score = 5 * this->score;

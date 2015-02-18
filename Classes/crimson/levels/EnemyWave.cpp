@@ -4,7 +4,7 @@
 
 namespace dxco {
 
-EnemyWave::EnemyWave(GameModel *model, int total, float freq, int level, std::vector<std::string> types, int isBoss) {
+EnemyWave::EnemyWave(GameModel *model, int total, float freq, int level, std::vector<std::string> types, int isBoss, int extraType) {
 	this->dt = 100;
 	this->freq = freq;
 	this->level = level;
@@ -15,10 +15,11 @@ EnemyWave::EnemyWave(GameModel *model, int total, float freq, int level, std::ve
 	this->types = types;
 	this->killsType = "";
 	this->killsFreq = 0.2;
+	this->extraType = extraType;
 }
 
 
-EnemyWave::EnemyWave(GameModel *model, int total, float freq, int level, std::vector<std::string> types, std::string killsType, float killsFreq) {
+EnemyWave::EnemyWave(GameModel *model, int total, float freq, int level, std::vector<std::string> types, std::string killsType, float killsFreq, int extraType) {
 	this->dt = 100;
 	this->freq = freq;
 	this->level = level;
@@ -29,6 +30,7 @@ EnemyWave::EnemyWave(GameModel *model, int total, float freq, int level, std::ve
 	this->killsType = killsType;
 	this->killsFreq = killsFreq;
 	this->types = types;
+	this->extraType = extraType;
 }
 
 bool EnemyWave::isFinished() {
@@ -40,18 +42,18 @@ void EnemyWave::update(float dt) {
 	this->dt += dt;
 	if (this->dt > this->freq){
 		if (this->isBoss == 1) {
-			this->model->enemyFactory->createBoss(model, this->types);
+			this->model->enemyFactory->createBoss(model, this->types, this->extraType);
 		} else if (this->isBoss == 2){
-			this->model->enemyFactory->createSuperBoss(model, this->types);
+			this->model->enemyFactory->createSuperBoss(model, this->types, this->extraType);
 		} else if (this->isBoss == -1){
 			this->model->enemyFactory->createPanda(model);
 		} else {
 			if (this->killsType != ""){
-				this->model->enemyFactory->createEnemy(model, this->types, this->killsType, this->killsFreq);
+				this->model->enemyFactory->createEnemy(model, this->types, this->killsType, this->killsFreq, this->extraType);
 			} else if (this->types.size()) {
-				this->model->enemyFactory->createEnemy(model, this->types);
+				this->model->enemyFactory->createEnemy(model, this->types, this->extraType);
 			} else {
-				this->model->enemyFactory->createEnemy(model);
+				this->model->enemyFactory->createEnemy(model, this->extraType);
 			}
 		}
 		this->dt = 0;
