@@ -13,6 +13,8 @@ Bonus::Bonus(GameModel* model, cocos2d::CCSprite* sprite,
 	this->model = model;
 	this->dt = 0;
 	this->sound = "sounds/bonus.ogg";
+
+	sprite->runAction(cocos2d::CCFadeOut::create(BONUS_DT + 0.1));
 }
 
 void Bonus::update(float dt) {
