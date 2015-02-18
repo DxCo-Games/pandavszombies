@@ -6,6 +6,7 @@
 #include "AbstractMenuLayer.h"
 
 #include <vector>
+#define CLICK_MAX_DELTA 4
 
 namespace dxco {
 
@@ -23,11 +24,20 @@ public:
 	CREATE_FUNC(LevelSelectionLayer);
 
 	void ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
-
+	void ccTouchesEnded(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
+	void ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
 	std::vector<LevelButton*> buttons;
 	int page;
+	int touchId;
 	LevelScreenButton *prev;
 	LevelScreenButton *next;
+
+	cocos2d::CCPoint beginLocation;
+	cocos2d::CCPoint lastLocation;
+
+	float minX;
+	float maxX;
+
 };
 
 } /* namespace dxco */
