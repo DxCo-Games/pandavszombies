@@ -1,0 +1,30 @@
+{
+"config": {
+	"background": 0
+},
+"waves": [{
+	"total" : 50,
+	"freq" : 0.65,
+	"isBoss" : 0,
+	"types": ["oficinista"]
+	},
+	{
+	"total" : 5,
+	"freq" : 0.25,
+	"isBoss" : 1,
+	"types": ["oficinista"]
+	},
+	{
+	"total" : 100,
+	"freq" : 0.4,
+	"isBoss" : 0,
+	"types": ["oficinista"]
+	},
+	{
+	"total" : 10,
+	"freq" : 0.25,
+	"isBoss" : 1,
+	"types": ["oficinista"]
+	}
+	]
+}

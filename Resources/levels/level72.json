@@ -1,0 +1,15 @@
+{
+"config": {
+	"background": 0,
+	"title": "The filler level",
+	"time": 40,
+	"bonus": 1
+},
+"waves": [{
+	"total" : 5000,
+	"freq" : 0.1,
+	"level" : 0,
+	"isBoss" : 0
+	}
+	]
+}
