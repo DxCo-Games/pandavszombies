@@ -81,30 +81,31 @@ EquipPandaItem::EquipPandaItem(std::string item, float x, float y, float width,
 
 	this->addChild(coinsLabel);
 
-	std::string cantidadStr = StringUtil::toString(
-			this->getCantidadDisponible());
+	if (!(this->item == "bazooka.unlocked" ||this->item == "fire.unlocked" || this->item == "firebullet.unlocked" || this->item == "frenzy.unlocked")) {
+		std::string cantidadStr = StringUtil::toString(
+				this->getCantidadDisponible());
 
-	cocos2d::CCLabelTTF* cantidadLabel = LabelUtil::create(cantidadStr, 18, 0,
-			0, 0, 0, "fonts/KBStickToThePlan.ttf");
+		cocos2d::CCLabelTTF* cantidadLabel = LabelUtil::create(cantidadStr, 18, 0,
+				0, 0, 0, "fonts/KBStickToThePlan.ttf");
 
-	LabelUtil::setScaleByHeight(cantidadLabel, width * 0.15);
+		LabelUtil::setScaleByHeight(cantidadLabel, width * 0.15);
 
-	float cantidadLabelHeight = LabelUtil::getHeight(cantidadLabel);
-	float cantidadLabelWidth = LabelUtil::getWidth(cantidadLabel);
+		float cantidadLabelHeight = LabelUtil::getHeight(cantidadLabel);
+		float cantidadLabelWidth = LabelUtil::getWidth(cantidadLabel);
 
-	float cantidadLabelX = (cantidadLabelWidth / 2) + origin.x + width * 0.17;
-	float cantidadLabelY = height - (cantidadLabelHeight / 2) + origin.y
-			- width * 0.19;
+		float cantidadLabelX = (cantidadLabelWidth / 2) + origin.x + width * 0.17;
+		float cantidadLabelY = height - (cantidadLabelHeight / 2) + origin.y
+				- width * 0.19;
 
-	cantidadLabel->setPositionX(cantidadLabelX);
-	cantidadLabel->setPositionY(cantidadLabelY);
+		cantidadLabel->setPositionX(cantidadLabelX);
+		cantidadLabel->setPositionY(cantidadLabelY);
 
-	if (!this->isActivo()) {
-		cantidadLabel->setColor(cocos2d::ccc3(181, 181, 181));
+		if (!this->isActivo()) {
+			cantidadLabel->setColor(cocos2d::ccc3(181, 181, 181));
+		}
+
+		this->addChild(cantidadLabel);
 	}
-
-	this->addChild(cantidadLabel);
-
 	cocos2d::CCSprite* buyButton = SpriteUtil::create(this->getBuyImagePath(),
 			0, 0, scaleMaster);
 	SpriteUtil::bottomAlign(scaleMaster, buyButton);
@@ -177,11 +178,12 @@ std::string EquipPandaItem::getImagePath() {
 	std::string result = "equip/MEJORA_";
 
 	if (this->item == "bazooka.unlocked") {
-		result.append("bazooka");
-	} else if (this->item == "fire.unlocked") {
-		result.append("fuego");
-	} else if (this->item == "firebullet.unlocked") {
-		result.append("fuego");
+		result.append("bazooka.png");
+
+		return result;
+	} else if (this->item == "fire.unlocked" || this->item == "firebullet.unlocked") {
+		result.append("fuego.png");
+		return result;
 	} else if (this->item == "player.life") {
 		result.append("energia");
 	} else if (this->item == "player.speed") {
@@ -189,7 +191,8 @@ std::string EquipPandaItem::getImagePath() {
 	} else if (this->item == "bonus.probability") {
 		result.append("regalo");
 	} else if (this->item == "frenzy.unlocked") {
-		result.append("regalo");
+		result.append("frensy.png");
+		return result;
 	} else if (this->item == "weapon.duration") {
 		result.append("reloj");
 	} else if (this->item == "attack.damage") {
