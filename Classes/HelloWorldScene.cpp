@@ -400,7 +400,7 @@ void HelloWorld::createInterface() {
 		this->title1->setPositionY(zombie->getPositionY());
 		this->title1->enableStroke(cocos2d::ccc3(220, 0, 0), 2, true);
 		dxco::LabelUtil::setColor(title1, dxco::LabelUtil::RED);
-		this->addChild(this->title1);
+		this->addChild(this->title1, 20);
 
 		this->title2 = CCLabelTTF::create("NONAME", "fonts/KBStickToThePlan.ttf", 22, CCSize(350,0), kCCTextAlignmentCenter);
 		this->title2->setPositionX(timer->getPositionX());
@@ -408,7 +408,7 @@ void HelloWorld::createInterface() {
 		this->title2->enableStroke(cocos2d::ccc3(220, 0, 0), 2, true);
 		dxco::LabelUtil::setColor(title2, dxco::LabelUtil::RED);
 		this->title2->setVisible(false);
-		this->addChild(this->title2);
+		this->addChild(this->title2, 20);
 	}
 
 	//text messages
