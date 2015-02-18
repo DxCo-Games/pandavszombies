@@ -2,18 +2,7 @@
 "config": {
 	"background": 1
 },
-"waves": [{
-	"total" : 20,
-	"freq" : 1,
-	"level" : 3,
-	"isBoss" : 0
-	},
-	{
-	"total" : 2,
-	"freq" : 10,
-	"level" : 3,
-	"isBoss" : 0
-	},
+"waves": [
 	{
 	"total" : 20,
 	"freq" : 1,
@@ -21,8 +10,8 @@
 	"isBoss" : 0
 	},
 	{
-	"total" : 2,
-	"freq" : 10,
+	"total" : 5,
+	"freq" : 3,
 	"level" : 3,
 	"isBoss" : 0
 	},

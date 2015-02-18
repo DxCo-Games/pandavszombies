@@ -147,6 +147,12 @@ void Enemy::fixZOrder(float playerY) {
 	if(this->isActive()){
 		float enemyBottom = this->getBottomPosition();
 		int zorder = 1000 - enemyBottom * 1000 / this->model->mapa->getHeight();
+
+		//this may fix the phantom zombie. or not.
+		if (zorder < 0) {
+			zorder = 0;
+		}
+
 		this->model->mapa->reorderChild(this->sprite, zorder);
 	}
 }
