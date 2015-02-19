@@ -1,0 +1,13 @@
+{
+"config": {
+	"background": 0,
+	"title": "Anyone got here?",
+	"bonus": 1
+},
+"waves": [{
+	"total" : 1000,
+	"freq" : 0.05,
+	"isBoss" : 0
+	}
+	]
+}

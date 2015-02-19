@@ -1,0 +1,38 @@
+{
+"config": {
+	"background": 0, 
+	"title": "This was fun, uh?",
+	"bonus": 1
+},
+"waves": [{
+	"total" : 50,
+	"freq" : 0.1,
+	"isBoss" : 0,
+	"types": ["basquet"]
+	},
+	{
+	"total" : 3,
+	"freq" : 1,
+	"isBoss" : 1,
+	"types": ["basquet"]
+	},
+	{
+	"total" : 100,
+	"freq" : 0.05,
+	"isBoss" : 0,
+	"types": ["basquet"]
+	},
+	{
+	"total" : 20,
+	"freq" : 1,
+	"isBoss" : 1,
+	"types": ["basquet"]
+	},
+	{
+	"total" : 200,
+	"freq" : 0.05,
+	"isBoss" : 0,
+	"types": ["basquet"]
+	}
+	]
+}
