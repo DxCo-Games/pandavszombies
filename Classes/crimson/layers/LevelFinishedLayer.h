@@ -24,6 +24,8 @@ public:
 
 	void ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
 
+	void enableTouch();
+
 	cocos2d::CCLabelTTF* killsLabel;
 	cocos2d::CCLabelTTF* pointsLabel;
 	cocos2d::CCLabelTTF* coinsLabel;
