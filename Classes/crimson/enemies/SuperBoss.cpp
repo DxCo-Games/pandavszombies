@@ -2,8 +2,8 @@
 
 namespace dxco {
 
-SuperBoss::SuperBoss(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations, int level, std::string type, int extraType):
-		Boss(model, sprite, animations, level, type, extraType),
+SuperBoss::SuperBoss(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations, int level, std::string type):
+		Boss(model, sprite, animations, level, type),
 		Item(sprite, animations){
 	//fix superboss parameters
 	this->life *= 30;

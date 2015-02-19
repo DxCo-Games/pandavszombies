@@ -10,8 +10,8 @@ class GameModel;
 
 class EnemyWave {
 public:
-	EnemyWave(GameModel *model, int total, float freq, int level, std::vector<std::string> types, int isBoss=0, int extraType=0);
-	EnemyWave(GameModel *model, int total, float freq, int level, std::vector<std::string> types, std::string killsType, float killsFreq=0.2, int extraType=0);
+	EnemyWave(GameModel *model, int total, float freq, int level, std::vector<std::string> types, int isBoss=0);
+	EnemyWave(GameModel *model, int total, float freq, int level, std::vector<std::string> types, std::string killsType, float killsFreq=0.2);
 
 	bool isFinished();
 	void update(float dt);
@@ -25,7 +25,6 @@ public:
 	float freq; //seconds between enemies
 	float dt; //seconds since last creation
 	std::vector<std::string> types;
-	int extraType;
 	std::string killsType;
 	float killsFreq;
 

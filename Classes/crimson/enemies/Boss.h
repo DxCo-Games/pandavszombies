@@ -10,7 +10,7 @@ class Player;
 
 class Boss: public dxco::Enemy {
 public:
-	Boss(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations, int level, std::string type, int extraType);
+	Boss(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations, int level, std::string type);
 	virtual float getColitionRatio();
 	virtual void kill();
 };

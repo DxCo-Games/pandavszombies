@@ -16,20 +16,22 @@ class EnemyFactory {
 public:
 	EnemyFactory();
 
-	void createEnemy(GameModel* model, std::vector<std::string> types, int extraType);
-	void createEnemy(GameModel* model, int extraType=0);
-	void createEnemy(GameModel* model, std::vector<std::string>types, std::string type, float freq, int extraType); //create that type with probability, else any other type
+	void createEnemy(GameModel* model, std::vector<std::string> types);
+	void createEnemy(GameModel* model);
+	void createEnemy(GameModel* model, std::vector<std::string>types, std::string type, float freq); //create that type with probability, else any other type
 
-	void createBoss(GameModel* model, int extraType=0);
-	void createBoss(GameModel* model, std::vector<std::string> types, int extraType);
+	void createBoss(GameModel* model);
+	void createBoss(GameModel* model, std::vector<std::string> types);
 
-	void createSuperBoss(GameModel* model, std::vector<std::string> types, int extraType);
+	void createSuperBoss(GameModel* model, std::vector<std::string> types);
 	void createPanda(GameModel* model);
+	void createNoobSaibot(GameModel* model);
 
 	cocos2d::CCSprite* createSpriteInRandomPosition(GameModel* model, std::string texture, int width, int height);
 
 	std::map<int, dxco::Animation*> loadAnimations(GameModel* model, std::string type, float speed);
 	std::map<int, dxco::Animation*> pandaAnimations(GameModel* model);
+	Enemy* getEnemy(GameModel* model, std::vector<std::string>types);
 private:
 	void addEnemy(GameModel* model, Enemy* enemy);
 	std::vector<std::string> createTypesVector(bool includeElvis);
