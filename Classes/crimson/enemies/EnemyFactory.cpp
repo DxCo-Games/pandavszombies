@@ -43,6 +43,7 @@ void EnemyFactory::createEnemy(GameModel* model, std::vector<std::string>types, 
 
 void EnemyFactory::createEnemy(GameModel* model, std::vector<std::string>types) {
 	if (model->enemies.size() > MAX_CONCURRENT_ZOMBIES) {
+		model->level->totalEnemies -= 1;
 		return;
 	}
 	Enemy *enemy = this->getEnemy(model, types);
@@ -77,6 +78,7 @@ Enemy* EnemyFactory::getEnemy(GameModel* model, std::vector<std::string>types) {
 
 void EnemyFactory::createPanda(GameModel* model) {
 	if (model->enemies.size() > MAX_CONCURRENT_ZOMBIES) {
+		model->level->totalEnemies -= 1;
 		return;
 	}
 	int enemyLevel = model->prop->get("enemy.level");
@@ -97,6 +99,7 @@ void EnemyFactory::createBoss(GameModel* model) {
 
 void EnemyFactory::createNoobSaibot(GameModel* model) {
 	if (model->enemies.size() > MAX_CONCURRENT_ZOMBIES) {
+		model->level->totalEnemies -= 1;
 		return;
 	}
 
@@ -114,6 +117,7 @@ void EnemyFactory::createEnemy(GameModel* model) {
 
 void EnemyFactory::createBoss(GameModel* model, std::vector<std::string> types) {
 	if (model->enemies.size() > MAX_CONCURRENT_ZOMBIES) {
+		model->level->totalEnemies -= 1;
 		return;
 	}
 	std::string type = "elvis";
