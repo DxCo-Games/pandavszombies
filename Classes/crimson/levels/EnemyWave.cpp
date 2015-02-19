@@ -47,6 +47,8 @@ void EnemyWave::update(float dt) {
 			this->model->enemyFactory->createPanda(model);
 		} else if (this->isBoss == -2){
 			this->model->enemyFactory->createNoobSaibot(model);
+		} else if (this->isBoss == -3){
+			this->model->enemyFactory->createPandaBoss(model);
 		} else if (this->isBoss == 3){
 			this->model->enemyFactory->createBombEnemy(model);
 		} else {

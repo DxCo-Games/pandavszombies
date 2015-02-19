@@ -24,7 +24,10 @@ public:
 	void createBoss(GameModel* model, std::vector<std::string> types);
 
 	void createSuperBoss(GameModel* model, std::vector<std::string> types);
+
 	void createPanda(GameModel* model);
+	void createPandaBoss(GameModel* model);
+
 	void createNoobSaibot(GameModel* model);
 
 	void createBombEnemy(GameModel* model);

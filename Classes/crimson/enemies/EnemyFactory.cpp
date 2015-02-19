@@ -95,6 +95,23 @@ void EnemyFactory::createPanda(GameModel* model) {
 	SpriteUtil::fadeIn(enemy->getSprite());
 }
 
+void EnemyFactory::createPandaBoss(GameModel* model) {
+	if (model->enemies.size() > MAX_CONCURRENT_ZOMBIES) {
+		model->level->totalEnemies -= 1;
+		return;
+	}
+	int enemyLevel = model->prop->get("enemy.level");
+
+	std::map<int, dxco::Animation*> animations = pandaAnimations(model);
+	cocos2d::CCSprite* enemySprite = createSpriteInRandomPosition(model, "herida1_5_0000.png", 150, 150);
+	Boss* enemy = new Boss(model, enemySprite, animations, enemyLevel, "cura");
+	enemySprite->setColor(cocos2d::ccc3(60, 100, 60));
+	enemy->baseColor = cocos2d::ccc3(60, 100, 60);
+	enemy->anglePositions = 16;
+	addEnemy(model, enemy);
+	SpriteUtil::fadeIn(enemy->getSprite());
+}
+
 void EnemyFactory::createBoss(GameModel* model) {
 	this->createBoss(model, this->createTypesVector(true));
 }
