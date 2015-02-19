@@ -19,6 +19,11 @@ BonusFactory::BonusFactory() {
 }
 
 void BonusFactory::createBonus(GameModel* model, cocos2d::CCPoint location) {
+	if (model->bonuses.size() >= MAX_CONCURRENT_BONUS) {
+		//limit the number of bonus on screen
+		return;
+	}
+
 	if (rand() % 100 < model->prop->get("bonus.probability")) {
 
 		Bonus* bonus;
@@ -27,47 +32,59 @@ void BonusFactory::createBonus(GameModel* model, cocos2d::CCPoint location) {
 		if (model->player->weaponType == Player::PISTOL) {
 			weaponProbability = 80;
 		}
+		if (this->countWeaponBonus(model) >= MAX_CONCURRENT_BONUS) {
+			//limit the amount of weapons in the ground
+			weaponProbability = 0;
+		}
 
 		if (rand() % 100 < weaponProbability) {
 			bonus = this->createWeaponBonus(model, location);
 		} else {
 			std::map<int, dxco::Animation*> animations;
+			bool selected = false;
 
-			switch (rand() % 7) {
-				case 0: {	//Health bonus
-					cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/health.png", location.x, location.y, 45, 45);
-					bonus = new HealthBonus(model, bonusSprite, animations);
-					break;
-				}
-				case 1: {
-					cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/bomb.png", location.x, location.y, 45, 45);
-					bonus = new ExplosionBonus(model, bonusSprite, animations);
-					break;
-				}
-				case 2: {
-					cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/speed.png", location.x, location.y, 45, 45);
-					bonus = new MovementSpeedBonus(model, bonusSprite, animations);
-					break;
-				}
-				case 3: {
-					cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/bonus_points.png", location.x, location.y, 45, 45);
-					bonus = new PuntosBonus(model, bonusSprite, animations);
-					break;
-				}
-				case 4: {
-					cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/weapon_speed.png", location.x, location.y, 45, 45);
-					bonus = new WeaponSpeedBonus(model, bonusSprite, animations);
-					break;
-				}
-				case 5: {
-					cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/shield.png", location.x, location.y, 45, 45);
-					bonus = new ShieldBonus(model, bonusSprite, animations);
-					break;
-				}
-				case 6: {
-					cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/freeze.png", location.x, location.y, 45, 45);
-					bonus = new FreezeBombBonus(model, bonusSprite, animations);
-					break;
+			while (!selected) {
+				selected = true;
+				switch (rand() % 7) {
+					case 0: {	//Health bonus
+						cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/health.png", location.x, location.y, 45, 45);
+						bonus = new HealthBonus(model, bonusSprite, animations);
+						break;
+					}
+					case 1: {
+						cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/bomb.png", location.x, location.y, 45, 45);
+						bonus = new ExplosionBonus(model, bonusSprite, animations);
+						break;
+					}
+					case 2: {
+						cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/speed.png", location.x, location.y, 45, 45);
+						bonus = new MovementSpeedBonus(model, bonusSprite, animations);
+						break;
+					}
+					case 3: {
+						cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/bonus_points.png", location.x, location.y, 45, 45);
+						bonus = new PuntosBonus(model, bonusSprite, animations);
+						break;
+					}
+					case 4: {
+						cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/weapon_speed.png", location.x, location.y, 45, 45);
+						bonus = new WeaponSpeedBonus(model, bonusSprite, animations);
+						break;
+					}
+					case 5: {
+						cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/shield.png", location.x, location.y, 45, 45);
+						bonus = new ShieldBonus(model, bonusSprite, animations);
+						break;
+					}
+					case 6: {
+						if (model->freezeBonusActivated || this->countFreezeBonus(model) > 0) {
+							selected = false;
+							break;
+						}
+						cocos2d::CCSprite* bonusSprite = dxco::SpriteUtil::create("bonus/freeze.png", location.x, location.y, 45, 45);
+						bonus = new FreezeBombBonus(model, bonusSprite, animations);
+						break;
+					}
 				}
 			}
 		}
@@ -124,6 +141,27 @@ Bonus* BonusFactory::createWeaponBonus(GameModel* model, cocos2d::CCPoint locati
 	}
 	}
 
+}
+
+int BonusFactory::countWeaponBonus(GameModel* model) {
+	int count = 0;
+	for (int i=0; i <model->bonuses.size(); i++) {
+		if (dynamic_cast<WeaponBonus*>(model->bonuses[i]) != NULL) {
+			count++;
+		}
+	}
+
+	return count;
+}
+int BonusFactory::countFreezeBonus(GameModel* model) {
+	int count = 0;
+	for (int i=0; i <model->bonuses.size(); i++) {
+		if (dynamic_cast<FreezeBombBonus*>(model->bonuses[i]) != NULL) {
+			count++;
+		}
+	}
+
+	return count;
 }
 
 } /* namespace dxco */

@@ -3,6 +3,9 @@
 
 #include "cocos2d.h"
 
+#define MAX_CONCURRENT_BONUS 10
+#define MAX_CONCURRENT_WEAPONS 3
+
 namespace dxco {
 
 class GameModel;
@@ -16,6 +19,9 @@ public:
 	void addToMap(GameModel* model, Bonus* bonus);
 
 	Bonus* createWeaponBonus(GameModel* model, cocos2d::CCPoint);
+
+	int countWeaponBonus(GameModel* model);
+	int countFreezeBonus(GameModel* model);
 };
 
 

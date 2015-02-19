@@ -7,6 +7,7 @@
 #include "Boss.h"
 #include "SuperBoss.h"
 #include "../GameModel.h"
+#include "../levels/Level.h"
 #include "../GameProperties.h"
 #include "../../HelloWorldScene.h"
 #include <algorithm>
