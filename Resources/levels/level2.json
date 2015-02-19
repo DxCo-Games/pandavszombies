@@ -4,10 +4,10 @@
 	"title": "I see dead people"
 },
 "waves": [{
-	"total" : 40,
-	"freq" : 0.75,
+	"total" : 400,
+	"freq" : 0.5,
 	"level" : 0,
-	"isBoss" : 0
+	"isBoss" : 3
 	}
 	]
 }

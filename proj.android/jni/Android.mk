@@ -50,6 +50,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/crimson/Player.cpp \
                    ../../Classes/crimson/Bullet.cpp \
                    ../../Classes/crimson/enemies/Enemy.cpp \
+                   ../../Classes/crimson/enemies/BombEnemy.cpp \
                    ../../Classes/crimson/enemies/Boss.cpp \
                    ../../Classes/crimson/enemies/SuperBoss.cpp \
                    ../../Classes/crimson/enemies/EnemyFactory.cpp \

@@ -3,6 +3,7 @@
 #include "../../dxco/StringUtil.h"
 #include "../../dxco/Animation.h"
 #include "../../dxco/MathUtil.h"
+#include "BombEnemy.h"
 #include "Enemy.h"
 #include "Boss.h"
 #include "SuperBoss.h"
@@ -96,6 +97,43 @@ void EnemyFactory::createPanda(GameModel* model) {
 
 void EnemyFactory::createBoss(GameModel* model) {
 	this->createBoss(model, this->createTypesVector(true));
+}
+
+void EnemyFactory::createBombEnemy(GameModel* model) {
+	this->createBombEnemy(model, this->createTypesVector(true));
+}
+
+void EnemyFactory::createBombEnemy(GameModel* model, std::vector<std::string>types) {
+
+	if (model->enemies.size() > MAX_CONCURRENT_ZOMBIES) {
+		model->level->totalEnemies -= 1;
+		return;
+	}
+
+	std::string type = types[rand() % types.size()];
+
+	int delta = (rand() % 10);
+	int enemyLevel = model->prop->get("enemy.level");
+	float speed = Enemy::getSpeed(enemyLevel);
+
+	if (type == "basquet") {
+		delta += 10;
+		speed = speed * 1.8;
+	}
+
+	std::map<int, dxco::Animation*> animations = loadAnimations(model, type,
+			speed);
+	cocos2d::CCSprite* enemySprite = createSpriteInRandomPosition(model,
+			type + "_1_0000.png", 75 + delta, 75 + delta);
+
+	Enemy* enemy = new BombEnemy(model, enemySprite, animations, enemyLevel, type);
+	//FIXME add SpeedyEnemy
+
+	if (type == "basquet") {
+		enemy->speed = speed;
+	}
+
+	addEnemy(model, enemy);
 }
 
 void EnemyFactory::createNoobSaibot(GameModel* model) {
