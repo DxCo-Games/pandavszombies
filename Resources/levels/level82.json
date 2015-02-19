@@ -1,0 +1,28 @@
+{
+"config": {
+	"background": 1,
+	"title": "Mirror Match vol. 2"
+},
+"waves": [
+	{
+	"total" : 100,
+	"freq" : 0.4,
+	"isBoss" : -1
+	},
+	{
+	"total" : 5,
+	"freq" : 0.4,
+	"isBoss" : -3
+	},
+	{
+	"total" : 150,
+	"freq" : 0.4,
+	"isBoss" : -1
+	},
+	{
+	"total" : 10,
+	"freq" : 0.4,
+	"isBoss" : -3
+	}
+	]
+}

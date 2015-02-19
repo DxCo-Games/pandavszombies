@@ -24,7 +24,10 @@ public:
 	void createBoss(GameModel* model, std::vector<std::string> types);
 
 	void createSuperBoss(GameModel* model, std::vector<std::string> types);
+
 	void createPanda(GameModel* model);
+	void createPandaBoss(GameModel* model);
+
 	void createNoobSaibot(GameModel* model);
 
 	cocos2d::CCSprite* createSpriteInRandomPosition(GameModel* model, std::string texture, int width, int height);

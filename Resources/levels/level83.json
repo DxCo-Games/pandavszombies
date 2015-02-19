@@ -1,0 +1,28 @@
+{
+"config": {
+	"background": 2,
+	"title": "Another dark level"
+},
+"waves": [
+	{
+	"total" : 100,
+	"freq" : 0.4,
+	"isBoss" : 0
+	},
+	{
+	"total" : 5,
+	"freq" : 0.4,
+	"isBoss" : 1
+	},
+	{
+	"total" : 100,
+	"freq" : 0.4,
+	"isBoss" : 0
+	},
+	{
+	"total" : 10,
+	"freq" : 0.4,
+	"isBoss" : 1
+	}
+	]
+}
