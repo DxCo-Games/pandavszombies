@@ -1,10 +1,3 @@
-/*
- * BombEnemy.cpp
- *
- *  Created on: Feb 19, 2015
- *      Author: gsosarolon
- */
-
 #include "BombEnemy.h"
 #include "../GameModel.h"
 #include "cocos2d.h"
@@ -21,7 +14,7 @@ BombEnemy::BombEnemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, 
 void BombEnemy::kill() {
 	Enemy::kill();
 
-	cocos2d::CCParticleSystemQuad* firework = cocos2d::CCParticleSystemQuad::create("ball.plist");
+	cocos2d::CCParticleSystemQuad* firework = cocos2d::CCParticleSystemQuad::create("bazooka_ball.plist");
 
 	firework->setPosition(this->getLocation());
 	firework->setPositionType(cocos2d::kCCPositionTypeRelative);
@@ -31,7 +24,7 @@ void BombEnemy::kill() {
 		Enemy* enemy = this->model->enemies[i];
 
 		if (MathUtil::distance(firework->getPosition(), enemy->getLocation()) < ENEMY_EXPLOSION_RANGE) {
-			enemy->hurt(this->model->prop->get("attack.damage"));
+			enemy->hurt(this->model->prop->get("attack.damage")* 5);
 		}
 	}
 

@@ -117,7 +117,7 @@ void EnemyFactory::createBoss(GameModel* model) {
 }
 
 void EnemyFactory::createBombEnemy(GameModel* model) {
-	this->createBombEnemy(model, this->createTypesVector(true));
+	this->createBombEnemy(model, this->createTypesVector(false));
 }
 
 void EnemyFactory::createBombEnemy(GameModel* model, std::vector<std::string>types) {
