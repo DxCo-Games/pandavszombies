@@ -1,0 +1,13 @@
+{
+"config": {
+	"background": 0,
+	"title": "And now... without bonus",
+	"time": 60,
+	"bonus": 2
+},
+"waves": [{
+	"total" : 1000,
+	"freq" : 0.6
+	}
+	]
+}
