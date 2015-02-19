@@ -7,9 +7,11 @@ namespace dxco {
 
 class StoryButton : public ButtonDxCo {
 public:
-	StoryButton(cocos2d::CCSprite* sprite);
+	StoryButton(cocos2d::CCSprite* sprite, int currentPage);
 
 	virtual void execute();
+private:
+	int currentPage;
 };
 
 } /* namespace dxco */

@@ -117,7 +117,12 @@ void UserDAO::finishLevel(int level, int stars) {
 	if (DB::getInteger(next, -1) == -1) {
 		//unlock only if locked
 		DB::putInteger(next, 0);
+		DB::putInteger(LAST_LEVEL_UNLOCKED, level + 1);
 	}
+}
+
+int UserDAO::getLastUnlockedLevel() {
+	return DB::getInteger(LAST_LEVEL_UNLOCKED, 0);
 }
 
 bool UserDAO::levelEnabled(int level) {

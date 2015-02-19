@@ -10,6 +10,7 @@
 #define FACEBOOK_USERNAME_KEY "facebook_username"
 #define BEST_SCORE_KEY "best_store"
 #define COINS_KEY "coins"
+#define LAST_LEVEL_UNLOCKED "last_level_unlocked"
 
 namespace dxco {
 
@@ -38,6 +39,8 @@ public:
 	static void finishLevel(int level, int stars);
 	static bool levelEnabled(int level);
 	static int getLevelStars(int level);
+
+	static int getLastUnlockedLevel();
 private:
 	static void doSaveFacebookUser();
 	static void deleteAllScores();

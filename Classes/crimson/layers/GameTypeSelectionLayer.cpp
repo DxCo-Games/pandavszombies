@@ -3,6 +3,7 @@
 #include "../../dxco/SpriteUtil.h"
 #include "../SoundUtil.h"
 #include "SimpleAudioEngine.h"
+#include "../daos/UserDAO.h"
 
 namespace dxco {
 
@@ -68,9 +69,11 @@ bool GameTypeSelectionLayer::init() {
 
 	int frenzy = GameProperties::get("frenzy.unlocked");
 
+	int lastUnlockedLevel = UserDAO::getLastUnlockedLevel();
+
 	cocos2d::CCSprite* storyButtonSprite = this->getSprite("buttons/story_button.png", 2 + frenzy);
 	this->addChild(storyButtonSprite);
-	this->storyButton = new StoryButton(storyButtonSprite);
+	this->storyButton = new StoryButton(storyButtonSprite, floor(lastUnlockedLevel / 20));
 
 	cocos2d::CCSprite* survivalButtonSprite = this->getSprite("buttons/survival_button.png", 1 + frenzy);
 	SpriteUtil::leftAlign(storyButtonSprite, survivalButtonSprite);
