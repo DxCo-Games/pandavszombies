@@ -1,0 +1,13 @@
+{
+"config": {
+	"background": 0,
+	"title": "Stairway to hell",
+	"time": 120
+},
+"waves": [{
+	"total" : 10000,
+	"freq" : 0.35,
+	"isBoss" : 0
+	}
+	]
+}

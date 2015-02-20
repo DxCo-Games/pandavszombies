@@ -4,6 +4,7 @@
 #include "KillCountLevel.h"
 #include "../GameModel.h"
 #include "../bonus/NoBonusFactory.h"
+#include "../bonus/BombBonusFactory.h"
 #include "../bonus/WeaponFirstBonusFactory.h"
 #include "../../HelloWorldScene.h"
 
@@ -61,7 +62,10 @@ Level* LevelParser::parse(GameModel* model, std::string levelPath, int currentLe
 			level->bonusFactory = new WeaponFirstBonusFactory();
 		} else if (bonus == 2) {
 			level->bonusFactory = new NoBonusFactory();
+		} else if (bonus == 3) {
+			level->bonusFactory = new BombBonusFactory();
 		}
+
 	}
 
 	return level;
