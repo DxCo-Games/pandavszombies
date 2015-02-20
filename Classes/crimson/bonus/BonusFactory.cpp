@@ -32,7 +32,7 @@ void BonusFactory::createBonus(GameModel* model, cocos2d::CCPoint location) {
 		if (model->player->weaponType == Player::PISTOL) {
 			weaponProbability = 80;
 		}
-		if (this->countWeaponBonus(model) >= MAX_CONCURRENT_BONUS) {
+		if (this->countWeaponBonus(model) >= MAX_CONCURRENT_WEAPONS) {
 			//limit the amount of weapons in the ground
 			weaponProbability = 0;
 		}

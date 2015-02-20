@@ -20,6 +20,10 @@ EnemyFactory::EnemyFactory(){
 }
 
 void EnemyFactory::createEnemy(GameModel* model, std::vector<std::string>types, std::string type, float freq) {
+	this->createEnemy(model, this->createKillTypesVector(types, type, freq));
+}
+
+std::vector<std::string> EnemyFactory::createKillTypesVector(std::vector<std::string>types, std::string type, float freq) {
 	std::vector<std::string> vec;
 	//20 is equally probable, 15 is less, 5 is lesser...
 	if (rand() % 100 < freq * 100) {
@@ -40,7 +44,8 @@ void EnemyFactory::createEnemy(GameModel* model, std::vector<std::string>types, 
 			vec.erase(std::remove(vec.begin(), vec.end(), type), vec.end());
 		}
 	}
-	this->createEnemy(model, vec);
+
+	return vec;
 }
 
 void EnemyFactory::createEnemy(GameModel* model, std::vector<std::string>types) {
@@ -156,6 +161,20 @@ void EnemyFactory::createNoobSaibot(GameModel* model) {
 	}
 
 	Enemy *enemy = this->getEnemy(model, this->createTypesVector(false));
+	enemy->baseColor = cocos2d::ccc3(20, 30, 20);
+	enemy->getSprite()->setColor(cocos2d::ccc3(20, 30, 20));
+	enemy->getSprite()->setOpacity(150);
+
+	addEnemy(model, enemy, false);
+}
+
+void EnemyFactory::createNoobSaibot(GameModel* model, std::vector<std::string>types, std::string type, float freq) {
+	if (model->enemies.size() > MAX_CONCURRENT_ZOMBIES) {
+		model->level->totalEnemies -= 1;
+		return;
+	}
+
+	Enemy *enemy = this->getEnemy(model, this->createKillTypesVector(types, type, freq));
 	enemy->baseColor = cocos2d::ccc3(20, 30, 20);
 	enemy->getSprite()->setColor(cocos2d::ccc3(20, 30, 20));
 	enemy->getSprite()->setOpacity(150);
