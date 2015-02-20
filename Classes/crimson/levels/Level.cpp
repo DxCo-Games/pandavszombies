@@ -21,7 +21,8 @@ Level::Level(GameModel *model, std::vector<EnemyWave*>& waves, std::string title
 }
 
 void Level::showMessage() {
-
+	std::string msg = "Just kill’em all.";
+	model->vista->message(msg, 5);
 }
 
 void Level::updateFreezed(float dt) {
