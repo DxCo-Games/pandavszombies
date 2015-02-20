@@ -5,7 +5,7 @@
  *      Author: gsosarolon
  */
 
-#include "/Users/gsosarolon/Documents/workspace/cocos2d-x/samples/Cpp/crimson/Classes/crimson/enemies/AntEnemy.h"
+#include "AntEnemy.h"
 
 namespace dxco {
 
