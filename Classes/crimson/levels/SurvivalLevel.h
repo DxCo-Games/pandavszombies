@@ -16,6 +16,7 @@ public:
 	virtual void restartLevel();
 
 	virtual void updateInterface();
+	virtual void showMessage();
 
 	float enemyDt;
 	float bossDt;

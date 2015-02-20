@@ -27,6 +27,10 @@ TutorialLevel::TutorialLevel(GameModel* model): Level(model, *new std::vector<En
 	this->model->prop->set("enemy.level",  1);
 }
 
+void TutorialLevel::showMessage() {
+
+}
+
 bool TutorialLevel::isFinished() {
 	return this->currentStep >= 6;
 }

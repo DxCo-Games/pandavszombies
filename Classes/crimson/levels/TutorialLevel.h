@@ -12,6 +12,8 @@ public:
 	virtual void update(float dt);
 	virtual void restartLevel();
 
+	virtual void showMessage();
+
 	int currentStep; // 0-3
 	float rotationDt;
 	float movementDt;
