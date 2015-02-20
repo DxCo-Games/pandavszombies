@@ -1,0 +1,37 @@
+{
+"config": {
+	"background": 0,
+	"title": "The fine art of palette swapping"
+},
+"waves": [{
+	"total" : 30,
+	"freq" : 0.6,
+	"isBoss" : -2
+	},
+	{
+	"total" : 100,
+	"freq" : 0.25,
+	"isBoss" : -2
+	},
+	{
+	"total" : 15,
+	"freq" : 1,
+	"isBoss" : -2
+	},
+	{
+	"total" : 100,
+	"freq" : 0.01,
+	"isBoss" : -2
+	},
+	{
+	"total" : 20,
+	"freq" : 1,
+	"isBoss" : -2
+	},
+	{
+	"total" : 100,
+	"freq" : 0.01,
+	"isBoss" : -2
+	}
+	]
+}

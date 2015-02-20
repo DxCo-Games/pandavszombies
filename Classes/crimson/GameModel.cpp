@@ -115,8 +115,10 @@ void GameModel::loadLevel(bool survival, bool frenzy, int level) {
 		this->level = new SurvivalLevel(this);
 		this->level->title = "The mystery level";
 		this->vista->setMap(1);
+		this->prop->set("enemy.level", ZOMBIE_SURVIVAL_INITIAL_LEVEL);
 	} else {
 		this->level = LevelParser::parse(this, "levels/level" + StringUtil::toString(level) +".json", level);
+		this->level->showMessage();
 	}
 }
 
@@ -262,7 +264,7 @@ void GameModel::restartGame() {
 	this->vista->opacityLayer->setVisible(false);
 	this->vista->bubble->setVisible(false);
 
-	this->prop->set("enemy.level", 5);
+	this->prop->set("enemy.level", ZOMBIE_SURVIVAL_INITIAL_LEVEL);
 
 	this->player->restartPosition();
 	this->vista->shadow->setPosition(player->getLocation());

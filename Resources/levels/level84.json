@@ -1,0 +1,45 @@
+{
+"config": {
+	"background": 0,
+	"kills": 3,
+	"type": "campesino",
+	"bonus": 1
+},
+"waves": [{
+	"total" : 50,
+	"freq" : 0.6,
+	"isBoss" : 1,
+	"types": ["oficinista", "cura", "cirujano"]
+	},
+	{
+	"total" : 1,
+	"freq" : 0.6,
+	"isBoss" : 0,
+	"types": ["campesino"]
+	},
+	{
+	"total" : 50,
+	"freq" : 0.6,
+	"isBoss" : 1,
+	"types": ["oficinista", "cura", "cirujano"]
+	},
+	{
+	"total" : 1,
+	"freq" : 0.6,
+	"isBoss" : 0,
+	"types": ["campesino"]
+	},
+	{
+	"total" : 50,
+	"freq" : 0.6,
+	"isBoss" : 1,
+	"types": ["campesino", "oficinista", "cura", "cirujano"]
+	},
+	{
+	"total" : 1,
+	"freq" : 0.6,
+	"isBoss" : 0,
+	"types": ["campesino"]
+	}
+	]
+}

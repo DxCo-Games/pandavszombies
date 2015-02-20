@@ -1,0 +1,14 @@
+{
+"config": {
+	"background": 2,
+	"kills": 15,
+	"type": "oficinista"
+},
+"waves": [{
+	"total" : 10000,
+	"freq" : 0.75,
+	"killsFreq": 0.05,
+	"isBoss" : 0
+	}
+	]
+}

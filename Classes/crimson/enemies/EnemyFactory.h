@@ -29,6 +29,7 @@ public:
 	void createPandaBoss(GameModel* model);
 
 	void createNoobSaibot(GameModel* model);
+	void createNoobSaibot(GameModel* model, std::vector<std::string>types, std::string type, float freq);
 
 	void createBombEnemy(GameModel* model);
 	void createBombEnemy(GameModel* model, std::vector<std::string>types);
@@ -39,8 +40,9 @@ public:
 	std::map<int, dxco::Animation*> pandaAnimations(GameModel* model);
 	Enemy* getEnemy(GameModel* model, std::vector<std::string>types);
 private:
-	void addEnemy(GameModel* model, Enemy* enemy);
+	void addEnemy(GameModel* model, Enemy* enemy, bool fade = true);
 	std::vector<std::string> createTypesVector(bool includeElvis);
+	std::vector<std::string> createKillTypesVector(std::vector<std::string>types, std::string type, float freq);
 };
 
 } /* namespace dxco */

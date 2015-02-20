@@ -57,4 +57,8 @@ void SurvivalLevel::restartLevel() {
 
 }
 
+void SurvivalLevel::showMessage() {
+
+}
+
 } /* namespace dxco */

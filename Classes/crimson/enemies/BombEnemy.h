@@ -1,10 +1,3 @@
-/*
- * BombEnemy.h
- *
- *  Created on: Feb 19, 2015
- *      Author: gsosarolon
- */
-
 #ifndef BOMBENEMY_H_
 #define BOMBENEMY_H_
 

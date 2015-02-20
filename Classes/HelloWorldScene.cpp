@@ -551,6 +551,10 @@ void HelloWorld::update(float dt) {
 
 void HelloWorld::keyBackClicked() {
 
+	if (this->levelFinishedLayer == NULL) { // Loading screen
+		return;
+	}
+
 	if (this->levelFinishedLayer->isVisible()) { // if game is over
 		cocos2d::CCDirector* pDirector = cocos2d::CCDirector::sharedDirector();
 		pDirector->replaceScene(dxco::GameTypeSelectionLayer::scene());

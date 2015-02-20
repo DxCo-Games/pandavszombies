@@ -11,7 +11,7 @@ class GameModel;
 class EnemyWave {
 public:
 	EnemyWave(GameModel *model, int total, float freq, int level, std::vector<std::string> types, int isBoss=0);
-	EnemyWave(GameModel *model, int total, float freq, int level, std::vector<std::string> types, std::string killsType, float killsFreq=0.2);
+	EnemyWave(GameModel *model, int total, float freq, int level, std::vector<std::string> types, std::string killsType, float killsFreq=0.2, int isBoss=0);
 
 	bool isFinished();
 	void update(float dt);

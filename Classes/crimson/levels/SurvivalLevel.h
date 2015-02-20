@@ -1,7 +1,7 @@
 #ifndef SURVIVALLEVEL_H_
 #define SURVIVALLEVEL_H_
 
-#define SURVIVAL_ENEMY_LEVEL_DT 15
+#define SURVIVAL_ENEMY_LEVEL_DT 5
 
 #include "Level.h"
 
@@ -16,6 +16,7 @@ public:
 	virtual void restartLevel();
 
 	virtual void updateInterface();
+	virtual void showMessage();
 
 	float enemyDt;
 	float bossDt;

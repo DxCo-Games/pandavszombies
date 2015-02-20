@@ -1,13 +1,14 @@
 {
 "config": {
 	"background": 1,
-	"title": "I see dead people"
+	"title": "The bomber zombies",
+	"bonus": 2
 },
 "waves": [{
-	"total" : 40,
+	"total" : 100,
 	"freq" : 0.75,
 	"level" : 0,
-	"isBoss" : 0
+	"isBoss" : 3
 	}
 	]
 }
