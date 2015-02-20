@@ -48,7 +48,7 @@ void GameProperties::saveDefaultProperties() {
 
 	// cuando se realiza una mejora, la propiedad mejora en este porcentaje.
 	DB::putInteger("player.life.addition", 50);
-	DB::putInteger("player.speed.addition", 2);
+	DB::putInteger("player.speed.addition", 3);
 	DB::putInteger("bonus.probability.addition", 2);
 
 	DB::putInteger("weapon.duration.addition", 1);
