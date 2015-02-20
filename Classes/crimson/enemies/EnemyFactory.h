@@ -34,6 +34,9 @@ public:
 	void createBombEnemy(GameModel* model);
 	void createBombEnemy(GameModel* model, std::vector<std::string>types);
 
+	void createAntEnemy(GameModel* model);
+	void createAntEnemy(GameModel* model, std::vector<std::string>types);
+
 	cocos2d::CCSprite* createSpriteInRandomPosition(GameModel* model, std::string texture, int width, int height);
 
 	std::map<int, dxco::Animation*> loadAnimations(GameModel* model, std::string type, float speed);

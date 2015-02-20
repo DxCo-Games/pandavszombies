@@ -4,10 +4,16 @@
 	"title": "I see dead people"
 },
 "waves": [{
-	"total" : 40,
-	"freq" : 0.75,
+	"total" : 1,
+	"freq" : 1,
+	"isBoss" : 2,
+	"types": ["campesino"]
+	},
+	{
+	"total" : 1200,
+	"freq" : 0.25,
 	"level" : 0,
-	"isBoss" : 0
+	"isBoss" : 4
 	}
 	]
 }

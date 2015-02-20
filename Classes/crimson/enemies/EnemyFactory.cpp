@@ -4,6 +4,7 @@
 #include "../../dxco/Animation.h"
 #include "../../dxco/MathUtil.h"
 #include "BombEnemy.h"
+#include "AntEnemy.h"
 #include "Enemy.h"
 #include "Boss.h"
 #include "SuperBoss.h"
@@ -16,7 +17,8 @@
 namespace dxco {
 
 
-EnemyFactory::EnemyFactory(){
+EnemyFactory::EnemyFactory() {
+
 }
 
 void EnemyFactory::createEnemy(GameModel* model, std::vector<std::string>types, std::string type, float freq) {
@@ -70,7 +72,7 @@ Enemy* EnemyFactory::getEnemy(GameModel* model, std::vector<std::string>types) {
 	}
 
 	std::map<int, dxco::Animation*> animations = loadAnimations(model, type, speed);
-	cocos2d::CCSprite* enemySprite = createSpriteInRandomPosition(model, type + "_1_0000.png", 75 + delta, 75 + delta);
+	cocos2d::CCSprite* enemySprite = createSpriteInRandomPosition(model, type + "_1_0000.png", 15 + delta, 15 + delta);
 
 	Enemy* enemy = new Enemy(model, enemySprite, animations, enemyLevel, type);
 	//FIXME add SpeedyEnemy
@@ -79,6 +81,44 @@ Enemy* EnemyFactory::getEnemy(GameModel* model, std::vector<std::string>types) {
 	}
 
 	return enemy;
+}
+
+void EnemyFactory::createAntEnemy(GameModel* model) {
+	this->createAntEnemy(model, this->createTypesVector(false));
+}
+
+void EnemyFactory::createAntEnemy(GameModel* model, std::vector<std::string>types) {
+
+	if (model->enemies.size() > MAX_CONCURRENT_ZOMBIES) {
+		model->level->totalEnemies -= 1;
+		return;
+	}
+
+	std::string type = types[rand() % types.size()];
+
+	int delta = (rand() % 2);
+	int enemyLevel = model->prop->get("enemy.level");
+	float speed = Enemy::getSpeed(enemyLevel);
+
+	if (type == "basquet") {
+		delta += 2;
+		speed = speed * 1.8;
+	}
+
+	std::map<int, dxco::Animation*> animations = loadAnimations(model, type,
+			speed);
+	cocos2d::CCSprite* enemySprite = createSpriteInRandomPosition(model,
+			type + "_1_0000.png", 20 + delta, 20 + delta);
+
+	Enemy* enemy = new AntEnemy(model, enemySprite, animations, enemyLevel,
+			type);
+	//FIXME add SpeedyEnemy
+
+	if (type == "basquet") {
+		enemy->speed = speed;
+	}
+
+	addEnemy(model, enemy);
 }
 
 void EnemyFactory::createPanda(GameModel* model) {
