@@ -71,6 +71,10 @@ bool GameTypeSelectionLayer::init() {
 
 	int lastUnlockedLevel = UserDAO::getLastUnlockedLevel();
 
+	if (lastUnlockedLevel != 0) {
+		lastUnlockedLevel -= 1;
+	}
+
 	cocos2d::CCSprite* storyButtonSprite = this->getSprite("buttons/story_button.png", 2 + frenzy);
 	this->addChild(storyButtonSprite);
 	this->storyButton = new StoryButton(storyButtonSprite, floor(lastUnlockedLevel / 20));
