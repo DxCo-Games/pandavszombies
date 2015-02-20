@@ -52,8 +52,8 @@ bool GameTypeSelectionLayer::init() {
 		return false;
 	}
 
-	if (!dxco::SoundUtil::isSoundEffectsOn()) {
-		CocosDenshion::SimpleAudioEngine::sharedEngine()->setEffectsVolume(0);
+	if (!dxco::SoundUtil::isMusicOn()) {
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(0.0);
 	}
 
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("sounds/background_menu.mp3", true);
