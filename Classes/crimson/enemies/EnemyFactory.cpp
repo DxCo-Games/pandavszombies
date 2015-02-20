@@ -67,7 +67,7 @@ Enemy* EnemyFactory::getEnemy(GameModel* model, std::vector<std::string>types) {
 	}
 
 	std::map<int, dxco::Animation*> animations = loadAnimations(model, type, speed);
-	cocos2d::CCSprite* enemySprite = createSpriteInRandomPosition(model, type + "_1_0000.png", 75 + delta, 75 + delta);
+	cocos2d::CCSprite* enemySprite = createSpriteInRandomPosition(model, type + "_1_0000.png", 15 + delta, 15 + delta);
 
 	Enemy* enemy = new Enemy(model, enemySprite, animations, enemyLevel, type);
 	//FIXME add SpeedyEnemy
