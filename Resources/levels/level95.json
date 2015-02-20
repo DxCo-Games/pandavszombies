@@ -1,12 +1,12 @@
 {
 "config": {
 	"background": 1,
-	"title": "lo100to",
-	"time": 20
+	"time": 20,
+	"bonus": 1
 },
 "waves": [{
-	"total" : 1000,
-	"freq" : 0.5,
+	"total" : 500000,
+	"freq" : 0.001,
 	"isBoss" : 0
 	}
 	]
