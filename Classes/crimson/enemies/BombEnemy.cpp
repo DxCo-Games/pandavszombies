@@ -19,6 +19,7 @@ void BombEnemy::kill() {
 	firework->setPosition(this->getLocation());
 	firework->setPositionType(cocos2d::kCCPositionTypeRelative);
 	this->model->vista->clouds->addChild(firework);
+	this->model->vista->playEffect("sounds/bazooka.ogg");
 
 	for (int i = 0; i < this->model->enemies.size(); i++) {
 		Enemy* enemy = this->model->enemies[i];

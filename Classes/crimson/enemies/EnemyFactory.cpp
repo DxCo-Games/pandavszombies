@@ -50,8 +50,6 @@ void EnemyFactory::createEnemy(GameModel* model, std::vector<std::string>types) 
 	}
 	Enemy *enemy = this->getEnemy(model, types);
 	addEnemy(model, enemy);
-
-	SpriteUtil::fadeIn(enemy->getSprite());
 }
 
 Enemy* EnemyFactory::getEnemy(GameModel* model, std::vector<std::string>types) {
@@ -92,7 +90,6 @@ void EnemyFactory::createPanda(GameModel* model) {
 	enemy->baseColor = cocos2d::ccc3(60, 100, 60);
 	enemy->anglePositions = 16;
 	addEnemy(model, enemy);
-	SpriteUtil::fadeIn(enemy->getSprite());
 }
 
 void EnemyFactory::createPandaBoss(GameModel* model) {
@@ -109,7 +106,6 @@ void EnemyFactory::createPandaBoss(GameModel* model) {
 	enemy->baseColor = cocos2d::ccc3(60, 100, 60);
 	enemy->anglePositions = 16;
 	addEnemy(model, enemy);
-	SpriteUtil::fadeIn(enemy->getSprite());
 }
 
 void EnemyFactory::createBoss(GameModel* model) {
@@ -164,7 +160,7 @@ void EnemyFactory::createNoobSaibot(GameModel* model) {
 	enemy->getSprite()->setColor(cocos2d::ccc3(20, 30, 20));
 	enemy->getSprite()->setOpacity(150);
 
-	addEnemy(model, enemy);
+	addEnemy(model, enemy, false);
 }
 
 void EnemyFactory::createEnemy(GameModel* model) {
@@ -188,8 +184,6 @@ void EnemyFactory::createBoss(GameModel* model, std::vector<std::string> types) 
 	cocos2d::CCSprite* enemySprite = createSpriteInRandomPosition(model, type + "_1_0000.png", 150, 150);
 	Enemy* enemy = new Boss(model, enemySprite, animations, enemyLevel, type);
 	addEnemy(model, enemy);
-
-	SpriteUtil::fadeIn(enemy->getSprite());
 }
 
 void EnemyFactory::createSuperBoss(GameModel* model, std::vector<std::string> types) {
@@ -205,15 +199,16 @@ void EnemyFactory::createSuperBoss(GameModel* model, std::vector<std::string> ty
 	cocos2d::CCSprite* enemySprite = createSpriteInRandomPosition(model, type + "_1_0000.png", 280, 280);
 	Enemy* enemy = new SuperBoss(model, enemySprite, animations, enemyLevel, type);
 	addEnemy(model, enemy);
-
-	SpriteUtil::fadeIn(enemy->getSprite());
 }
 
-void EnemyFactory::addEnemy(GameModel* model, Enemy* enemy) {
+void EnemyFactory::addEnemy(GameModel* model, Enemy* enemy, bool fade) {
 
 	model->enemies.push_back(enemy);
 	model->items.push_back(enemy);
 	model->mapa->addChild(enemy->getSprite());
+	if (fade) {
+		SpriteUtil::fadeIn(enemy->getSprite());
+	}
 }
 
 std::vector<std::string> EnemyFactory::createTypesVector(bool includeElvis) {

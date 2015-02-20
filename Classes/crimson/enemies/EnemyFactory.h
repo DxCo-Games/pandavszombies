@@ -39,7 +39,7 @@ public:
 	std::map<int, dxco::Animation*> pandaAnimations(GameModel* model);
 	Enemy* getEnemy(GameModel* model, std::vector<std::string>types);
 private:
-	void addEnemy(GameModel* model, Enemy* enemy);
+	void addEnemy(GameModel* model, Enemy* enemy, bool fade = true);
 	std::vector<std::string> createTypesVector(bool includeElvis);
 };
 
