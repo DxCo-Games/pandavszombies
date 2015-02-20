@@ -4,9 +4,17 @@
 	"title": "Ants"
 },
 "waves": [{
-	"total" : 500,
-	"freq" : 0.4,
-	"isBoss" : 0
+	"total" : 1,
+	"freq" : 1,
+	"isBoss" : 2,
+	"types": ["campesino"]
+	},
+	{
+	"total" : 1200,
+	"freq" : 0.01,
+	"level" : 0,
+	"isBoss" : 4,
+	"types": ["campesino"]
 	}
 	]
 }

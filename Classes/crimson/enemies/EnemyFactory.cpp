@@ -96,9 +96,9 @@ void EnemyFactory::createAntEnemy(GameModel* model, std::vector<std::string>type
 
 	std::string type = types[rand() % types.size()];
 
-	int delta = (rand() % 2);
+	int delta = (rand() % 5);
 	int enemyLevel = model->prop->get("enemy.level");
-	float speed = Enemy::getSpeed(enemyLevel);
+	float speed = Enemy::getSpeed(enemyLevel) / 4;
 
 	if (type == "basquet") {
 		delta += 2;
@@ -108,7 +108,7 @@ void EnemyFactory::createAntEnemy(GameModel* model, std::vector<std::string>type
 	std::map<int, dxco::Animation*> animations = loadAnimations(model, type,
 			speed);
 	cocos2d::CCSprite* enemySprite = createSpriteInRandomPosition(model,
-			type + "_1_0000.png", 20 + delta, 20 + delta);
+			type + "_1_0000.png", 40 + delta, 40 + delta);
 
 	Enemy* enemy = new AntEnemy(model, enemySprite, animations, enemyLevel,
 			type);

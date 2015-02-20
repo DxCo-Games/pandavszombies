@@ -1,10 +1,3 @@
-/*
- * AntEnemy.h
- *
- *  Created on: Feb 20, 2015
- *      Author: gsosarolon
- */
-
 #ifndef ANTENEMY_H_
 #define ANTENEMY_H_
 

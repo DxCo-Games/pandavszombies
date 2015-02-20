@@ -1,18 +1,11 @@
-/*
- * AntEnemy.cpp
- *
- *  Created on: Feb 20, 2015
- *      Author: gsosarolon
- */
-
 #include "AntEnemy.h"
 
 namespace dxco {
 
 AntEnemy::AntEnemy(GameModel* model, cocos2d::CCSprite* sprite, std::map<int, Animation*>& animations, int level, std::string type): Enemy(model, sprite, animations, level, type), Item(sprite, animations) {
-	this->score = 1;
-	this->life = 1;
-	this->strength = 1;
+	this->score = this->score / 50;
+	this->life = this->life / 50;
+	this->strength = this->strength / 50;
 }
 
 float AntEnemy::getWidth() {
