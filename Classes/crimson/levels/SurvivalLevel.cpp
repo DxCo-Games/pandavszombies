@@ -16,6 +16,7 @@ SurvivalLevel::SurvivalLevel(GameModel* model, float maxEnemyDt, float maxBossDt
 	this->maxBossDt = maxBossDt;
 
 	model->vista->setMap(rand() %2);
+	model->prop->set("enemy.level", ZOMBIE_SURVIVAL_INITIAL_LEVEL);
 }
 
 bool SurvivalLevel::isFinished() {
