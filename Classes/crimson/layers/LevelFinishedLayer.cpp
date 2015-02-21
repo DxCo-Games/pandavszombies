@@ -121,15 +121,22 @@ void LevelFinishedLayer::show(int points, int kills, int coins, int stars) {
 			this->title = SpriteUtil::create("game_over_title.png", visibleSize.width * 0.15, visibleSize.height * 0.7, visibleSize.width * 0.7, visibleSize.height * 0.15);
 			this->addChild(title);
 
-			this->nextLevelButton->sprite->setVisible(false);
+			if (this->nextLevelButton != NULL) {
+				this->nextLevelButton->sprite->setVisible(false);
+			}
+
 			this->tryAgainButton->sprite->setPositionX(visibleSize.width * 0.69);
 		} else {
 			this->removeChild(this->title);
 			this->title = SpriteUtil::create("level_finished_title.png", visibleSize.width * 0.15, visibleSize.height * 0.7, visibleSize.width * 0.7, visibleSize.height * 0.15);
 			this->addChild(title);
-			this->nextLevelButton->sprite->setVisible(true);
 
-			this->tryAgainButton->sprite->setPositionX(visibleSize.width * 0.60);
+			if (this->nextLevelButton != NULL) {
+				this->nextLevelButton->sprite->setVisible(true);
+				this->tryAgainButton->sprite->setPositionX(visibleSize.width * 0.60);
+			} else {
+				this->tryAgainButton->sprite->setPositionX(visibleSize.width * 0.69);
+			}
 		}
 
 		if (this->starsSprite != NULL) {

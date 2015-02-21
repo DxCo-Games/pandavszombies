@@ -10,7 +10,7 @@
 #include "../buttons/NextLevelButton.h"
 #include "../buttons/EquipPandaButton.h"
 
-#define LEVEL_COUNT 99
+#define LEVEL_COUNT 100
 
 namespace dxco {
 
