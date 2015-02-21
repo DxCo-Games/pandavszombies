@@ -271,7 +271,9 @@ void EnemyFactory::createBosszilla(GameModel* model, std::vector<std::string> ty
 	int enemyLevel = model->prop->get("enemy.level");
 	std::map<int, dxco::Animation*> animations = loadAnimations(model, type, Enemy::getSpeed(enemyLevel) / 2);
 
-	cocos2d::CCSprite* enemySprite = createSpriteInRandomPosition(model, type + "_1_0000.png", 450, 450);
+	cocos2d::CCSprite* enemySprite = createSpriteInRandomPosition(model, type + "_1_0000.png", 100, 100);
+	enemySprite->setScaleX(enemySprite->getScaleX()*5);
+	enemySprite->setScaleY(enemySprite->getScaleY()*5);
 	Enemy* enemy = new Bosszilla(model, enemySprite, animations, enemyLevel, type);
 	addEnemy(model, enemy);
 }

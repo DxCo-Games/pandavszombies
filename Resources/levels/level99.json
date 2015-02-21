@@ -4,9 +4,9 @@
 	"title": "Bosszilla"
 },
 "waves": [{
-	"total" : 5,
+	"total" : 10,
 	"freq" : 0.2,
-	"isBoss" : 1
+	"isBoss" : 0
 	},
 	{
 	"total" : 1,
@@ -14,9 +14,9 @@
 	"isBoss" : 5
 	},
 	{
-	"total" : 50,
-	"freq" : 1.5,
-	"isBoss" : 1
+	"total" : 250,
+	"freq" : 0.75,
+	"isBoss" : 0
 	}
 	]
 }
