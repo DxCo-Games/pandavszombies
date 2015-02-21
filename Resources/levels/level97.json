@@ -1,0 +1,14 @@
+{
+"config": {
+	"background": 1,
+	"title": "The patience level",
+	"time": 300
+},
+"waves": [
+	{
+	"total" : 500000,
+	"freq" : 0.3,
+	"isBoss" : 0
+	}
+	]
+}

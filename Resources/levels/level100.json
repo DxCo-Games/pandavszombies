@@ -1,0 +1,105 @@
+{
+"config": {
+	"background": 1,
+	"title": "A universal history of iniquity"
+},
+"waves": [
+	{
+	"total" : 200,
+	"freq" : 0.3,
+	"isBoss" : 0,
+	"types": ["cura"]
+	},
+	{
+	"total" : 20,
+	"freq" : 1,
+	"isBoss" : 1,
+	"types": ["cura"]
+	},
+	{
+	"total" : 200,
+	"freq" : 0.3,
+	"isBoss" : 0,
+	"types": ["campesino"]
+	},
+	{
+	"total" : 20,
+	"freq" : 1,
+	"isBoss" : 1,
+	"types": ["campesino"]
+	},
+	{
+	"total" : 200,
+	"freq" : 0.3,
+	"isBoss" : 0,
+	"types": ["oficinista"]
+	},
+	{
+	"total" : 20,
+	"freq" : 1,
+	"isBoss" : 1,
+	"types": ["oficinista"]
+	},
+	{
+	"total" : 200,
+	"freq" : 0.3,
+	"isBoss" : 0,
+	"types": ["basquet"]
+	},
+	{
+	"total" : 20,
+	"freq" : 1,
+	"isBoss" : 1,
+	"types": ["basquet"]
+	},
+	{
+	"total" : 200,
+	"freq" : 0.3,
+	"isBoss" : 0
+	},
+	{
+	"total" : 20,
+	"freq" : 1,
+	"isBoss" : 1,
+	"types": ["basquet", "cura", "ofinista", "basquet", "elvis", "cirujano"]
+	},
+	{
+	"total" : 200,
+	"freq" : 0.3,
+	"isBoss" : -1
+	},
+	{
+	"total" : 20,
+	"freq" : 1,
+	"isBoss" : -3
+	},
+	{
+	"total" : 200,
+	"freq" : 0.3,
+	"isBoss" : -2
+	},
+	{
+	"total" : 200,
+	"freq" : 0.3,
+	"isBoss" : 3
+	},
+	{
+	"total" : 2,
+	"freq" : 1,
+	"isBoss" : 2,
+	"types": ["campesino"]
+	},
+	{
+	"total" : 1000,
+	"freq" : 0.01,
+	"level" : 0,
+	"isBoss" : 4,
+	"types": ["campesino"]
+	},
+	{
+	"total" : 20,
+	"freq" : 0.5,
+	"isBoss" : 1
+	}
+	]
+}
