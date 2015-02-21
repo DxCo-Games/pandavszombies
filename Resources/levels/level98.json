@@ -1,0 +1,15 @@
+{
+"config": {
+	"background": 1,
+	"title": "No bonus for you",
+	"time": 30,
+	"bonus": 2
+},
+"waves": [
+	{
+	"total" : 50000,
+	"freq" : 0.3,
+	"isBoss" : 0
+	}
+	]
+}

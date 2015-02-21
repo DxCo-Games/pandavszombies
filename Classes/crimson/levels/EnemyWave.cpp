@@ -58,6 +58,8 @@ void EnemyWave::update(float dt) {
 			this->model->enemyFactory->createBombEnemy(model);
 		} else if (this->isBoss == 4){
 			this->model->enemyFactory->createAntEnemy(model, this->types);
+		} else if (this->isBoss == 5){
+				this->model->enemyFactory->createBosszilla(model, this->types);
 		} else {
 			if (this->killsType != ""){
 				this->model->enemyFactory->createEnemy(model, this->types, this->killsType, this->killsFreq);

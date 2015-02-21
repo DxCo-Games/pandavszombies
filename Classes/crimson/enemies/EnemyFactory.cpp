@@ -8,6 +8,7 @@
 #include "Enemy.h"
 #include "Boss.h"
 #include "SuperBoss.h"
+#include "Bosszilla.h"
 #include "../GameModel.h"
 #include "../levels/Level.h"
 #include "../GameProperties.h"
@@ -257,6 +258,21 @@ void EnemyFactory::createSuperBoss(GameModel* model, std::vector<std::string> ty
 
 	cocos2d::CCSprite* enemySprite = createSpriteInRandomPosition(model, type + "_1_0000.png", 280, 280);
 	Enemy* enemy = new SuperBoss(model, enemySprite, animations, enemyLevel, type);
+	addEnemy(model, enemy);
+}
+
+void EnemyFactory::createBosszilla(GameModel* model, std::vector<std::string> types) {
+	std::string type = "elvis";
+
+	if (types.size() != 0) {
+		type = types[rand() % types.size()];
+	}
+
+	int enemyLevel = model->prop->get("enemy.level");
+	std::map<int, dxco::Animation*> animations = loadAnimations(model, type, Enemy::getSpeed(enemyLevel) / 2);
+
+	cocos2d::CCSprite* enemySprite = createSpriteInRandomPosition(model, type + "_1_0000.png", 450, 450);
+	Enemy* enemy = new Bosszilla(model, enemySprite, animations, enemyLevel, type);
 	addEnemy(model, enemy);
 }
 
