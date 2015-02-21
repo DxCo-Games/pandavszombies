@@ -52,7 +52,9 @@ bool GameTypeSelectionLayer::init() {
 		return false;
 	}
 
-	if (!dxco::SoundUtil::isMusicOn()) {
+	if (dxco::SoundUtil::isMusicOn()) {
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(0.5);
+	} else {
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(0.0);
 	}
 
