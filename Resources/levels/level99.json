@@ -1,10 +1,11 @@
 {
 "config": {
 	"background": 1,
-	"title": "Bosszilla"
+	"title": "Bosszilla",
+	"bonus": 1
 },
 "waves": [{
-	"total" : 10,
+	"total" : 5,
 	"freq" : 0.2,
 	"isBoss" : 0
 	},
@@ -14,9 +15,9 @@
 	"isBoss" : 5
 	},
 	{
-	"total" : 250,
-	"freq" : 0.75,
-	"isBoss" : 0
+	"total" : 50,
+	"freq" : 1.5,
+	"isBoss" : 1
 	}
 	]
 }
