@@ -61,7 +61,7 @@
 	"total" : 20,
 	"freq" : 1,
 	"isBoss" : 1,
-	"types": ["basquet", "cura", "ofinista", "basquet", "elvis", "cirujano"]
+	"types": ["basquet", "cura", "oficinista", "basquet", "elvis", "cirujano"]
 	},
 	{
 	"total" : 200,
