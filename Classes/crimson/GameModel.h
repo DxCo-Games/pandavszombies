@@ -15,7 +15,7 @@
 #define MAP_WIDTH 623
 #define MAP_HEIGHT 516
 
-#define ZOMBIE_SURVIVAL_INITIAL_LEVEL 5
+#define ZOMBIE_SURVIVAL_INITIAL_LEVEL 15
 
 class HelloWorld;
 

@@ -34,12 +34,22 @@ void SurvivalLevel::update(float dt) {
 		this->model->enemyFactory->createBoss(this->model);
 		this->bossDt = 0;
 	}
+
 	this->enemyLevelDt += dt;
-	if (this->enemyLevelDt > SURVIVAL_ENEMY_LEVEL_DT){
-		int enemyLevel = this->model->prop->get("enemy.level");
-		this->model->prop->set("enemy.level",  enemyLevel + 1);
-		this->enemyLevelDt = 0;
+	int enemyLevel = this->model->prop->get("enemy.level");
+
+	if (enemyLevel <= 50) {
+		if (this->enemyLevelDt > SURVIVAL_ENEMY_LEVEL_DT_BEFORE_50){
+			this->model->prop->set("enemy.level",  enemyLevel + 1);
+			this->enemyLevelDt = 0;
+		}
+	} else {
+		if (this->enemyLevelDt > SURVIVAL_ENEMY_LEVEL_DT_AFTER_50){
+			this->model->prop->set("enemy.level",  enemyLevel + 1);
+			this->enemyLevelDt = 0;
+		}
 	}
+
 
 	this->updateInterface();
 }
