@@ -77,6 +77,10 @@ bool GameTypeSelectionLayer::init() {
 		lastUnlockedLevel -= 1;
 	}
 
+	if (lastUnlockedLevel == 100) {
+		lastUnlockedLevel -= 1;
+	}
+
 	cocos2d::CCSprite* storyButtonSprite = this->getSprite("buttons/story_button.png", 2 + frenzy);
 	this->addChild(storyButtonSprite);
 	this->storyButton = new StoryButton(storyButtonSprite, floor(lastUnlockedLevel / 20));
