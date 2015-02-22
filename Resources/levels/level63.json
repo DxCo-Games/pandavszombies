@@ -1,16 +1,14 @@
 {
 "config": {
-	"background": 0,
-	"kills": 5,
-	"type": "campesino",
-	"title": "running out of ideas"
+	"background": 1,
+	"title": "The bomber zombies",
+	"bonus": 2
 },
 "waves": [{
-	"total" : 5000,
-	"freq" : 0.5,
-	"isBoss" : 0,
-	"killsFreq": 0.025,
-	"types": ["oficinista"]
+	"total" : 100,
+	"freq" : 0.85,
+	"level" : 0,
+	"isBoss" : 3
 	}
 	]
 }

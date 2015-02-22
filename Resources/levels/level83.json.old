@@ -1,28 +1,28 @@
 {
 "config": {
-	"background": 1,
-	"title": "Mirror Match vol. 2"
+	"background": 2,
+	"title": "Another dark level"
 },
 "waves": [
 	{
 	"total" : 100,
 	"freq" : 0.4,
-	"isBoss" : -1
+	"isBoss" : 0
 	},
 	{
 	"total" : 5,
 	"freq" : 0.4,
-	"isBoss" : -3
+	"isBoss" : 1
 	},
 	{
-	"total" : 150,
+	"total" : 100,
 	"freq" : 0.4,
-	"isBoss" : -1
+	"isBoss" : 0
 	},
 	{
 	"total" : 10,
 	"freq" : 0.4,
-	"isBoss" : -3
+	"isBoss" : 1
 	}
 	]
 }

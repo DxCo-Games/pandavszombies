@@ -1,11 +1,11 @@
 {
 "config": {
 	"background": 2,
-	"title": "The dark level UO"
+	"title": "Another dark level"
 },
 "waves": [{
 	"total" : 200,
-	"freq" : 0.65,
+	"freq" : 0.6,
 	"isBoss" : 0
 	}
 	]

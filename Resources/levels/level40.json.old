@@ -1,6 +1,6 @@
 {
 "config": {
-	"background": 1,
+	"background": 0,
 	"title": "The Superboss vol. 2"
 },
 "waves": [{
@@ -14,17 +14,7 @@
 	"isBoss" : 2
 	},
 	{
-	"total" : 50,
-	"freq" : 1.5,
-	"isBoss" : 0
-	},
-	{
-	"total" : 1,
-	"freq" : 0.1,
-	"isBoss" : 2
-	},
-	{
-	"total" : 50,
+	"total" : 54,
 	"freq" : 1.5,
 	"isBoss" : 0
 	}

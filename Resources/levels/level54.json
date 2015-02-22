@@ -1,14 +1,16 @@
 {
 "config": {
-	"background": 1,
-	"kills": 50,
-	"type": "campesino"
+	"background": 0,
+	"kills": 5,
+	"type": "campesino",
+	"title": "Running out of ideas"
 },
 "waves": [{
-	"total" : 10000,
-	"freq" : 0.35,
-	"level" : 2,
-	"isBoss" : 0
+	"total" : 5000,
+	"freq" : 0.5,
+	"isBoss" : 0,
+	"killsFreq": 0.025,
+	"types": ["oficinista"]
 	}
 	]
 }

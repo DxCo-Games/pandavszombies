@@ -1,7 +1,7 @@
 {
 "config": {
 	"background": 1,
-	"title": "The fine art of palette swapping"
+	"title": "50 zombie shadows"
 },
 "waves": [{
 	"total" : 30,
@@ -9,7 +9,7 @@
 	"isBoss" : -2
 	},
 	{
-	"total" : 100,
+	"total" : 150,
 	"freq" : 0.25,
 	"isBoss" : -2
 	},
@@ -19,7 +19,7 @@
 	"isBoss" : -2
 	},
 	{
-	"total" : 100,
+	"total" : 150,
 	"freq" : 0.01,
 	"isBoss" : -2
 	},
@@ -29,7 +29,17 @@
 	"isBoss" : -2
 	},
 	{
-	"total" : 100,
+	"total" : 150,
+	"freq" : 0.01,
+	"isBoss" : -2
+	},
+	{
+	"total" : 20,
+	"freq" : 1,
+	"isBoss" : -2
+	},
+	{
+	"total" : 300,
 	"freq" : 0.01,
 	"isBoss" : -2
 	}

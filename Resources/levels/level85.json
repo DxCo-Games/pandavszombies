@@ -1,12 +1,12 @@
 {
 "config": {
 	"background": 1,
-	"title": "The bomber zombies",
+	"title": "The bomber zombies vol. 2",
 	"bonus": 2
 },
 "waves": [{
-	"total" : 100,
-	"freq" : 0.75,
+	"total" : 150,
+	"freq" : 0.65,
 	"level" : 0,
 	"isBoss" : 3
 	}

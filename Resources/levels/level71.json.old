@@ -15,13 +15,13 @@
 	"types": ["oficinista"]
 	},
 	{
-	"total" : 150,
+	"total" : 100,
 	"freq" : 0.4,
 	"isBoss" : 0,
 	"types": ["oficinista"]
 	},
 	{
-	"total" : 15,
+	"total" : 10,
 	"freq" : 0.25,
 	"isBoss" : 1,
 	"types": ["oficinista"]

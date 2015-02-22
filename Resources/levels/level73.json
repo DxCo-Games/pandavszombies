@@ -1,25 +1,15 @@
 {
 "config": {
-	"background": 0,
-	"kills": 10,
-	"type": "campesino"
+	"background": 1,
+	"title": "Ants"
 },
-"waves": [{
-	"total" : 100,
-	"freq" : 0.65,
-	"killsFreq": 0.05,
-	"isBoss" : 0
-	},
+"waves": [
 	{
-	"total" : 5,
-	"freq" : 0.25,
-	"isBoss" : 1
-	},
-	{
-	"total" : 5000,
-	"freq" : 0.65,
-	"killsFreq": 0.05,
-	"isBoss" : 0
+	"total" : 800,
+	"freq" : 0.01,
+	"level" : 0,
+	"isBoss" : 4,
+	"types": ["campesino"]
 	}
 	]
 }

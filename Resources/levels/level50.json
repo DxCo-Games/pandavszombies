@@ -1,32 +1,17 @@
 {
 "config": {
 	"background": 1,
-	"title": "The Superboss vol. 3"
+	"title": "Mirror Match"
 },
 "waves": [{
-	"total" : 5,
-	"freq" : 0.2,
-	"isBoss" : 0
-	},
-	{
-	"total" : 1,
-	"freq" : 0.1,
-	"isBoss" : 2
-	},
-	{
 	"total" : 50,
-	"freq" : 1.5,
-	"isBoss" : 0
+	"freq" : 0.6,
+	"isBoss" : -1
 	},
 	{
-	"total" : 1,
-	"freq" : 0.1,
-	"isBoss" : 2
-	},
-	{
-	"total" : 50,
-	"freq" : 1.5,
-	"isBoss" : 0
+	"total" : 150,
+	"freq" : 0.4,
+	"isBoss" : -1
 	}
 	]
 }

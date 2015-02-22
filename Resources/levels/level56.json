@@ -1,12 +1,22 @@
 {
 "config": {
-	"background": 1
+	"background": 0,
+	"title": "A new warrior awaits you"
 },
 "waves": [{
-	"total" : 150,
-	"freq" : 0.75,
-	"level" : 2,
-	"isBoss" : 0
+	"total" : 70,
+	"freq" : 0.05,
+	"isBoss" : -2
+	},
+	{
+	"total" : 15,
+	"freq" : 1,
+	"isBoss" : -2
+	},
+	{
+	"total" : 100,
+	"freq" : 0.01,
+	"isBoss" : -2
 	}
 	]
 }

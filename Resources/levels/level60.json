@@ -1,17 +1,12 @@
 {
 "config": {
-	"background": 1,
-	"title": "Mirror Match"
+	"background": 2,
+	"title": "Alone in the dark"
 },
 "waves": [{
-	"total" : 50,
-	"freq" : 0.6,
-	"isBoss" : -1
-	},
-	{
-	"total" : 150,
-	"freq" : 0.4,
-	"isBoss" : -1
+	"total" : 200,
+	"freq" : 0.8,
+	"isBoss" : 0
 	}
 	]
 }
