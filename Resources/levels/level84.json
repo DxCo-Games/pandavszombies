@@ -33,7 +33,7 @@
 	"total" : 50,
 	"freq" : 0.6,
 	"isBoss" : 1,
-	"types": ["campesino", "oficinista", "cura", "cirujano"]
+	"types": ["oficinista", "cura", "cirujano"]
 	},
 	{
 	"total" : 1,
