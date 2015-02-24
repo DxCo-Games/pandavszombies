@@ -114,11 +114,7 @@ void TutorialLevel::update(float dt) {
 
 		if (this->model->kills == 4 && !this->messageDisplayed) {
 
-			if (equipPanda == 0) {
-				model->vista->message("Good job! here are 450 coins, use them to equip your panda");
-			} else {
-				model->vista->message("Good job!");
-			}
+			model->vista->message("You'll earn coins every 100 points, use them to equip your panda");
 
 			this->messageDisplayed = true;
 		}
