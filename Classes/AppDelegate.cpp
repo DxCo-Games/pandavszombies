@@ -68,7 +68,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	    revmob->StartSession("54df7781b474a0740951d1eb");
 	#endif
 
-	revmob->SetTestingMode(revmob::kTestingModeWithAds);
+	//revmob->SetTestingMode(revmob::kTestingModeWithAds);
     
     vector<string> searchPath;
 
