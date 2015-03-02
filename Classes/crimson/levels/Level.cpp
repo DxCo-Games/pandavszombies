@@ -47,12 +47,16 @@ void Level::update(float dt) {
 
 bool Level::isFinished() {
 	//return true if all waves are finished and all enemies were killed
-	return this->model->kills == this->totalEnemies;
+	return this->model->kills >= this->totalEnemies;
 }
 
 void Level::restartLevel() {
 	this->currentWave = 0;
 	this->waves[this->currentWave]->reset();
+	this->totalEnemies = 0;
+	for (int i=0; i < waves.size(); i++) {
+		this->totalEnemies += waves[i]->total;
+	}
 }
 
 void Level::updateInterface() {
