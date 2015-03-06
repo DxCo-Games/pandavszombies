@@ -22,6 +22,10 @@ import android.widget.Toast;
 import com.facebook.Session;
 import com.facebook.Session.OpenRequest;
 import com.facebook.SessionState;
+import com.parse.ConfigCallback;
+import com.parse.Parse;
+import com.parse.ParseConfig;
+import com.parse.ParseException;
 
 
 public class MainMenuActivity extends Activity {
@@ -46,8 +50,13 @@ public class MainMenuActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+	 
+		Parse.initialize(this, "IJw4teqCfajXsuurrzbokGmsmjE1i86gbuYNO6my", "dUoVH3BLMqFijaiVZN31VTw6Gr2chR52MuQ6yc8l");
+		
 		SoundUtil.activity = this;
+		ParseConfiguration.activity = this;
+		
+		getConfigFromParse();
 		
 		setContentView(R.layout.main_menu_activity);
 
@@ -157,6 +166,27 @@ public class MainMenuActivity extends Activity {
 		updateView();
 	}
 	
+	private void getConfigFromParse() {
+		
+		final Activity context = this;
+		
+		ParseConfig.getInBackground(new ConfigCallback() {
+			@Override
+			public void done(ParseConfig config, ParseException e) {
+				int showAdMinLevel = config.getInt("showAdMinLevel");
+				int showAdRateStory = config.getInt("showAdRateStory");
+				int showAdRateSurvival = config.getInt("showAdRateSurvival");
+				int configurationTimeCacheHs = config.getInt("configurationTimeCacheHs");
+
+				ConfigurationUtil.editConfiguration(context, "showAdMinLevel", showAdMinLevel);
+				ConfigurationUtil.editConfiguration(context, "showAdRateStory", showAdRateStory);
+				ConfigurationUtil.editConfiguration(context, "showAdRateSurvival", showAdRateSurvival);
+				ConfigurationUtil.editConfiguration(context, "configurationTimeCacheHs", configurationTimeCacheHs);
+			}
+		});
+
+	}
+
 	private void onClickLogin() {
 		Session session = Session.getActiveSession();
 

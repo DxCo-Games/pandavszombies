@@ -20,6 +20,7 @@
 #include "bonus/WeaponFirstBonusFactory.h"
 #include "enemies/Enemy.h"
 #include "../dxco/RevMob.h"
+#include "ParseConfiguration.h"
 #include <cstdlib>
 
 namespace dxco {
@@ -120,10 +121,10 @@ void GameModel::loadLevel(bool survival, bool frenzy, int level) {
 bool GameModel::showAd() {
 	bool show = false;
 
-	if (this->vista->level > 15) {
-		show = (rand() % 100) < 34; // muestro uno de cada 3.
+	if (this->vista->level >= ParseConfiguration::getAdMinLevel()) {
+		show = (rand() % 100) < ParseConfiguration::getShowAdRateStory();
 	} else if (this->vista->level == -1) {
-		show = (rand() % 100) < 20; // muestro uno de cada 5.
+		show = (rand() % 100) < ParseConfiguration::getShowAdRateSurvival();
 	}
 
 	return show;
@@ -306,7 +307,6 @@ void GameModel::restartGame() {
 	this->bonuses.clear();
 	this->bullets.clear();
 
-	// TODO hacer que esto sea por probabilidad y level > 20
 	this->adShowed = !this->showAd();
 	this->adDt = 0.0;
 
