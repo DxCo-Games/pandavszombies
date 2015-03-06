@@ -2,6 +2,8 @@ package com.dxco.pandavszombies;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Calendar;
+import java.util.Date;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -166,25 +168,42 @@ public class MainMenuActivity extends Activity {
 		updateView();
 	}
 	
-	private void getConfigFromParse() {
+private void getConfigFromParse() {
 		
 		final Activity context = this;
 		
-		ParseConfig.getInBackground(new ConfigCallback() {
-			@Override
-			public void done(ParseConfig config, ParseException e) {
-				int showAdMinLevel = config.getInt("showAdMinLevel");
-				int showAdRateStory = config.getInt("showAdRateStory");
-				int showAdRateSurvival = config.getInt("showAdRateSurvival");
-				int configurationTimeCacheHs = config.getInt("configurationTimeCacheHs");
+		Date configurationLastUpdate = ConfigurationUtil.getConfiguration(context, "configurationLastUpdate");
+		int configurationTimeCacheHs = ParseConfiguration.getConfigurationTimeCacheHs();
+		
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(configurationLastUpdate);
+		cal.add(Calendar.HOUR_OF_DAY, configurationTimeCacheHs);
+		
+		Date newUpdateTime = cal.getTime();
+		
+		if (new Date().after(newUpdateTime)) {
+			ParseConfig.getInBackground(new ConfigCallback() {
+				
+				@Override
+				public void done(ParseConfig config, ParseException e) {
+					if (e != null) {
+						return;
+					}
+					
+					int showAdMinLevel = config.getInt("showAdMinLevel");
+					int showAdRateStory = config.getInt("showAdRateStory");
+					int showAdRateSurvival = config.getInt("showAdRateSurvival");
+					int configurationTimeCacheHs = config.getInt("configurationTimeCacheHs");
 
-				ConfigurationUtil.editConfiguration(context, "showAdMinLevel", showAdMinLevel);
-				ConfigurationUtil.editConfiguration(context, "showAdRateStory", showAdRateStory);
-				ConfigurationUtil.editConfiguration(context, "showAdRateSurvival", showAdRateSurvival);
-				ConfigurationUtil.editConfiguration(context, "configurationTimeCacheHs", configurationTimeCacheHs);
-			}
-		});
-
+					ConfigurationUtil.editConfiguration(context, "showAdMinLevel", showAdMinLevel);
+					ConfigurationUtil.editConfiguration(context, "showAdRateStory", showAdRateStory);
+					ConfigurationUtil.editConfiguration(context, "showAdRateSurvival", showAdRateSurvival);
+					ConfigurationUtil.editConfiguration(context, "configurationTimeCacheHs", configurationTimeCacheHs);
+					
+					ConfigurationUtil.editConfiguration(context, "configurationLastUpdate", new Date());
+				}
+			});
+		}
 	}
 
 	private void onClickLogin() {

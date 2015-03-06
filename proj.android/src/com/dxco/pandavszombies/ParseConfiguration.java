@@ -17,4 +17,8 @@ public class ParseConfiguration {
 	public static int getShowAdRateSurvival() {
 		return ConfigurationUtil.getConfiguration(activity, "showAdRateSurvival", 34);
 	}
+	
+	public static int getConfigurationTimeCacheHs() {
+		return ConfigurationUtil.getConfiguration(activity, "configurationTimeCacheHs", 24);
+	}
 }
