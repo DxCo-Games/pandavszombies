@@ -20,23 +20,77 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-****************************************************************************/
+ ****************************************************************************/
 package com.dxco.pandavszombies;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 import org.cocos2dx.lib.Cocos2dxActivity;
 
+import android.annotation.TargetApi;
+import android.graphics.Color;
+import android.graphics.Point;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.Display;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.LinearLayout;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.revmob.cocos2dx.RevMobWrapper;
 
-public class CppConnectorActivity extends Cocos2dxActivity{
+public class CppConnectorActivity extends Cocos2dxActivity {
 
-	protected void onCreate(Bundle savedInstanceState){
+	private static CppConnectorActivity _appActiviy;
+	private AdView adView;
+	private static InterstitialAd interstitial;
+	private static final String AD_UNIT_ID = "ca-app-pub-5892109117152956/3638174425";
+
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		RevMobWrapper.setActivity(this);
+
+		interstitial = new InterstitialAd(this);
+		interstitial.setAdUnitId(AD_UNIT_ID);
+
+		// Create ad request.
+		AdRequest adRequest = new AdRequest.Builder().addTestDevice("381853A2F9EC0A98").build();
+
+		// Begin loading your interstitial.
+		interstitial.loadAd(adRequest);
+
+		_appActiviy = this;
+
 	}
-	
-    static {
-         System.loadLibrary("hellocpp");
-    }
+
+	public static void loadAdmob() {
+		_appActiviy.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				if (interstitial.isLoaded()) {
+					interstitial.show();
+					
+					interstitial = new InterstitialAd(_appActiviy);
+					interstitial.setAdUnitId(AD_UNIT_ID);
+
+					// Create ad request.
+					AdRequest adRequest = new AdRequest.Builder().addTestDevice("381853A2F9EC0A98").build();
+
+					// Begin loading your interstitial.
+					interstitial.loadAd(adRequest);
+
+				}
+			}
+		});
+	}
+
+
+	static {
+		System.loadLibrary("hellocpp");
+	}
 }

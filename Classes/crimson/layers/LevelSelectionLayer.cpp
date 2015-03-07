@@ -4,6 +4,7 @@
 #include "../buttons/LevelScreenButton.h"
 #include "../../dxco/StringUtil.h"
 #include "../../dxco/DB.h"
+#include "../../dxco/admob/AdmobHelper.h"
 
 namespace dxco {
 
@@ -30,6 +31,7 @@ bool LevelSelectionLayer::init() {
 	if (!cocos2d::CCLayer::init()) {
 		return false;
 	}
+
 	cocos2d::CCSize visibleSize = cocos2d::CCDirector::sharedDirector()->getVisibleSize();
 
 	cocos2d::CCSprite* spriteBackground;

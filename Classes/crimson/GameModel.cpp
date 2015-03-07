@@ -20,6 +20,7 @@
 #include "bonus/WeaponFirstBonusFactory.h"
 #include "enemies/Enemy.h"
 #include "../dxco/RevMob.h"
+#include "../dxco/admob/AdmobHelper.h"
 #include "ParseConfiguration.h"
 #include <cstdlib>
 
@@ -91,7 +92,7 @@ GameModel::GameModel(HelloWorld* vista, Player* player) {
 
 	//batch node added to map
 	this->enemyFactory = new EnemyFactory();
-	this->adShowed = true;
+	this->adShowed = !(this->showAd() && this->showAd()); // la primer muerte con mucha menos probabilidad
 	this->adDt = 0.0;
 }
 
@@ -225,9 +226,12 @@ void GameModel::updateAds(float dt) {
 		if (!this->adShowed && this->adDt > 1.5) {
 
 			this->adShowed = true;
-			revmob::RevMob *revmob = revmob::RevMob::SharedInstance();
+			AdmobHelper::showInterstitial();
+			/*
+			 * TODO remover revmob cuando todo este ok
+			 * revmob::RevMob *revmob = revmob::RevMob::SharedInstance();
 			revmob->ShowLoadedFullscreen();
-			revmob->LoadFullscreen();
+			revmob->LoadFullscreen();*/
 		}
 	}
 }

@@ -42,6 +42,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/dxco/VoiceManager.cpp \
                    ../../Classes/dxco/AssetLoader.cpp \
                    ../../Classes/dxco/SteeringBehaviorItem.cpp \
+                   ../../Classes/dxco/admob/AdmobHelper.cpp \
                    ../../Classes/crimson/SoundUtil.cpp \
                    ../../Classes/crimson/ParseConfiguration.cpp \
                    ../../Classes/crimson/JoystickMira.cpp \
