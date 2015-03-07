@@ -462,7 +462,7 @@ void HelloWorld::message(std::string text, int seconds, CCSprite* aditionalSprit
 		float panelX = this->panel->getPositionX();
 		float panelY = this->panel->getPositionY();
 
-		dxco::SpriteUtil::moveTo(aditionalSprite, panelX + panelWidth * 0.6 - 70, panelY - (panelHeight/2) - 12);
+		dxco::SpriteUtil::moveTo(aditionalSprite, panelX + panelWidth * 0.6 - 60, panelY - (panelHeight/2) - 12);
 
 		this->controlsLayer->addChild(aditionalSprite, 10);
 		aditionalSprite->runAction((CCSequence *)seq->copy());
