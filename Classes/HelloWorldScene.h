@@ -77,7 +77,7 @@ public:
     //0: city, 1: cemetery. cpp enums suck
     void setMap(int map);
 
-    void message(std::string text, int seconds=10);
+    void message(std::string text, int seconds=10, cocos2d::CCSprite* aditionalSprite=NULL);
     cocos2d::CCSprite* panel;
     cocos2d::CCLabelTTF* panelText;
 

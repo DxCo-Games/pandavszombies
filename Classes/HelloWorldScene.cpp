@@ -440,7 +440,7 @@ void HelloWorld::setLevelTitle() {
 	}
 }
 
-void HelloWorld::message(std::string text, int seconds) {
+void HelloWorld::message(std::string text, int seconds, CCSprite* aditionalSprite) {
 	this->panelText->stopAllActions();
 	this->panel->stopAllActions();
 
@@ -453,6 +453,19 @@ void HelloWorld::message(std::string text, int seconds) {
 		seq = CCSequence::create(CCDelayTime::create(seconds), CCFadeOut::create(0.25), NULL);
 	} else {
 		seq = CCSequence::create(CCFadeIn::create(0.25), CCDelayTime::create(seconds), CCFadeOut::create(0.25), NULL);
+	}
+
+	if (aditionalSprite) {
+		float panelWidth = dxco::SpriteUtil::getWidth(this->panel);
+		float panelHeight = dxco::SpriteUtil::getHeight(this->panel);
+
+		float panelX = this->panel->getPositionX();
+		float panelY = this->panel->getPositionY();
+
+		dxco::SpriteUtil::moveTo(aditionalSprite, panelX + panelWidth * 0.6 - 70, panelY - (panelHeight/2) - 12);
+
+		this->controlsLayer->addChild(aditionalSprite, 10);
+		aditionalSprite->runAction((CCSequence *)seq->copy());
 	}
 
 	this->panel->runAction((CCSequence *)seq->copy());

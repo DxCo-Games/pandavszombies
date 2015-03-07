@@ -1,7 +1,9 @@
 #include "KillCountLevel.h"
 #include "../GameModel.h"
 #include "../../dxco/StringUtil.h"
+#include "../../dxco/SpriteUtil.h"
 #include "../../HelloWorldScene.h"
+#include "cocos2d.h"
 
 namespace dxco {
 
@@ -13,8 +15,16 @@ KillCountLevel::KillCountLevel(GameModel *model, std::vector<EnemyWave*>& waves,
 }
 
 void KillCountLevel::showMessage() {
-	std::string msg = "Kill "+ StringUtil::toString(this->kills) +" " + this->verboseType() + " to win.";
-	model->vista->message(msg);
+	std::string msg = "Kill "+ StringUtil::toString(this->kills) + " to win.";
+	std::string index = this->getTypeIndex();
+
+	model->vista->message(msg, 10, SpriteUtil::create(this->type + "_" + index + "_0000" + ".png", 0, 0, 40, 40, true));
+}
+
+
+std::string KillCountLevel::getTypeIndex() {
+
+	return "6";
 }
 
 std::string KillCountLevel::verboseType() {

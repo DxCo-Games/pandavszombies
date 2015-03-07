@@ -16,7 +16,7 @@ public:
 	std::string verboseType();
 
 	virtual void showMessage();
-
+	std::string getTypeIndex();
 	int kills;
 	std::string type;
 };

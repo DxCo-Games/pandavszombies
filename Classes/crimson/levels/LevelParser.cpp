@@ -45,6 +45,7 @@ Level* LevelParser::parse(GameModel* model, std::string levelPath, int currentLe
 	}
 
 	Level *level;
+
 	if ((*document)["config"].HasMember("kills")) {
 		int kills = (*document)["config"]["kills"].GetInt();
 		std::string type = (*document)["config"]["type"].GetString();
