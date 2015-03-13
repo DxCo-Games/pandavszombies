@@ -86,9 +86,10 @@ void Enemy::update(float dt) {
 			} else {
 				behaviors = USE_STAND;
 			}
-			behaviors = behaviors | USE_SEPARATION;
+			behaviors = behaviors | USE_SEPARATION | USE_OBSTACLE_AVOIDANCE;
 			this->updateBehaviors(dt, behaviors, playerLocation, dist,
-					this->model->items, ENEMY_SEEK_RANGE - ENEMY_ARRIVE_RANGE, ENEMY_ARRIVE_RANGE);
+					this->model->items, this->model->mapa->obstacles,
+					ENEMY_SEEK_RANGE - ENEMY_ARRIVE_RANGE, ENEMY_ARRIVE_RANGE);
 
 			//look at destiny
 			this->setRotation(angle);
@@ -207,8 +208,8 @@ void Enemy::burn(float dt, cocos2d::CCPoint playerLocation, float distance, floa
 	float wasBurning = this->burning;
 	/*If has fire weapon and close to the player and in front of the player */
 	this->burning =(this->model->player->weaponType == Player::FIRE &&
-			distance < this->model->player->getWidth() * 1.5 &&
-			abs(abs(this->model->player->getRotation() - angle) - 180) < 60);
+			this->model->player->inVisionRange(this, this->model->player->getWidth() * 1.5, 60, distance,
+					this->model->player->getRotation()));
 
 	if (this->burning && wasBurning){
 		this->hurt(FIRE_DAMAGE * dt * this->model->prop->get("attack.damage"));
