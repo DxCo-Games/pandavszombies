@@ -86,9 +86,10 @@ void Enemy::update(float dt) {
 			} else {
 				behaviors = USE_STAND;
 			}
-			behaviors = behaviors | USE_SEPARATION | USE_OBSTACLE_AVOIDANCE;
+			behaviors = behaviors | USE_SEPARATION;
+			std::vector<Item*> obstacles; //empty not using this
 			this->updateBehaviors(dt, behaviors, playerLocation, dist,
-					this->model->items, this->model->mapa->obstacles,
+					this->model->items, obstacles,
 					ENEMY_SEEK_RANGE - ENEMY_ARRIVE_RANGE, ENEMY_ARRIVE_RANGE);
 
 			//look at destiny
