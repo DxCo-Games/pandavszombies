@@ -238,7 +238,7 @@ std::string EquipPandaItem::getDetail() {
 	if (this->item == "bazooka.unlocked") {
 		return Language::get("equip.bazooka.detail");
 	} else if (this->item == "fire.unlocked") {
-		return Language::get("equip.fire.detail");
+		return Language::get("equip.flame.detail");
 	} else if (this->item == "firebullet.unlocked") {
 		return Language::get("equip.fireball.detail");
 	} else if (this->item == "frenzy.unlocked") {
