@@ -51,6 +51,7 @@ public:
 	void beat(Player* player, float dt);
 	void hurt(float value);
 	void burn(float dt, cocos2d::CCPoint playerLocation, float distance, float angle);
+	float getFireDamage(float dt);
 	virtual void kill();
 	virtual bool isActive();
 	virtual float getColitionRatio();

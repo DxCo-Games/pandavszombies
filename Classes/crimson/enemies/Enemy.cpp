@@ -10,6 +10,7 @@
 #include <algorithm>
 #include "../../dxco/VoiceManager.h"
 #include "../../HelloWorldScene.h"
+#include "../bonus/WeaponSpeedBonus.h"
 
 namespace dxco {
 
@@ -205,6 +206,12 @@ void Enemy::hurt(float value) {
 	}
 }
 
+float Enemy::getFireDamage(float dt) {
+	float base = FIRE_DAMAGE * dt * this->model->prop->get("attack.damage");
+	float bonusCount = this->model->player->weaponSpeedBonus / WEAPON_SPEED_BONUS_RATIO + 1;
+	return base * bonusCount;
+}
+
 void Enemy::burn(float dt, cocos2d::CCPoint playerLocation, float distance, float angle) {
 	float wasBurning = this->burning;
 	/*If has fire weapon and close to the player and in front of the player */
@@ -213,7 +220,7 @@ void Enemy::burn(float dt, cocos2d::CCPoint playerLocation, float distance, floa
 					this->model->player->getRotation()));
 
 	if (this->burning && wasBurning){
-		this->hurt(FIRE_DAMAGE * dt * this->model->prop->get("attack.damage"));
+		this->hurt(getFireDamage(dt));
 	}
 }
 
