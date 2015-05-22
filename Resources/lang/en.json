@@ -1,4 +1,9 @@
 {
+"equip.life.skill": "life",
+"equip.attack.skill": "attack",
+"equip.speed.skill": "speed",
+"equip.weapon.skill": "weapon time",
+"equip.bonus.skill": "bonus",
 "equip.bazooka.name": "BAZOOKA",
 "equip.flame.name": "FLAME",
 "equip.frenzy.name": "FRENZY",

@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include "../../dxco/LabelUtil.h"
 #include "../../dxco/StringUtil.h"
+#include "../../dxco/Language.h"
 #include <string>
 #include "EquipPandaItem.h"
 #include "../GameProperties.h"
@@ -147,11 +148,11 @@ void EquipPandaLayer::loadMejoras(float skillsPandaWidth, float skillsPandaHeigh
 }
 
 void EquipPandaLayer::addSkills(float skillsPandaX, float skillsPandaY, float skillsPandaWidth, float skillsPandaHeight) {
-	this->addSkill(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight, "life", this->getLife(), 0);
-	this->addSkill(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight, "attack", this->getAttack(), 1);
-	this->addSkill(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight, "speed", this->getSpeed(), 2);
-	this->addSkill(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight, "weapon time", this->getWeaponTime(), 3);
-	this->addSkill(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight, "bonus", this->getBonus(), 4);
+	this->addSkill(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight, Language::get("equip.life.skill"), this->getLife(), 0);
+	this->addSkill(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight, Language::get("equip.attack.skill"), this->getAttack(), 1);
+	this->addSkill(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight, Language::get("equip.speed.skill"), this->getSpeed(), 2);
+	this->addSkill(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight, Language::get("equip.weapon.skill"), this->getWeaponTime(), 3);
+	this->addSkill(skillsPandaX, skillsPandaY, skillsPandaWidth, skillsPandaHeight, Language::get("equip.bonus.skill"), this->getBonus(), 4);
 }
 
 void EquipPandaLayer::addSkill(float skillsPandaX, float skillsPandaY, float skillsPandaWidth, float skillsPandaHeight, std::string skillName, int skillValue, int index) {
