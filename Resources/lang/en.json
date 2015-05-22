@@ -1,0 +1,38 @@
+{
+"equip.bazooka.name": "BAZOOKA",
+"equip.flame.name": "FLAME",
+"equip.frenzy.name": "FRENZY",
+"equip.fireball.name": "FIREBALL",
+"equip.life.name": "LIFE",
+"equip.speed.name": "SPEED",
+"equip.bonus.name": "BONUS %",
+"equip.weapon.name: "WEAPON",
+"equip.attack.name": "ATTACK",
+
+"equip.bazooka.detail": "unlock the bazooka",
+"equip.flame.detail": "unlock the flamethrower",
+"equip.frenzy.detail": "unlock the frenzy game mode",
+"equip.fireball.detail": "unlock the fireballs",
+"equip.life.detail": "+50 life increase",
+"equip.speed.detail": "+3 speed increase",
+"equip.bonus.detail": "+2 bonus frequency increase",
+"equip.weapon.detail: "+1 weapon duration increase",
+"equip.attack.detail": "+10 attack increase",
+
+"combo.1": "Good",
+"combo.2": "Excellent",
+"combo.3":  "Outstanding",
+"combo.4": "Toasty!",
+
+"level.level": "Just kill’em all.",
+"level.timed": "Survive for %d seconds to win.",
+"level.kills": "Kill %d to win",
+
+"tutorial.1": "Hold and move the left pad to move around",
+"tutorial.2": "Now hold and move the right pad to change the shoot direction",
+"tutorial.3": "Good! Now try using both pads together",
+"tutorial.4": "There's a zombie around, kill him!",
+"tutorial.5": "Pick up the bonus to improve your weapon",
+"tutorial.6": "Watch out! Another zombie wave!",
+"tutorial.7": "You'll earn coins every 100 points, use them to equip your panda"
+}

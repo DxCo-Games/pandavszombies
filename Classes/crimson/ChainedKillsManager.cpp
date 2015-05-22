@@ -1,6 +1,7 @@
 #include "ChainedKillsManager.h"
 #include "GameModel.h"
 #include "../dxco/StringUtil.h"
+#include "../dxco/Language.h"
 #include "../HelloWorldScene.h"
 
 
@@ -60,13 +61,13 @@ void ChainedKillsManager::setChainMessage(){
 	this->lastChainLength = 0;
 	cocos2d::CCLabelTTF *label = this->model->vista->killsChainLabel;
 	if (kills < 15) {
-		label->setString("Good");
+		label->setString(Language::get("combo.1").c_str());
 	} else if (kills < 30) {
-		label->setString("Excellent");
+		label->setString(Language::get("combo.2").c_str());
 	} else if (kills < 50) {
-		label->setString("Outstanding");
+		label->setString(Language::get("combo.3").c_str());
 	} else {
-		label->setString("Toasty!");
+		label->setString(Language::get("combo.4").c_str());
 		this->model->vista->playEffect("sounds/toasty.ogg");
 	}
 }

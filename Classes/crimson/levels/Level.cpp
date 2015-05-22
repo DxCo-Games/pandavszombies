@@ -4,6 +4,7 @@
 #include "../bonus/BonusFactory.h"
 #include "../../HelloWorldScene.h"
 #include "../../dxco/StringUtil.h"
+#include "../../dxco/Language.h"
 
 namespace dxco {
 
@@ -21,8 +22,7 @@ Level::Level(GameModel *model, std::vector<EnemyWave*>& waves, std::string title
 }
 
 void Level::showMessage() {
-	std::string msg = "Just kill’em all.";
-	model->vista->message(msg, 5);
+	model->vista->message(Language::get("level.level"), 5);
 }
 
 void Level::updateFreezed(float dt) {

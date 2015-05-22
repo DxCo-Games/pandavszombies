@@ -5,6 +5,7 @@
 #include "../GameProperties.h"
 #include "../Player.h"
 #include "../../dxco/StringUtil.h"
+#include "../../dxco/Language.h"
 #include "../layers/GameTypeSelectionLayer.h"
 #include "SimpleAudioEngine.h"
 #include "../daos/UserDAO.h"
@@ -23,7 +24,7 @@ TutorialLevel::TutorialLevel(GameModel* model): Level(model, *new std::vector<En
 
 	model->vista->setMap(1);
 	//step 0 message
-	model->vista->message("Hold and move the left pad to move around");
+	model->vista->message(Language::get("tutorial.1"));
 	this->model->prop->set("enemy.level",  1);
 }
 
@@ -47,7 +48,7 @@ void TutorialLevel::update(float dt) {
 			this->movementDt = 0;
 			this->currentStep++;
 			//step 1 message
-			model->vista->message("Now hold and move the right pad to change the shoot direction");
+			model->vista->message(Language::get("tutorial.2"));
 		}
 		break;
 	}
@@ -61,7 +62,7 @@ void TutorialLevel::update(float dt) {
 			this->rotationDt = 0;
 			this->currentStep++;
 			//step 2 message
-			model->vista->message("Good! Now try using both pads together");
+			model->vista->message(Language::get("tutorial.3"));
 		}
 		break;
 	}
@@ -76,7 +77,7 @@ void TutorialLevel::update(float dt) {
 		//rotate and move for total 3s to finish step
 		if (this->movementDt > 3 && this->rotationDt > 3) {
 			this->currentStep++;
-			model->vista->message("There's a zombie around, kill him!");
+			model->vista->message(Language::get("tutorial.4"));
 
 			//create one zombie
 			this->model->enemyFactory->createEnemy(this->model);
@@ -87,7 +88,7 @@ void TutorialLevel::update(float dt) {
 	case 3: {
 		//finish when all zombies killed
 		if (this->model->kills == 1) {
-			model->vista->message("Pick up the bonus to improve your weapon");
+			model->vista->message(Language::get("tutorial.5"));
 			this->currentStep++;
 
 			//plant a bonus
@@ -102,7 +103,7 @@ void TutorialLevel::update(float dt) {
 		//finish when bonus picked up
 		if(model->player->weaponType != Player::PISTOL) {
 			this->currentStep++;
-			model->vista->message("Watch out! Another zombie wave!");
+			model->vista->message(Language::get("tutorial.6"));
 			this->model->enemyFactory->createEnemy(this->model);
 			this->model->enemyFactory->createEnemy(this->model);
 			this->model->enemyFactory->createEnemy(this->model);
@@ -114,7 +115,7 @@ void TutorialLevel::update(float dt) {
 
 		if (this->model->kills == 4 && !this->messageDisplayed) {
 
-			model->vista->message("You'll earn coins every 100 points, use them to equip your panda");
+			model->vista->message(Language::get("tutorial.7"));
 
 			this->messageDisplayed = true;
 		}

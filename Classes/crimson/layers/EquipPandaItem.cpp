@@ -4,6 +4,7 @@
 #include "../../dxco/SpriteUtil.h"
 #include "../../dxco/LabelUtil.h"
 #include "../../dxco/StringUtil.h"
+#include "../../dxco/Language.h"
 #include "../GameProperties.h"
 #include "../daos/UserDAO.h"
 #include "../buttons/BuyPowerUpButton.h"
@@ -211,23 +212,23 @@ std::string EquipPandaItem::getImagePath() {
 std::string EquipPandaItem::getName() {
 
 	if (this->item == "bazooka.unlocked") {
-		return "BAZOOKA";
+		return Language::get("equip.bazooka.name");
 	} else if (this->item == "fire.unlocked") {
-		return "FLAME";
+		return Language::get("equip.flame.name");
 	} else if (this->item == "frenzy.unlocked") {
-			return "FRENZY";
+		return Language::get("equip.frenzy.name");
 	} else if (this->item == "firebullet.unlocked") {
-		return "FIREBALL";
+		return Language::get("equip.fireball.name");
 	} else if (this->item == "player.life") {
-		return "LIFE";
+		return Language::get("equip.life.name");
 	} else if (this->item == "player.speed") {
-		return "SPEED";
+		return Language::get("equip.speed.name");
 	} else if (this->item == "bonus.probability") {
-		return "BONUS %";
+		return Language::get("equip.bonus.name");
 	} else if (this->item == "weapon.duration") {
-		return "WEAPON";
+		return Language::get("equip.weapon.name");
 	} else if (this->item == "attack.damage") {
-		return "ATTACK";
+		return Language::get("equip.attack.name");
 	}
 
 	return " ";
@@ -235,23 +236,23 @@ std::string EquipPandaItem::getName() {
 
 std::string EquipPandaItem::getDetail() {
 	if (this->item == "bazooka.unlocked") {
-		return "unlock the bazooka";
+		return Language::get("equip.bazooka.detail");
 	} else if (this->item == "fire.unlocked") {
-		return "unlock the flamethrower";
+		return Language::get("equip.fire.detail");
 	} else if (this->item == "firebullet.unlocked") {
-		return "unlock the fireballs";
+		return Language::get("equip.fireball.detail");
 	} else if (this->item == "frenzy.unlocked") {
-			return "unlock the frenzy game mode";
+		return Language::get("equip.frenzy.detail");
 	} else if (this->item == "player.life") {
-		return "+50 life increase";
+		return Language::get("equip.life.detail");
 	} else if (this->item == "player.speed") {
-		return "+3 speed increase";
+		return Language::get("equip.speed.detail");
 	} else if (this->item == "bonus.probability") {
-		return "+2 bonus frequency increase";
+		return Language::get("equip.bonus.detail");
 	} else if (this->item == "weapon.duration") {
-		return "+1 weapon duration increase";
+		return Language::get("equip.weapon.detail");
 	} else if (this->item == "attack.damage") {
-		return "+10 attack increase";
+		return Language::get("equip.attack.detail");
 	}
 	return " ";
 }

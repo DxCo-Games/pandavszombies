@@ -1,6 +1,7 @@
 #include "TimedLevel.h"
 #include "../../dxco/StringUtil.h"
 #include "../../dxco/SpriteUtil.h"
+#include "../../dxco/Language.h"
 #include "../../HelloWorldScene.h"
 
 namespace dxco {
@@ -16,7 +17,7 @@ TimedLevel::TimedLevel(GameModel *model, std::vector<EnemyWave*>& waves, int sec
 }
 
 void TimedLevel::showMessage() {
-	std::string msg = "Survive for "+ StringUtil::toString(this->seconds) + " seconds to win.";
+	std::string msg = StringUtil::iFormat(Language::get("level.timed"), this->seconds);
 	model->vista->message(msg);
 }
 
