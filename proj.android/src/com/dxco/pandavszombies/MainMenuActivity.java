@@ -29,6 +29,9 @@ import com.parse.Parse;
 import com.parse.ParseConfig;
 import com.parse.ParseException;
 
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.Tracker;
+
 
 public class MainMenuActivity extends Activity {
 
@@ -42,6 +45,9 @@ public class MainMenuActivity extends Activity {
 	
 	private static final String APP_ID = "com.dxco.pandavszombies";
 	private static final String GAME_URL = "https://play.google.com/store/apps/details?id=" + APP_ID;
+	
+	public static GoogleAnalytics analytics;
+	public static Tracker tracker;
 	
 	static {
 		System.loadLibrary("hellocpp");
@@ -61,6 +67,14 @@ public class MainMenuActivity extends Activity {
 		getConfigFromParse();
 		
 		setContentView(R.layout.main_menu_activity);
+		
+		//enable google analytics
+		analytics = GoogleAnalytics.getInstance(this);
+	    analytics.setLocalDispatchPeriod(1800);
+
+	    tracker = analytics.newTracker("UA-63308474-1"); // Replace with actual tracker/property Id
+	    tracker.enableAdvertisingIdCollection(true);
+	    tracker.enableAutoActivityTracking(true);
 
 		this.botonMusicOn = (ImageButton) findViewById(R.id.botonMusicOn);
 		this.botonMusicOff = (ImageButton) findViewById(R.id.botonMusicOff);
