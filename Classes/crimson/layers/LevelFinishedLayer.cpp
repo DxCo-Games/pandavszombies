@@ -27,13 +27,19 @@ LevelFinishedLayer::LevelFinishedLayer(GameModel* model, float x, float y, float
 
 	this->addChild(placaGameOver);
 
-	cocos2d::CCSprite* menuButtonSprite = SpriteUtil::create("buttons/menu_button.png", visibleSize.width * 0.2, visibleSize.height * 0.15, title);
+	cocos2d::CCSprite* menuButtonSprite = SpriteUtil::create("buttons/menu_icon_button.png", visibleSize.width * 0.2, visibleSize.height * 0.18, title);
 	SpriteUtil::leftAlign(this->title, menuButtonSprite);
-
 	this->addChild(menuButtonSprite);
 
+	cocos2d::CCSprite* shareButtonSprite = SpriteUtil::create("buttons/share_button.png", visibleSize.width * 0.2, visibleSize.height * 0.18, title);
+	SpriteUtil::topAlign(menuButtonSprite, shareButtonSprite);
+	SpriteUtil::rightAlign(this->title, shareButtonSprite);
+	this->addChild(shareButtonSprite);
+
+
 	if (!survival && level != LEVEL_COUNT) {
-		cocos2d::CCSprite* nextLevelSprite = SpriteUtil::create("buttons/next_button.png", visibleSize.width * 0.64, visibleSize.height * 0.15, menuButtonSprite);
+		cocos2d::CCSprite* nextLevelSprite = SpriteUtil::create("buttons/next_button.png", visibleSize.width * 0.64, visibleSize.height * 0.18, menuButtonSprite);
+		SpriteUtil::topAlign(menuButtonSprite, nextLevelSprite);
 		this->addChild(nextLevelSprite);
 		this->nextLevelButton = new NextLevelButton(nextLevelSprite, level + 1);
 	} else {
@@ -45,17 +51,18 @@ LevelFinishedLayer::LevelFinishedLayer(GameModel* model, float x, float y, float
 	cocos2d::CCSprite* tryAgainButtonSprite = NULL;
 
 	if (survival) {
-		tryAgainButtonSprite = SpriteUtil::create("buttons/try_again_button.png", visibleSize.width * 0.58, visibleSize.height * 0.15, title);
+		tryAgainButtonSprite = SpriteUtil::create("buttons/try_again_button.png", visibleSize.width * 0.58, visibleSize.height * 0.18, title);
 	} else {
-		tryAgainButtonSprite = SpriteUtil::create("buttons/try_again_button.png", visibleSize.width * 0.55, visibleSize.height * 0.15, title);
+		tryAgainButtonSprite = SpriteUtil::create("buttons/try_again_button.png", visibleSize.width * 0.55, visibleSize.height * 0.18, title);
 	}
 
+	SpriteUtil::topAlign(menuButtonSprite, tryAgainButtonSprite);
 	this->addChild(tryAgainButtonSprite);
 	this->tryAgainButton = new RestartSurvivalButton(model, tryAgainButtonSprite);
 
 	cocos2d::CCSprite* equipPandaButtonSprite = SpriteUtil::create("buttons/equip_panda_button.png", visibleSize.width * 0.2, visibleSize.height * 0.15, title);
-	SpriteUtil::rightAlign(this->title, equipPandaButtonSprite);
-
+	equipPandaButtonSprite->setPositionX(menuButtonSprite->getPositionX() + SpriteUtil::getWidth(menuButtonSprite)*0.95);
+	SpriteUtil::topAlign(menuButtonSprite, equipPandaButtonSprite);
 	this->addChild(equipPandaButtonSprite);
 	this->equipPandaButton = new EquipPandaButton(equipPandaButtonSprite);
 
