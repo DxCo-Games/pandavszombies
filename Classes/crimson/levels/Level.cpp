@@ -33,6 +33,10 @@ bool Level::showAdd() {
 	return false;
 }
 
+std::string Level::getLevelText() {
+	return StringUtil::iFormat("level %d", model->levelNumber);
+}
+
 void Level::update(float dt) {
 	EnemyWave *wave = this->waves[this->currentWave];
 	if (!wave->isFinished()) {

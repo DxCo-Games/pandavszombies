@@ -3,7 +3,9 @@
 #include "platform/android/jni/JniHelper.h"
 #include <jni.h>
 #include "../GameModel.h"
+#include "../levels/Level.h"
 #include "../../HelloWorldScene.h"
+#include "../../dxco/StringUtil.h"
 
 namespace dxco {
 
@@ -31,16 +33,22 @@ std::string ShareButton::takeScreenshot() {
 	return filename;
 }
 
-//TODO improve text
-//TODO include level info in text
+//TODO probar el coffeecatch para no matar la app
 //TODO ocultar botones
+//TODO tratar de mostrar titulo del nivel
+
+std::string ShareButton::getMessage() {
+	std::string msg = "I've just played %s in http://bit.ly/PandaVZ #indiegame #android";
+
+	return StringUtil::sFormat(msg, model->level->getLevelText());
+}
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 void ShareButton::execute() {
 
 	std::string path = takeScreenshot();
 	CCLOG("SENDING %s", path.c_str());
-	std::string msg = "I've just played some level in http://bit.ly/PandaVZ";
+	std::string msg = getMessage();
 
 	cocos2d::JniMethodInfo t;
 

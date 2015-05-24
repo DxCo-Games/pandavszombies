@@ -21,6 +21,7 @@ public:
 	virtual void showMessage();
 
 	virtual void updateInterface();
+	virtual std::string getLevelText();
 
 	//TODO add background creation to this?
 	GameModel* model;

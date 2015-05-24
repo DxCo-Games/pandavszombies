@@ -58,6 +58,10 @@ bool SurvivalLevel::showAdd() {
 	return (rand() % 100) < 20;
 }
 
+std::string SurvivalLevel::getLevelText() {
+	return "the survival level";
+}
+
 void SurvivalLevel::updateInterface() {
 	std::string playerKillsText = StringUtil::intToKString(this->model->kills);
 	this->model->vista->killsLabel->setString(playerKillsText.c_str());

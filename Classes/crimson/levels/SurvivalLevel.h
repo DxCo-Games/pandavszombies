@@ -16,6 +16,8 @@ public:
 	virtual void update(float dt);
 	virtual void restartLevel();
 
+	virtual std::string getLevelText();
+
 	virtual void updateInterface();
 	virtual void showMessage();
 

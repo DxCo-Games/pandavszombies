@@ -13,6 +13,7 @@ public:
 	virtual void execute();
 
 	std::string takeScreenshot();
+	std::string getMessage();
 };
 
 } /* namespace dxco */

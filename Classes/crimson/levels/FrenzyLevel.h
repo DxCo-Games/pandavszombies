@@ -9,6 +9,7 @@ class GameModel;
 class FrenzyLevel: public SurvivalLevel {
 public:
 	FrenzyLevel(GameModel* model);
+	virtual std::string getLevelText();
 };
 
 } /* namespace dxco */
