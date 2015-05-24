@@ -112,6 +112,26 @@ LevelFinishedLayer::LevelFinishedLayer(GameModel* model, float x, float y, float
 	hide();
 }
 
+void LevelFinishedLayer::prepareShare() {
+	menuButton->getSprite()->setVisible(false);
+	shareButton->getSprite()->setVisible(false);
+	tryAgainButton->getSprite()->setVisible(false);
+	if (this->nextLevelButton != NULL && !this->survival) {
+		this->nextLevelButton->sprite->setVisible(false);
+	}
+	equipPandaButton->getSprite()->setVisible(false);
+}
+
+void LevelFinishedLayer::returnShare() {
+	menuButton->getSprite()->setVisible(true);
+	shareButton->getSprite()->setVisible(true);
+	tryAgainButton->getSprite()->setVisible(true);
+	if (this->nextLevelButton != NULL && !this->survival) {
+		this->nextLevelButton->sprite->setVisible(true);
+	}
+	equipPandaButton->getSprite()->setVisible(true);
+}
+
 void LevelFinishedLayer::show(int points, int kills, int coins, int stars) {
 
 	this->killsLabel->setString(StringUtil::intToKString(kills).c_str());

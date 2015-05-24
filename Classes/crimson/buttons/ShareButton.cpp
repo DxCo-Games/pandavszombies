@@ -33,18 +33,24 @@ std::string ShareButton::takeScreenshot() {
 	return filename;
 }
 
-//TODO probar el coffeecatch para no matar la app
-//TODO ocultar botones
-//TODO tratar de mostrar titulo del nivel
+//TODO probar el coffeecatch para no matar la app ?
+//TODO traducir textos
 
 std::string ShareButton::getMessage() {
-	std::string msg = "I've just played %s in http://bit.ly/PandaVZ #indiegame #android";
+	std::string msg;
+	if (model->level->isFinished()) {
+		msg = "I've just kicked ass at %s in http://bit.ly/PandaVZ #indiegame #android";
+	} else {
+		msg = "I've just played %s in http://bit.ly/PandaVZ #indiegame #android";
+	}
 
 	return StringUtil::sFormat(msg, model->level->getLevelText());
 }
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 void ShareButton::execute() {
+
+	model->vista->levelFinishedLayer->prepareShare();
 
 	std::string path = takeScreenshot();
 	CCLOG("SENDING %s", path.c_str());
@@ -64,6 +70,8 @@ void ShareButton::execute() {
 		t.env->DeleteLocalRef(StringArg2);
 		t.env->DeleteLocalRef(t.classID);
 	}
+
+	model->vista->levelFinishedLayer->returnShare();
 }
 #else
 #endif

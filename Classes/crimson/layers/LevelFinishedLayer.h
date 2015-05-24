@@ -23,6 +23,9 @@ public:
 	void show(int points, int kills, int coins, int stars);
 	void hide();
 
+	void prepareShare();
+	void returnShare();
+
 	void ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
 
 	void enableTouch();
