@@ -35,5 +35,11 @@
 "tutorial.4": "Hay un zombie cerca, mátalo!",
 "tutorial.5": "Toma el bonus para mejorar tu arma",
 "tutorial.6": "Cuidado! Más zombies!",
-"tutorial.7": "Ganarás monedas cada 100 puntos, usalas para equipar al panda"
+"tutorial.7": "Ganarás monedas cada 100 puntos, usalas para equipar al panda",
+"share.win": "Reventé a los zombies en %s de http://bit.ly/PandaVZ #indiegame #android",
+"share.lose": "Me comieron el cerebro en %s de http://bit.ly/PandaVZ #indiegame #android",
+"share.level": "el nivel %d", 
+"share.survival": "el modo survival",
+"share.frenzy": "el modo frenzy"
+
 }

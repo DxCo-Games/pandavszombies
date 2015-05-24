@@ -6,6 +6,7 @@
 #include "../levels/Level.h"
 #include "../../HelloWorldScene.h"
 #include "../../dxco/StringUtil.h"
+#include "../../dxco/Language.h"
 
 namespace dxco {
 
@@ -39,9 +40,9 @@ std::string ShareButton::takeScreenshot() {
 std::string ShareButton::getMessage() {
 	std::string msg;
 	if (model->level->isFinished()) {
-		msg = "I've just kicked ass at %s in http://bit.ly/PandaVZ #indiegame #android";
+		msg = Language::get("share.win");
 	} else {
-		msg = "I've just played %s in http://bit.ly/PandaVZ #indiegame #android";
+		msg = Language::get("share.lose");
 	}
 
 	return StringUtil::sFormat(msg, model->level->getLevelText());

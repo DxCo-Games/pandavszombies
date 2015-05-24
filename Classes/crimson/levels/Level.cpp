@@ -34,7 +34,7 @@ bool Level::showAdd() {
 }
 
 std::string Level::getLevelText() {
-	return StringUtil::iFormat("level %d", model->levelNumber);
+	return StringUtil::iFormat(Language::get("share.level"), model->levelNumber);
 }
 
 void Level::update(float dt) {

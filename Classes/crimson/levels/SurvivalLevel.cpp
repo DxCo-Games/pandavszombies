@@ -4,6 +4,7 @@
 #include "../GameProperties.h"
 #include "../../HelloWorldScene.h"
 #include "../../dxco/StringUtil.h"
+#include "../../dxco/Language.h"
 #include <cstdlib>
 
 namespace dxco {
@@ -59,7 +60,7 @@ bool SurvivalLevel::showAdd() {
 }
 
 std::string SurvivalLevel::getLevelText() {
-	return "the survival level";
+	return Language::get("share.survival");
 }
 
 void SurvivalLevel::updateInterface() {

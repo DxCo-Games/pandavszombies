@@ -35,5 +35,10 @@
 "tutorial.4": "There's a zombie around, kill him!",
 "tutorial.5": "Pick up the bonus to improve your weapon",
 "tutorial.6": "Watch out! Another zombie wave!",
-"tutorial.7": "You'll earn coins every 100 points, use them to equip your panda"
+"tutorial.7": "You'll earn coins every 100 points, use them to equip your panda",
+"share.win": "I've just kicked ass at %s in http://bit.ly/PandaVZ #indiegame #android",
+"share.lose": "My brain was eaten at %s in http://bit.ly/PandaVZ #indiegame #android",
+"share.level": "level %d", 
+"share.survival": "the survival mode",
+"share.frenzy": "the frenzy mode"
 }
