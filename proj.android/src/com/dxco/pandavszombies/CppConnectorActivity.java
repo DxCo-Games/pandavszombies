@@ -23,16 +23,26 @@ THE SOFTWARE.
  ****************************************************************************/
 package com.dxco.pandavszombies;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import org.cocos2dx.lib.Cocos2dxActivity;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
@@ -67,7 +77,41 @@ public class CppConnectorActivity extends Cocos2dxActivity {
 		_appActiviy = this;
 
 	}
-
+	
+//	public String takeScreenshot() {
+//		View rootView = this.getCurrentFocus();
+//		rootView.setVisibility(View.VISIBLE);
+//		rootView.setDrawingCacheEnabled(true);
+//		Bitmap bitmap = rootView.getDrawingCache();
+//		
+//		File imagePath = new File(Environment.getExternalStorageDirectory() + "/screenshot.png");
+//		FileOutputStream fos;
+//
+//		try {
+//			fos = new FileOutputStream(imagePath);
+//			bitmap.compress(CompressFormat.PNG, 100, fos);
+//			fos.flush();
+//			fos.close();
+//		} catch (FileNotFoundException e) {
+//			Log.e("GREC", e.getMessage(), e);
+//		} catch (IOException e) {
+//			Log.e("GREC", e.getMessage(), e);
+//		}
+//
+//		return imagePath.getAbsolutePath();
+//	}
+	
+	public static void share(String path, String msg) {
+		Uri screenshotUri = Uri.parse(path); 
+		
+		Intent intent = new Intent(Intent.ACTION_SEND);
+		intent.setType("image/png"); 
+		intent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
+		intent.putExtra(Intent.EXTRA_TEXT, msg);
+		
+		_appActiviy.startActivity(Intent.createChooser(intent, "Share"));
+	}
+	
 	public static void loadAdmob() {
 		_appActiviy.runOnUiThread(new Runnable() {
 			@Override

@@ -9,6 +9,7 @@
 #include "../buttons/RestartSurvivalButton.h"
 #include "../buttons/NextLevelButton.h"
 #include "../buttons/EquipPandaButton.h"
+#include "../buttons/ShareButton.h"
 
 #define LEVEL_COUNT 100
 
@@ -34,6 +35,7 @@ private:
 	bool survival;
 
 	GameTypeSelectionButton* menuButton;
+	ShareButton* shareButton;
 	RestartSurvivalButton* tryAgainButton;
 	NextLevelButton* nextLevelButton;
 	EquipPandaButton* equipPandaButton;

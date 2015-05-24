@@ -30,11 +30,13 @@ LevelFinishedLayer::LevelFinishedLayer(GameModel* model, float x, float y, float
 	cocos2d::CCSprite* menuButtonSprite = SpriteUtil::create("buttons/menu_icon_button.png", visibleSize.width * 0.2, visibleSize.height * 0.18, title);
 	SpriteUtil::leftAlign(this->title, menuButtonSprite);
 	this->addChild(menuButtonSprite);
+	this->menuButton = new GameTypeSelectionButton(menuButtonSprite);
 
 	cocos2d::CCSprite* shareButtonSprite = SpriteUtil::create("buttons/share_button.png", visibleSize.width * 0.2, visibleSize.height * 0.18, title);
 	SpriteUtil::topAlign(menuButtonSprite, shareButtonSprite);
 	SpriteUtil::rightAlign(this->title, shareButtonSprite);
 	this->addChild(shareButtonSprite);
+	this->shareButton = new ShareButton(shareButtonSprite, model);
 
 
 	if (!survival && level != LEVEL_COUNT) {
@@ -46,7 +48,6 @@ LevelFinishedLayer::LevelFinishedLayer(GameModel* model, float x, float y, float
 		this->nextLevelButton = NULL;
 	}
 
-	this->menuButton = new GameTypeSelectionButton(menuButtonSprite);
 
 	cocos2d::CCSprite* tryAgainButtonSprite = NULL;
 
@@ -185,6 +186,7 @@ void LevelFinishedLayer::ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEve
 	}
 
 	this->menuButton->touch(location);
+	this->shareButton->touch(location);
 	this->tryAgainButton->touch(location);
 	this->equipPandaButton->touch(location);
 }

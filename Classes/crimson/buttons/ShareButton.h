@@ -4,10 +4,15 @@
 #include "../../dxco/Button.h"
 
 namespace dxco {
+class GameModel;
 
 class ShareButton: public ButtonDxCo {
 public:
-	ShareButton();
+	ShareButton(cocos2d::CCSprite* sprite, GameModel* model);
+	GameModel* model;
+	virtual void execute();
+
+	std::string takeScreenshot();
 };
 
 } /* namespace dxco */
