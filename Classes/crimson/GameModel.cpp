@@ -21,6 +21,7 @@
 #include "enemies/Enemy.h"
 #include "../dxco/RevMob.h"
 #include "../dxco/admob/AdmobHelper.h"
+#include "../dxco/RateHelper.h"
 #include "ParseConfiguration.h"
 #include <cstdlib>
 
@@ -90,9 +91,8 @@ GameModel::GameModel(HelloWorld* vista, Player* player) {
 	//se puede evitar esto?
 	this->resetTypeKills();
 
-	//batch node added to map
 	this->enemyFactory = new EnemyFactory();
-	this->adShowed = !(this->showAd() && this->showAd()); // la primer muerte con mucha menos probabilidad
+	this->adShowed = !this->showAd();
 	this->adDt = 0.0;
 }
 
@@ -226,12 +226,11 @@ void GameModel::updateAds(float dt) {
 		if (!this->adShowed && this->adDt > 1.5) {
 
 			this->adShowed = true;
-			AdmobHelper::showInterstitial();
-			/*
-			 * TODO remover revmob cuando todo este ok
-			 * revmob::RevMob *revmob = revmob::RevMob::SharedInstance();
-			revmob->ShowLoadedFullscreen();
-			revmob->LoadFullscreen();*/
+			//ask for rate only if it won (and meets other reqs)
+			//show ad only if not asked for rate
+			if(!this->player->isActive() || !RateHelper::showRateDialogIfNeeded()) {
+				AdmobHelper::showInterstitial();
+			}
 		}
 	}
 }

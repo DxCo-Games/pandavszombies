@@ -31,6 +31,7 @@ import com.parse.ParseException;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Logger.LogLevel;
 import com.google.android.gms.analytics.Tracker;
+import com.kskkbys.rate.RateThisApp;
 
 public class MainMenuActivity extends Activity {
 
@@ -58,7 +59,7 @@ public class MainMenuActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		
 		Parse.initialize(this, "IJw4teqCfajXsuurrzbokGmsmjE1i86gbuYNO6my",
 				"dUoVH3BLMqFijaiVZN31VTw6Gr2chR52MuQ6yc8l");
 
@@ -66,6 +67,8 @@ public class MainMenuActivity extends Activity {
 		ParseConfiguration.activity = this;
 
 		getConfigFromParse();
+		
+		RateThisApp.onStart(this);
 
 		setContentView(R.layout.main_menu_activity);
 

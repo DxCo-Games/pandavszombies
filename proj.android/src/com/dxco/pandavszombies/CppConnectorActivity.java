@@ -23,36 +23,16 @@ THE SOFTWARE.
  ****************************************************************************/
 package com.dxco.pandavszombies;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
 import org.cocos2dx.lib.Cocos2dxActivity;
 
-import android.annotation.TargetApi;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Bitmap.CompressFormat;
-import android.graphics.Color;
-import android.graphics.Point;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.util.Log;
-import android.view.Display;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.LinearLayout;
 
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
-import com.revmob.cocos2dx.RevMobWrapper;
+import com.kskkbys.rate.RateThisApp;
 
 public class CppConnectorActivity extends Cocos2dxActivity {
 
@@ -63,7 +43,6 @@ public class CppConnectorActivity extends Cocos2dxActivity {
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		RevMobWrapper.setActivity(this);
 
 		interstitial = new InterstitialAd(this);
 		interstitial.setAdUnitId(AD_UNIT_ID);
@@ -110,6 +89,26 @@ public class CppConnectorActivity extends Cocos2dxActivity {
 		intent.putExtra(Intent.EXTRA_TEXT, msg);
 		
 		_appActiviy.startActivity(Intent.createChooser(intent, "Share"));
+	}
+	
+	public static Integer rateDialog() {
+		boolean should = RateThisApp.shouldShowRateDialog();
+		
+		_appActiviy.runOnUiThread(new Runnable() {
+			
+			@Override
+			public void run() {
+				RateThisApp.showRateDialogIfNeeded(_appActiviy);
+			}
+		});
+		
+		//stupid java
+		int ret = 0;
+		if (should) {
+			ret = 1;
+		}
+		
+		return ret;
 	}
 	
 	public static void loadAdmob() {

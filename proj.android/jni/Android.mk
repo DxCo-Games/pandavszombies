@@ -33,8 +33,6 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/dxco/Sha1.cpp \
                    ../../Classes/dxco/CCAdView.cpp \
                    ../../Classes/dxco/AdsAPI.cpp \
-                   ../../Classes/dxco/RevMob.cpp \
-                   ../../Classes/dxco/RevMobAds_Android.cpp \
                    ../../Classes/dxco/JoystickController.cpp \
                    ../../Classes/dxco/Joystick.cpp \
                    ../../Classes/dxco/MathUtil.cpp \
@@ -43,6 +41,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/dxco/AssetLoader.cpp \
                    ../../Classes/dxco/SteeringBehaviorItem.cpp \
                    ../../Classes/dxco/admob/AdmobHelper.cpp \
+                   ../../Classes/dxco/RateHelper.cpp \
                    ../../Classes/dxco/Language.cpp \
                    ../../Classes/crimson/SoundUtil.cpp \
                    ../../Classes/crimson/ParseConfiguration.cpp \
