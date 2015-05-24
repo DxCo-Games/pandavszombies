@@ -9,7 +9,7 @@
 	"isBoss" : -2
 	},
 	{
-	"total" : 150,
+	"total" : 120,
 	"freq" : 0.25,
 	"isBoss" : -2
 	},
@@ -19,7 +19,7 @@
 	"isBoss" : -2
 	},
 	{
-	"total" : 150,
+	"total" : 120,
 	"freq" : 0.01,
 	"isBoss" : -2
 	},
@@ -29,7 +29,7 @@
 	"isBoss" : -2
 	},
 	{
-	"total" : 150,
+	"total" : 120,
 	"freq" : 0.01,
 	"isBoss" : -2
 	},
@@ -39,7 +39,7 @@
 	"isBoss" : -2
 	},
 	{
-	"total" : 300,
+	"total" : 200,
 	"freq" : 0.01,
 	"isBoss" : -2
 	}

@@ -6,7 +6,7 @@
 	"bonus": 1
 },
 "waves": [{
-	"total" : 50,
+	"total" : 40,
 	"freq" : 0.6,
 	"isBoss" : 1,
 	"types": ["oficinista", "cura", "cirujano"]
@@ -18,7 +18,7 @@
 	"types": ["campesino"]
 	},
 	{
-	"total" : 50,
+	"total" : 40,
 	"freq" : 0.6,
 	"isBoss" : 1,
 	"types": ["oficinista", "cura", "cirujano"]
@@ -30,7 +30,7 @@
 	"types": ["campesino"]
 	},
 	{
-	"total" : 50,
+	"total" : 40,
 	"freq" : 0.6,
 	"isBoss" : 1,
 	"types": ["oficinista", "cura", "cirujano"]

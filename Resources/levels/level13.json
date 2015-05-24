@@ -7,7 +7,7 @@
 },
 "waves": [{
 	"total" : 10000,
-	"freq" : 0.35,
+	"freq" : 0.4,
 	"level" : 2,
 	"isBoss" : 0
 	}

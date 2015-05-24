@@ -16,7 +16,7 @@
 	"types": ["campesino", "oficinista", "cura", "cirujano"]
 	},
 	{
-	"total" : 40,
+	"total" : 30,
 	"freq" : 0.75,
 	"isBoss" : 1,
 	"types": ["campesino", "oficinista", "cura", "cirujano"]

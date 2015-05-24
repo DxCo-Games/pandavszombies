@@ -3,7 +3,7 @@
 	"background": 0
 },
 "waves": [{
-	"total" : 70,
+	"total" : 50,
 	"freq" : 0.05,
 	"isBoss" : 0
 	},
@@ -13,7 +13,7 @@
 	"isBoss" : 0
 	},
 	{
-	"total" : 100,
+	"total" : 75,
 	"freq" : 0.01,
 	"isBoss" : 0
 	}
