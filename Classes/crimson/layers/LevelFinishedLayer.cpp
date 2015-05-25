@@ -1,6 +1,7 @@
 #include "LevelFinishedLayer.h"
 
 #include "../GameModel.h"
+#include "../levels/Level.h"
 #include "../../dxco/SpriteUtil.h"
 #include "../../dxco/LabelUtil.h"
 #include "../../dxco/StringUtil.h"
@@ -128,7 +129,7 @@ void LevelFinishedLayer::returnShare() {
 	menuButton->getSprite()->setVisible(true);
 	shareButton->getSprite()->setVisible(true);
 	tryAgainButton->getSprite()->setVisible(true);
-	if (this->nextLevelButton != NULL && !this->survival) {
+	if (this->nextLevelButton != NULL && this->model->level->isFinished()) {
 		this->nextLevelButton->sprite->setVisible(true);
 	}
 	equipPandaButton->getSprite()->setVisible(true);
