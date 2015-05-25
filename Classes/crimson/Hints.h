@@ -17,10 +17,13 @@ public:
 	 */
 	std::string getHint();
 
-	std::string firstPowerup();
-	std::string powerup();
-	std::string playAnother();
+	void trackLoses();
+
 	std::string powerupForSurvival();
+	std::string firstPowerup();
+	std::string playAnother();
+	std::string powerup();
+
 	std::string superbossFireball();
 	std::string flamethrowerFrenzy();
 };

@@ -9,6 +9,7 @@
 #include "../layers/GameTypeSelectionLayer.h"
 #include "SimpleAudioEngine.h"
 #include "../daos/UserDAO.h"
+#include "../GameProperties.h"
 
 namespace dxco {
 
@@ -125,7 +126,7 @@ void TutorialLevel::update(float dt) {
 
 			if (equipPanda == 0) {
 				GameProperties::set("push.equip", 1);
-				UserDAO::addCoins(450);
+				UserDAO::addCoins(ITEM_INITIAL_COST);
 
 				cocos2d::CCDirector* pDirector = cocos2d::CCDirector::sharedDirector();
 				pDirector->replaceScene(GameTypeSelectionLayer::scene());
