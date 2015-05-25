@@ -65,7 +65,6 @@ public:
 	float adDt;
 
 	bool showAd();
-private:
 	void updateCoins();
 	int getLevelStars();
 };

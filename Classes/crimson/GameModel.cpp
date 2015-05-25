@@ -200,12 +200,13 @@ void GameModel::update(float dt) {
 		this->vista->juegoPausado = true;
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
 		this->vista->opacityLayer->setVisible(true);
-		int stars = this->getLevelStars();
-		this->vista->levelFinishedLayer->show(this->player->score, this->kills, this->player->score / COIN_VALUE, stars);
+
+		//if no hint, level finished is showed
+		this->vista->hintLayer->show();
 
 		if (this->level->isFinished()) {
 			this->vista->playEffect("sounds/youwin2.ogg");
-			UserDAO::finishLevel(this->levelNumber, stars);
+			UserDAO::finishLevel(this->levelNumber, this->getLevelStars());
 		}
 		updateCoins();
 	}

@@ -20,7 +20,7 @@ class LevelFinishedLayer:  public Container {
 public:
 	LevelFinishedLayer(GameModel* model, float x, float y, float width, float height, bool survival, int level = 0);
 
-	void show(int points, int kills, int coins, int stars);
+	void show();
 	void hide();
 
 	void prepareShare();
@@ -37,6 +37,7 @@ private:
 
 	bool survival;
 
+	GameModel *model;
 	GameTypeSelectionButton* menuButton;
 	ShareButton* shareButton;
 	RestartSurvivalButton* tryAgainButton;

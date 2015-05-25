@@ -148,6 +148,10 @@ void HelloWorld::realInit() {
 	    this->addChild(levelFinishedLayer, 50);
 
 	    this->createInterface();
+
+	    this->hintLayer = new dxco::HintLayer(this->model, 0, 0, visibleSize.width, visibleSize.height);
+		this->addChild(hintLayer, 50);
+
 	    this->pauseLayer = new dxco::PauseLayer(this->model, 0, 0, visibleSize.width, visibleSize.height, this->weaponIcon);
 	    this->addChild(pauseLayer, 50);
 

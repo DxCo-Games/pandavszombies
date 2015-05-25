@@ -8,6 +8,7 @@
 #include "dxco/Container.h"
 #include "dxco/Item.h"
 #include "crimson/layers/LevelFinishedLayer.h"
+#include "crimson/layers/HintLayer.h"
 #include "crimson/layers/PauseLayer.h"
 #include "dxco/AssetLoader.h"
 
@@ -89,6 +90,7 @@ public:
     cocos2d::CCLayerColor* opacityLayer;
 
     dxco::LevelFinishedLayer* levelFinishedLayer;
+    dxco::HintLayer* hintLayer;
     dxco::PauseLayer* pauseLayer;
     dxco::AssetLoader* assetLoader;
 

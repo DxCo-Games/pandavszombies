@@ -1,5 +1,6 @@
 #include "LevelFinishedLayer.h"
 
+#include "../GameModel.h"
 #include "../../dxco/SpriteUtil.h"
 #include "../../dxco/LabelUtil.h"
 #include "../../dxco/StringUtil.h"
@@ -8,6 +9,7 @@ namespace dxco {
 
 LevelFinishedLayer::LevelFinishedLayer(GameModel* model, float x, float y, float width, float height, bool survival, int level) : Container(x, y, width, height) {
 
+	this->model = model;
 	this->survival = survival;
 
 	cocos2d::CCSize visibleSize = cocos2d::CCDirector::sharedDirector()->getVisibleSize();
@@ -132,7 +134,12 @@ void LevelFinishedLayer::returnShare() {
 	equipPandaButton->getSprite()->setVisible(true);
 }
 
-void LevelFinishedLayer::show(int points, int kills, int coins, int stars) {
+void LevelFinishedLayer::show() {
+	int points = this->model->player->score;
+	int kills = this->model->kills;
+	int coins = this->model->player->score / COIN_VALUE;
+	int stars = this->model->getLevelStars();
+
 
 	this->killsLabel->setString(StringUtil::intToKString(kills).c_str());
 	this->coinsLabel->setString(StringUtil::intToKString(coins).c_str());
