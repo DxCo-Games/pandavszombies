@@ -19,7 +19,7 @@ HintLayer::HintLayer(GameModel *model, float x, float y, float width, float heig
 	placa->setPositionY(visibleSize.height * 0.65);
 	this->addChild(placa);
 
-	this->panelText = cocos2d::CCLabelTTF::create("", "fonts/KBStickToThePlan.ttf", 15, cocos2d::CCSize(200,0), cocos2d::kCCTextAlignmentCenter);
+	this->panelText = cocos2d::CCLabelTTF::create("", "fonts/KBStickToThePlan.ttf", 15, cocos2d::CCSize(220,0), cocos2d::kCCTextAlignmentCenter);
 	this->panelText->setColor(cocos2d::ccc3(255, 255, 255));
 	this->panelText->setPositionX(placa->getPositionX());
 	this->panelText->setPositionY(placa->getPositionY());

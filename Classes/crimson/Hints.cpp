@@ -7,12 +7,13 @@
 #include "levels/Level.h"
 #include "levels/EnemyWave.h"
 #include "bonus/WeaponFirstBonusFactory.h"
+#include "../dxco/Language.h"
 
 namespace dxco {
 
 Hints::Hints(GameModel* model) {
 	this->model = model;
-
+	this->survivalShown = false;
 }
 
 void Hints::trackLoses() {
@@ -70,7 +71,7 @@ std::string Hints::firstPowerup(){
 
 	if (loses == 2 && attackLevel == 1 && canBuy) {
 		DB::putInteger("story.loses", 0);
-		return "hint: increase your attack level in the equip panda menu to kill the zombies faster";
+		return Language::get("hint.first");
 	}
 
 	return "";
@@ -82,7 +83,7 @@ std::string Hints::powerup(){
 
 	if (loses == 3 && canBuy) {
 		DB::putInteger("story.loses", 0);
-		return "hint: increase your skills in the equip panda menu to keep up with the stronger zombies";
+		return Language::get("hint.powerup");
 	}
 
 	return "";
@@ -93,19 +94,20 @@ std::string Hints::playAnother(){
 
 	if (loses == 4 && !canBuy) {
 		DB::putInteger("story.loses", 0);
-		return "hint: try the survival mode to gather coins and buy skills in the equip panda menu";
+		return Language::get("hint.playanother");
 	}
 
 	return "";
 }
 std::string Hints::powerupForSurvival(){
-	//if loses survival in less than 2 min and has less than 3 attacks
+	//if loses survival in less than 1 min and has less than 3 attacks
 	bool survival = this->model->vista->survivalMode;
 	int seconds = this->model->timer;
 	int attackLevel = DB::getInteger("attack.damage.level");
 
-	if (survival && seconds < 120 && attackLevel < 4) {
-		return "hint: try the story mode to gather coins and buy skills to survive longer";
+	if (!this->survivalShown && survival && seconds < 60 && attackLevel < 4) {
+		this->survivalShown = true; //show once per session
+		return Language::get("hint.survival");
 	}
 
 	return "";
@@ -125,7 +127,7 @@ std::string Hints::superbossFireball(){
 
 	if (loses == 2 && !fireballUnlocked && isSuperboss) {
 		DB::putInteger("story.loses", 0);
-		return "hint: try unlocking the fireball weapon to beat the superbosses";
+		return Language::get("hint.superboss");
 	}
 
 	return "";
@@ -139,7 +141,7 @@ std::string Hints::flamethrowerFrenzy(){
 
 	if (loses == 3 && isFrenzy && (!flameUnlocked || !bazookaUnlocked)) {
 		DB::putInteger("story.loses", 0);
-		return "hint: try unlocking the bazooka and the flamethrower to have better chances to win";
+		return Language::get("hint.frenzy");
 	}
 
 	return "";

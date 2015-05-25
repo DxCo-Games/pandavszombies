@@ -11,6 +11,7 @@ class Hints {
 public:
 	Hints(GameModel* model);
 	GameModel *model;
+	bool survivalShown;
 
 	/*
 	 * To be called at the end of every play.

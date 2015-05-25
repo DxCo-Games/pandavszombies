@@ -40,5 +40,11 @@
 "share.lose": "My brain was eaten at %s in http://bit.ly/PandaVZ #indiegame #android",
 "share.level": "level %d", 
 "share.survival": "the survival mode",
-"share.frenzy": "the frenzy mode"
+"share.frenzy": "the frenzy mode",
+"hint.survival": "hint: try the story mode to gather coins and buy skills to survive longer",
+"hint.first": "hint: increase your attack level in the equip panda menu to kill the zombies faster",
+"hint.playanother": "hint: try the survival mode to gather coins and buy skills in the equip panda menu",
+"hint.powerup": "hint: increase your skills in the equip panda menu to keep up with the stronger zombies",
+"hint.superboss": "hint: try unlocking the fireball weapon to beat the superbosses",
+"hint.frenzy": "hint: try unlocking the bazooka and the flamethrower to have better chances to win"
 }
