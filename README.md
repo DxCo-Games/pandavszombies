@@ -2,7 +2,7 @@
 
 ![](ciru.gif)![](basquet.gif)![](cura.gif)
 
-Panda vs Zombies is a top-down shooter videogame for Android, implemented using [cocos2d-x](https://github.com/cocos2d/cocos2d-x). The game is [available in Google Play Store](https://play.google.com/store/apps/details?id=com.dxco.pandavszombies).
+Panda vs Zombies is a top-down shooter videogame for Android, implemented using [cocos2d-x](https://github.com/cocos2d/cocos2d-x). The game is [available in Google Play](https://play.google.com/store/apps/details?id=com.dxco.pandavszombies).
 
 ## Installation
 
