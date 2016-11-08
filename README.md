@@ -1,6 +1,8 @@
 # Panda vs Zombies
 Panda vs Zombies is a top-down shooter videogame for Android, implemented using cocos2d-x. The game is [available in Google Play Store](https://play.google.com/store/apps/details?id=com.dxco.pandavszombies).
 
+![](ciru.gif)![](basquet.gif)![](cura.gif)
+
 ## Installation
 
 Clone the repo and init the [lib-dxco submodule](https://github.com/DxCo-Games/lib-dxco):

@@ -17,3 +17,4 @@ assets
 proj.android/.settings/org.eclipse.cdt.core.prefs
 proj.android/build_native.sh
 proj.android/.project
+.DS_Store
